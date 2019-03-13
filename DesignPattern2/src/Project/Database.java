@@ -10,7 +10,7 @@ public class Database{
 	
 	//"com.mysql.jdbc.Driver","jdbc:mysql://112.211.95.65:3306/","superuser","kathyemir","swdespa"
 	private volatile static Database instance = null;
-	private final String DRIVER_NAME = "com.mysql.jdbc.Driver";
+	private final String DRIVER_NAME = "com.mysql.cj.jdbc.Driver";
 	private String URL;
 	private String USERNAME;
 	private String PASSWORD;
@@ -73,7 +73,7 @@ public class Database{
 			Class.forName(DRIVER_NAME);
 			Connection connection = DriverManager.getConnection(
 					URL + 
-					DATABASE + "?autoReconnect=true&useSSL=false", 
+					DATABASE + "?serverTimezone=UTC&useLegacyDatetimeCode=false&allowPublicKeyRetrieval=true&autoReconnect=true&useSSL=false", 
 					USERNAME,
 					PASSWORD);
 			return connection;
