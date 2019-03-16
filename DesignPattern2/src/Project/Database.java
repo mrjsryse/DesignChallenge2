@@ -112,17 +112,8 @@ public class Database{
 	}
 	
 	public void loggingAccount(loggingIn registeredAccount) {
-		
-	}
-
-	public void queryTemplate(String parameters) {
-		
-		//get getConnection() from db
-		Connection cnt = getConnection();
-		
-		String query = "";
-		//create string query
-		query = "";
+		Connection cnt = getConnection(); 
+		String query = "SELECT * FROM accounts WHERE Username = ('"+registeredAccount.getRegisteredUsername()+"') AND Password = ('"+registeredAccount.getRegisteredPassword()+"')"; 
 		
 		try {
 			//create prepared statement
@@ -133,7 +124,40 @@ public class Database{
 			
 			//transform set into list
 			while(rs.next()) {
-				System.out.println(rs);
+				System.out.println(rs.getString("Username"));
+				System.out.println(rs.getString("Password"));
+			}
+			
+			//close all the resources
+			ps.close();
+			rs.close();
+			cnt.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			
+		}
+	}
+
+	public void queryTemplate(String parameters) {
+		
+		//get getConnection() from db
+		Connection cnt = getConnection();
+		
+		String query = "SELECT * FROM accounts";
+		//create string qu
+		
+		try {
+			//create prepared statement
+			PreparedStatement ps = cnt.prepareStatement(query);
+			
+			//get result and store in result set
+			ResultSet rs = ps.executeQuery();
+			
+			//transform set into list
+			while(rs.next()) {
+				System.out.println(rs.getString("Username"));
+				System.out.println(rs.getString("Password"));
 			}
 			
 			//close all the resources
@@ -145,7 +169,36 @@ public class Database{
 			e.printStackTrace();
 		} 
 		
-		//return null;
-	}	
+	}
+	
+	public void testerTemplate() {
+		String x = "dad";
+		String y = "d";
+		Connection cnt = getConnection(); 
+		String query = "SELECT * FROM accounts WHERE Username = ('"+x+"') AND Password = ('"+y+"')"; 
+		
+		try {
+			//create prepared statement
+			PreparedStatement ps = cnt.prepareStatement(query);
+			
+			//get result and store in result set
+			ResultSet rs = ps.executeQuery();
+			
+			//transform set into list
+			while(rs.next()) {
+				System.out.println(rs.getString("Username"));
+				System.out.println(rs.getString("Password"));
+			}
+			
+			//close all the resources
+			ps.close();
+			rs.close();
+			cnt.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			
+		}
+	}
 
 }
