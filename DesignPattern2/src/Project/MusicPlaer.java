@@ -1,5 +1,5 @@
 package Project;
-
+import jaco.mp3.player.MP3Player; 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.awt.event.ActionEvent;
 import javax.swing.JList;
 import javax.swing.JTextPane;
@@ -37,6 +38,7 @@ public class MusicPlaer extends JFrame {
 	 * Create the frame.
 	 */
 	public MusicPlaer() {
+		MP3Player mp3 = new MP3Player(new File("C:\\Users\\Nello Santos\\Desktop\\Music\\DecAve.mp3"));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 812, 649);
 		contentPane = new JPanel();
@@ -47,12 +49,18 @@ public class MusicPlaer extends JFrame {
 		JButton btnPlay = new JButton("Play");
 		btnPlay.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+			mp3.play();
 			}
 		});
 		btnPlay.setBounds(314, 525, 89, 45);
 		contentPane.add(btnPlay);
 		
 		JButton btnPause = new JButton("Pause");
+		btnPause.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				mp3.pause();
+			}
+		});
 		btnPause.setBounds(413, 525, 89, 45);
 		contentPane.add(btnPause);
 		
