@@ -9,6 +9,7 @@ import java.sql.SQLException;
 public class Database{
 	
 	//"com.mysql.jdbc.Driver","jdbc:mysql://112.211.95.65:3306/","superuser","kathyemir","swdespa"
+	//arielariel0
 	private volatile static Database instance = null;
 	private final String DRIVER_NAME = "com.mysql.cj.jdbc.Driver";
 	private String URL;
@@ -34,31 +35,23 @@ public class Database{
 			return false;
 		//CREATE TABLE IF NOT EXISTS
 		
-		String query = "CREATE TABLE IF NOT EXISTS slots (id int NOT NULL AUTO_INCREMENT PRIMARY KEY,slotType varchar(255), doctor varchar(255), dateFrom DATETIME, dateTo DATETIME);";
+		String query = "CREATE TABLE IF NOT EXISTS accounts (Username varchar(255), Password varchar(255));";
 
-		String query2 = "CREATE TABLE IF NOT EXISTS books (id int NOT NULL AUTO_INCREMENT PRIMARY KEY,bookType varchar(255), client varchar(255), dateFrom DATETIME, dateTo DATETIME, slotsID int NOT NULL);";
+//		String query2 = "CREATE TABLE IF NOT EXISTS books (id int NOT NULL AUTO_INCREMENT PRIMARY KEY,bookType varchar(255), client varchar(255), dateFrom DATETIME, dateTo DATETIME, slotsID int NOT NULL);";
 
-		String query3 = "CREATE TABLE IF NOT EXISTS notifs (id int NOT NULL AUTO_INCREMENT PRIMARY KEY,client varchar(255), doctor varchar(255), dateFrom DATETIME, dateTo DATETIME);";
+//		String query3 = "CREATE TABLE IF NOT EXISTS notifs (id int NOT NULL AUTO_INCREMENT PRIMARY KEY,client varchar(255), doctor varchar(255), dateFrom DATETIME, dateTo DATETIME);";
 
-		String query4 = "ALTER TABLE slots auto_increment = 1";
+		String query4 = "ALTER TABLE accounts	 auto_increment = 1";
 		
-		String query5 = "ALTER TABLE books auto_increment = 1";
+//		String query5 = "ALTER TABLE books auto_increment = 1";
 		
-		String query6 = "ALTER TABLE notifs auto_increment = 1";
+//		String query6 = "ALTER TABLE notifs auto_increment = 1";
 		
 		try {
 
 			PreparedStatement ps = getConnection().prepareStatement(query);
 			ps.execute();
-			ps = getConnection().prepareStatement(query2);
-			ps.execute();
-			ps = getConnection().prepareStatement(query3);
-			ps.execute();
 			ps = getConnection().prepareStatement(query4);
-			ps.execute();
-			ps = getConnection().prepareStatement(query5);
-			ps.execute();
-			ps = getConnection().prepareStatement(query6);
 			ps.execute();
 			
 		}catch (SQLException e) {
@@ -89,13 +82,45 @@ public class Database{
 	protected Database() {
 		
 	}
+	
+	public void addingAccount(signingUp newAccount){
+		String x,y;
+		//get getConnection() from db
+		Connection cnt = getConnection();
+		x = newAccount.getUsername();
+		y = newAccount.getPassword();
+		
+		String query = "insert into accounts values ('"+x+"','"+y+"')";
+		//create string query
+		
+		try {
+			//create prepared statement
+			PreparedStatement ps = cnt.prepareStatement(query);
+			
+			//get result and store in result set
+			ps.execute();
+			
+			//close all the resources
+			ps.close();
+			cnt.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} 
+		
+		//return null;
+	}
+	
+	public void loggingAccount(loggingIn registeredAccount) {
+		
+	}
 
 	public void queryTemplate(String parameters) {
 		
 		//get getConnection() from db
 		Connection cnt = getConnection();
 		
-		String query = null;
+		String query = "";
 		//create string query
 		query = "";
 		

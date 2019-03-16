@@ -9,10 +9,18 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 
 public class signingUpView extends JFrame{
+	private volatile static signingUpView instance = null;
 	private JTextField usernameField;
 	private JTextField passwordField;
 	signingUp signUp;
-	accountList list;
+	generalController controller;
+	
+	public static signingUpView getInstance() {
+        if (instance == null) {
+        	instance = new signingUpView();
+        }
+		return instance;
+	}
 	
 	public signingUpView() {
 		
@@ -67,7 +75,8 @@ public class signingUpView extends JFrame{
 		{
 			String username = usernameField.getText();
 			String password = passwordField.getText();
-			signUp = new signingUp(username,password);
+			signUp = new signingUp(username,password); //signUp is the account detials
+			generalController.getInstance().gettingAccountData(username, password);;
 			
 			closingWindow();
 		}
