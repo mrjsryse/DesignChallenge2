@@ -1,5 +1,3 @@
-package Project;
-
 public class loggingController {
 	private volatile static loggingController instance = null;
 	

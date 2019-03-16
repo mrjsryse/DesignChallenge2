@@ -1,5 +1,3 @@
-package Project;
-
 public class loggingIn {
 	private String registeredUsername,registeredPassword;
 	

@@ -1,4 +1,3 @@
-package Project;
 import jaco.mp3.player.MP3Player; 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;

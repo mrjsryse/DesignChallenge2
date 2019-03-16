@@ -1,5 +1,3 @@
-package Project;
-
 public class generalController {
 	private volatile static generalController instance = null;
 	

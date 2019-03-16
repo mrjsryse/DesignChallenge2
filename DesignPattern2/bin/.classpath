@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<classpath>
-	<classpathentry kind="src" path=""/>
-	<classpathentry kind="lib" path="src/jaco-mp3-player-0.9.3.jar"/>
-	<classpathentry kind="lib" path="src/mysql-connector-java-8.0.15.jar"/>
-	<classpathentry kind="output" path="bin"/>
-</classpath>

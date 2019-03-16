@@ -1,5 +1,3 @@
-package Project;
-
 public class accountModel {
 	
 	private volatile static accountModel modelInstance = null;
