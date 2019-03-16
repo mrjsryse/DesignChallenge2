@@ -17,6 +17,6 @@ public class accountModel {
 	}
 	
 	public void checkingAccountData(loggingIn w) {
-		
+		Database.getInstance().loggingAccount(w);
 	}
 }
