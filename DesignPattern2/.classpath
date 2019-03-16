@@ -7,6 +7,10 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="src/mysql-connector-java-8.0.15.jar"/>
+<<<<<<< HEAD
 	<classpathentry kind="lib" path="C:/Users/Nello Santos/Music/jaco-mp3-player-0.9.3/jaco-mp3-player-0.9.3.jar"/>
+=======
+	<classpathentry kind="lib" path="C:/Users/William/Desktop/jarman/jaco-mp3-player-0.9.3.jar"/>
+>>>>>>> e2183fb072b3b269319b383e9610f3fec3c0f6f0
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -38,8 +38,12 @@ public class MusicPlaer extends JFrame {
 	 * Create the frame.
 	 */
 	public MusicPlaer() {
+<<<<<<< HEAD
 		MP3Player mp3 = new MP3Player(new File("C:\\Users\\Nello Santos\\Desktop\\Music\\DecAve.mp3"));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+=======
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+>>>>>>> e2183fb072b3b269319b383e9610f3fec3c0f6f0
 		setBounds(100, 100, 812, 649);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -49,7 +53,13 @@ public class MusicPlaer extends JFrame {
 		JButton btnPlay = new JButton("Play");
 		btnPlay.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+<<<<<<< HEAD
 			mp3.play();
+=======
+				MP3Player mp3player = new MP3Player(new File(filepath));
+			    
+			    mp3player.play();
+>>>>>>> e2183fb072b3b269319b383e9610f3fec3c0f6f0
 			}
 		});
 		btnPlay.setBounds(314, 525, 89, 45);
@@ -89,12 +99,19 @@ public class MusicPlaer extends JFrame {
 		contentPane.add(btnPickPlaylist);
 		
 		JButton btnPickSong = new JButton("Add Song to Playlist");
+		btnPickSong.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AddSong as = new AddSong();
+				as.setVisible(true);
+			}
+		});
 		btnPickSong.setBounds(590, 452, 190, 45);
 		contentPane.add(btnPickSong);
 		
 		JTextPane textPane = new JTextPane();
 		textPane.setBounds(257, 300, 290, 146);
-		textPane.setText("wew");
+		textPane.setText("Song Name: \n"
+						+ "Genre: \n");
 		contentPane.add(textPane);
 		
 		JLabel lblSongInfo = new JLabel("Song Info");
