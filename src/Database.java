@@ -88,7 +88,8 @@ public class Database{
 		x = newAccount.getUsername();
 		y = newAccount.getPassword();
 		
-		String query = "insert into accounts values ('"+x+"','"+y+"')";
+		
+		String query = "insert into accounts values ('"+x+"','"+y+"',"+0+")";
 		//create string query
 		
 		try {
