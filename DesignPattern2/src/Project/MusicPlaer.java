@@ -37,7 +37,7 @@ public class MusicPlaer extends JFrame {
 	 * Create the frame.
 	 */
 	public MusicPlaer() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 812, 649);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -47,6 +47,9 @@ public class MusicPlaer extends JFrame {
 		JButton btnPlay = new JButton("Play");
 		btnPlay.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				MP3Player mp3player = new MP3Player(new File(filepath));
+			    
+			    mp3player.play();
 			}
 		});
 		btnPlay.setBounds(314, 525, 89, 45);
@@ -81,12 +84,19 @@ public class MusicPlaer extends JFrame {
 		contentPane.add(btnPickPlaylist);
 		
 		JButton btnPickSong = new JButton("Add Song to Playlist");
+		btnPickSong.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AddSong as = new AddSong();
+				as.setVisible(true);
+			}
+		});
 		btnPickSong.setBounds(590, 452, 190, 45);
 		contentPane.add(btnPickSong);
 		
 		JTextPane textPane = new JTextPane();
 		textPane.setBounds(257, 300, 290, 146);
-		textPane.setText("wew");
+		textPane.setText("Song Name: \n"
+						+ "Genre: \n");
 		contentPane.add(textPane);
 		
 		JLabel lblSongInfo = new JLabel("Song Info");
