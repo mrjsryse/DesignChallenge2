@@ -1,12 +1,16 @@
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
 public class loggingInView extends JFrame{
 	private JTextField UsernameTextField;
 	private JTextField PasswordTextField;
+	loggingIn logIn;
 	public loggingInView() {
 		this.setSize(650, 700);
 		getContentPane().setLayout(null);
@@ -43,10 +47,25 @@ public class loggingInView extends JFrame{
 		lblPassword.setBounds(40, 374, 218, 50);
 		getContentPane().add(lblPassword);
 		
-		JButton btnNewButton = new JButton("Confirm");
-		btnNewButton.setBounds(462, 584, 89, 23);
-		getContentPane().add(btnNewButton);
-		
-		
+		JButton btnConfirm = new JButton("Confirm");
+		btnConfirm.setBounds(462, 584, 89, 23);
+		getContentPane().add(btnConfirm);
+		btnConfirm.addActionListener(new confirmButton());
+	}
+	class confirmButton implements ActionListener
+	{
+	public void actionPerformed (ActionEvent account)
+		{
+			String username = UsernameTextField.getText();
+			String password = PasswordTextField.getText();
+			logIn = new loggingIn(username,password);
+			loggingController.getInstance().gettingRegisteredAccountData(username, password);
+			
+			closingWindow();
+		}
+	}
+	
+	public void closingWindow() {
+		this.setVisible(false);
 	}
 }

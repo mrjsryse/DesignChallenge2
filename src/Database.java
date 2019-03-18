@@ -128,6 +128,7 @@ public class Database{
 			e.printStackTrace();
 			
 		}
+		System.out.println("Login Successful!");
 	}
 
 	public void queryTemplate(String parameters) {
