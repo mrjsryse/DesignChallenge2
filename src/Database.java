@@ -81,15 +81,15 @@ public class Database{
 		
 		
 		String query = "insert into accounts values ('"+x+"','"+y+"')";
+		String query2 = "ALTER TABLE accounts auto_increment = 1";
 
 
 		//create string query
 		
 		try {
-			//create prepared statement
-			PreparedStatement ps = cnt.prepareStatement(query);
-			
-			//get result and store in result set
+			PreparedStatement ps = getConnection().prepareStatement(query);
+			ps.execute();
+			ps = getConnection().prepareStatement(query2);
 			ps.execute();
 			
 			//close all the resources
