@@ -80,16 +80,13 @@ public class Database{
 		y = newAccount.getPassword();
 		
 		
-		String query = "insert into accounts values ('"+x+"','"+y+"')";
-		String query2 = "ALTER TABLE accounts auto_increment = 1";
+		String query = "insert into accounts values ("+0+",'"+x+"','"+y+"')";
 
 
 		//create string query
 		
 		try {
 			PreparedStatement ps = getConnection().prepareStatement(query);
-			ps.execute();
-			ps = getConnection().prepareStatement(query2);
 			ps.execute();
 			
 			//close all the resources
