@@ -9,7 +9,7 @@ import javax.swing.JButton;
 public class selectAccount extends JFrame{
 	signingUpView signingUpViewing;
 	signingUp signUpData;
-	loggingInView loggingIn;
+	loggingInView loggingInViewing;
 	public JButton btnSignUp,btnGuestAccount,btnRegisteredAccount;
 	
 	
@@ -17,6 +17,7 @@ public class selectAccount extends JFrame{
 	public selectAccount() {
 		
 		signingUpViewing = new signingUpView();
+		loggingInViewing = new loggingInView();
 		
 		JPanel backgroundPanel = new JPanel();
 		getContentPane().add(backgroundPanel, BorderLayout.CENTER);
@@ -86,7 +87,7 @@ public class selectAccount extends JFrame{
 	public void actionPerformed (ActionEvent e)
 		{
 		System.out.println("Click Two");
-		loggingIn.setVisible(true);
+		loggingInViewing.setVisible(true);
 		System.out.println("After Click Two");
 		}
 }
