@@ -39,7 +39,7 @@ public class Database{
 
 //		String query3 = "CREATE TABLE IF NOT EXISTS notifs (id int NOT NULL AUTO_INCREMENT PRIMARY KEY,client varchar(255), doctor varchar(255), dateFrom DATETIME, dateTo DATETIME);";
 
-		String query4 = "ALTER TABLE accounts	 auto_increment = 1";
+		String query4 = "ALTER TABLE accounts auto_increment = 1";
 		
 //		String query5 = "ALTER TABLE books auto_increment = 1";
 		
@@ -55,7 +55,6 @@ public class Database{
 		}catch (SQLException e) {
 			e.printStackTrace();
 		} 
-		
 		return true;
 	}
 	
@@ -90,7 +89,7 @@ public class Database{
 		
 		
 		String query = "insert into accounts values ('"+x+"','"+y+"')";
-		query = "ALTER TABLE accounts	 auto_increment = 1";
+		
 		//create string query
 		
 		try {
@@ -107,6 +106,8 @@ public class Database{
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+
+		query = "ALTER TABLE accounts auto_increment = 1";
 		//return null;
 	}
 	
