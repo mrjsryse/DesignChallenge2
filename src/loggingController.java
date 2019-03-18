@@ -10,6 +10,6 @@ public class loggingController {
 	
 	public void gettingRegisteredAccountData(String registeredUsername,String registeredPassword) {
 		loggingIn registeredAccount = new loggingIn(registeredUsername, registeredPassword);
-		
+		accountModel.getInstance().checkingAccountData(registeredAccount);
 	}
 }
