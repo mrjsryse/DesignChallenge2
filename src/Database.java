@@ -34,22 +34,14 @@ public class Database{
 		//CREATE TABLE IF NOT EXISTS
 		
 		String query = "CREATE TABLE IF NOT EXISTS accounts (Username varchar(255), Password varchar(255));";
-
-//		String query2 = "CREATE TABLE IF NOT EXISTS books (id int NOT NULL AUTO_INCREMENT PRIMARY KEY,bookType varchar(255), client varchar(255), dateFrom DATETIME, dateTo DATETIME, slotsID int NOT NULL);";
-
-//		String query3 = "CREATE TABLE IF NOT EXISTS notifs (id int NOT NULL AUTO_INCREMENT PRIMARY KEY,client varchar(255), doctor varchar(255), dateFrom DATETIME, dateTo DATETIME);";
-
-		String query4 = "ALTER TABLE accounts auto_increment = 1";
 		
-//		String query5 = "ALTER TABLE books auto_increment = 1";
-		
-//		String query6 = "ALTER TABLE notifs auto_increment = 1";
+		String query2 = "ALTER TABLE accounts auto_increment = 1";
 		
 		try {
 
 			PreparedStatement ps = getConnection().prepareStatement(query);
 			ps.execute();
-			ps = getConnection().prepareStatement(query4);
+			ps = getConnection().prepareStatement(query2);
 			ps.execute();
 			
 		}catch (SQLException e) {
@@ -89,7 +81,8 @@ public class Database{
 		
 		
 		String query = "insert into accounts values ('"+x+"','"+y+"')";
-		
+
+
 		//create string query
 		
 		try {
@@ -106,8 +99,6 @@ public class Database{
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
-		query = "ALTER TABLE accounts auto_increment = 1";
 		//return null;
 	}
 	
