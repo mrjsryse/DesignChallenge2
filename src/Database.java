@@ -33,7 +33,7 @@ public class Database{
 			return false;
 		//CREATE TABLE IF NOT EXISTS
 		
-		String query = "CREATE TABLE IF NOT EXISTS accounts (UserID NOT NULL AUTO_INCREMENT PRIMARY KEY, Username varchar(255), Password varchar(255));";
+		String query = "CREATE TABLE IF NOT EXISTS accounts (UserID int NOT NULL AUTO_INCREMENT PRIMARY KEY, Username varchar(255), Password varchar(255));";
 		
 		String query2 = "ALTER TABLE accounts auto_increment = 1";
 		
