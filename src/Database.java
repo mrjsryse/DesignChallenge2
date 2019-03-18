@@ -33,29 +33,20 @@ public class Database{
 			return false;
 		//CREATE TABLE IF NOT EXISTS
 		
-		String query = "CREATE TABLE IF NOT EXISTS accounts (Username varchar(255), Password varchar(255));";
-
-//		String query2 = "CREATE TABLE IF NOT EXISTS books (id int NOT NULL AUTO_INCREMENT PRIMARY KEY,bookType varchar(255), client varchar(255), dateFrom DATETIME, dateTo DATETIME, slotsID int NOT NULL);";
-
-//		String query3 = "CREATE TABLE IF NOT EXISTS notifs (id int NOT NULL AUTO_INCREMENT PRIMARY KEY,client varchar(255), doctor varchar(255), dateFrom DATETIME, dateTo DATETIME);";
-
-		String query4 = "ALTER TABLE accounts	 auto_increment = 1";
+		String query = "CREATE TABLE IF NOT EXISTS accounts (UserID int NOT NULL AUTO_INCREMENT PRIMARY KEY, Username varchar(255), Password varchar(255));";
 		
-//		String query5 = "ALTER TABLE books auto_increment = 1";
-		
-//		String query6 = "ALTER TABLE notifs auto_increment = 1";
+		String query2 = "ALTER TABLE accounts auto_increment = 1";
 		
 		try {
 
 			PreparedStatement ps = getConnection().prepareStatement(query);
 			ps.execute();
-			ps = getConnection().prepareStatement(query4);
+			ps = getConnection().prepareStatement(query2);
 			ps.execute();
 			
 		}catch (SQLException e) {
 			e.printStackTrace();
 		} 
-		
 		return true;
 	}
 	
@@ -81,7 +72,7 @@ public class Database{
 		
 	}
 	
-	public void addingAccount(signingUp newAccount){
+	public void addingAccount(signingUp newAccount){ //Signing Up
 		String x,y;
 		//get getConnection() from db
 		Connection cnt = getConnection();
@@ -90,14 +81,15 @@ public class Database{
 		
 		
 		String query = "insert into accounts values ('"+x+"','"+y+"')";
-		query = "ALTER TABLE accounts	 auto_increment = 1";
+		String query2 = "ALTER TABLE accounts auto_increment = 1";
+
+
 		//create string query
 		
 		try {
-			//create prepared statement
-			PreparedStatement ps = cnt.prepareStatement(query);
-			
-			//get result and store in result set
+			PreparedStatement ps = getConnection().prepareStatement(query);
+			ps.execute();
+			ps = getConnection().prepareStatement(query2);
 			ps.execute();
 			
 			//close all the resources
@@ -110,7 +102,7 @@ public class Database{
 		//return null;
 	}
 	
-	public void loggingAccount(loggingIn registeredAccount) {
+	public void loggingAccount(loggingIn registeredAccount) { //Logging In
 		Connection cnt = getConnection(); 
 		String query = "SELECT * FROM accounts WHERE Username = ('"+registeredAccount.getRegisteredUsername()+"') AND Password = ('"+registeredAccount.getRegisteredPassword()+"')"; 
 		
@@ -136,6 +128,7 @@ public class Database{
 			e.printStackTrace();
 			
 		}
+		System.out.println("Login Successful!");
 	}
 
 	public void queryTemplate(String parameters) {
@@ -170,34 +163,34 @@ public class Database{
 		
 	}
 	
-	public void testerTemplate() {
-		String x = "dad";
-		String y = "d";
-		Connection cnt = getConnection(); 
-		String query = "SELECT * FROM accounts WHERE Username = ('"+x+"') AND Password = ('"+y+"')"; 
-		
-		try {
-			//create prepared statement
-			PreparedStatement ps = cnt.prepareStatement(query);
-			
-			//get result and store in result set
-			ResultSet rs = ps.executeQuery();
-			
-			//transform set into list
-			while(rs.next()) {
-				System.out.println(rs.getString("Username"));
-				System.out.println(rs.getString("Password"));
-			}
-			
-			//close all the resources
-			ps.close();
-			rs.close();
-			cnt.close();
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-			
-		}
-	}
+//	public void testerTemplate() {
+//		String x = "dad";
+//		String y = "d";
+//		Connection cnt = getConnection(); 
+//		String query = "SELECT * FROM accounts WHERE Username = ('"+x+"') AND Password = ('"+y+"')"; 
+//		
+//		try {
+//			//create prepared statement
+//			PreparedStatement ps = cnt.prepareStatement(query);
+//			
+//			//get result and store in result set
+//			ResultSet rs = ps.executeQuery();
+//			
+//			//transform set into list
+//			while(rs.next()) {
+//				System.out.println(rs.getString("Username"));
+//				System.out.println(rs.getString("Password"));
+//			}
+//			
+//			//close all the resources
+//			ps.close();
+//			rs.close();
+//			cnt.close();
+//
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//			
+//		}
+//	}
 
 }

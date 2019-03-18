@@ -11,6 +11,7 @@
 /MusicPlaer.class
 /accountModel.class
 /addSongDetails.class
+<<<<<<< HEAD
 /generalController.class
 /loggingController.class
 /loggingIn.class
@@ -32,3 +33,9 @@
 /AddSong$btn_AddSong.class
 /AddSong$btn_Add.class
 /MusicPlaer$btn_Refresh.class
+=======
+/selectAccount$registeredButton.class
+/loggingInView.class
+/loggingInView$cofirmButton.class
+/loggingInView$confirmButton.class
+>>>>>>> 725a2b35f90f43c561acbc94e10837fc6b1faeab

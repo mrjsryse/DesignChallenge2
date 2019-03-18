@@ -9,6 +9,7 @@ import javax.swing.JButton;
 public class selectAccount extends JFrame{
 	signingUpView signingUpViewing;
 	signingUp signUpData;
+	loggingInView loggingInViewing;
 	public JButton btnSignUp,btnGuestAccount,btnRegisteredAccount;
 	
 	
@@ -16,6 +17,7 @@ public class selectAccount extends JFrame{
 	public selectAccount() {
 		
 		signingUpViewing = new signingUpView();
+		loggingInViewing = new loggingInView();
 		
 		JPanel backgroundPanel = new JPanel();
 		getContentPane().add(backgroundPanel, BorderLayout.CENTER);
@@ -47,12 +49,8 @@ public class selectAccount extends JFrame{
 
 		this.setVisible(true);
 		this.setSize(625, 700);
-//		btnGuestAccount = new JButton();
-//		btnGuestAccount.addActionListener(new guestButton());
-//		btnRegisteredAccount = new JButton();
-//		btnRegisteredAccount.addActionListener(new registeredButton());
+		btnRegisteredAccount.addActionListener(new registeredButton());
 		btnSignUp.addActionListener(new signUpButton());
-		
 	}
 	
 //	class guestButton implements ActionListener
@@ -78,6 +76,16 @@ public class selectAccount extends JFrame{
 		System.out.println("Click");
 		signingUpViewing.setVisible(true);
 		System.out.println("After Click");
+		}
+}
+	
+	class registeredButton implements ActionListener
+	{
+	public void actionPerformed (ActionEvent e)
+		{
+		System.out.println("Click Two");
+		loggingInViewing.setVisible(true);
+		System.out.println("After Click Two");
 		}
 }
 	
