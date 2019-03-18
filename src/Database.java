@@ -115,7 +115,13 @@ public class Database{
 				System.out.println(rs.getString("Username"));
 				System.out.println(rs.getString("Password"));
 			}
+			String userName = registeredAccount.getRegisteredUsername();
+			String passWord = registeredAccount.getRegisteredPassword();
 			
+			if(rs.next())
+				System.out.println("Success!");
+			else
+				System.out.println("Failure!");
 			//close all the resources
 			ps.close();
 			rs.close();
@@ -125,7 +131,7 @@ public class Database{
 			e.printStackTrace();
 			
 		}
-		System.out.println("Login Successful!");
+		
 	}
 
 	public void queryTemplate(String parameters) {
