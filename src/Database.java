@@ -83,13 +83,14 @@ public class Database{
 	
 	public void addingAccount(signingUp newAccount){
 		String x,y;
+		int w=6;
 		//get getConnection() from db
 		Connection cnt = getConnection();
 		x = newAccount.getUsername();
 		y = newAccount.getPassword();
 		
 		
-		String query = "insert into accounts values ('"+x+"','"+y+"',"+0+")";
+		String query = "insert into accounts values ("+w+",'"+x+"','"+y+"')";
 		//create string query
 		
 		try {
@@ -106,7 +107,7 @@ public class Database{
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} 
-		
+		w++;
 		//return null;
 	}
 	
