@@ -49,9 +49,6 @@ public class selectAccount extends JFrame{
 
 		this.setVisible(true);
 		this.setSize(625, 700);
-//		btnGuestAccount = new JButton();
-//		btnGuestAccount.addActionListener(new guestButton());
-//		btnRegisteredAccount = new JButton();
 		btnRegisteredAccount.addActionListener(new registeredButton());
 		btnSignUp.addActionListener(new signUpButton());
 	}
