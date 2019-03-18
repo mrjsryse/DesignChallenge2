@@ -83,7 +83,7 @@ public class Database{
 	
 	public void addingAccount(signingUp newAccount){
 		String x,y;
-		int w=6;
+		int w=8; //to add in the database
 		//get getConnection() from db
 		Connection cnt = getConnection();
 		x = newAccount.getUsername();
@@ -91,6 +91,7 @@ public class Database{
 		
 		
 		String query = "insert into accounts values ("+w+",'"+x+"','"+y+"')";
+		w = increment(w);
 		//create string query
 		
 		try {
@@ -106,9 +107,13 @@ public class Database{
 
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} 
-		w++;
+		}
 		//return null;
+	}
+	
+	public int increment(int w){
+		w = w + 1;
+		return w;
 	}
 	
 	public void loggingAccount(loggingIn registeredAccount) {
