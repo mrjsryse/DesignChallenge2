@@ -20,8 +20,10 @@ public class AddSong extends JFrame {
 	private JTextField textFieldGenre;
 	JButton btnChooseFile, btnNewButton;
 	private JTextField textFieldYear;
-	String songName;
+	String fileName;
 	private JTextField textFieldChosenFile;
+	private JTextField textFieldSongName;
+	private JLabel lblSongName;
 	/**
 	 * Launch the application.
 	 */
@@ -99,6 +101,15 @@ public class AddSong extends JFrame {
 		textFieldChosenFile.setColumns(10);
 		textFieldChosenFile.setBounds(29, 40, 144, 20);
 		contentPane.add(textFieldChosenFile);
+		
+		textFieldSongName = new JTextField();
+		textFieldSongName.setColumns(10);
+		textFieldSongName.setBounds(87, 111, 86, 20);
+		contentPane.add(textFieldSongName);
+		
+		lblSongName = new JLabel("Song Name");
+		lblSongName.setBounds(0, 111, 86, 14);
+		contentPane.add(lblSongName);
 	}
 	
 	class btn_ChooseFile implements ActionListener
@@ -108,7 +119,7 @@ public class AddSong extends JFrame {
 			 JFileChooser chooser = new JFileChooser();
 			 chooser.showOpenDialog(null);
 			 File f = chooser.getSelectedFile();
-			  songName = f.getName();
+			  fileName = f.getAbsolutePath();
 		 }
 		 
 	 }
@@ -118,7 +129,8 @@ public class AddSong extends JFrame {
 		 public void actionPerformed(ActionEvent e)
 		 {
 
-			 textFieldChosenFile.setText(songName);
+			 textFieldChosenFile.setText(fileName);
+			 String songName = textFieldSongName.getText();
 			 String artistName = textFieldArtistName.getText();
 			 String albumName = textFieldAlbum.getText();
 			 String genre = textFieldGenre.getText();
