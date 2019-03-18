@@ -81,7 +81,7 @@ public class Database{
 		
 		
 		String query = "insert into accounts values ('"+x+"','"+y+"')";
-		String query2 = "ALTER TABLE accounts auto_increment = 1";
+		String query2 = "ALTER TABLE accounts auto_increment = 1	";
 
 
 		//create string query
