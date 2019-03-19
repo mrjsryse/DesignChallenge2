@@ -128,19 +128,20 @@ public class AddSong extends JFrame {
 	 {		
 		 public void actionPerformed(ActionEvent e)
 		 {
+			 Song2 song = new Song2();
 
 			 textFieldChosenFile.setText(fileName);
-			 String songName = textFieldSongName.getText();
+			 song.setSongName(textFieldSongName.getText());
 			 String artistName = textFieldArtistName.getText();
 			 String albumName = textFieldAlbum.getText();
 			 String genre = textFieldGenre.getText();
 			 String year = textFieldYear.getText();
 			 
-			 Song addedSong = new Song(songName, artistName, albumName, genre, year);
+			// Song addedSong = new Song(songName, artistName, albumName, genre, year);
 			 
 			 SongList sList = new SongList();
-			 sList.addEvent(addedSong);
-			 int index = sList.getIndex(addedSong);
+		//	 sList.addEvent(addedSong);
+		//	 int index = sList.getIndex(addedSong);
 			 
 			
 			 
