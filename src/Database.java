@@ -10,8 +10,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import com.mysql.cj.xdevapi.Statement;
-
 public class Database{
 	
 	//"com.mysql.jdbc.Driver","jdbc:mysql://112.211.95.65:3306/","superuser","kathyemir","swdespa"
@@ -215,7 +213,7 @@ public class Database{
 		//create string qu
 		
 		try {
-			//create prepared statement
+			//create prepared statement	
 			PreparedStatement ps = cnt.prepareStatement(query);
 			
 			//get result and store in result set
