@@ -1,4 +1,5 @@
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -35,20 +36,35 @@ public class Database{
 		
 		String query = "CREATE TABLE IF NOT EXISTS accounts (UserID int NOT NULL AUTO_INCREMENT PRIMARY KEY, Username varchar(255), Password varchar(255));"; //creating table
 		String query2 = "CREATE TABLE IF NOT EXISTS playlists(playlists int NOT NULL AUTO_INCREMENT PRIMARY KEY, ProfileNumber int(11), Playlist_Number int(11));";
-		String query3 = "";
+		String query3 = "CREATE TABLE IF NOT EXISTS songs(SongID varchar(255) NOT NULL PRIMARY KEY, Title varchar(255), "
+				+ "Artist varchar(255),Album varchar(255),Genre varchar(255), Length TIME, DateAdded TIME);";
+		String query4 = "CREATE TABLE IF NOT EXISTS user_playlists(PlaylistID int NOT NULL AUTO_INCREMENT PRIMARY KEY, ProfileNumber int(11), SongNumber int(11))";
+		
 		
 		String queryIncrement = "ALTER TABLE accounts auto_increment = 1";
 		String queryIncrement2 = "ALTER TABLE playlists auto_increment = 1";
+		String queryIncrement3 = "ALTER TABLE songs auto_increment = 1";
+		String queryIncrement4 = "ALTER TABLE user_playlists auto_increment = 1";
+		
 		try {
-
 			PreparedStatement ps = getConnection().prepareStatement(query);
 			ps.execute();
 			PreparedStatement ps2 = getConnection().prepareStatement(query2);
 			ps2.execute();
+			PreparedStatement ps3 = getConnection().prepareStatement(query3);
+			ps3.execute();
+			PreparedStatement ps4 = getConnection().prepareStatement(query4);
+			ps4.execute();
+			
+			
 			ps = getConnection().prepareStatement(queryIncrement);
 			ps.execute();
 			ps2 = getConnection().prepareStatement(queryIncrement2);
 			ps2.execute();
+			ps3 = getConnection().prepareStatement(queryIncrement3);
+			ps3.execute();
+			ps4 = getConnection().prepareStatement(queryIncrement4);
+			ps4.execute();
 			
 		}catch (SQLException e) {
 			e.printStackTrace();
