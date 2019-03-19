@@ -13,7 +13,7 @@ public class signingUpView extends JFrame{
 	private JTextField passwordField;
 	signingUp signUp;
 	generalController controller;
-	
+	registeredUserView profileViewing;
 	public static signingUpView getInstance() {
         if (instance == null) {
         	instance = new signingUpView();
@@ -22,6 +22,9 @@ public class signingUpView extends JFrame{
 	}
 	
 	public signingUpView() {
+		
+		setIconImage(Toolkit.getDefaultToolkit().getImage(guestView.class.getResource("/images/spotify.png")));
+		setTitle("Not So Spotify");
 		
 		JPanel backgroundPanel = new JPanel();
 		getContentPane().add(backgroundPanel, BorderLayout.CENTER);
@@ -77,6 +80,7 @@ public class signingUpView extends JFrame{
 			signUp = new signingUp(username,password); //signUp is the account detials
 			generalController.getInstance().gettingAccountData(username, password);;
 			
+			profileViewing.setVisible(true);
 			closingWindow();
 		}
 	}

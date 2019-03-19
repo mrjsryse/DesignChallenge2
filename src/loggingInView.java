@@ -1,6 +1,7 @@
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -12,6 +13,9 @@ public class loggingInView extends JFrame{
 	private JTextField PasswordTextField;
 	loggingIn logIn;
 	public loggingInView() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(guestView.class.getResource("/images/spotify.png")));
+		setTitle("Not So Spotify");
+		
 		this.setSize(650, 700);
 		getContentPane().setLayout(null);
 		
