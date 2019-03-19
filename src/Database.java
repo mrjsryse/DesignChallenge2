@@ -101,7 +101,9 @@ public class Database{
 	
 	public void loggingAccount(loggingIn registeredAccount) { //Logging In
 		Connection cnt = getConnection(); 
-		String query = "SELECT * FROM accounts WHERE Username = ('"+registeredAccount.getRegisteredUsername()+"') AND Password = ('"+registeredAccount.getRegisteredPassword()+"')"; 
+		
+		String query = "SELECT * FROM accounts"
+				+ " WHERE Username = ("+registeredAccount.getRegisteredUsername()+") AND Password = ("+registeredAccount.getRegisteredPassword()+")"; 
 		
 		try {
 			//create prepared statement
@@ -112,16 +114,23 @@ public class Database{
 			
 			//transform set into list
 			while(rs.next()) {
-				System.out.println(rs.getString("Username"));
-				System.out.println(rs.getString("Password"));
+				System.out.println("It reached until here");
+				String username = rs.getString(registeredAccount.getRegisteredUsername());
+				String password = rs.getString(registeredAccount.getRegisteredPassword());
+				System.out.println(rs.getString(username + "\t" + password));
 			}
-			String userName = registeredAccount.getRegisteredUsername();
-			String passWord = registeredAccount.getRegisteredPassword();
 			
-			if(rs.next())
-				System.out.println("Success!");
-			else
-				System.out.println("Failure!");
+			if(rs.next() == false) {
+				System.out.println("Empty");
+				System.out.println(registeredAccount.getRegisteredUsername()); //just for testing
+				System.out.println(registeredAccount.getRegisteredPassword());
+			}
+			else {
+				System.out.println("NOT empty");
+				System.out.println(registeredAccount.getRegisteredUsername()); //just for testing
+				System.out.println(registeredAccount.getRegisteredPassword());
+			}
+			
 			//close all the resources
 			ps.close();
 			rs.close();
