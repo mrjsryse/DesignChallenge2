@@ -17,11 +17,14 @@ import java.awt.event.ActionEvent;
 import javax.swing.JList;
 import javax.swing.JTextPane;
 import javax.swing.JLabel;
+import java.awt.Font;
+import javax.swing.ImageIcon;
 
 public class MusicPlaer extends JFrame {
 
 	MP3Player mp3 = new MP3Player(new File("C:\\Users\\Nello Santos\\Desktop\\Music\\DecAve.mp3"));
 	private JPanel contentPane;
+	//private signingUp currentUser;
 	JButton btnPickPlaylist, btnPickSong, btnCreatePlaylist, btnUploadSong, btnEditSong, btnPlay, btnPause, btnNextSong, btnPreviousSong;
 	JList yourSongsList;
 	JTextPane txtpnSongNameGenre;
@@ -59,21 +62,25 @@ public class MusicPlaer extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		 btnPlay = new JButton("Play");
+		 btnPlay = new JButton("");
+		 btnPlay.setIcon(new ImageIcon("C:\\Users\\Antonello Santos\\Documents\\GitHub\\DesignChallenge2\\src\\images\\play-button.png"));
 		btnPlay.addActionListener(new btn_Play());
 		btnPlay.setBounds(492, 681, 89, 45);
 		contentPane.add(btnPlay);
 		
-		 btnPause = new JButton("Pause");
+		 btnPause = new JButton("");
+		 btnPause.setIcon(new ImageIcon(profileView.class.getResource("/images/pause-button.png")));
 		btnPause.addActionListener(new btn_Pause());
 		btnPause.setBounds(593, 681, 89, 45);
 		contentPane.add(btnPause);
 		
-		 btnNextSong = new JButton(">");
+		 btnNextSong = new JButton("");
+		 btnNextSong.setIcon(new ImageIcon(profileView.class.getResource("/images/skip-to-next-track.png")));
 		btnNextSong.setBounds(705, 681, 89, 45);
 		contentPane.add(btnNextSong);
 		
-		 btnPreviousSong = new JButton("<");
+		 btnPreviousSong = new JButton("");
+		 btnPreviousSong.setIcon(new ImageIcon(profileView.class.getResource("/images/back-track.png")));
 		btnPreviousSong.setBounds(380, 681, 89, 45);
 		contentPane.add(btnPreviousSong);
 		
@@ -85,16 +92,16 @@ public class MusicPlaer extends JFrame {
 		playlistSongList.setBounds(403, 139, 375, 224);
 		contentPane.add(playlistSongList);
 		
-		 btnPickPlaylist = new JButton("Pick Playlist");
+		btnPickPlaylist = new JButton("Bird ni Josh");
 		btnPickPlaylist.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnPickPlaylist.setBounds(53, 664, 136, 45);
+		btnPickPlaylist.setBounds(25, 664, 136, 45);
 		contentPane.add(btnPickPlaylist);
 		
 		 btnPickSong = new JButton("Add Song to Playlist");
-		btnPickSong.setBounds(898, 664, 190, 45);
+		btnPickSong.setBounds(957, 664, 190, 45);
 		contentPane.add(btnPickSong);
 		
 		 txtpnSongNameGenre = new JTextPane();
@@ -147,6 +154,30 @@ public class MusicPlaer extends JFrame {
 		btnRefresh.addActionListener(new btn_Refresh());
 		btnRefresh.setBounds(760, 21, 97, 25);
 		contentPane.add(btnRefresh);
+		
+		JLabel lblUser = new JLabel("Current User:");
+		lblUser.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblUser.setBounds(418, 20, 118, 16);
+		contentPane.add(lblUser);
+		
+		JTextPane usernameTextPane = new JTextPane();
+		usernameTextPane.setBounds(523, 20, 89, 22);
+		usernameTextPane.setText("username");
+		contentPane.add(usernameTextPane);
+		
+		JButton shuffleButton = new JButton("");
+		shuffleButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		shuffleButton.setIcon(new ImageIcon(profileView.class.getResource("/images/shuffle.png")));
+		shuffleButton.setBounds(279, 681, 89, 45);
+		contentPane.add(shuffleButton);
+		
+		JButton repeatButton = new JButton("");
+		repeatButton.setIcon(new ImageIcon(profileView.class.getResource("/images/repeat.png")));
+		repeatButton.setBounds(806, 681, 89, 45);
+		contentPane.add(repeatButton);
 	}
 	
 	 class btn_Play implements ActionListener 

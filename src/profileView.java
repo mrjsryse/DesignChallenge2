@@ -166,6 +166,10 @@ public class profileView extends JFrame {
 		contentPane.add(usernameTextPane);
 		
 		JButton shuffleButton = new JButton("");
+		shuffleButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
 		shuffleButton.setIcon(new ImageIcon(profileView.class.getResource("/images/shuffle.png")));
 		shuffleButton.setBounds(279, 681, 89, 45);
 		contentPane.add(shuffleButton);
