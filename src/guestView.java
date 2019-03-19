@@ -24,7 +24,7 @@ import java.awt.Toolkit;
 
 public class guestView extends JFrame {
 	private volatile static guestView instance = null;
-	MP3Player mp3 = new MP3Player(new File("C:\\Users\\Nello Santos\\Desktop\\Music\\DecAve.mp3"));
+	MP3Player mp3 = new MP3Player(new File("C:\\Users\\Antonello Santos\\Music\\DecAve1.mp3"));
 	private JPanel contentPane;
 	//private signingUp currentUser;
 	JButton btnPickPlaylist, btnPickSong, btnCreatePlaylist, btnUploadSong, btnEditSong, btnPlay, btnPause, btnNextSong, btnPreviousSong;
@@ -46,7 +46,6 @@ public class guestView extends JFrame {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(guestView.class.getResource("/images/spotify.png")));
 		setTitle("Not So Spotify");
 
-		MP3Player mp3 = new MP3Player(new File("C:\\Users\\Nello Santos\\Desktop\\Music\\DecAve.mp3"));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -99,11 +98,12 @@ public class guestView extends JFrame {
 		btnPickPlaylist.setBounds(25, 664, 136, 45);
 		contentPane.add(btnPickPlaylist);
 		
-		 btnPickSong = new JButton("Add Song to Playlist");
+		JButton btnPickSong = new JButton("Add Song to Playlist");
 		btnPickSong.setBounds(957, 664, 190, 45);
 		contentPane.add(btnPickSong);
-		
-		 txtpnSongNameGenre = new JTextPane();
+		btnPickSong.addActionListener(new btn_addSongtoP());
+		 
+		txtpnSongNameGenre = new JTextPane();
 		txtpnSongNameGenre.setBounds(403, 405, 375, 209);
 		txtpnSongNameGenre.setText("Song Name: \r\nGenre: \r\n");
 		contentPane.add(txtpnSongNameGenre);
@@ -163,11 +163,13 @@ public class guestView extends JFrame {
 		shuffleButton.setIcon(new ImageIcon(profileView.class.getResource("/images/shuffle.png")));
 		shuffleButton.setBounds(279, 681, 89, 45);
 		contentPane.add(shuffleButton);
+		shuffleButton.addActionListener(new btn_shuffle());
 		
 		JButton repeatButton = new JButton("");
 		repeatButton.setIcon(new ImageIcon(profileView.class.getResource("/images/repeat.png")));
 		repeatButton.setBounds(806, 681, 89, 45);
 		contentPane.add(repeatButton);
+		repeatButton.addActionListener(new btn_repeat());
 		
 		JButton logoutButton = new JButton("Logout");
 		logoutButton.setBounds(1050, 728, 97, 25);
@@ -184,6 +186,16 @@ public class guestView extends JFrame {
 
 	     }
 	 }
+	
+	 class btn_addSongtoP implements ActionListener 
+	 {
+
+	     public void actionPerformed(ActionEvent e) 
+	     {
+	        mp3.addToPlayList(new File("C:\\\\Users\\\\Antonello Santos\\\\Music\\\\OnTheWingsOfLove.mp3"));
+
+	     }
+	 }
 	 
 	 class btn_Pause implements ActionListener 
 	 {
@@ -193,6 +205,21 @@ public class guestView extends JFrame {
 		 }
 	 }
 	 
+	 class btn_shuffle implements ActionListener 
+	 {
+		 public void actionPerformed(ActionEvent e)
+		 {
+			 mp3.setShuffle(true);
+		 }
+	 }
+	 
+	 class btn_repeat implements ActionListener 
+	 {
+		 public void actionPerformed(ActionEvent e)
+		 {
+			 mp3.setRepeat(true);
+		 }
+	 }
 	 class btn_UploadSong implements ActionListener
 	 {
 		 public void actionPerformed(ActionEvent e)

@@ -4,6 +4,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
 import javax.swing.ImageIcon;
@@ -109,6 +110,7 @@ public class selectAccount extends JFrame{
 			System.out.println("Click Three");
 			guestView.getInstance().setVisible(true);
 			System.out.println("After Click Three");
+			JOptionPane.showMessageDialog(null,"Logged in as Guest!");
 			closingWindow();
 			
 		}
