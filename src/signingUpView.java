@@ -23,6 +23,9 @@ public class signingUpView extends JFrame{
 	
 	public signingUpView() {
 		
+		setIconImage(Toolkit.getDefaultToolkit().getImage(guestView.class.getResource("/images/spotify.png")));
+		setTitle("Not So Spotify");
+		
 		JPanel backgroundPanel = new JPanel();
 		getContentPane().add(backgroundPanel, BorderLayout.CENTER);
 		backgroundPanel.setLayout(null);

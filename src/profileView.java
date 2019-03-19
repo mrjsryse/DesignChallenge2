@@ -21,6 +21,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextPane;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.Toolkit;
+
 import javax.swing.ImageIcon;
 
 public class profileView extends JFrame {
@@ -47,7 +49,9 @@ public class profileView extends JFrame {
 	 * Create the frame.
 	 */
 	public profileView() {
-
+		setIconImage(Toolkit.getDefaultToolkit().getImage(guestView.class.getResource("/images/spotify.png")));
+		setTitle("Not So Spotify");
+		
 		MP3Player mp3 = new MP3Player(new File("C:\\Users\\Nello Santos\\Desktop\\Music\\DecAve.mp3"));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
