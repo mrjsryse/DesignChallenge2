@@ -13,7 +13,6 @@ public class signingUpView extends JFrame{
 	private JTextField passwordField;
 	signingUp signUp;
 	generalController controller;
-	registeredUserView profileViewing;
 	public static signingUpView getInstance() {
         if (instance == null) {
         	instance = new signingUpView();
@@ -80,7 +79,7 @@ public class signingUpView extends JFrame{
 			signUp = new signingUp(username,password); //signUp is the account detials
 			generalController.getInstance().gettingAccountData(username, password);;
 			
-			profileViewing.setVisible(true);
+			registeredUserView.getInstance().setVisible(true);
 			closingWindow();
 		}
 	}
