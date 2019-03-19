@@ -153,22 +153,26 @@ public class Database{
 		
 	}
 	
-	public void writeBLOB(Song song) {
+	public void writeBLOB(AddSong song) {
 			
 			FileInputStream input = null;
 			Connection cnt = getConnection();
 			PreparedStatement myStatement = null;
 			
-			String query = "SELECT * FROM swdespa.songdata SET data=? WHERE song = '"+song.getSongName()+"'";
+			String query = "SELECT * FROM swdespa.songdata SET data=? WHERE song = '"+song.songName+"'";
 			
 			//create string qu
 			
 			try {
-				File theSongFile = new File(song.getSongName()); //Place instead of song.getSongName()
+				myStatement = cnt.prepareStatement(query);
+				
+				File theSongFile = new File(song.fileName); //Place instead of song.getSongName()
 				input = new FileInputStream(theSongFile);
 				myStatement.setBinaryStream(1, input);
 				
 				System.out.println("Reading the MP3 file: " + theSongFile.getAbsolutePath());
+				System.out.println("Storing MP3 into the database " + theSongFile);
+				System.out.println(query);
 	
 			} catch (Exception ecx) {
 				ecx.printStackTrace();
