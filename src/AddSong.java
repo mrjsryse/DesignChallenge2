@@ -13,7 +13,8 @@ import javax.swing.JButton;
 import javax.swing.JFileChooser;
 
 public class AddSong extends JFrame {
-
+	
+	MusicPlaer mp;
 	private JPanel contentPane;
 	private JTextField textFieldArtistName;
 	private JTextField textFieldAlbum;
@@ -125,29 +126,32 @@ public class AddSong extends JFrame {
 	 }
 	
 	class btn_Add implements ActionListener
-	 {		
+	 {		MusicPlaer mp;
 		 public void actionPerformed(ActionEvent e)
 		 {
-/*			 textFieldChosenFile.setText(fileName);
+			 textFieldChosenFile.setText(fileName);
 			 String songName = textFieldSongName.getText();
 			 String artistName = textFieldArtistName.getText();
 			 String albumName = textFieldAlbum.getText();
 			 String genre = textFieldGenre.getText();
 			 String year = textFieldYear.getText();
 			 
-			 Song addedSong = new Song(songName, artistName, albumName, genre, year);
+			 Song addedSong = new SongBuilder()
+					 .setSongName(songName)
+					 .setArtistName(artistName)
+					 .setAlbum(albumName)
+					 .setGenre(genre)
+					 .setYear(year)
+					 .getSong();
 			 
 			 SongList sList = new SongList();
 			 sList.addEvent(addedSong);
 			 int index = sList.getIndex(addedSong);
 			 
-			*/
-			 
-			 
-			 Song song = new Song.SongBuilder().setSongName(textFieldSongName.getText()).getSong();
+
 			 
 			 
 		 }
-		 
+		
 	 }
 }
