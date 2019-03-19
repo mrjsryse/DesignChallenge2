@@ -212,11 +212,15 @@ public class MusicPlaer extends JFrame {
 	 {
 		 public void actionPerformed(ActionEvent e)
 		 {
+			 Song s = new Song.SongBuilder().getSong();
+			 
 			 SongList sList = new SongList();
 			 DefaultListModel DLM = new DefaultListModel();
 			 
-			 for(int x = 0; x < sList.getSongSize(); x++)
-			 DLM.addElement(sList.getSongList().get(x).ArtistName);
+		//	 for(int x = 0; x < sList.getSongSize(); x++)
+	//		 DLM.addElement(sList.getSongList().get(x).ArtistName);
+			 
+			 
 			 
 			 yourSongsList.setModel(DLM);
 			 
