@@ -21,4 +21,5 @@ public class loggingIn {
 	public void setRegisteredPassword(String registeredPassword) {
 		this.registeredPassword = registeredPassword;
 	}
+	
 }

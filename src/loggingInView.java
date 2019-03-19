@@ -60,7 +60,6 @@ public class loggingInView extends JFrame{
 			String registeredPassword = PasswordTextField.getText();
 			logIn = new loggingIn(registeredUsername,registeredPassword);
 			loggingController.getInstance().gettingRegisteredAccountData(registeredUsername, registeredPassword);
-			
 			closingWindow();
 		}
 	}
