@@ -1,3 +1,5 @@
+import java.io.File;
+import java.io.FileInputStream;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;
@@ -151,34 +153,25 @@ public class Database{
 		
 	}
 	
-	public void writeBLOB() {
+	public void writeBLOB(Song song) {
 			
-			//get getConnection() from db
+			FileInputStream input = null;
 			Connection cnt = getConnection();
+			PreparedStatement myStatement = null;
 			
-			String query = "SELECT * FROM accounts";
+			String query = "SELECT * FROM swdespa.songdata SET data=? WHERE song = '"+song.getSongName()+"'";
+			
 			//create string qu
 			
 			try {
-				//create prepared statement
-				PreparedStatement ps = cnt.prepareStatement(query);
+				File theSongFile = new File(song.getSongName()); //Place instead of song.getSongName()
+				input = new FileInputStream(theSongFile);
+				myStatement.setBinaryStream(1, input);
 				
-				//get result and store in result set
-				ResultSet rs = ps.executeQuery();
-				
-				//transform set into list
-				while(rs.next()) {
-					System.out.println(rs.getString("Username"));
-					System.out.println(rs.getString("Password"));
-				}
-				
-				//close all the resources
-				ps.close();
-				rs.close();
-				cnt.close();
+				System.out.println("Reading the MP3 file: " + theSongFile.getAbsolutePath());
 	
-			} catch (SQLException e) {
-				e.printStackTrace();
+			} catch (Exception ecx) {
+				ecx.printStackTrace();
 			} 
 			
 		}
