@@ -111,13 +111,6 @@ public class Database{
 			//get result and store in result set
 			ResultSet rs = ps.executeQuery();
 			
-			if(rs.next() == false) {
-				System.out.println("Empty");
-			}
-			else {
-				System.out.println("NOT empty");
-			}
-			
 			//close all the resources
 			ps.close();
 			rs.close();
