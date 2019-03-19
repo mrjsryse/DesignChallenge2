@@ -1,5 +1,5 @@
 
-public interface SongPlan {
+public interface SongPlan { //Builder Interface
 	public void setSongName(String songName);
 	public void setSongArtistName(String artistName);
 	public void setSongAlbum(String albumName);

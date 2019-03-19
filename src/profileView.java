@@ -92,7 +92,7 @@ public class profileView extends JFrame {
 		playlistSongList.setBounds(403, 139, 375, 224);
 		contentPane.add(playlistSongList);
 		
-		 btnPickPlaylist = new JButton("Pick Playlist");
+		btnPickPlaylist = new JButton("Bird ni Josh");
 		btnPickPlaylist.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
