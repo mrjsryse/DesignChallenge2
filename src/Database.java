@@ -177,6 +177,38 @@ public class Database{
 		
 	}
 	
+public void writeBLOB() {
+		
+		//get getConnection() from db
+		Connection cnt = getConnection();
+		
+		String query = "SELECT * FROM accounts";
+		//create string qu
+		
+		try {
+			//create prepared statement
+			PreparedStatement ps = cnt.prepareStatement(query);
+			
+			//get result and store in result set
+			ResultSet rs = ps.executeQuery();
+			
+			//transform set into list
+			while(rs.next()) {
+				System.out.println(rs.getString("Username"));
+				System.out.println(rs.getString("Password"));
+			}
+			
+			//close all the resources
+			ps.close();
+			rs.close();
+			cnt.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} 
+		
+	}
+	
 //	public void testerTemplate() {
 //		String x = "dad";
 //		String y = "d";
