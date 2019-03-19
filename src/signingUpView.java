@@ -13,7 +13,7 @@ public class signingUpView extends JFrame{
 	private JTextField passwordField;
 	signingUp signUp;
 	generalController controller;
-	profileView profileViewing;
+	registeredUserView profileViewing;
 	public static signingUpView getInstance() {
         if (instance == null) {
         	instance = new signingUpView();

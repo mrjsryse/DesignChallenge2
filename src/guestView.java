@@ -63,13 +63,13 @@ public class guestView extends JFrame {
 		contentPane.add(btnPlay);
 		
 		 btnPause = new JButton("");
-		 btnPause.setIcon(new ImageIcon(profileView.class.getResource("/images/pause-button.png")));
+		 btnPause.setIcon(new ImageIcon(registeredUserView.class.getResource("/images/pause-button.png")));
 		btnPause.addActionListener(new btn_Pause());
 		btnPause.setBounds(593, 681, 89, 45);
 		contentPane.add(btnPause);
 		
 		 btnNextSong = new JButton("");
-		 btnNextSong.setIcon(new ImageIcon(profileView.class.getResource("/images/skip-to-next-track.png")));
+		 btnNextSong.setIcon(new ImageIcon(registeredUserView.class.getResource("/images/skip-to-next-track.png")));
 		btnNextSong.setBounds(705, 681, 89, 45);
 		contentPane.add(btnNextSong);
 		
@@ -78,7 +78,7 @@ public class guestView extends JFrame {
 		 	public void actionPerformed(ActionEvent e) {
 		 	}
 		 });
-		 btnPreviousSong.setIcon(new ImageIcon(profileView.class.getResource("/images/back-track.png")));
+		 btnPreviousSong.setIcon(new ImageIcon(registeredUserView.class.getResource("/images/back-track.png")));
 		btnPreviousSong.setBounds(380, 681, 89, 45);
 		contentPane.add(btnPreviousSong);
 		
@@ -160,13 +160,13 @@ public class guestView extends JFrame {
 		contentPane.add(lblUser);
 		
 		JButton shuffleButton = new JButton("");
-		shuffleButton.setIcon(new ImageIcon(profileView.class.getResource("/images/shuffle.png")));
+		shuffleButton.setIcon(new ImageIcon(registeredUserView.class.getResource("/images/shuffle.png")));
 		shuffleButton.setBounds(279, 681, 89, 45);
 		contentPane.add(shuffleButton);
 		shuffleButton.addActionListener(new btn_shuffle());
 		
 		JButton repeatButton = new JButton("");
-		repeatButton.setIcon(new ImageIcon(profileView.class.getResource("/images/repeat.png")));
+		repeatButton.setIcon(new ImageIcon(registeredUserView.class.getResource("/images/repeat.png")));
 		repeatButton.setBounds(806, 681, 89, 45);
 		contentPane.add(repeatButton);
 		repeatButton.addActionListener(new btn_repeat());
