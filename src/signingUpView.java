@@ -4,6 +4,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
@@ -13,6 +14,7 @@ public class signingUpView extends JFrame{
 	private JTextField passwordField;
 	signingUp signUp;
 	generalController controller;
+	
 	public static signingUpView getInstance() {
         if (instance == null) {
         	instance = new signingUpView();
@@ -78,9 +80,11 @@ public class signingUpView extends JFrame{
 			String password = passwordField.getText();
 			signUp = new signingUp(username,password); //signUp is the account detials
 			generalController.getInstance().gettingAccountData(username, password);;
-			
+			JOptionPane.showMessageDialog(null,"Successfully Signed Up!");
 			registeredUserView.getInstance().setVisible(true);
 			closingWindow();
+			selectAccount.getInstance().setVisible(false);
+			
 		}
 	}
 	
