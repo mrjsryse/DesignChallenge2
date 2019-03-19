@@ -9,6 +9,7 @@ import javax.swing.JButton;
 public class selectAccount extends JFrame{
 	signingUpView signingUpViewing;
 	signingUp signUpData;
+	loggingIn registeredData;
 	loggingInView loggingInViewing;
 	public JButton btnSignUp,btnGuestAccount,btnRegisteredAccount;
 	
@@ -53,25 +54,12 @@ public class selectAccount extends JFrame{
 
 		this.setVisible(true);
 		this.setSize(625, 700);
-		btnRegisteredAccount.addActionListener(new registeredButton());
+		
+		//Making the action listeners
 		btnSignUp.addActionListener(new signUpButton());
+		btnRegisteredAccount.addActionListener(new registeredButton());
+
 	}
-	
-//	class guestButton implements ActionListener
-//	{
-//	public void actionPerformed (ActionEvent e)
-//		{
-//		closingWindow();
-//		}
-//}
-//	
-//	class registeredButton implements ActionListener
-//	{
-//	public void actionPerformed (ActionEvent e)
-//		{
-//		closingWindow();
-//		}
-//}
 	
 	class signUpButton implements ActionListener
 	{
@@ -82,6 +70,9 @@ public class selectAccount extends JFrame{
 		System.out.println("After Click");
 		}
 }
+	public void addAccount(signingUpView signingUpViewing) {
+		this.signingUpViewing = signingUpViewing;
+	}
 	
 	class registeredButton implements ActionListener
 	{
@@ -92,13 +83,16 @@ public class selectAccount extends JFrame{
 		System.out.println("After Click Two");
 		}
 }
+	public void loggingInAccount(loggingInView loggingInViewing) {
+		this.loggingInViewing = loggingInViewing;
+	}
 	
 	public void closingWindow() {
 		this.setVisible(false);
 	}
 	
-	public void addAccount(signingUpView signingUpViewing) {
-		this.signingUpViewing = signingUpViewing;
-	}
+	
+	
+	
 }
 

@@ -1,7 +1,17 @@
+<<<<<<< HEAD
 /AddSong$1.class
 /AddSong$btn_Add.class
 /AddSong$btn_ChooseFile.class
 /AddSong.class
+=======
+<<<<<<< HEAD
+/jaco-mp3-player-0.9.3.jar
+/mysql-connector-java-8.0.15.jar
+/AddSong$1.class
+/AddSong.class
+=======
+>>>>>>> 144808acb471844619dfe40cd7b40347a0cf3050
+>>>>>>> b7849c38a792de5652a11a166751c817ba762c92
 /Database.class
 /Driver.class
 /MusicPlaer$1.class
@@ -23,13 +33,30 @@
 /loggingIn.class
 /loggingInView$confirmButton.class
 /loggingInView.class
+<<<<<<< HEAD
 /mysql-connector-java-8.0.15.jar
+/selectAccount$registeredButton.class
+=======
 /selectAccount$registeredButton.class
 /selectAccount$signUpButton.class
 /selectAccount.class
 /signingUp.class
 /signingUpView$confirmButton.class
 /signingUpView.class
+=======
+<<<<<<< HEAD
+/generalController.class
+/loggingController.class
+/loggingIn.class
+/registeredView$proceedButton.class
+/registeredView.class
+>>>>>>> b7849c38a792de5652a11a166751c817ba762c92
+/selectAccount$signUpButton.class
+/selectAccount.class
+/signingUp.class
+/signingUpView$confirmButton.class
+/signingUpView.class
+<<<<<<< HEAD
 /profileView.class
 /profileView$1.class
 /profileView$btn_Pause.class
@@ -40,3 +67,23 @@
 /profileView$3.class
 /profileView$4.class
 /selectAccount$1.class
+=======
+/MusicPlaer$btn_Play.class
+/MusicPlaer$btn_Pause.class
+/MusicPlaer$btn_AddASong.class
+/MusicPlaer$btn_UploadSong.class
+/Song.class
+/SongList.class
+/AddSong$btn_UploadSong.class
+/AddSong$btn_ChooseFile.class
+/AddSong$btn_AddSong.class
+/AddSong$btn_Add.class
+/MusicPlaer$btn_Refresh.class
+=======
+/selectAccount$registeredButton.class
+/loggingInView.class
+/loggingInView$cofirmButton.class
+/loggingInView$confirmButton.class
+>>>>>>> 725a2b35f90f43c561acbc94e10837fc6b1faeab
+>>>>>>> 144808acb471844619dfe40cd7b40347a0cf3050
+>>>>>>> b7849c38a792de5652a11a166751c817ba762c92
