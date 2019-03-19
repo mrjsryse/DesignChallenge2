@@ -56,11 +56,10 @@ public class loggingInView extends JFrame{
 	{
 	public void actionPerformed (ActionEvent account)
 		{
-			String username = UsernameTextField.getText();
-			String password = PasswordTextField.getText();
-			logIn = new loggingIn(username,password);
-			loggingController.getInstance().gettingRegisteredAccountData(username, password);
-			
+			String registeredUsername = UsernameTextField.getText();
+			String registeredPassword = PasswordTextField.getText();
+			logIn = new loggingIn(registeredUsername,registeredPassword);
+			loggingController.getInstance().gettingRegisteredAccountData(registeredUsername, registeredPassword);
 			closingWindow();
 		}
 	}

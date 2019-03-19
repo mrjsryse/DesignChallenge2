@@ -18,7 +18,7 @@ import javax.swing.JList;
 import javax.swing.JTextPane;
 import javax.swing.JLabel;
 
-public class MusicPlaer extends JFrame {
+public class profileView extends JFrame {
 
 	MP3Player mp3 = new MP3Player(new File("C:\\Users\\Nello Santos\\Desktop\\Music\\DecAve.mp3"));
 	private JPanel contentPane;
@@ -46,7 +46,7 @@ public class MusicPlaer extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public MusicPlaer() {
+	public profileView() {
 
 		MP3Player mp3 = new MP3Player(new File("C:\\Users\\Nello Santos\\Desktop\\Music\\DecAve.mp3"));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
