@@ -1,11 +1,16 @@
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.FilterOutputStream;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import com.mysql.cj.xdevapi.Statement;
 
 public class Database{
 	
@@ -153,32 +158,52 @@ public class Database{
 		
 	}
 	
-	public void writeBLOB(AddSong song) {
-			
-			FileInputStream input = null;
-			Connection cnt = getConnection();
-			PreparedStatement myStatement = null;
-			
-			String query = "SELECT * FROM swdespa.songdata SET data=? WHERE song = '"+song.songName+"'";
-			
-			//create string qu
-			
-			try {
-				myStatement = cnt.prepareStatement(query);
-				
-				File theSongFile = new File(song.fileName); //Place instead of song.getSongName()
-				input = new FileInputStream(theSongFile);
-				myStatement.setBinaryStream(1, input);
-				
-				System.out.println("Reading the MP3 file: " + theSongFile.getAbsolutePath());
-				System.out.println("Storing MP3 into the database " + theSongFile);
-				System.out.println(query);
-	
-			} catch (Exception ecx) {
-				ecx.printStackTrace();
-			} 
-			
-		}
+//	public void writeBLOB(AddSong song) {
+//			
+//			Connection cnt = getConnection();
+//			FileInputStream input = null;
+//			PreparedStatement myStatement = null;
+//			
+//			String query = "SELECT * FROM swdespa.songdata SET data=? WHERE song = '"+song.songName+"'";
+//			
+//			//create string qu
+//			
+//			try {
+//				myStatement = cnt.prepareStatement(query);
+//				
+//				File theSongFile = new File(song.fileName); //Place instead of song.getSongName()
+//				input = new FileInputStream(theSongFile);
+//				myStatement.setBinaryStream(1, input);
+//				
+//				System.out.println("Reading the MP3 file: " + theSongFile.getAbsolutePath());
+//				System.out.println("Storing MP3 into the database " + theSongFile);
+//				System.out.println(query);
+//	
+//			} catch (Exception ecx) {
+//				ecx.printStackTrace();
+//			} 
+//			
+//		}
+//	
+//	public void readBLOB() {
+//		Connection cnt = getConnection();
+//		Statement myReadingStatement = null;
+//		ResultSet rs = null;
+//		
+//		InputStream input = null;
+//		FileOutputStream output = null;
+//		
+//		try {
+//			
+//		}catch(Exception exc) {
+//			exc.printStackTrace();
+//		}finally {
+//			if(input != null) {
+//				//input.close();
+//			}
+//			//if(output)
+//		}
+//	}
 	
 
 	public void queryTemplate(String parameters) {
