@@ -35,6 +35,10 @@ public class selectAccount extends JFrame{
 		backgroundPanel.add(lblAreYouA);
 		
 		btnGuestAccount = new JButton("Guest Account");
+		btnGuestAccount.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
 		btnGuestAccount.setBounds(212, 413, 183, 62);
 		backgroundPanel.add(btnGuestAccount);
 		
