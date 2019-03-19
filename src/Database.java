@@ -102,8 +102,7 @@ public class Database{
 	public void loggingAccount(loggingIn registeredAccount) { //Logging In
 		Connection cnt = getConnection(); 
 		
-		String query = "SELECT * FROM accounts "
-				+ "WHERE Username = ("+registeredAccount.getRegisteredUsername()+") AND Password = ("+registeredAccount.getRegisteredPassword()+")";
+		String query = "SELECT * FROM swdespa.accounts WHERE Username = ('"+registeredAccount.getRegisteredUsername()+"') AND Password = ('"+registeredAccount.getRegisteredPassword()+"');";
 		
 		try {
 			//create prepared statement
@@ -111,13 +110,6 @@ public class Database{
 			
 			//get result and store in result set
 			ResultSet rs = ps.executeQuery();
-			
-			//transform set into list
-			while(rs.next()) {
-				String username = rs.getString(registeredAccount.getRegisteredUsername());
-				String password = rs.getString(registeredAccount.getRegisteredPassword());
-				System.out.println(rs.getString(username + "\t" + password));
-			}
 			
 			if(rs.next() == false) {
 				System.out.println("Empty");

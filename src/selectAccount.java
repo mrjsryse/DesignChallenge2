@@ -79,7 +79,7 @@ public class selectAccount extends JFrame{
 		System.out.println("After Click Two");
 		}
 }
-	public void loggingInAccount(loggingInView loggingInView) {
+	public void loggingInAccount(loggingInView loggingInViewing) {
 		this.loggingInViewing = loggingInViewing;
 	}
 	
