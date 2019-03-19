@@ -1,9 +1,16 @@
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.FilterOutputStream;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import com.mysql.cj.xdevapi.Statement;
 
 public class Database{
 	
@@ -38,13 +45,15 @@ public class Database{
 		String query2 = "CREATE TABLE IF NOT EXISTS playlists(playlists int NOT NULL AUTO_INCREMENT PRIMARY KEY, ProfileNumber int(11), Playlist_Number int(11));";
 		String query3 = "CREATE TABLE IF NOT EXISTS songs(SongID varchar(255) NOT NULL PRIMARY KEY, Title varchar(255), "
 				+ "Artist varchar(255),Album varchar(255),Genre varchar(255), Length TIME, DateAdded TIME);";
-		String query4 = "CREATE TABLE IF NOT EXISTS user_playlists(PlaylistID int NOT NULL AUTO_INCREMENT PRIMARY KEY, ProfileNumber int(11), SongNumber int(11))";
+		String query4 = "CREATE TABLE IF NOT EXISTS user_playlists(PlaylistID int NOT NULL AUTO_INCREMENT PRIMARY KEY, ProfileNumber int(11), SongNumber int(11));";
+		String query5 = "CREATE TABLE IF NOT EXISTS songData(Title varchar(255) NOT NULL PRIMARY KEY, data BLOB);";
 		
 		
 		String queryIncrement = "ALTER TABLE accounts auto_increment = 1";
 		String queryIncrement2 = "ALTER TABLE playlists auto_increment = 1";
 		String queryIncrement3 = "ALTER TABLE songs auto_increment = 1";
 		String queryIncrement4 = "ALTER TABLE user_playlists auto_increment = 1";
+		String queryIncrement5 = "ALTER TABLE user_playlists auto_increment = 1";
 		
 		try {
 			PreparedStatement ps = getConnection().prepareStatement(query);
@@ -55,6 +64,8 @@ public class Database{
 			ps3.execute();
 			PreparedStatement ps4 = getConnection().prepareStatement(query4);
 			ps4.execute();
+			PreparedStatement ps5 = getConnection().prepareStatement(query5);
+			ps5.execute();
 			
 			
 			ps = getConnection().prepareStatement(queryIncrement);
@@ -65,6 +76,8 @@ public class Database{
 			ps3.execute();
 			ps4 = getConnection().prepareStatement(queryIncrement4);
 			ps4.execute();
+			ps5 = getConnection().prepareStatement(queryIncrement5);
+			ps5.execute();
 			
 		}catch (SQLException e) {
 			e.printStackTrace();
@@ -144,6 +157,54 @@ public class Database{
 		}
 		
 	}
+	
+//	public void writeBLOB(AddSong song) {
+//			
+//			Connection cnt = getConnection();
+//			FileInputStream input = null;
+//			PreparedStatement myStatement = null;
+//			
+//			String query = "SELECT * FROM swdespa.songdata SET data=? WHERE song = '"+song.songName+"'";
+//			
+//			//create string qu
+//			
+//			try {
+//				myStatement = cnt.prepareStatement(query);
+//				
+//				File theSongFile = new File(song.fileName); //Place instead of song.getSongName()
+//				input = new FileInputStream(theSongFile);
+//				myStatement.setBinaryStream(1, input);
+//				
+//				System.out.println("Reading the MP3 file: " + theSongFile.getAbsolutePath());
+//				System.out.println("Storing MP3 into the database " + theSongFile);
+//				System.out.println(query);
+//	
+//			} catch (Exception ecx) {
+//				ecx.printStackTrace();
+//			} 
+//			
+//		}
+//	
+//	public void readBLOB() {
+//		Connection cnt = getConnection();
+//		Statement myReadingStatement = null;
+//		ResultSet rs = null;
+//		
+//		InputStream input = null;
+//		FileOutputStream output = null;
+//		
+//		try {
+//			
+//		}catch(Exception exc) {
+//			exc.printStackTrace();
+//		}finally {
+//			if(input != null) {
+//				//input.close();
+//			}
+//			//if(output)
+//		}
+//	}
+	
 
 	public void queryTemplate(String parameters) {
 		
@@ -176,39 +237,7 @@ public class Database{
 		} 
 		
 	}
-	
-public void writeBLOB() {
-		
-		//get getConnection() from db
-		Connection cnt = getConnection();
-		
-		String query = "SELECT * FROM accounts";
-		//create string qu
-		
-		try {
-			//create prepared statement
-			PreparedStatement ps = cnt.prepareStatement(query);
-			
-			//get result and store in result set
-			ResultSet rs = ps.executeQuery();
-			
-			//transform set into list
-			while(rs.next()) {
-				System.out.println(rs.getString("Username"));
-				System.out.println(rs.getString("Password"));
-			}
-			
-			//close all the resources
-			ps.close();
-			rs.close();
-			cnt.close();
 
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} 
-		
-	}
-	
 //	public void testerTemplate() {
 //		String x = "dad";
 //		String y = "d";
