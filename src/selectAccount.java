@@ -7,20 +7,26 @@ import javax.swing.JLabel;
 import javax.swing.JButton;
 
 public class selectAccount extends JFrame{
+	private volatile static selectAccount instance = null;
 	signingUpView signingUpViewing;
 	signingUp signUpData;
 	loggingIn registeredData;
 	loggingInView loggingInViewing;
-	guestView guestViewing;
 	public JButton btnSignUp,btnGuestAccount,btnRegisteredAccount;
 	
+	
+	public static selectAccount getInstance() {
+        if (instance == null) {
+        	instance = new selectAccount();
+        }
+		return instance;
+	}
 	
 	
 	public selectAccount() {
 		
 		signingUpViewing = new signingUpView();
 		loggingInViewing = new loggingInView();
-		guestViewing = new guestView();
 		JPanel backgroundPanel = new JPanel();
 		getContentPane().add(backgroundPanel, BorderLayout.CENTER);
 		backgroundPanel.setLayout(null);
@@ -89,7 +95,7 @@ public class selectAccount extends JFrame{
 	{
 		public void actionPerformed(ActionEvent e) {
 			System.out.println("Click Three");
-			guestViewing.setVisible(true);
+			guestView.getInstance().setVisible(true);
 			System.out.println("After Click Three");
 			closingWindow();
 			

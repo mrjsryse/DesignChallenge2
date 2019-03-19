@@ -7,6 +7,8 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -15,6 +17,7 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.awt.event.ActionEvent;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JTextPane;
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -172,6 +175,11 @@ public class profileView extends JFrame {
 		repeatButton.setIcon(new ImageIcon(profileView.class.getResource("/images/repeat.png")));
 		repeatButton.setBounds(806, 681, 89, 45);
 		contentPane.add(repeatButton);
+		
+		JButton logoutButton = new JButton("Logout");
+		logoutButton.setBounds(1050, 728, 97, 25);
+		contentPane.add(logoutButton);
+		logoutButton.addActionListener(new btn_Logout());
 	}
 	
 	 class btn_Play implements ActionListener 
@@ -218,4 +226,18 @@ public class profileView extends JFrame {
 			 
 		 }
 	 }
+	 
+	 class btn_Logout implements ActionListener
+	 {
+		 public void actionPerformed(ActionEvent e)
+		 {
+			JOptionPane.showMessageDialog(null,"You have been Logged out!");
+			selectAccount.getInstance().setVisible(true);
+			closingWindow();
+		 }
+	 }
+	 
+		public void closingWindow() {
+			this.setVisible(false);
+		}
 }
