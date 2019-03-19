@@ -20,7 +20,7 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.ImageIcon;
 
-public class profileView extends JFrame {
+public class guestView extends JFrame {
 
 	MP3Player mp3 = new MP3Player(new File("C:\\Users\\Nello Santos\\Desktop\\Music\\DecAve.mp3"));
 	private JPanel contentPane;
@@ -49,7 +49,7 @@ public class profileView extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public profileView() {
+	public guestView() {
 
 		MP3Player mp3 = new MP3Player(new File("C:\\Users\\Nello Santos\\Desktop\\Music\\DecAve.mp3"));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -80,6 +80,10 @@ public class profileView extends JFrame {
 		contentPane.add(btnNextSong);
 		
 		 btnPreviousSong = new JButton("");
+		 btnPreviousSong.addActionListener(new ActionListener() {
+		 	public void actionPerformed(ActionEvent e) {
+		 	}
+		 });
 		 btnPreviousSong.setIcon(new ImageIcon(profileView.class.getResource("/images/back-track.png")));
 		btnPreviousSong.setBounds(380, 681, 89, 45);
 		contentPane.add(btnPreviousSong);
@@ -92,7 +96,7 @@ public class profileView extends JFrame {
 		playlistSongList.setBounds(403, 139, 375, 224);
 		contentPane.add(playlistSongList);
 		
-		btnPickPlaylist = new JButton("Bird ni Josh");
+		 btnPickPlaylist = new JButton("Pick Playlist");
 		btnPickPlaylist.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
@@ -155,21 +159,12 @@ public class profileView extends JFrame {
 		btnRefresh.setBounds(760, 21, 97, 25);
 		contentPane.add(btnRefresh);
 		
-		JLabel lblUser = new JLabel("Current User:");
+		JLabel lblUser = new JLabel("Guest");
 		lblUser.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblUser.setBounds(418, 20, 118, 16);
 		contentPane.add(lblUser);
 		
-		JTextPane usernameTextPane = new JTextPane();
-		usernameTextPane.setBounds(523, 20, 89, 22);
-		usernameTextPane.setText("username");
-		contentPane.add(usernameTextPane);
-		
 		JButton shuffleButton = new JButton("");
-		shuffleButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
 		shuffleButton.setIcon(new ImageIcon(profileView.class.getResource("/images/shuffle.png")));
 		shuffleButton.setBounds(279, 681, 89, 45);
 		contentPane.add(shuffleButton);
