@@ -80,7 +80,7 @@ public class signingUpView extends JFrame{
 			signUp = new signingUp(username,password); //signUp is the account detials
 			generalController.getInstance().gettingAccountData(username, password);;
 			
-			profileViewing.setVisible(true);
+			registeredUserView.getInstance().setVisible(true);
 			closingWindow();
 		}
 	}
