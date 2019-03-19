@@ -29,7 +29,7 @@ private static ArrayList<Song> songList = new ArrayList<Song>();
 	public void printSongs() {
 		for (int i = 0; i<songList.size(); i++)
 		{
-				System.out.print(songList.get(i).getSongName());
+				System.out.print(songList.get(i).SongName);
 				System.out.println("");
 		}
 	}

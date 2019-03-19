@@ -7,19 +7,6 @@ public class Song {
 	String Genre;
 	String Year;
 	
-	public Song(String SongName, String ArtistName, String Album, String Genre, String Year)
-	{
-		setSong(SongName, ArtistName, Album, Genre, Year);
-	}
-	
-	public void setSong(String SongName, String ArtistName, String Album, String Genre, String Year)
-	{
-		this.SongName = SongName;
-		this.ArtistName = ArtistName;
-		this.Album = Album;
-		this.Genre = Genre;
-		this.Year = Year;
-	}
 
 	public String getSongName() {
 		return SongName;

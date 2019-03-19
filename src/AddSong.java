@@ -24,6 +24,8 @@ public class AddSong extends JFrame {
 	private JTextField textFieldChosenFile;
 	private JTextField textFieldSongName;
 	private JLabel lblSongName;
+	
+	String songName, artistName, genre, albumName, year;
 	/**
 	 * Launch the application.
 	 */
@@ -44,6 +46,8 @@ public class AddSong extends JFrame {
 	 * Create the frame.
 	 */
 	public AddSong() {
+		
+		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -128,22 +132,21 @@ public class AddSong extends JFrame {
 	 {		
 		 public void actionPerformed(ActionEvent e)
 		 {
-			 Song2 song = new Song2();
-
 			 textFieldChosenFile.setText(fileName);
-			 song.setSongName(textFieldSongName.getText());
-			 String artistName = textFieldArtistName.getText();
-			 String albumName = textFieldAlbum.getText();
-			 String genre = textFieldGenre.getText();
-			 String year = textFieldYear.getText();
+			  songName = textFieldSongName.getText();
+			  artistName = textFieldArtistName.getText();
+			  albumName = textFieldAlbum.getText();
+			  genre = textFieldGenre.getText();
+			  year = textFieldYear.getText();
 			 
-			// Song addedSong = new Song(songName, artistName, albumName, genre, year);
+	/*		 Song addedSong = new Song(songName, artistName, albumName, genre, year);
 			 
 			 SongList sList = new SongList();
-		//	 sList.addEvent(addedSong);
-		//	 int index = sList.getIndex(addedSong);
+			 sList.addEvent(addedSong);
+			 int index = sList.getIndex(addedSong);   */
 			 
 			
+			 
 			 
 		 }
 		 
