@@ -6,12 +6,12 @@ public class Driver {
 		//jdbc:mysql://127.0.0.1:3306/
 		
 		//test adding for Git REEEE
-		String URL = "jdbc:mysql://127.0.0.1:3306/";
+		String URL = "jdbc:mysql://192.168.0.110:3306/";
 		String USERNAME = "ariel";
 		String PASSWORD = "arielariel0";
 		String DATABASE = "swdespa";
 
-		Database.getInstance().setConnection(URL, USERNAME, PASSWORD, DATABASE);
+		//Database.getInstance().setConnection(URL, USERNAME, PASSWORD, DATABASE);
 		//Database.getInstance().testerTemplate();
 		selectAccount sa = new selectAccount();
 		

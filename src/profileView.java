@@ -21,7 +21,7 @@ import java.awt.Font;
 import javax.swing.ImageIcon;
 
 public class profileView extends JFrame {
-
+	private volatile static profileView instance = null;
 	MP3Player mp3 = new MP3Player(new File("C:\\Users\\Nello Santos\\Desktop\\Music\\DecAve.mp3"));
 	private JPanel contentPane;
 	//private signingUp currentUser;
@@ -30,21 +30,15 @@ public class profileView extends JFrame {
 	JTextPane txtpnSongNameGenre;
 	private JButton btnRefresh;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					MusicPlaer frame = new MusicPlaer();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+
+	public static profileView getInstance() {
+        if (instance == null) {
+        	instance = new profileView();
+        }
+		return instance;
 	}
+
+
 
 	/**
 	 * Create the frame.

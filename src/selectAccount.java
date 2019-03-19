@@ -11,6 +11,7 @@ public class selectAccount extends JFrame{
 	signingUp signUpData;
 	loggingIn registeredData;
 	loggingInView loggingInViewing;
+	guestView guestViewing;
 	public JButton btnSignUp,btnGuestAccount,btnRegisteredAccount;
 	
 	
@@ -19,7 +20,7 @@ public class selectAccount extends JFrame{
 		
 		signingUpViewing = new signingUpView();
 		loggingInViewing = new loggingInView();
-		
+		guestViewing = new guestView();
 		JPanel backgroundPanel = new JPanel();
 		getContentPane().add(backgroundPanel, BorderLayout.CENTER);
 		backgroundPanel.setLayout(null);
@@ -36,10 +37,6 @@ public class selectAccount extends JFrame{
 		backgroundPanel.add(lblAreYouA);
 		
 		btnGuestAccount = new JButton("Guest Account");
-		btnGuestAccount.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
 		btnGuestAccount.setBounds(212, 413, 183, 62);
 		backgroundPanel.add(btnGuestAccount);
 		
@@ -58,6 +55,7 @@ public class selectAccount extends JFrame{
 		//Making the action listeners
 		btnSignUp.addActionListener(new signUpButton());
 		btnRegisteredAccount.addActionListener(new registeredButton());
+		btnGuestAccount.addActionListener(new guestButton());
 
 	}
 	
@@ -85,6 +83,17 @@ public class selectAccount extends JFrame{
 }
 	public void loggingInAccount(loggingInView loggingInViewing) {
 		this.loggingInViewing = loggingInViewing;
+	}
+	
+	class guestButton implements ActionListener 
+	{
+		public void actionPerformed(ActionEvent e) {
+			System.out.println("Click Three");
+			guestViewing.setVisible(true);
+			System.out.println("After Click Three");
+			closingWindow();
+			
+		}
 	}
 	
 	public void closingWindow() {
