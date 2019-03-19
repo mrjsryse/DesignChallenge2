@@ -19,11 +19,10 @@ import javax.swing.JTextPane;
 import javax.swing.JLabel;
 import java.awt.Font;
 
-public class profileView extends JFrame {
+public class guestView extends JFrame {
 
 	MP3Player mp3 = new MP3Player(new File("C:\\Users\\Nello Santos\\Desktop\\Music\\DecAve.mp3"));
 	private JPanel contentPane;
-	private signingUp currentUser;
 	JButton btnPickPlaylist, btnPickSong, btnCreatePlaylist, btnUploadSong, btnEditSong, btnPlay, btnPause, btnNextSong, btnPreviousSong;
 	JList yourSongsList;
 	JTextPane txtpnSongNameGenre;
@@ -48,7 +47,7 @@ public class profileView extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public profileView() {
+	public guestView() {
 
 		MP3Player mp3 = new MP3Player(new File("C:\\Users\\Nello Santos\\Desktop\\Music\\DecAve.mp3"));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -150,15 +149,10 @@ public class profileView extends JFrame {
 		btnRefresh.setBounds(760, 21, 97, 25);
 		contentPane.add(btnRefresh);
 		
-		JLabel lblUser = new JLabel("Current User:");
+		JLabel lblUser = new JLabel("Guest");
 		lblUser.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblUser.setBounds(418, 20, 118, 16);
 		contentPane.add(lblUser);
-		
-		JTextPane usernameTextPane = new JTextPane();
-		usernameTextPane.setBounds(523, 20, 89, 22);
-		usernameTextPane.setText("username");
-		contentPane.add(usernameTextPane);
 	}
 	
 	 class btn_Play implements ActionListener 
