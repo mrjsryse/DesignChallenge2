@@ -1,3 +1,4 @@
+package view;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -6,6 +7,13 @@ import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+
+import generalController;
+import guestView;
+import registeredUserView;
+import selectAccount;
+import signingUp;
+
 import javax.swing.JButton;
 
 public class signingUpView extends JFrame{
@@ -83,7 +91,7 @@ public class signingUpView extends JFrame{
 			JOptionPane.showMessageDialog(null,"Successfully Signed Up!");
 			registeredUserView.getInstance().setVisible(true);
 			closingWindow();
-			selectAccount.getInstance().setVisible(false);
+			selectAccount.getInstance().setVisible(false	);
 			
 		}
 	}
