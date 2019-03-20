@@ -1,3 +1,4 @@
+package view;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -8,6 +9,10 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
+
+import model.loggingIn;
+import model.signingUp;
+
 import javax.swing.ImageIcon;
 
 public class selectAccount extends JFrame{

@@ -1,27 +1,25 @@
+package view;
 
-import jaco.mp3.player.MP3Player; 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
-
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.DefaultListModel;
-import javax.swing.JButton;
-import javax.swing.JFileChooser;
-
+import java.awt.Font;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.awt.event.ActionEvent;
+
+import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JTextPane;
-import javax.swing.JLabel;
-import java.awt.Font;
-import javax.swing.ImageIcon;
-import java.awt.Toolkit;
+import javax.swing.border.EmptyBorder;
+
+
+import jaco.mp3.player.MP3Player;
+import model.SongList;
 
 public class guestView extends JFrame {
 	private volatile static guestView instance = null;
@@ -64,13 +62,13 @@ public class guestView extends JFrame {
 		contentPane.add(btnPlay);
 		
 		 btnPause = new JButton("");
-		 btnPause.setIcon(new ImageIcon(registeredUserView.class.getResource("/images/pause-button.png")));
+		 btnPause.setIcon(new ImageIcon(guestView.class.getResource("/images/pause-button.png")));
 		btnPause.addActionListener(new btn_Pause());
 		btnPause.setBounds(593, 681, 89, 45);
 		contentPane.add(btnPause);
 		
 		 btnNextSong = new JButton("");
-		 btnNextSong.setIcon(new ImageIcon(registeredUserView.class.getResource("/images/skip-to-next-track.png")));
+		 btnNextSong.setIcon(new ImageIcon(guestView.class.getResource("/images/skip-to-next-track.png")));
 		btnNextSong.setBounds(705, 681, 89, 45);
 		contentPane.add(btnNextSong);
 		
@@ -79,7 +77,7 @@ public class guestView extends JFrame {
 		 	public void actionPerformed(ActionEvent e) {
 		 	}
 		 });
-		 btnPreviousSong.setIcon(new ImageIcon(registeredUserView.class.getResource("/images/back-track.png")));
+		 btnPreviousSong.setIcon(new ImageIcon(guestView.class.getResource("/images/back-track.png")));
 		btnPreviousSong.setBounds(380, 681, 89, 45);
 		contentPane.add(btnPreviousSong);
 		
@@ -161,13 +159,13 @@ public class guestView extends JFrame {
 		contentPane.add(lblUser);
 		
 		JButton shuffleButton = new JButton("");
-		shuffleButton.setIcon(new ImageIcon(registeredUserView.class.getResource("/images/shuffle.png")));
+		shuffleButton.setIcon(new ImageIcon(guestView.class.getResource("/images/shuffle.png")));
 		shuffleButton.setBounds(279, 681, 89, 45);
 		contentPane.add(shuffleButton);
 		shuffleButton.addActionListener(new btn_shuffle());
 		
 		JButton repeatButton = new JButton("");
-		repeatButton.setIcon(new ImageIcon(registeredUserView.class.getResource("/images/repeat.png")));
+		repeatButton.setIcon(new ImageIcon(guestView.class.getResource("/images/repeat.png")));
 		repeatButton.setBounds(806, 681, 89, 45);
 		contentPane.add(repeatButton);
 		repeatButton.addActionListener(new btn_repeat());
@@ -225,9 +223,7 @@ public class guestView extends JFrame {
 	 {
 		 public void actionPerformed(ActionEvent e)
 		 {
-			 AddSong as = new AddSong();
-			 as.setVisible(true);
-			 
+			 AddSong.getInstance().setVisible(true);
 		 }
 	 }
 	 
@@ -239,7 +235,7 @@ public class guestView extends JFrame {
 			 DefaultListModel DLM = new DefaultListModel();
 			 
 			 for(int x = 0; x < sList.getSongSize(); x++)
-			 DLM.addElement(sList.getSongList().get(x).ArtistName);
+			 DLM.addElement(sList.getSongList().get(x).getArtistName());
 			 
 			 yourSongsList.setModel(DLM);
 			 

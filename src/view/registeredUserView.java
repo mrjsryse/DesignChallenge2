@@ -1,4 +1,10 @@
+package view;
+
 import jaco.mp3.player.MP3Player;
+import model.SongList;
+import view.AddSong;
+import view.guestView;
+import view.selectAccount;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -232,7 +238,7 @@ public class registeredUserView extends JFrame {
 			 DefaultListModel DLM = new DefaultListModel();
 			 
 			 for(int x = 0; x < sList.getSongSize(); x++)
-			 DLM.addElement(sList.getSongList().get(x).ArtistName);
+			 DLM.addElement(sList.getSongList().get(x).getArtistName());
 			 
 			 yourSongsList.setModel(DLM);
 			 

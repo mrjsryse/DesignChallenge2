@@ -1,3 +1,4 @@
+package view;
 
 
 import javax.swing.JFrame;
@@ -8,6 +9,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JTextField;
+
+import controller.loggingController;
+import model.loggingIn;
+
 import javax.swing.JButton;
 
 public class loggingInView extends JFrame{

@@ -1,3 +1,4 @@
+package view;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -7,6 +8,10 @@ import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+
+import controller.generalController;
+import model.signingUp;
+
 import javax.swing.JButton;
 
 public class signingUpView extends JFrame{
