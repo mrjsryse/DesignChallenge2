@@ -9,9 +9,10 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import controller.SongBuilder;
 import model.Song;
-import model.SongBuilder;
 import model.SongList;
+import model.generalModel;
 
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -137,6 +138,7 @@ public class AddSong extends JFrame {
 			 String albumName = textFieldAlbum.getText();
 			 String genre = textFieldGenre.getText();
 			 String year = textFieldYear.getText();
+			
 			 
 			 Song addedSong = new SongBuilder()
 					 .setSongName(songName)
@@ -145,6 +147,8 @@ public class AddSong extends JFrame {
 					 .setGenre(genre)
 					 .setYear(year)
 					 .getSong();
+			 
+			 generalModel.getInstance().getSongData(addedSong);;
 			 
 			 SongList sList = new SongList();
 			 sList.addEvent(addedSong);

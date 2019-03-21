@@ -1,6 +1,5 @@
 package controller;
 import model.Song;
-import model.SongBuilder;
 
 public class TempDriver {
 	public static void main (String[] args)
@@ -10,9 +9,11 @@ public class TempDriver {
 				.setArtistName("Artist")
 				.setAlbum("Album")
 				.setGenre("Genre")
-				.setYear("Year")
+				.setYear("year")
 				.getSong();
 		
 		System.out.print(song);
+		
+		
 	}
 }

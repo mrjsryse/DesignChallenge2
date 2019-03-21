@@ -89,7 +89,7 @@ public class signingUpView extends JFrame{
 			JOptionPane.showMessageDialog(null,"Successfully Signed Up!");
 			registeredUserView.getInstance().setVisible(true);
 			closingWindow();
-			selectAccount.getInstance().setVisible(false	);
+			selectAccount.getInstance().setVisible(false);
 			
 		}
 	}

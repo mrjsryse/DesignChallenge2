@@ -1,4 +1,6 @@
-package model;
+package controller;
+
+import model.Song;
 
 public class SongBuilder 
 {

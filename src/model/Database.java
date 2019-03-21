@@ -42,8 +42,8 @@ public class Database{
 		
 		String query = "CREATE TABLE IF NOT EXISTS accounts (UserID int NOT NULL AUTO_INCREMENT PRIMARY KEY, Username varchar(255), Password varchar(255));"; //creating table
 		String query2 = "CREATE TABLE IF NOT EXISTS playlists(playlists int NOT NULL AUTO_INCREMENT PRIMARY KEY, ProfileNumber int(11), Playlist_Number int(11));";
-		String query3 = "CREATE TABLE IF NOT EXISTS songs(SongID varchar(255) NOT NULL PRIMARY KEY, Title varchar(255), "
-				+ "Artist varchar(255),Album varchar(255),Genre varchar(255), Length TIME, DateAdded TIME);";
+		String query3 = "CREATE TABLE IF NOT EXISTS songs(SongID int NOT NULL AUTO_INCREMENT PRIMARY KEY, Title varchar(255), "
+				+ "Artist varchar(255),Album varchar(255),Genre varchar(255), Length TIME, DateAdded varchar(255));";
 		String query4 = "CREATE TABLE IF NOT EXISTS user_playlists(PlaylistID int NOT NULL AUTO_INCREMENT PRIMARY KEY, ProfileNumber int(11), SongNumber int(11));";
 		String query5 = "CREATE TABLE IF NOT EXISTS songData(Title varchar(255) NOT NULL PRIMARY KEY, data BLOB);";
 		
@@ -235,6 +235,42 @@ public class Database{
 			e.printStackTrace();
 		} 
 		
+	}
+	
+	public void addingSong(Song s){ //Signing Up
+		String getSongName, getArtistName, getAlbumName, getGenre;
+		String getYear;
+		//get getConnection() from db
+		Connection cnt = getConnection();
+		getSongName = s.getSongName();
+		getArtistName = s.getArtistName();
+		getAlbumName = s.getAlbum();
+		getGenre = s.getGenre();
+		getYear = s.getYear();
+		
+		
+		String query = "insert into songs values ("+0+",'"+getSongName+"','"
+															+getArtistName+"','" 
+															+getAlbumName+ "','"
+															+getGenre+ "','"
+															+0+ "','"
+															+getYear+ "')";
+
+		System.out.print(query);
+		//create string query
+		
+		try {
+			PreparedStatement ps = getConnection().prepareStatement(query);
+			ps.execute();
+			
+			//close all the resources
+			ps.close();
+			cnt.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		//return null;
 	}
 
 //	public void testerTemplate() {
