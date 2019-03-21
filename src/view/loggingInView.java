@@ -89,18 +89,23 @@ public class loggingInView extends JFrame{
 			String registeredPassword = PasswordTextField.getText();
 			logIn = new account(registeredUsername,registeredPassword);
 			generalController.getInstance().gettingRegisteredAccountData(registeredUsername, registeredPassword);
+
+			closingWindow();
 		}
 	}
 	
 	public void entranceAllowed() {
 		JOptionPane.showMessageDialog(null,"Successfully Logged In!");
-		closingWindow();
-		
+		MusicPlaer.getInstance().setVisible(true);
 	}
 	
 	public void entranceDenied() {
 		JOptionPane.showMessageDialog(null, "Failed to Log Into Your Account!");
-		closingWindow();
+	}
+	
+	public String gettingUsername() {
+		String username = UsernameTextField.getText();
+		return username;
 	}
 	
 	public void closingWindow() {
