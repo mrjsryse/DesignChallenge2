@@ -1,12 +1,11 @@
 package model;
 
-public class accountModel {
+public class generalModel {
+	private volatile static generalModel modelInstance = null;
 	
-	private volatile static accountModel modelInstance = null;
-	
-	public static accountModel getInstance() {
+	public static generalModel getInstance() {
         if (modelInstance == null) {
-        	modelInstance = new accountModel();
+        	modelInstance = new generalModel();
         }
 		return modelInstance;
 	

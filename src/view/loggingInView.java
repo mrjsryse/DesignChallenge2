@@ -17,10 +17,15 @@ import model.account;
 
 import javax.swing.JButton;
 
+import model.Database;
+
 public class loggingInView extends JFrame{
 	private JTextField UsernameTextField;
 	private JTextField PasswordTextField;
 	account logIn;
+	Boolean entrance;
+	Database theAccounts;
+	
 	public loggingInView() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(guestView.class.getResource("/images/spotify.png")));
 		setTitle("Not So Spotify");
@@ -73,9 +78,25 @@ public class loggingInView extends JFrame{
 			String registeredPassword = PasswordTextField.getText();
 			logIn = new account(registeredUsername,registeredPassword);
 			generalController.getInstance().gettingRegisteredAccountData(registeredUsername, registeredPassword);
-			JOptionPane.showMessageDialog(null,"Successfully Logged In!");
-			closingWindow();
+			if(entrance == true) {
+				JOptionPane.showMessageDialog(null,"Successfully Logged In!");
+				closingWindow();
+			}
+			else {
+				JOptionPane.showMessageDialog(null, "Failed to Log Into Your Account!");
+				closingWindow();
+			}
+			
+			
 		}
+	}
+	
+	public void entranceAllowed() {
+		entrance = true;
+	}
+	
+	public void entranceDenied() {
+		entrance = false;
 	}
 	
 	public void closingWindow() {

@@ -12,6 +12,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import view.loggingInView;
 
 public class Database{
 	
@@ -23,6 +24,7 @@ public class Database{
 	private String USERNAME;
 	private String PASSWORD;
 	private String DATABASE;
+	loggingInView entrance;
 	
 	public static Database getInstance() {
         if (instance == null) {
@@ -146,6 +148,13 @@ public class Database{
 			
 			//get result and store in result set
 			ResultSet rs = ps.executeQuery();
+			
+			if(rs.next() == false) {
+				entrance.entranceAllowed();
+			}
+			else if(rs.next() == true){
+				entrance.entranceDenied();
+			}
 			
 			//close all the resources
 			ps.close();
