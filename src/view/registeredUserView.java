@@ -1,4 +1,11 @@
-import jaco.mp3.player.MP3Player; 
+package view;
+
+import jaco.mp3.player.MP3Player;
+import model.SongList;
+import view.AddSong;
+import view.guestView;
+import view.selectAccount;
+
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
@@ -7,6 +14,8 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -19,33 +28,39 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextPane;
 import javax.swing.JLabel;
 import java.awt.Font;
-import javax.swing.ImageIcon;
 import java.awt.Toolkit;
 
-public class guestView extends JFrame {
-	private volatile static guestView instance = null;
-	MP3Player mp3 = new MP3Player(new File("C:\\Users\\Antonello Santos\\Music\\DecAve1.mp3"));
+import javax.swing.ImageIcon;
+
+public class registeredUserView extends JFrame {
+	private volatile static registeredUserView instance = null;
+	MP3Player mp3 = new MP3Player(new File("C:\\Users\\Nello Santos\\Desktop\\Music\\DecAve.mp3"));
 	private JPanel contentPane;
 	//private signingUp currentUser;
 	JButton btnPickPlaylist, btnPickSong, btnCreatePlaylist, btnUploadSong, btnEditSong, btnPlay, btnPause, btnNextSong, btnPreviousSong;
 	JList yourSongsList;
 	JTextPane txtpnSongNameGenre;
 	private JButton btnRefresh;
+	private JButton button;
 
-	public static guestView getInstance() {
+
+	public static registeredUserView getInstance() {
         if (instance == null) {
-        	instance = new guestView();
+        	instance = new registeredUserView();
         }
 		return instance;
 	}
 
+
+
 	/**
 	 * Create the frame.
 	 */
-	public guestView() {
+	public registeredUserView() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(guestView.class.getResource("/images/spotify.png")));
 		setTitle("Not So Spotify");
-
+		
+		MP3Player mp3 = new MP3Player(new File("C:\\Users\\Nello Santos\\Desktop\\Music\\DecAve.mp3"));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -74,10 +89,6 @@ public class guestView extends JFrame {
 		contentPane.add(btnNextSong);
 		
 		 btnPreviousSong = new JButton("");
-		 btnPreviousSong.addActionListener(new ActionListener() {
-		 	public void actionPerformed(ActionEvent e) {
-		 	}
-		 });
 		 btnPreviousSong.setIcon(new ImageIcon(registeredUserView.class.getResource("/images/back-track.png")));
 		btnPreviousSong.setBounds(380, 681, 89, 45);
 		contentPane.add(btnPreviousSong);
@@ -90,7 +101,7 @@ public class guestView extends JFrame {
 		playlistSongList.setBounds(403, 139, 375, 224);
 		contentPane.add(playlistSongList);
 		
-		 btnPickPlaylist = new JButton("Pick Playlist");
+		btnPickPlaylist = new JButton("Pick Playlist");
 		btnPickPlaylist.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
@@ -98,12 +109,11 @@ public class guestView extends JFrame {
 		btnPickPlaylist.setBounds(25, 664, 136, 45);
 		contentPane.add(btnPickPlaylist);
 		
-		JButton btnPickSong = new JButton("Add Song to Playlist");
+		 btnPickSong = new JButton("Add Song to Playlist");
 		btnPickSong.setBounds(957, 664, 190, 45);
 		contentPane.add(btnPickSong);
-		btnPickSong.addActionListener(new btn_addSongtoP());
-		 
-		txtpnSongNameGenre = new JTextPane();
+		
+		 txtpnSongNameGenre = new JTextPane();
 		txtpnSongNameGenre.setBounds(403, 405, 375, 209);
 		txtpnSongNameGenre.setText("Song Name: \r\nGenre: \r\n");
 		contentPane.add(txtpnSongNameGenre);
@@ -154,26 +164,41 @@ public class guestView extends JFrame {
 		btnRefresh.setBounds(760, 21, 97, 25);
 		contentPane.add(btnRefresh);
 		
-		JLabel lblUser = new JLabel("Guest");
+		JLabel lblUser = new JLabel("Current User:");
 		lblUser.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblUser.setBounds(418, 20, 118, 16);
 		contentPane.add(lblUser);
 		
+		JTextPane usernameTextPane = new JTextPane();
+		usernameTextPane.setBounds(523, 20, 89, 22);
+		usernameTextPane.setText("username");
+		contentPane.add(usernameTextPane);
+		
 		JButton shuffleButton = new JButton("");
+		shuffleButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
 		shuffleButton.setIcon(new ImageIcon(registeredUserView.class.getResource("/images/shuffle.png")));
 		shuffleButton.setBounds(279, 681, 89, 45);
 		contentPane.add(shuffleButton);
-		shuffleButton.addActionListener(new btn_shuffle());
 		
 		JButton repeatButton = new JButton("");
 		repeatButton.setIcon(new ImageIcon(registeredUserView.class.getResource("/images/repeat.png")));
 		repeatButton.setBounds(806, 681, 89, 45);
 		contentPane.add(repeatButton);
-		repeatButton.addActionListener(new btn_repeat());
 		
 		JButton logoutButton = new JButton("Logout");
 		logoutButton.setBounds(1050, 728, 97, 25);
 		contentPane.add(logoutButton);
+		
+		button = new JButton("Create Proflie");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		button.setBounds(183, 11, 118, 45);
+		contentPane.add(button);
 		logoutButton.addActionListener(new btn_Logout());
 	}
 	
@@ -186,16 +211,6 @@ public class guestView extends JFrame {
 
 	     }
 	 }
-	
-	 class btn_addSongtoP implements ActionListener 
-	 {
-
-	     public void actionPerformed(ActionEvent e) 
-	     {
-	        mp3.addToPlayList(new File("C:\\\\Users\\\\Antonello Santos\\\\Music\\\\OnTheWingsOfLove.mp3"));
-
-	     }
-	 }
 	 
 	 class btn_Pause implements ActionListener 
 	 {
@@ -205,21 +220,6 @@ public class guestView extends JFrame {
 		 }
 	 }
 	 
-	 class btn_shuffle implements ActionListener 
-	 {
-		 public void actionPerformed(ActionEvent e)
-		 {
-			 mp3.setShuffle(true);
-		 }
-	 }
-	 
-	 class btn_repeat implements ActionListener 
-	 {
-		 public void actionPerformed(ActionEvent e)
-		 {
-			 mp3.setRepeat(true);
-		 }
-	 }
 	 class btn_UploadSong implements ActionListener
 	 {
 		 public void actionPerformed(ActionEvent e)
@@ -238,9 +238,11 @@ public class guestView extends JFrame {
 			 DefaultListModel DLM = new DefaultListModel();
 			 
 			 for(int x = 0; x < sList.getSongSize(); x++)
-			 DLM.addElement(sList.getSongList().get(x).ArtistName);
+			 DLM.addElement(sList.getSongList().get(x).getArtistName());
 			 
 			 yourSongsList.setModel(DLM);
+			 
+			 
 			 
 		 }
 	 }

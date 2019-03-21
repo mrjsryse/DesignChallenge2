@@ -1,3 +1,7 @@
+package controller;
+import model.accountModel;
+import model.signingUp;
+
 public class generalController {
 	private volatile static generalController instance = null;
 	

@@ -1,3 +1,7 @@
+package controller;
+import model.accountModel;
+import model.loggingIn;
+
 public class loggingController {
 	private volatile static loggingController instance = null;
 	
