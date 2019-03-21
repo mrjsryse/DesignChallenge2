@@ -43,9 +43,9 @@ public class Database{
 		String query = "CREATE TABLE IF NOT EXISTS accounts (UserID int NOT NULL AUTO_INCREMENT PRIMARY KEY, Username varchar(255), Password varchar(255));"; //creating table
 		String query2 = "CREATE TABLE IF NOT EXISTS playlists(playlists int NOT NULL AUTO_INCREMENT PRIMARY KEY, ProfileNumber int(11), Playlist_Number int(11));";
 		String query3 = "CREATE TABLE IF NOT EXISTS songs(SongID int NOT NULL AUTO_INCREMENT PRIMARY KEY, Title varchar(255), "
-				+ "Artist varchar(255),Album varchar(255),Genre varchar(255), Length TIME, DateAdded varchar(255));";
+				+ "Artist varchar(255),Album varchar(255),Genre varchar(255), Year varchar(255));";
 		String query4 = "CREATE TABLE IF NOT EXISTS user_playlists(PlaylistID int NOT NULL AUTO_INCREMENT PRIMARY KEY, ProfileNumber int(11), SongNumber int(11));";
-		String query5 = "CREATE TABLE IF NOT EXISTS songData(Title varchar(255) NOT NULL PRIMARY KEY, data BLOB);";
+		String query5 = "CREATE TABLE IF NOT EXISTS songData(SongID int NOT NULL AUTO_INCREMENT PRIMARY KEY, data BLOB);";
 		
 		
 		String queryIncrement = "ALTER TABLE accounts auto_increment = 1";
@@ -253,7 +253,6 @@ public class Database{
 															+getArtistName+"','" 
 															+getAlbumName+ "','"
 															+getGenre+ "','"
-															+0+ "','"
 															+getYear+ "')";
 
 		System.out.print(query);
