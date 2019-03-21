@@ -1,3 +1,5 @@
+package model;
+
 public class accountModel {
 	
 	private volatile static accountModel modelInstance = null;
