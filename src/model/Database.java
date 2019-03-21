@@ -137,8 +137,9 @@ public class Database{
 		//return null;
 	}
 	
-	public void loggingAccount(account registeredAccount) { //Logging In
+	public boolean loggingAccount(account registeredAccount) { //Logging In
 		Connection cnt = getConnection(); 
+		boolean loggedIn = false;
 		
 		String query = "SELECT * FROM swdespa.accounts WHERE Username = ('"+registeredAccount.getUsername()+"') AND Password = ('"+registeredAccount.getPassword()+"');";
 		
@@ -149,13 +150,7 @@ public class Database{
 			//get result and store in result set
 			ResultSet rs = ps.executeQuery();
 			
-			if(rs.next() == false) {
-				entrance.entranceAllowed();
-			}
-			else if(rs.next() == true){
-				entrance.entranceDenied();
-			}
-			
+			loggedIn = rs.next() == false;
 			//close all the resources
 			ps.close();
 			rs.close();
@@ -168,6 +163,7 @@ public class Database{
 			e.printStackTrace();
 			
 		}
+		return loggedIn;
 		
 	}
 	

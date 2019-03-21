@@ -1,5 +1,7 @@
 package model;
 
+import view.loggingInView;
+
 public class generalModel {
 	private volatile static generalModel modelInstance = null;
 	
@@ -16,6 +18,11 @@ public class generalModel {
 	}
 	
 	public void checkingAccountData(account w) {
-		Database.getInstance().loggingAccount(w);
+		if(Database.getInstance().loggingAccount(w) == true) {
+			loggingInView.getInstance().entranceAllowed();
+		}
+		else {
+			loggingInView.getInstance().entranceDenied();
+		}
 	}
 }
