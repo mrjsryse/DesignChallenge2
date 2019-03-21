@@ -1,3 +1,4 @@
+package model;
 
 public interface SongPlan { //Builder Interface
 	public void setSongName(String songName);

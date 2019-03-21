@@ -1,3 +1,4 @@
+package view;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
@@ -7,13 +8,18 @@ import java.io.File;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import model.Song;
+import model.SongBuilder;
+import model.SongList;
+
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 
 public class AddSong extends JFrame {
-	
+	private volatile static AddSong instance = null;
 	MusicPlaer mp;
 	private JPanel contentPane;
 	private JTextField textFieldArtistName;
@@ -28,17 +34,13 @@ public class AddSong extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					AddSong frame = new AddSong();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+
+	
+	public static AddSong getInstance() {
+        if (instance == null) {
+        	instance = new AddSong();
+        }
+		return instance;
 	}
 
 	/**

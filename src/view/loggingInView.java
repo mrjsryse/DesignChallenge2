@@ -1,3 +1,6 @@
+package view;
+
+
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -6,6 +9,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JTextField;
+
+import controller.loggingController;
+import model.loggingIn;
+
 import javax.swing.JButton;
 
 public class loggingInView extends JFrame{
@@ -24,7 +31,7 @@ public class loggingInView extends JFrame{
 		lblNewLabel.setBounds(237, 68, 125, 50);
 		getContentPane().add(lblNewLabel);
 		
-		JLabel lblNewLabel_1 = new JLabel("What Are Your Account Detials?");
+		JLabel lblNewLabel_1 = new JLabel("What Are Your Account Details?");
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblNewLabel_1.setBounds(192, 127, 233, 14);
 		getContentPane().add(lblNewLabel_1);
