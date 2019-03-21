@@ -17,7 +17,7 @@ public class Song {
 		Year = year;
 	}
 
-	public String getSong()
+	public String getSongName()
 	{
 		return SongName;
 	}

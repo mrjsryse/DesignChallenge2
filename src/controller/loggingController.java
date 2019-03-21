@@ -1,5 +1,5 @@
 package controller;
-import model.accountModel;
+import model.generalModel;
 import model.loggingIn;
 
 public class loggingController {
@@ -14,6 +14,6 @@ public class loggingController {
 	
 	public void gettingRegisteredAccountData(String registeredUsername,String registeredPassword) {
 		loggingIn registeredAccount = new loggingIn(registeredUsername, registeredPassword);
-		accountModel.getInstance().checkingAccountData(registeredAccount);
+		generalModel.getInstance().checkingAccountData(registeredAccount);
 	}
 }
