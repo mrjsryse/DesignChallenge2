@@ -1,6 +1,7 @@
 package view;
 
 import java.awt.*;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JFrame;
@@ -10,7 +11,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import controller.generalController;
-import model.signingUp;
+import model.account;
 
 import javax.swing.JButton;
 
@@ -18,7 +19,7 @@ public class signingUpView extends JFrame{
 	private volatile static signingUpView instance = null;
 	private JTextField usernameField;
 	private JTextField passwordField;
-	signingUp signUp;
+	account signUp;
 	generalController controller;
 	
 	public static signingUpView getInstance() {
@@ -84,8 +85,8 @@ public class signingUpView extends JFrame{
 		{
 			String username = usernameField.getText();
 			String password = passwordField.getText();
-			signUp = new signingUp(username,password); //signUp is the account detials
-			generalController.getInstance().gettingAccountData(username, password);;
+			signUp = new account(username,password); 
+			generalController.getInstance().gettingAccountData(username, password);
 			JOptionPane.showMessageDialog(null,"Successfully Signed Up!");
 			registeredUserView.getInstance().setVisible(true);
 			closingWindow();

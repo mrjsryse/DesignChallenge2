@@ -17,6 +17,8 @@ import javax.swing.border.EmptyBorder;
 
 import jaco.mp3.player.MP3Player;
 import model.SongList;
+import model.account;
+import model.generalModel;
 
 public class MusicPlaer extends JFrame {
 
@@ -27,23 +29,21 @@ public class MusicPlaer extends JFrame {
 	JList yourSongsList;
 	JTextPane txtpnSongNameGenre;
 	private JButton btnRefresh;
+	account registeredAccount;
+	private volatile static MusicPlaer instance = null;
+	String registeredUsername;
 
+	public static MusicPlaer getInstance() {
+        if (instance == null) {
+        	instance = new MusicPlaer();
+        }
+		return instance;
+	}
+	
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					MusicPlaer frame = new MusicPlaer();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
+	
 	/**
 	 * Create the frame.
 	 */
@@ -158,11 +158,6 @@ public class MusicPlaer extends JFrame {
 		lblUser.setBounds(418, 20, 118, 16);
 		contentPane.add(lblUser);
 		
-		JTextPane usernameTextPane = new JTextPane();
-		usernameTextPane.setBounds(523, 20, 89, 22);
-		usernameTextPane.setText("username");
-		contentPane.add(usernameTextPane);
-		
 		JButton shuffleButton = new JButton("");
 		shuffleButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -176,6 +171,12 @@ public class MusicPlaer extends JFrame {
 		repeatButton.setIcon(new ImageIcon(registeredUserView.class.getResource("/images/repeat.png")));
 		repeatButton.setBounds(806, 681, 89, 45);
 		contentPane.add(repeatButton);
+		
+		JLabel usernameField = new JLabel("");
+		usernameField.setFont(new Font("Tahoma", Font.PLAIN, 26));
+		usernameField.setBounds(529, -1, 153, 57);
+		usernameField.setText(gettingUsername(registeredUsername)); //making the username
+		contentPane.add(usernameField);
 	}
 	
 	 class btn_Play implements ActionListener 
@@ -226,4 +227,10 @@ public class MusicPlaer extends JFrame {
 			 
 		 }
 	 }
+	 
+	 public String gettingUsername(String w) {
+		 String username = w;
+		 return username;
+	 }
+	 
 }

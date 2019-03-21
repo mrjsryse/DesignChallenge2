@@ -1,6 +1,7 @@
 package view;
 
 import java.awt.*;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JFrame;
@@ -10,16 +11,14 @@ import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
 
-import model.loggingIn;
-import model.signingUp;
+import model.account;
 
 import javax.swing.ImageIcon;
 
 public class selectAccount extends JFrame{
 	private volatile static selectAccount instance = null;
 	signingUpView signingUpViewing;
-	signingUp signUpData;
-	loggingIn registeredData;
+	account signUpData,registeredData;
 	loggingInView loggingInViewing;
 	public JButton btnSignUp,btnGuestAccount,btnRegisteredAccount;
 	

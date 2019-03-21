@@ -1,8 +1,9 @@
 package model;
-public class signingUp {
+
+public class account {
 	private String username,password;
 	
-	public signingUp(String username, String password) {
+	public account(String username, String password) {
 		this.username = username;
 		this.password = password;
 	}
@@ -22,6 +23,4 @@ public class signingUp {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
-	
 }
