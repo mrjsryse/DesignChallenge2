@@ -1,5 +1,5 @@
 package controller;
-import model.accountModel;
+import model.generalModel;
 import model.account;
 
 public class generalController {
@@ -14,11 +14,11 @@ public class generalController {
 	
 	public void gettingAccountData(String username, String password) {
 		account newAccount = new account(username, password);
-		accountModel.getInstance().getAccountData(newAccount);
+		generalModel.getInstance().getAccountData(newAccount);
 	}
 	
 	public void gettingRegisteredAccountData(String registeredUsername,String registeredPassword) {
 		account registeredAccount = new account(registeredUsername, registeredPassword);
-		accountModel.getInstance().checkingAccountData(registeredAccount);
+		generalModel.getInstance().checkingAccountData(registeredAccount);
 	}
 }
