@@ -3,6 +3,8 @@ package view;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -10,15 +12,15 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JTextField;
 
-import controller.loggingController;
-import model.loggingIn;
+import controller.generalController;
+import model.account;
 
 import javax.swing.JButton;
 
 public class loggingInView extends JFrame{
 	private JTextField UsernameTextField;
 	private JTextField PasswordTextField;
-	loggingIn logIn;
+	account logIn;
 	public loggingInView() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(guestView.class.getResource("/images/spotify.png")));
 		setTitle("Not So Spotify");
@@ -69,8 +71,9 @@ public class loggingInView extends JFrame{
 		{
 			String registeredUsername = UsernameTextField.getText();
 			String registeredPassword = PasswordTextField.getText();
-			logIn = new loggingIn(registeredUsername,registeredPassword);
-			loggingController.getInstance().gettingRegisteredAccountData(registeredUsername, registeredPassword);
+			logIn = new account(registeredUsername,registeredPassword);
+			generalController.getInstance().gettingRegisteredAccountData(registeredUsername, registeredPassword);
+			JOptionPane.showMessageDialog(null,"Successfully Logged In!");
 			closingWindow();
 		}
 	}

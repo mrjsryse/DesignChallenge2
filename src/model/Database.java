@@ -1,5 +1,7 @@
 package model;
 import java.io.File;
+import javax.swing.*;
+import javax.swing.JOptionPane;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FilterOutputStream;
@@ -106,7 +108,7 @@ public class Database{
 		
 	}
 	
-	public void addingAccount(signingUp newAccount){ //Signing Up
+	public void addingAccount(account newAccount){ //Signing Up
 		String x,y;
 		//get getConnection() from db
 		Connection cnt = getConnection();
@@ -133,10 +135,10 @@ public class Database{
 		//return null;
 	}
 	
-	public void loggingAccount(loggingIn registeredAccount) { //Logging In
+	public void loggingAccount(account registeredAccount) { //Logging In
 		Connection cnt = getConnection(); 
 		
-		String query = "SELECT * FROM swdespa.accounts WHERE Username = ('"+registeredAccount.getRegisteredUsername()+"') AND Password = ('"+registeredAccount.getRegisteredPassword()+"');";
+		String query = "SELECT * FROM swdespa.accounts WHERE Username = ('"+registeredAccount.getUsername()+"') AND Password = ('"+registeredAccount.getPassword()+"');";
 		
 		try {
 			//create prepared statement
@@ -149,6 +151,9 @@ public class Database{
 			ps.close();
 			rs.close();
 			cnt.close();
+			
+			
+		
 
 		} catch (SQLException e) {
 			e.printStackTrace();

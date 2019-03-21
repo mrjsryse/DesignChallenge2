@@ -12,11 +12,11 @@ public class accountModel {
 	
 	}
 	
-	public void getAccountData(signingUp x) {
+	public void getAccountData(account x) {
 		Database.getInstance().addingAccount(x);
 	}
 	
-	public void checkingAccountData(loggingIn w) {
+	public void checkingAccountData(account w) {
 		Database.getInstance().loggingAccount(w);
 	}
 }
