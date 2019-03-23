@@ -45,10 +45,10 @@ public class Database{
 		//CREATE TABLE IF NOT EXISTS
 		
 		String query = "CREATE TABLE IF NOT EXISTS accounts (UserID int NOT NULL AUTO_INCREMENT PRIMARY KEY, Username varchar(255), Password varchar(255));"; //creating table
-		String query2 = "CREATE TABLE IF NOT EXISTS playlists(PlaylistID int NOT NULL AUTO_INCREMENT PRIMARY KEY, PlaylistName varchar(255), UserID int(11);";
-		String query3 = "CREATE TABLE IF NOT EXISTS songs(SongID int NOT NULL AUTO_INCREMENT PRIMARY KEY, PlaylistID int(11), Title varchar(255), "
-				+ "Artist varchar(255),Album varchar(255),Genre varchar(255), Year varchar(255));";
-		String query4 = "CREATE TABLE IF NOT EXISTS user_playlists(PlaylistID int NOT NULL AUTO_INCREMENT PRIMARY KEY, UserID int(11), SongID int(11));";
+		String query2 = "CREATE TABLE IF NOT EXISTS playlists(PlaylistID int NOT NULL AUTO_INCREMENT PRIMARY KEY, PlaylistName varchar(255), UserID int(11));";
+		String query3 = "CREATE TABLE IF NOT EXISTS songs(SongID int NOT NULL AUTO_INCREMENT PRIMARY KEY, Title varchar(255), "
+				+ "Artist varchar(255),Album varchar(255),Genre varchar(255), Year varchar(255), UserID int(11));";
+		String query4 = "CREATE TABLE IF NOT EXISTS user_playlists(UserID int NOT NULL AUTO_INCREMENT PRIMARY KEY, PlaylistID int(11), PlaylistName varchar(255));";
 		String query5 = "CREATE TABLE IF NOT EXISTS songData(SongID int NOT NULL AUTO_INCREMENT PRIMARY KEY, data BLOB);";
 		
 		
@@ -56,7 +56,7 @@ public class Database{
 		String queryIncrement2 = "ALTER TABLE playlists auto_increment = 1";
 		String queryIncrement3 = "ALTER TABLE songs auto_increment = 1";
 		String queryIncrement4 = "ALTER TABLE user_playlists auto_increment = 1";
-		String queryIncrement5 = "ALTER TABLE user_playlists auto_increment = 1";
+		String queryIncrement5 = "ALTER TABLE songData auto_increment = 1";
 		
 		try {
 			PreparedStatement ps = getConnection().prepareStatement(query);
@@ -259,11 +259,13 @@ public class Database{
 		getYear = s.getYear();
 		
 		
-		String query = "insert into songs values ("+0+",'"+getSongName+"','"
+		String query = "insert into songs values ("+0+",'"+getSongName+"','" 
 															+getArtistName+"','" 
 															+getAlbumName+ "','"
 															+getGenre+ "','"
-															+getYear+ "')";
+															+getYear+ "','"
+															+0+ "')";
+		
 
 		System.out.print(query);
 		//create string query
@@ -292,8 +294,7 @@ public class Database{
 		getPlaylistName = p.getPlaylistName();
 		
 		
-		String query = "insert into songs values ("+0+",'"+getPlaylistName+"','"
-															+0+ "','"
+		String query = "insert into playlists values ("+0+",'"+getPlaylistName+"','"
 															+0+ "')";
 
 		System.out.print(query);
@@ -312,6 +313,8 @@ public class Database{
 		}
 		//return null;
 	}
+	
+	
 //	public void testerTemplate() {
 //		String x = "dad";
 //		String y = "d";
