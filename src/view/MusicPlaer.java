@@ -281,6 +281,4 @@ public class MusicPlaer extends JFrame {
 	 public void seeingSongInformation(infoSong songInformation) {
 			this.songInformation = songInformation;
 		}
-	 
-	 
 }

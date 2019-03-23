@@ -56,7 +56,6 @@ public class Database{
 		String queryIncrement2 = "ALTER TABLE playlists auto_increment = 1";
 		String queryIncrement3 = "ALTER TABLE songs auto_increment = 1";
 		String queryIncrement4 = "ALTER TABLE user_playlists auto_increment = 1";
-		String queryIncrement5 = "ALTER TABLE user_playlists auto_increment = 1";
 		
 		try {
 			PreparedStatement ps = getConnection().prepareStatement(query);
@@ -67,8 +66,6 @@ public class Database{
 			ps3.execute();
 			PreparedStatement ps4 = getConnection().prepareStatement(query4);
 			ps4.execute();
-			PreparedStatement ps5 = getConnection().prepareStatement(query5);
-			ps5.execute();
 			
 			
 			ps = getConnection().prepareStatement(queryIncrement);
@@ -79,8 +76,6 @@ public class Database{
 			ps3.execute();
 			ps4 = getConnection().prepareStatement(queryIncrement4);
 			ps4.execute();
-			ps5 = getConnection().prepareStatement(queryIncrement5);
-			ps5.execute();
 			
 		}catch (SQLException e) {
 			e.printStackTrace();
