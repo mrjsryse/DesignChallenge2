@@ -17,7 +17,8 @@ public class generalModel {
 	
 	public void getSongData(Song s)
 	{
-		Database.getInstance().addingSong(s);
+		int SongID = Database.getInstance().addingSong(s);
+		Database.getInstance().writeBLOB(SongID, s.getPath());
 	}
 	
 	public void getAccountData(account x) {

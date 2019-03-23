@@ -10,6 +10,7 @@ public class SongBuilder
 	String Album;
 	String Genre;
 	String Year;
+	String Path;
 	
 	public SongBuilder setSongName(String songName) {
 		SongName = songName;
@@ -31,10 +32,14 @@ public class SongBuilder
 		Year = year;
 		return this; 	
 	}
+	public SongBuilder setPath(String path) {
+		Path = path;
+		return this;
+	}
 	
 	public Song getSong()
 	{
-		return new Song(SongName, ArtistName, Album, Genre, Year);
+		return new Song(SongName, ArtistName, Album, Genre, Year, Path);
 	}
 	
 	

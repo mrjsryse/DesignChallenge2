@@ -23,14 +23,14 @@ import model.SongList;
 
 public class guestView extends JFrame {
 	private volatile static guestView instance = null;
-	MP3Player mp3 = new MP3Player(new File("C:\\Users\\Antonello Santos\\Music\\DecAve1.mp3"));
+	MP3Player mp3 = new MP3Player(new File("currentSong.mp3"));
 	private JPanel contentPane;
 	//private signingUp currentUser;
 	JButton btnPickPlaylist, btnPickSong, btnCreatePlaylist, btnUploadSong, btnEditSong, btnPlay, btnPause, btnNextSong, btnPreviousSong;
 	JList yourSongsList;
 	JTextPane txtpnSongNameGenre;
 	private JButton btnRefresh;
-
+	
 	public static guestView getInstance() {
         if (instance == null) {
         	instance = new guestView();
@@ -38,6 +38,11 @@ public class guestView extends JFrame {
 		return instance;
 	}
 
+	public void setSong(String path) {
+		mp3.stop();
+		mp3 = new MP3Player(new File(path));
+	}
+	
 	/**
 	 * Create the frame.
 	 */

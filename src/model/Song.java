@@ -7,14 +7,16 @@ public class Song {
 	String Album;
 	String Genre;
 	String Year;
+	String Path;
 	
-	public Song(String songName, String artistName, String album, String genre, String year) {
+	public Song(String songName, String artistName, String album, String genre, String year, String path) {
 		super();
 		SongName = songName;
 		ArtistName = artistName;
 		Album = album;
 		Genre = genre;
 		Year = year;
+		Path = path;
 	}
 
 	public String getSongName()
@@ -40,6 +42,11 @@ public class Song {
 	public String getYear()
 	{
 		return Year;
+	}
+	
+	public String getPath()
+	{
+		return Path;
 	}
 	
 	@Override
