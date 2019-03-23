@@ -32,4 +32,9 @@ public class generalModel {
 			loggingInView.getInstance().entranceDenied();
 		}
 	}
+	
+	public void getPlaylistData(Playlist p)
+	{
+		Database.getInstance().addingPlaylist(p);
+	}
 }
