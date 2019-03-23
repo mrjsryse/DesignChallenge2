@@ -22,7 +22,7 @@ import javax.swing.JLabel;
 import javax.swing.JButton;
 
 public class CreatePlaylist extends JFrame {
-
+	private volatile static CreatePlaylist instance = null;
 	private JPanel contentPane;
 	private JTextField textFieldEnterPlaylistName;
 	JButton btnCreatePlaylist;
@@ -30,6 +30,12 @@ public class CreatePlaylist extends JFrame {
 	/**
 	 * Launch the application.
 	 */
+	public static CreatePlaylist getInstance() {
+        if (instance == null) {
+        	instance = new CreatePlaylist();
+        }
+		return instance;
+	}
 
 
 	/**
@@ -73,7 +79,7 @@ public class CreatePlaylist extends JFrame {
 			 pList.addEvent(addedPlaylist);
 			 int index = pList.getIndex(addedPlaylist);
 			 
-	//		 generalModel.getInstance().getSongData(addedSong);;
+			 generalModel.getInstance().getPlaylistData(addedPlaylist);;
 			 
 			 
 		 }
