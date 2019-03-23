@@ -52,7 +52,7 @@ public class CreatePlaylist extends JFrame {
 		lblNewLabel.setBounds(30, 14, 112, 14);
 		contentPane.add(lblNewLabel);
 		
-		 btnCreatePlaylist = new JButton("Create Playlist");
+		btnCreatePlaylist = new JButton("Create Playlist");
 		btnCreatePlaylist.addActionListener(new btn_CreatePlaylist());
 		btnCreatePlaylist.setBounds(135, 110, 101, 23);
 		contentPane.add(btnCreatePlaylist);

@@ -23,7 +23,10 @@ import model.SongList;
 
 public class guestView extends JFrame {
 	private volatile static guestView instance = null;
-	MP3Player mp3 = new MP3Player(new File("C:\\Users\\Antonello Santos\\Music\\DecAve1.mp3"));
+	File file1 = new File("C:\\Users\\Nello Santos\\Desktop\\Music\\DecAve.mp3");
+	File file2 = new File("C:\\Users\\Nello Santos\\Desktop\\Music\\Freedom.mp3");
+	private String Tite = "Freedom.mp3";
+	MP3Player mp3 = new MP3Player(file1);
 	private JPanel contentPane;
 	//private signingUp currentUser;
 	JButton btnPickPlaylist, btnPickSong, btnCreatePlaylist, btnUploadSong, btnEditSong, btnPlay, btnPause, btnNextSong, btnPreviousSong;
@@ -71,12 +74,9 @@ public class guestView extends JFrame {
 		 btnNextSong.setIcon(new ImageIcon(guestView.class.getResource("/images/skip-to-next-track.png")));
 		btnNextSong.setBounds(705, 681, 89, 45);
 		contentPane.add(btnNextSong);
+		btnNextSong.addActionListener(new btn_nextSong());
 		
 		 btnPreviousSong = new JButton("");
-		 btnPreviousSong.addActionListener(new ActionListener() {
-		 	public void actionPerformed(ActionEvent e) {
-		 	}
-		 });
 		 btnPreviousSong.setIcon(new ImageIcon(guestView.class.getResource("/images/back-track.png")));
 		btnPreviousSong.setBounds(380, 681, 89, 45);
 		contentPane.add(btnPreviousSong);
@@ -90,10 +90,6 @@ public class guestView extends JFrame {
 		contentPane.add(playlistSongList);
 		
 		 btnPickPlaylist = new JButton("Pick Playlist");
-		btnPickPlaylist.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
 		btnPickPlaylist.setBounds(25, 664, 136, 45);
 		contentPane.add(btnPickPlaylist);
 		
@@ -112,10 +108,6 @@ public class guestView extends JFrame {
 		contentPane.add(lblSongInfo);
 		
 		 btnCreatePlaylist = new JButton("Create Playlist");
-		btnCreatePlaylist.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
 		btnCreatePlaylist.setBounds(53, 11, 118, 45);
 		contentPane.add(btnCreatePlaylist);
 		
@@ -141,12 +133,9 @@ public class guestView extends JFrame {
 		contentPane.add(lblYourSongs);
 		
 		 btnEditSong = new JButton("Edit Song");
-		btnEditSong.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
 		btnEditSong.setBounds(905, 11, 89, 45);
 		contentPane.add(btnEditSong);
+		btnEditSong.addActionListener(new btn_editsong());
 		
 		btnRefresh = new JButton("Refresh");
 		btnRefresh.addActionListener(new btn_Refresh());
@@ -191,7 +180,8 @@ public class guestView extends JFrame {
 
 	     public void actionPerformed(ActionEvent e) 
 	     {
-	        mp3.addToPlayList(new File("C:\\\\Users\\\\Antonello Santos\\\\Music\\\\OnTheWingsOfLove.mp3"));
+	        JOptionPane.showMessageDialog(null,"Added" + Tite);
+	    	 mp3.addToPlayList(file2);
 
 	     }
 	 }
@@ -252,6 +242,23 @@ public class guestView extends JFrame {
 		 }
 	 }
 	 
+	 class btn_editsong implements ActionListener
+	 {
+		 public void actionPerformed(ActionEvent e)
+		 {
+			EditSong.getInstance().setVisible(true);
+			
+		 }
+	 }
+	 
+	 class btn_nextSong implements ActionListener
+	 {
+		 public void actionPerformed(ActionEvent e)
+		 {
+			mp3.skipForward();
+			
+		 }
+	 }
 		public void closingWindow() {
 			this.setVisible(false);
 		}
