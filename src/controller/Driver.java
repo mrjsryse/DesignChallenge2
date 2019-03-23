@@ -17,7 +17,7 @@ public class Driver {
 
 		Database.getInstance().setConnection(URL, USERNAME, PASSWORD, DATABASE);
 		//Database.getInstance().testerTemplate();
-		Database.getInstance().readBLOB(1);
+		//Database.getInstance().readBLOB(1);
 		selectAccount sa = new selectAccount();
 		
 	}
