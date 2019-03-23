@@ -4,13 +4,13 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JTextField;
-public class addSongDetails extends JFrame{
+public class AddSongDetails extends JFrame{
 	private JTextField SongTextField;
 	private JTextField ArtistTextField;
 	private JTextField GenreTextField;
 	private JTextField DateTextField;
 	private JTextField AlbumTextField;
-	public addSongDetails() {
+	public AddSongDetails() {
 		getContentPane().setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Song Details");

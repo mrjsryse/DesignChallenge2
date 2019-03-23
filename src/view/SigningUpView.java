@@ -15,23 +15,23 @@ import model.account;
 
 import javax.swing.JButton;
 
-public class signingUpView extends JFrame{
-	private volatile static signingUpView instance = null;
+public class SigningUpView extends JFrame{
+	private volatile static SigningUpView instance = null;
 	private JTextField usernameField;
 	private JTextField passwordField;
 	account signUp;
 	generalController controller;
 	
-	public static signingUpView getInstance() {
+	public static SigningUpView getInstance() {
         if (instance == null) {
-        	instance = new signingUpView();
+        	instance = new SigningUpView();
         }
 		return instance;
 	}
 	
-	public signingUpView() {
+	public SigningUpView() {
 		
-		setIconImage(Toolkit.getDefaultToolkit().getImage(guestView.class.getResource("/images/spotify.png")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(GuestView.class.getResource("/images/spotify.png")));
 		setTitle("Not So Spotify");
 		
 		JPanel backgroundPanel = new JPanel();
@@ -88,9 +88,9 @@ public class signingUpView extends JFrame{
 			signUp = new account(username,password); 
 			generalController.getInstance().gettingAccountData(username, password);
 			JOptionPane.showMessageDialog(null,"Successfully Signed Up!");
-			registeredUserView.getInstance().setVisible(true);
+			RegisteredUserView.getInstance().setVisible(true);
 			closingWindow();
-			selectAccount.getInstance().setVisible(false);
+			SelectAccount.getInstance().setVisible(false);
 			
 		}
 	}

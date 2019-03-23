@@ -7,7 +7,7 @@ import javax.swing.SwingConstants;
 import controller.generalController;
 import model.account;
 import model.generalModel;
-import view.loggingInView.confirmButton;
+import view.LoggingInView.confirmButton;
 
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -15,12 +15,12 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 
-public class infoSong extends JFrame{
+public class InfoSong extends JFrame{
 	
 	AddSong song;
 	String songTitle,artistName,albumName,genreName,yearDate;
 	
-	public infoSong() {
+	public InfoSong() {
 		
 		this.setSize(650, 700);
 		getContentPane().setLayout(null);

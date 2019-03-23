@@ -20,25 +20,25 @@ import javax.swing.JButton;
 
 import model.Database;
 
-public class loggingInView extends JFrame{
+public class LoggingInView extends JFrame{
 	private JTextField UsernameTextField;
 	private JTextField PasswordTextField;
 	account logIn;
 	Boolean entrance;
 	Database theAccounts;
 	
-	private volatile static loggingInView modelInstance = null;
+	private volatile static LoggingInView modelInstance = null;
 	
-	public static loggingInView getInstance() {
+	public static LoggingInView getInstance() {
         if (modelInstance == null) {
-        	modelInstance = new loggingInView();
+        	modelInstance = new LoggingInView();
         }
 		return modelInstance;
 	
 	}
 	
-	public loggingInView() {
-		setIconImage(Toolkit.getDefaultToolkit().getImage(guestView.class.getResource("/images/spotify.png")));
+	public LoggingInView() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(GuestView.class.getResource("/images/spotify.png")));
 		setTitle("Not So Spotify");
 		
 		this.setSize(650, 700);
@@ -96,7 +96,7 @@ public class loggingInView extends JFrame{
 	
 	public void entranceAllowed() {
 		JOptionPane.showMessageDialog(null,"Successfully Logged In!");
-		MusicPlaer.getInstance().setVisible(true);
+		RegisteredUserView.getInstance().setVisible(true);
 	}
 	
 	public void entranceDenied() {

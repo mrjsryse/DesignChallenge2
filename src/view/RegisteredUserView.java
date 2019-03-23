@@ -3,8 +3,8 @@ package view;
 import jaco.mp3.player.MP3Player;
 import model.SongList;
 import view.AddSong;
-import view.guestView;
-import view.selectAccount;
+import view.GuestView;
+import view.SelectAccount;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -32,8 +32,8 @@ import java.awt.Toolkit;
 
 import javax.swing.ImageIcon;
 
-public class registeredUserView extends JFrame {
-	private volatile static registeredUserView instance = null;
+public class RegisteredUserView extends JFrame {
+	private volatile static RegisteredUserView instance = null;
 	MP3Player mp3 = new MP3Player(new File("C:\\Users\\Nello Santos\\Desktop\\Music\\DecAve.mp3"));
 	private JPanel contentPane;
 	//private signingUp currentUser;
@@ -44,9 +44,9 @@ public class registeredUserView extends JFrame {
 	private JButton button;
 
 
-	public static registeredUserView getInstance() {
+	public static RegisteredUserView getInstance() {
         if (instance == null) {
-        	instance = new registeredUserView();
+        	instance = new RegisteredUserView();
         }
 		return instance;
 	}
@@ -56,8 +56,8 @@ public class registeredUserView extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public registeredUserView() {
-		setIconImage(Toolkit.getDefaultToolkit().getImage(guestView.class.getResource("/images/spotify.png")));
+	public RegisteredUserView() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(GuestView.class.getResource("/images/spotify.png")));
 		setTitle("Not So Spotify");
 		
 		MP3Player mp3 = new MP3Player(new File("C:\\Users\\Nello Santos\\Desktop\\Music\\DecAve.mp3"));
@@ -78,18 +78,18 @@ public class registeredUserView extends JFrame {
 		contentPane.add(btnPlay);
 		
 		 btnPause = new JButton("");
-		 btnPause.setIcon(new ImageIcon(registeredUserView.class.getResource("/images/pause-button.png")));
+		 btnPause.setIcon(new ImageIcon(RegisteredUserView.class.getResource("/images/pause-button.png")));
 		btnPause.addActionListener(new btn_Pause());
 		btnPause.setBounds(593, 681, 89, 45);
 		contentPane.add(btnPause);
 		
 		 btnNextSong = new JButton("");
-		 btnNextSong.setIcon(new ImageIcon(registeredUserView.class.getResource("/images/skip-to-next-track.png")));
+		 btnNextSong.setIcon(new ImageIcon(RegisteredUserView.class.getResource("/images/skip-to-next-track.png")));
 		btnNextSong.setBounds(705, 681, 89, 45);
 		contentPane.add(btnNextSong);
 		
 		 btnPreviousSong = new JButton("");
-		 btnPreviousSong.setIcon(new ImageIcon(registeredUserView.class.getResource("/images/back-track.png")));
+		 btnPreviousSong.setIcon(new ImageIcon(RegisteredUserView.class.getResource("/images/back-track.png")));
 		btnPreviousSong.setBounds(380, 681, 89, 45);
 		contentPane.add(btnPreviousSong);
 		
@@ -179,12 +179,12 @@ public class registeredUserView extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});
-		shuffleButton.setIcon(new ImageIcon(registeredUserView.class.getResource("/images/shuffle.png")));
+		shuffleButton.setIcon(new ImageIcon(RegisteredUserView.class.getResource("/images/shuffle.png")));
 		shuffleButton.setBounds(279, 681, 89, 45);
 		contentPane.add(shuffleButton);
 		
 		JButton repeatButton = new JButton("");
-		repeatButton.setIcon(new ImageIcon(registeredUserView.class.getResource("/images/repeat.png")));
+		repeatButton.setIcon(new ImageIcon(RegisteredUserView.class.getResource("/images/repeat.png")));
 		repeatButton.setBounds(806, 681, 89, 45);
 		contentPane.add(repeatButton);
 		
@@ -252,7 +252,7 @@ public class registeredUserView extends JFrame {
 		 public void actionPerformed(ActionEvent e)
 		 {
 			JOptionPane.showMessageDialog(null,"You have been Logged out!");
-			selectAccount.getInstance().setVisible(true);
+			SelectAccount.getInstance().setVisible(true);
 			closingWindow();
 		 }
 	 }

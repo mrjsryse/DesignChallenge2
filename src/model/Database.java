@@ -14,7 +14,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import view.loggingInView;
+import view.LoggingInView;
 
 public class Database{
 	
@@ -26,7 +26,7 @@ public class Database{
 	private String USERNAME;
 	private String PASSWORD;
 	private String DATABASE;
-	loggingInView entrance;
+	LoggingInView entrance;
 	
 	public static Database getInstance() {
         if (instance == null) {

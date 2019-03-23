@@ -50,12 +50,12 @@ public class CreatePlaylist extends JFrame {
 		contentPane.setLayout(null);
 		
 		textFieldEnterPlaylistName = new JTextField();
-		textFieldEnterPlaylistName.setBounds(41, 39, 101, 20);
+		textFieldEnterPlaylistName.setBounds(30, 39, 112, 20);
 		contentPane.add(textFieldEnterPlaylistName);
 		textFieldEnterPlaylistName.setColumns(10);
 		
 		JLabel lblNewLabel = new JLabel("Enter Playlist Name:");
-		lblNewLabel.setBounds(30, 14, 112, 14);
+		lblNewLabel.setBounds(30, 14, 136, 14);
 		contentPane.add(lblNewLabel);
 		
 		btnCreatePlaylist = new JButton("Create Playlist");

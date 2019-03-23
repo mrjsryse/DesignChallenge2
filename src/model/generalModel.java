@@ -1,7 +1,7 @@
 package model;
 
 import controller.SongBuilder;
-import view.loggingInView;
+import view.LoggingInView;
 
 public class generalModel {
 
@@ -27,10 +27,10 @@ public class generalModel {
 	
 	public void checkingAccountData(account w) {
 		if(Database.getInstance().loggingAccount(w) == true) {
-			loggingInView.getInstance().entranceAllowed();
+			LoggingInView.getInstance().entranceAllowed();
 		}
 		else {
-			loggingInView.getInstance().entranceDenied();
+			LoggingInView.getInstance().entranceDenied();
 		}
 	}
 	

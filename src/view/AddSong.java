@@ -21,7 +21,6 @@ import javax.swing.JFileChooser;
 
 public class AddSong extends JFrame {
 	private volatile static AddSong instance = null;
-	MusicPlaer mp;
 	private JPanel contentPane;
 	private JTextField textFieldArtistName;
 	private JTextField textFieldAlbum;
@@ -130,7 +129,7 @@ public class AddSong extends JFrame {
 	 }
 	
 	class btn_Add implements ActionListener
-	 {		MusicPlaer mp;
+	 {		
 		 public void actionPerformed(ActionEvent e)
 		 {
 			 String songName = textFieldSongName.getText();
