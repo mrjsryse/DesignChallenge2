@@ -160,4 +160,29 @@ public class AddSong extends JFrame {
 		 }
 		
 	 }
+	
+	public String gettingSong() {
+		String title = textFieldSongName.getText();
+		return title;
+	}
+	
+	public String gettingArtist() {
+		String artist = textFieldArtistName.getText();
+		return artist;
+	}
+	
+	public String gettingAlbum() {
+		String album = textFieldAlbum.getText();
+		return album;
+	}
+	
+	public String gettingGenre() {
+		String genre = textFieldGenre.getText();
+		return genre;
+	}
+	
+	public String gettingYear() {
+		String year = textFieldYear.getText();
+		return year;
+	}
 }
