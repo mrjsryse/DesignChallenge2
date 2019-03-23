@@ -20,19 +20,21 @@ import model.PlaylistList;
 import model.SongList;
 import model.account;
 import model.generalModel;
+import view.loggingInView.confirmButton;
 
 public class MusicPlaer extends JFrame {
 
 	MP3Player mp3 = new MP3Player(new File("C:\\Users\\Nello Santos\\Desktop\\Music\\DecAve.mp3"));
 	private JPanel contentPane;
 	//private signingUp currentUser;
-	JButton btnPickPlaylist, btnPickSong, btnCreatePlaylist, btnUploadSong, btnEditSong, btnPlay, btnPause, btnNextSong, btnPreviousSong;
+	JButton btnPickPlaylist, btnPickSong, btnCreatePlaylist, btnUploadSong, btnEditSong, btnPlay, btnPause, btnNextSong, btnPreviousSong, btnSongInfo;
 	JList yourSongsList, playlistList;
 	JTextPane txtpnSongNameGenre;
 	private JButton btnRefresh;
 	account registeredAccount;
 	private volatile static MusicPlaer instance = null;
 	String registeredUsername;
+	infoSong songInformation;
 
 	public static MusicPlaer getInstance() {
         if (instance == null) {
@@ -64,6 +66,7 @@ public class MusicPlaer extends JFrame {
 	public MusicPlaer() {
 
 		MP3Player mp3 = new MP3Player(new File("C:\\Users\\Nello Santos\\Desktop\\Music\\DecAve.mp3"));
+		songInformation = new infoSong();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -132,7 +135,7 @@ public class MusicPlaer extends JFrame {
 		
 		 btnUploadSong = new JButton("Upload Song");
 		btnUploadSong.addActionListener(new btn_UploadSong());
-		btnUploadSong.setBounds(1021, 11, 126, 45);
+		btnUploadSong.setBounds(1052, 11, 95, 45);
 		contentPane.add(btnUploadSong);
 		
 		 yourSongsList = new JList();
@@ -156,12 +159,12 @@ public class MusicPlaer extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnEditSong.setBounds(905, 11, 89, 45);
+		btnEditSong.setBounds(953, 11, 89, 45);
 		contentPane.add(btnEditSong);
 		
 		btnRefresh = new JButton("Refresh");
 		btnRefresh.addActionListener(new btn_Refresh());
-		btnRefresh.setBounds(760, 21, 97, 25);
+		btnRefresh.setBounds(738, 21, 97, 25);
 		contentPane.add(btnRefresh);
 		
 		JLabel lblUser = new JLabel("Current User:");
@@ -188,6 +191,12 @@ public class MusicPlaer extends JFrame {
 		usernameField.setBounds(529, -1, 153, 57);
 		usernameField.setText(gettingUsername(registeredUsername)); //making the username
 		contentPane.add(usernameField);
+		
+		btnSongInfo = new JButton("Song Info");
+		btnSongInfo.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		btnSongInfo.setBounds(854, 11, 89, 45);
+		contentPane.add(btnSongInfo);
+		btnSongInfo.addActionListener(new songInfo());
 	}
 	
 	 class btn_Play implements ActionListener 
@@ -261,4 +270,15 @@ public class MusicPlaer extends JFrame {
 		 return username;
 	 }
 	 
+	 class songInfo implements ActionListener
+	 {
+		 public void actionPerformed(ActionEvent e)
+		 {
+			 songInformation.setVisible(true);
+		 }
+	 }
+	 
+	 public void seeingSongInformation(infoSong songInformation) {
+			this.songInformation = songInformation;
+		}
 }
