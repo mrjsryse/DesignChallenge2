@@ -16,6 +16,7 @@ import javax.swing.JTextPane;
 import javax.swing.border.EmptyBorder;
 
 import jaco.mp3.player.MP3Player;
+import model.PlaylistList;
 import model.SongList;
 import model.account;
 import model.generalModel;
@@ -26,7 +27,7 @@ public class MusicPlaer extends JFrame {
 	private JPanel contentPane;
 	//private signingUp currentUser;
 	JButton btnPickPlaylist, btnPickSong, btnCreatePlaylist, btnUploadSong, btnEditSong, btnPlay, btnPause, btnNextSong, btnPreviousSong;
-	JList yourSongsList;
+	JList yourSongsList, playlistList;
 	JTextPane txtpnSongNameGenre;
 	private JButton btnRefresh;
 	account registeredAccount;
@@ -38,6 +39,19 @@ public class MusicPlaer extends JFrame {
         	instance = new MusicPlaer();
         }
 		return instance;
+	}
+	
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					MusicPlaer frame = new MusicPlaer();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
 	}
 	
 	/**
@@ -82,7 +96,7 @@ public class MusicPlaer extends JFrame {
 		btnPreviousSong.setBounds(380, 681, 89, 45);
 		contentPane.add(btnPreviousSong);
 		
-		JList playlistList = new JList();
+		 playlistList = new JList();
 		playlistList.setBounds(25, 93, 322, 558);
 		contentPane.add(playlistList);
 		
@@ -112,10 +126,7 @@ public class MusicPlaer extends JFrame {
 		contentPane.add(lblSongInfo);
 		
 		 btnCreatePlaylist = new JButton("Create Playlist");
-		btnCreatePlaylist.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
+		btnCreatePlaylist.addActionListener(new btn_CreatePlaylist());
 		btnCreatePlaylist.setBounds(53, 11, 118, 45);
 		contentPane.add(btnCreatePlaylist);
 		
@@ -218,11 +229,28 @@ public class MusicPlaer extends JFrame {
 			 
 			 for(int x = 0; x < sList.getSongSize(); x++)
 			 DLM.addElement(sList.getSongList().get(x).getSongName());
-			 
-			 
-			 
+
 			 yourSongsList.setModel(DLM);
 			 
+			 PlaylistList pList = new PlaylistList();
+			 DefaultListModel DLM2 = new DefaultListModel();
+			 
+			 for(int x = 0; x < pList.getPlaylistSize(); x++)
+			 DLM2.addElement(pList.getPlaylistList().get(x).getPlaylistName());
+
+			 playlistList.setModel(DLM2);
+			 
+			 
+		 }
+	 }
+	 
+	 class btn_CreatePlaylist implements ActionListener
+	 {
+		 public void actionPerformed(ActionEvent e)
+		 {
+			 
+			 CreatePlaylist cp = new CreatePlaylist();
+			 cp.setVisible(true);
 			 
 			 
 		 }

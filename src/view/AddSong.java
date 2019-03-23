@@ -148,13 +148,13 @@ public class AddSong extends JFrame {
 					 .setYear(year)
 					 .getSong();
 			 
-			 generalModel.getInstance().getSongData(addedSong);;
+			 
 			 
 			 SongList sList = new SongList();
-			 sList.addEvent(addedSong);
+			 sList.addSong(addedSong);
 			 int index = sList.getIndex(addedSong);
 			 
-
+			 generalModel.getInstance().getSongData(addedSong);;
 			 
 			 
 		 }
