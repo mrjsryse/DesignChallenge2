@@ -4,9 +4,15 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
+import controller.generalController;
+import model.account;
 import model.generalModel;
+import view.loggingInView.confirmButton;
 
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
 
 public class infoSong extends JFrame{
@@ -82,6 +88,15 @@ public class infoSong extends JFrame{
 		JButton btnNewButton = new JButton("Close");
 		btnNewButton.setBounds(496, 597, 89, 23);
 		getContentPane().add(btnNewButton);
+		btnNewButton.addActionListener(new confirmButton());
+	}
+	
+	class confirmButton implements ActionListener
+	{
+	public void actionPerformed (ActionEvent account)
+		{
+			closingWindow();
+		}
 	}
 
 	private String gettingYear(String e) {
@@ -107,6 +122,10 @@ public class infoSong extends JFrame{
 	private String gettingSong(String a) {
 		String title = a;
 		return title;
+	}
+	
+	public void closingWindow() {
+		this.setVisible(false);
 	}
 
 }
