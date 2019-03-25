@@ -2,17 +2,26 @@ package model;
 
 import java.util.ArrayList;
 
+import view.AddSong;
+
 public class Playlist {
 	private static ArrayList<Song> SongInPlaylist = new ArrayList<Song>();
-	String playlistName;
-	
+	static String playlistName;
+	private volatile static Playlist instance = null;
 
 	public Playlist(ArrayList<Song> SongInPlaylist, String playlistName) {
 		super();
 		this.SongInPlaylist = SongInPlaylist;
 		this.playlistName = playlistName;
 	}
-
+	
+	public static Playlist getInstance() {
+        if (instance == null) {
+        	instance = new Playlist(SongInPlaylist, playlistName);
+        }
+		return instance;
+	}
+	
 	public static ArrayList<Song> getSongInPlaylist() {
 		return SongInPlaylist;
 	}

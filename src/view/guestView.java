@@ -185,8 +185,8 @@ public class guestView extends JFrame {
 
 	     public void actionPerformed(ActionEvent e) 
 	     {
-	        JOptionPane.showMessageDialog(null,"Added" + Tite);
-	    	 mp3.addToPlayList(file2);
+	//       JOptionPane.showMessageDialog(null,"Added" + Tite);
+//	    	 mp3.addToPlayList(file2);
 
 	     }
 	 }
