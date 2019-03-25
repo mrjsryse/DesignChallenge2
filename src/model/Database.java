@@ -1,5 +1,7 @@
 package model;
 import java.io.File;
+import javax.swing.*;
+import javax.swing.JOptionPane;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FilterOutputStream;
@@ -10,6 +12,9 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+
+import view.loggingInView;
 
 public class Database{
 	
@@ -21,6 +26,7 @@ public class Database{
 	private String USERNAME;
 	private String PASSWORD;
 	private String DATABASE;
+	loggingInView entrance;
 	
 	public static Database getInstance() {
         if (instance == null) {
@@ -41,18 +47,18 @@ public class Database{
 		//CREATE TABLE IF NOT EXISTS
 		
 		String query = "CREATE TABLE IF NOT EXISTS accounts (UserID int NOT NULL AUTO_INCREMENT PRIMARY KEY, Username varchar(255), Password varchar(255));"; //creating table
-		String query2 = "CREATE TABLE IF NOT EXISTS playlists(playlists int NOT NULL AUTO_INCREMENT PRIMARY KEY, ProfileNumber int(11), Playlist_Number int(11));";
+		String query2 = "CREATE TABLE IF NOT EXISTS playlists(PlaylistID int NOT NULL AUTO_INCREMENT PRIMARY KEY, PlaylistName varchar(255), UserID int(11));";
 		String query3 = "CREATE TABLE IF NOT EXISTS songs(SongID int NOT NULL AUTO_INCREMENT PRIMARY KEY, Title varchar(255), "
-				+ "Artist varchar(255),Album varchar(255),Genre varchar(255), Year varchar(255));";
-		String query4 = "CREATE TABLE IF NOT EXISTS user_playlists(PlaylistID int NOT NULL AUTO_INCREMENT PRIMARY KEY, ProfileNumber int(11), SongNumber int(11));";
-		String query5 = "CREATE TABLE IF NOT EXISTS songData(SongID int NOT NULL AUTO_INCREMENT PRIMARY KEY, data BLOB);";
+				+ "Artist varchar(255),Album varchar(255),Genre varchar(255), Year varchar(255), UserID int(11));";
+		String query4 = "CREATE TABLE IF NOT EXISTS user_playlists(UserID int NOT NULL AUTO_INCREMENT PRIMARY KEY, PlaylistID int(11), PlaylistName varchar(255));";
+		String query5 = "CREATE TABLE IF NOT EXISTS songData(SongID int NOT NULL AUTO_INCREMENT PRIMARY KEY, data LONGBLOB);";
 		
 		
 		String queryIncrement = "ALTER TABLE accounts auto_increment = 1";
 		String queryIncrement2 = "ALTER TABLE playlists auto_increment = 1";
 		String queryIncrement3 = "ALTER TABLE songs auto_increment = 1";
 		String queryIncrement4 = "ALTER TABLE user_playlists auto_increment = 1";
-		String queryIncrement5 = "ALTER TABLE user_playlists auto_increment = 1";
+		String queryIncrement5 = "ALTER TABLE songData auto_increment = 1";
 		
 		try {
 			PreparedStatement ps = getConnection().prepareStatement(query);
@@ -106,7 +112,7 @@ public class Database{
 		
 	}
 	
-	public void addingAccount(signingUp newAccount){ //Signing Up
+	public void addingAccount(account newAccount){ //Signing Up
 		String x,y;
 		//get getConnection() from db
 		Connection cnt = getConnection();
@@ -133,10 +139,11 @@ public class Database{
 		//return null;
 	}
 	
-	public void loggingAccount(loggingIn registeredAccount) { //Logging In
+	public boolean loggingAccount(account registeredAccount) { //Logging In
 		Connection cnt = getConnection(); 
+		boolean loggedIn = false;
 		
-		String query = "SELECT * FROM swdespa.accounts WHERE Username = ('"+registeredAccount.getRegisteredUsername()+"') AND Password = ('"+registeredAccount.getRegisteredPassword()+"');";
+		String query = "SELECT * FROM swdespa.accounts WHERE Username = ('"+registeredAccount.getUsername()+"') AND Password = ('"+registeredAccount.getPassword()+"');";
 		
 		try {
 			//create prepared statement
@@ -145,65 +152,89 @@ public class Database{
 			//get result and store in result set
 			ResultSet rs = ps.executeQuery();
 			
+			loggedIn = rs.next() == false;
 			//close all the resources
 			ps.close();
 			rs.close();
 			cnt.close();
+			
+			
+		
 
 		} catch (SQLException e) {
 			e.printStackTrace();
 			
 		}
+		return loggedIn;
 		
 	}
+
+	public void writeBLOB(int SongID, String path) {
+			
+			Connection cnt = getConnection();
+			FileInputStream input = null;
+			PreparedStatement myStatement = null;
+			
+			String query = "INSERT INTO songData VALUES (?,?)";
+			
+			//create string qu
+			
+			try {
+				myStatement = cnt.prepareStatement(query);
+				
+				File theSongFile = new File(path); //Place instead of song.getSongName()
+				input = new FileInputStream(theSongFile);
+				myStatement.setBinaryStream(2, input);
+				myStatement.setInt(1, SongID);
+				
+				System.out.println("Reading the MP3 file: " + theSongFile.getAbsolutePath());
+				System.out.println("Storing MP3 into the database " + theSongFile);
+				System.out.println(query);
+				
+				myStatement.execute();
+				
+				myStatement.close();
 	
-//	public void writeBLOB(AddSong song) {
-//			
-//			Connection cnt = getConnection();
-//			FileInputStream input = null;
-//			PreparedStatement myStatement = null;
-//			
-//			String query = "SELECT * FROM swdespa.songdata SET data=? WHERE song = '"+song.songName+"'";
-//			
-//			//create string qu
-//			
-//			try {
-//				myStatement = cnt.prepareStatement(query);
-//				
-//				File theSongFile = new File(song.fileName); //Place instead of song.getSongName()
-//				input = new FileInputStream(theSongFile);
-//				myStatement.setBinaryStream(1, input);
-//				
-//				System.out.println("Reading the MP3 file: " + theSongFile.getAbsolutePath());
-//				System.out.println("Storing MP3 into the database " + theSongFile);
-//				System.out.println(query);
-//	
-//			} catch (Exception ecx) {
-//				ecx.printStackTrace();
-//			} 
-//			
-//		}
-//	
-//	public void readBLOB() {
-//		Connection cnt = getConnection();
-//		Statement myReadingStatement = null;
-//		ResultSet rs = null;
-//		
-//		InputStream input = null;
-//		FileOutputStream output = null;
-//		
-//		try {
-//			
-//		}catch(Exception exc) {
-//			exc.printStackTrace();
-//		}finally {
-//			if(input != null) {
-//				//input.close();
-//			}
-//			//if(output)
-//		}
-//	}
+			} catch (Exception ecx) {
+				ecx.printStackTrace();
+			} 
+			
+		}
 	
+	public void readBLOB(int SongID) {
+		Connection cnt = getConnection();
+		PreparedStatement myReadingStatement = null;
+		
+		String query = "SELECT data FROM songData WHERE SongID = ?;";
+		ResultSet rs = null;
+		
+		try {
+			myReadingStatement = cnt.prepareStatement(query);
+			myReadingStatement.setInt(1, SongID);
+			
+			rs = myReadingStatement.executeQuery();
+			
+			File file = new File("currentSong.mp3");
+			FileOutputStream output = new FileOutputStream(file);
+			
+            while (rs.next()) {
+                InputStream input = rs.getBinaryStream("data");
+                byte[] buffer = new byte[1024];
+                while (input.read(buffer) > 0) {
+                    output.write(buffer);
+                }
+                input.close();
+            }
+            
+            myReadingStatement.close();
+            output.close();
+			
+		}catch(Exception exc) {
+			exc.printStackTrace();
+		}finally {
+			
+		}
+	}
 
 	public void queryTemplate(String parameters) {
 		
@@ -237,7 +268,7 @@ public class Database{
 		
 	}
 	
-	public void addingSong(Song s){ //Signing Up
+	public int addingSong(Song s){ //Signing Up
 		String getSongName, getArtistName, getAlbumName, getGenre;
 		String getYear;
 		//get getConnection() from db
@@ -249,11 +280,48 @@ public class Database{
 		getYear = s.getYear();
 		
 		
-		String query = "insert into songs values ("+0+",'"+getSongName+"','"
+		String query = "insert into songs values ("+0+",'"+getSongName+"','" 
 															+getArtistName+"','" 
 															+getAlbumName+ "','"
 															+getGenre+ "','"
-															+getYear+ "')";
+															+getYear+ "','"
+															+0+ "')";
+		
+
+		System.out.print(query);
+		//create string query
+		
+		try {
+			PreparedStatement ps = getConnection().prepareStatement(query);
+			ps.executeUpdate(query, Statement.RETURN_GENERATED_KEYS);
+			ResultSet rs = ps.getGeneratedKeys();
+			rs.next();
+			int pk = rs.getInt(1);
+			System.out.println(pk);
+			//close all the resources
+			ps.close();
+			cnt.close();
+			
+			return pk;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
+
+	
+	public void addingPlaylist(Playlist p){ //Signing Up
+		String getPlaylistName;
+		
+		
+		//get getConnection() from db
+		Connection cnt = getConnection();
+		getPlaylistName = p.getPlaylistName();
+		
+		
+		String query = "insert into playlists values ("+0+",'"+getPlaylistName+"','"
+															+0+ "')";
 
 		System.out.print(query);
 		//create string query
@@ -271,7 +339,8 @@ public class Database{
 		}
 		//return null;
 	}
-
+	
+	
 //	public void testerTemplate() {
 //		String x = "dad";
 //		String y = "d";

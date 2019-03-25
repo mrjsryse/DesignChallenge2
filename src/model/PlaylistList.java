@@ -3,36 +3,36 @@ package model;
 import java.util.ArrayList;
 
 public class PlaylistList {
-		
-	private static ArrayList<Playlist> songList = new ArrayList<Playlist>();
-			
-		public void addEvent(Playlist playlist)
+
+
+	private static ArrayList<Playlist> playlistList = new ArrayList<Playlist>();
+	
+	public void addEvent(Playlist playlist)
+	{
+		playlistList.add(playlist);
+	}
+
+	public static ArrayList<Playlist> getPlaylistList() {
+		return playlistList;
+	}
+
+	public static void setPlaylistList(ArrayList<Playlist> playlistList) {
+		PlaylistList.playlistList = playlistList;
+	}
+	
+	public int getPlaylistSize() {
+		return playlistList.size();
+	}
+
+	public int getIndex(Playlist p) {
+		return playlistList.indexOf(p);
+	}
+
+	public void printSongs() {
+		for (int i = 0; i<playlistList.size(); i++)
 		{
-			songList.add(playlist);
+				System.out.print(playlistList.get(i).playlistName);
+				System.out.println("");
 		}
-
-		public static ArrayList<Song> getSongList() {
-			return songList;
-		}
-
-		public static void setSongList(ArrayList<Song> songList) {
-			SongList.songList = songList;
-		}
-			
-		public int getSongSize() {
-			return songList.size();
-		}
-
-		public int getIndex(Song s) {
-			return songList.indexOf(s);
-		}
-
-		public void printSongs() {
-			for (int i = 0; i<songList.size(); i++)
-			{
-					System.out.print(songList.get(i).SongName);
-					System.out.println("");
-			}
-			
-		}
+	}
 }

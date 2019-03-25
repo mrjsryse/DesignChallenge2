@@ -1,20 +1,31 @@
 package controller;
 
+
+import java.util.ArrayList;
+
 import model.Playlist;
 import model.Song;
 
-public class PlaylistBuilder {
-	String playListName;
+public class PlaylistBuilder
+{
+	ArrayList<Song> SongInPlaylist = new ArrayList<Song>();
+	String playlistName;
 	
-	public PlaylistBuilder setSongName(String playListName) {
-		this.playListName = playListName;
+	
+	public PlaylistBuilder setSongs(ArrayList<Song> SongInPlaylist) {
+		this.SongInPlaylist = SongInPlaylist;
+		return this;
+	}
+	public PlaylistBuilder setPlaylistName(String playlistName) {
+		this.playlistName = playlistName;
 		return this;
 	}
 	
-	
 	public Playlist getPlaylist()
 	{
-		return new Playlist(playListName);
+		return new Playlist();
 	}
 	
+	
+
 }

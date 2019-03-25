@@ -1,9 +1,10 @@
 package model;
 
 import controller.SongBuilder;
+import view.loggingInView;
 
 public class generalModel {
-	
+
 	private volatile static generalModel modelInstance = null;
 	
 	public static generalModel getInstance() {
@@ -14,16 +15,27 @@ public class generalModel {
 	
 	}
 	
-	public void getAccountData(signingUp x) {
+	public void getSongData(Song s)
+	{
+		int SongID = Database.getInstance().addingSong(s);
+		Database.getInstance().writeBLOB(SongID, s.getPath());
+	}
+	
+	public void getAccountData(account x) {
 		Database.getInstance().addingAccount(x);
 	}
 	
-	public void checkingAccountData(loggingIn w) {
-		Database.getInstance().loggingAccount(w);
+	public void checkingAccountData(account w) {
+		if(Database.getInstance().loggingAccount(w) == true) {
+			loggingInView.getInstance().entranceAllowed();
+		}
+		else {
+			loggingInView.getInstance().entranceDenied();
+		}
 	}
 	
-	public void getSongData(Song s)
+	public void getPlaylistData(Playlist p)
 	{
-		Database.getInstance().addingSong(s);
+		Database.getInstance().addingPlaylist(p);
 	}
 }

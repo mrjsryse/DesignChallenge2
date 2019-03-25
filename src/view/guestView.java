@@ -19,18 +19,20 @@ import javax.swing.border.EmptyBorder;
 
 
 import jaco.mp3.player.MP3Player;
+import model.PlaylistList;
 import model.SongList;
 
 public class guestView extends JFrame {
 	private volatile static guestView instance = null;
-	MP3Player mp3 = new MP3Player(new File("C:\\Users\\Antonello Santos\\Music\\DecAve1.mp3"));
+	MP3Player mp3 = new MP3Player(new File("currentSong.mp3"));
+
 	private JPanel contentPane;
 	//private signingUp currentUser;
 	JButton btnPickPlaylist, btnPickSong, btnCreatePlaylist, btnUploadSong, btnEditSong, btnPlay, btnPause, btnNextSong, btnPreviousSong;
-	JList yourSongsList;
+	JList yourSongsList, playlistList;
 	JTextPane txtpnSongNameGenre;
 	private JButton btnRefresh;
-
+	
 	public static guestView getInstance() {
         if (instance == null) {
         	instance = new guestView();
@@ -38,6 +40,11 @@ public class guestView extends JFrame {
 		return instance;
 	}
 
+	public void setSong(String path) {
+		mp3.stop();
+		mp3 = new MP3Player(new File(path));
+	}
+	
 	/**
 	 * Create the frame.
 	 */
@@ -71,17 +78,14 @@ public class guestView extends JFrame {
 		 btnNextSong.setIcon(new ImageIcon(guestView.class.getResource("/images/skip-to-next-track.png")));
 		btnNextSong.setBounds(705, 681, 89, 45);
 		contentPane.add(btnNextSong);
+		btnNextSong.addActionListener(new btn_nextSong());
 		
 		 btnPreviousSong = new JButton("");
-		 btnPreviousSong.addActionListener(new ActionListener() {
-		 	public void actionPerformed(ActionEvent e) {
-		 	}
-		 });
 		 btnPreviousSong.setIcon(new ImageIcon(guestView.class.getResource("/images/back-track.png")));
 		btnPreviousSong.setBounds(380, 681, 89, 45);
 		contentPane.add(btnPreviousSong);
 		
-		JList playlistList = new JList();
+		 playlistList = new JList();
 		playlistList.setBounds(25, 93, 322, 558);
 		contentPane.add(playlistList);
 		
@@ -90,10 +94,6 @@ public class guestView extends JFrame {
 		contentPane.add(playlistSongList);
 		
 		 btnPickPlaylist = new JButton("Pick Playlist");
-		btnPickPlaylist.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
 		btnPickPlaylist.setBounds(25, 664, 136, 45);
 		contentPane.add(btnPickPlaylist);
 		
@@ -111,11 +111,8 @@ public class guestView extends JFrame {
 		lblSongInfo.setBounds(403, 373, 95, 26);
 		contentPane.add(lblSongInfo);
 		
-		 btnCreatePlaylist = new JButton("Create Playlist");
-		btnCreatePlaylist.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
+		btnCreatePlaylist = new JButton("Create Playlist");
+		btnCreatePlaylist.addActionListener(new btn_CreatePlaylist());
 		btnCreatePlaylist.setBounds(53, 11, 118, 45);
 		contentPane.add(btnCreatePlaylist);
 		
@@ -141,12 +138,9 @@ public class guestView extends JFrame {
 		contentPane.add(lblYourSongs);
 		
 		 btnEditSong = new JButton("Edit Song");
-		btnEditSong.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
 		btnEditSong.setBounds(905, 11, 89, 45);
 		contentPane.add(btnEditSong);
+		btnEditSong.addActionListener(new btn_editsong());
 		
 		btnRefresh = new JButton("Refresh");
 		btnRefresh.addActionListener(new btn_Refresh());
@@ -191,7 +185,8 @@ public class guestView extends JFrame {
 
 	     public void actionPerformed(ActionEvent e) 
 	     {
-	        mp3.addToPlayList(new File("C:\\\\Users\\\\Antonello Santos\\\\Music\\\\OnTheWingsOfLove.mp3"));
+	//       JOptionPane.showMessageDialog(null,"Added" + Tite);
+//	    	 mp3.addToPlayList(file2);
 
 	     }
 	 }
@@ -231,13 +226,36 @@ public class guestView extends JFrame {
 	 {
 		 public void actionPerformed(ActionEvent e)
 		 {
+			 
+			 
 			 SongList sList = new SongList();
 			 DefaultListModel DLM = new DefaultListModel();
 			 
 			 for(int x = 0; x < sList.getSongSize(); x++)
-			 DLM.addElement(sList.getSongList().get(x).getArtistName());
-			 
+			 DLM.addElement(sList.getSongList().get(x).getSongName());
+
 			 yourSongsList.setModel(DLM);
+			 
+			 PlaylistList pList = new PlaylistList();
+			 DefaultListModel DLM2 = new DefaultListModel();
+			 
+			 for(int x = 0; x < pList.getPlaylistSize(); x++)
+			 DLM2.addElement(pList.getPlaylistList().get(x).getPlaylistName());
+
+			 playlistList.setModel(DLM2);
+			 
+			 
+		 }
+	 }
+	 
+	 class btn_CreatePlaylist implements ActionListener
+	 {
+		 public void actionPerformed(ActionEvent e)
+		 {
+			 
+			 CreatePlaylist cp = new CreatePlaylist();
+			 cp.setVisible(true);
+			 
 			 
 		 }
 	 }
@@ -252,6 +270,23 @@ public class guestView extends JFrame {
 		 }
 	 }
 	 
+	 class btn_editsong implements ActionListener
+	 {
+		 public void actionPerformed(ActionEvent e)
+		 {
+			EditSong.getInstance().setVisible(true);
+			
+		 }
+	 }
+	 
+	 class btn_nextSong implements ActionListener
+	 {
+		 public void actionPerformed(ActionEvent e)
+		 {
+			mp3.skipForward();
+			
+		 }
+	 }
 		public void closingWindow() {
 			this.setVisible(false);
 		}

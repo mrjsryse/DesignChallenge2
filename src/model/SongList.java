@@ -6,7 +6,7 @@ public class SongList {
 	
 private static ArrayList<Song> songList = new ArrayList<Song>();
 	
-	public void addEvent(Song song)
+	public void addSong(Song song)
 	{
 		songList.add(song);
 	}

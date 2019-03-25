@@ -123,7 +123,8 @@ public class AddSong extends JFrame {
 			 JFileChooser chooser = new JFileChooser();
 			 chooser.showOpenDialog(null);
 			 File f = chooser.getSelectedFile();
-			  fileName = f.getAbsolutePath();
+			 fileName = f.getAbsolutePath();
+			 textFieldChosenFile.setText(fileName);
 		 }
 		 
 	 }
@@ -132,13 +133,12 @@ public class AddSong extends JFrame {
 	 {		MusicPlaer mp;
 		 public void actionPerformed(ActionEvent e)
 		 {
-			 textFieldChosenFile.setText(fileName);
 			 String songName = textFieldSongName.getText();
 			 String artistName = textFieldArtistName.getText();
 			 String albumName = textFieldAlbum.getText();
 			 String genre = textFieldGenre.getText();
 			 String year = textFieldYear.getText();
-			
+			 String path = textFieldChosenFile.getText();
 			 
 			 Song addedSong = new SongBuilder()
 					 .setSongName(songName)
@@ -146,18 +146,44 @@ public class AddSong extends JFrame {
 					 .setAlbum(albumName)
 					 .setGenre(genre)
 					 .setYear(year)
+					 .setPath(path)
 					 .getSong();
 			 
-			 generalModel.getInstance().getSongData(addedSong);;
+			 
 			 
 			 SongList sList = new SongList();
-			 sList.addEvent(addedSong);
+			 sList.addSong(addedSong);
 			 int index = sList.getIndex(addedSong);
 			 
-
+			 generalModel.getInstance().getSongData(addedSong);;
 			 
 			 
 		 }
 		
 	 }
+	
+	public String gettingSong() {
+		String title = textFieldSongName.getText();
+		return title;
+	}
+	
+	public String gettingArtist() {
+		String artist = textFieldArtistName.getText();
+		return artist;
+	}
+	
+	public String gettingAlbum() {
+		String album = textFieldAlbum.getText();
+		return album;
+	}
+	
+	public String gettingGenre() {
+		String genre = textFieldGenre.getText();
+		return genre;
+	}
+	
+	public String gettingYear() {
+		String year = textFieldYear.getText();
+		return year;
+	}
 }
