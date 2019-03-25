@@ -12,12 +12,12 @@ public class Driver {
 		//test adding for Git REEEE
 		String URL = "jdbc:mysql://localhost:3306/";
 		String USERNAME = "root";
-		String PASSWORD = "arielariel0";
+		String PASSWORD = "mdrd0508";
 		String DATABASE = "swdespa";
 
 		Database.getInstance().setConnection(URL, USERNAME, PASSWORD, DATABASE);
 		//Database.getInstance().testerTemplate();
-		//Database.getInstance().readBLOB(1);
+		Database.getInstance().readBLOB(1);
 		SelectAccount sa = new SelectAccount();
 		
 	}

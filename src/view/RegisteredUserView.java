@@ -1,49 +1,40 @@
 package view;
 
-import jaco.mp3.player.MP3Player;
-import model.SongList;
-import view.AddSong;
-import view.GuestView;
-import view.SelectAccount;
+import java.awt.Font;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
-
-
+import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextPane;
 import javax.swing.border.EmptyBorder;
 
 
-import javax.swing.DefaultListModel;
-import javax.swing.JButton;
-import javax.swing.JFileChooser;
-
-import java.awt.event.ActionListener;
-import java.io.File;
-import java.awt.event.ActionEvent;
-import javax.swing.JList;
-import javax.swing.JOptionPane;
-import javax.swing.JTextPane;
-import javax.swing.JLabel;
-import java.awt.Font;
-import java.awt.Toolkit;
-
-import javax.swing.ImageIcon;
+import jaco.mp3.player.MP3Player;
+import model.PlaylistList;
+import model.SongList;
+import model.account;
 
 public class RegisteredUserView extends JFrame {
 	private volatile static RegisteredUserView instance = null;
-	MP3Player mp3 = new MP3Player(new File("C:\\Users\\Nello Santos\\Desktop\\Music\\DecAve.mp3"));
+	MP3Player mp3 = new MP3Player(new File("currentSong.mp3"));
+
 	private JPanel contentPane;
-	//private signingUp currentUser;
+	private String currentUser;
 	JButton btnPickPlaylist, btnPickSong, btnCreatePlaylist, btnUploadSong, btnEditSong, btnPlay, btnPause, btnNextSong, btnPreviousSong;
-	JList yourSongsList;
+	JList yourSongsList, playlistList;
 	JTextPane txtpnSongNameGenre;
 	private JButton btnRefresh;
-	private JButton button;
-
-
+	JLabel lblUser;
+	
 	public static RegisteredUserView getInstance() {
         if (instance == null) {
         	instance = new RegisteredUserView();
@@ -51,16 +42,18 @@ public class RegisteredUserView extends JFrame {
 		return instance;
 	}
 
-
-
+	public void setSong(String path) {
+		mp3.stop();
+		mp3 = new MP3Player(new File(path));
+	}
+	
 	/**
 	 * Create the frame.
 	 */
 	public RegisteredUserView() {
-		setIconImage(Toolkit.getDefaultToolkit().getImage(GuestView.class.getResource("/images/spotify.png")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(RegisteredUserView.class.getResource("/images/spotify.png")));
 		setTitle("Not So Spotify");
-		
-		MP3Player mp3 = new MP3Player(new File("C:\\Users\\Nello Santos\\Desktop\\Music\\DecAve.mp3"));
+
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -87,13 +80,15 @@ public class RegisteredUserView extends JFrame {
 		 btnNextSong.setIcon(new ImageIcon(RegisteredUserView.class.getResource("/images/skip-to-next-track.png")));
 		btnNextSong.setBounds(705, 681, 89, 45);
 		contentPane.add(btnNextSong);
+		btnNextSong.addActionListener(new btn_nextSong());
 		
 		 btnPreviousSong = new JButton("");
 		 btnPreviousSong.setIcon(new ImageIcon(RegisteredUserView.class.getResource("/images/back-track.png")));
 		btnPreviousSong.setBounds(380, 681, 89, 45);
 		contentPane.add(btnPreviousSong);
+		btnPreviousSong.addActionListener(new btn_prevSong());
 		
-		JList playlistList = new JList();
+		 playlistList = new JList();
 		playlistList.setBounds(25, 93, 322, 558);
 		contentPane.add(playlistList);
 		
@@ -101,19 +96,16 @@ public class RegisteredUserView extends JFrame {
 		playlistSongList.setBounds(403, 139, 375, 224);
 		contentPane.add(playlistSongList);
 		
-		btnPickPlaylist = new JButton("Pick Playlist");
-		btnPickPlaylist.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
+		 btnPickPlaylist = new JButton("Pick Playlist");
 		btnPickPlaylist.setBounds(25, 664, 136, 45);
 		contentPane.add(btnPickPlaylist);
 		
-		 btnPickSong = new JButton("Add Song to Playlist");
+		JButton btnPickSong = new JButton("Add Song to Playlist");
 		btnPickSong.setBounds(957, 664, 190, 45);
 		contentPane.add(btnPickSong);
-		
-		 txtpnSongNameGenre = new JTextPane();
+		btnPickSong.addActionListener(new btn_addSongtoP());
+		 
+		txtpnSongNameGenre = new JTextPane();
 		txtpnSongNameGenre.setBounds(403, 405, 375, 209);
 		txtpnSongNameGenre.setText("Song Name: \r\nGenre: \r\n");
 		contentPane.add(txtpnSongNameGenre);
@@ -122,11 +114,8 @@ public class RegisteredUserView extends JFrame {
 		lblSongInfo.setBounds(403, 373, 95, 26);
 		contentPane.add(lblSongInfo);
 		
-		 btnCreatePlaylist = new JButton("Create Playlist");
-		btnCreatePlaylist.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
+		btnCreatePlaylist = new JButton("Create Playlist");
+		btnCreatePlaylist.addActionListener(new btn_CreatePlaylist());
 		btnCreatePlaylist.setBounds(53, 11, 118, 45);
 		contentPane.add(btnCreatePlaylist);
 		
@@ -152,53 +141,35 @@ public class RegisteredUserView extends JFrame {
 		contentPane.add(lblYourSongs);
 		
 		 btnEditSong = new JButton("Edit Song");
-		btnEditSong.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
 		btnEditSong.setBounds(905, 11, 89, 45);
 		contentPane.add(btnEditSong);
+		btnEditSong.addActionListener(new btn_editsong());
 		
 		btnRefresh = new JButton("Refresh");
 		btnRefresh.addActionListener(new btn_Refresh());
 		btnRefresh.setBounds(760, 21, 97, 25);
 		contentPane.add(btnRefresh);
 		
-		JLabel lblUser = new JLabel("Current User:");
+		lblUser = new JLabel("Current User: " + currentUser );
 		lblUser.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblUser.setBounds(418, 20, 118, 16);
+		lblUser.setBounds(346, 20, 342, 16);
 		contentPane.add(lblUser);
 		
-		JTextPane usernameTextPane = new JTextPane();
-		usernameTextPane.setBounds(523, 20, 89, 22);
-		usernameTextPane.setText("username");
-		contentPane.add(usernameTextPane);
-		
 		JButton shuffleButton = new JButton("");
-		shuffleButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
 		shuffleButton.setIcon(new ImageIcon(RegisteredUserView.class.getResource("/images/shuffle.png")));
 		shuffleButton.setBounds(279, 681, 89, 45);
 		contentPane.add(shuffleButton);
+		shuffleButton.addActionListener(new btn_shuffle());
 		
 		JButton repeatButton = new JButton("");
 		repeatButton.setIcon(new ImageIcon(RegisteredUserView.class.getResource("/images/repeat.png")));
 		repeatButton.setBounds(806, 681, 89, 45);
 		contentPane.add(repeatButton);
+		repeatButton.addActionListener(new btn_repeat());
 		
 		JButton logoutButton = new JButton("Logout");
 		logoutButton.setBounds(1050, 728, 97, 25);
 		contentPane.add(logoutButton);
-		
-		button = new JButton("Create Proflie");
-		button.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		button.setBounds(183, 11, 118, 45);
-		contentPane.add(button);
 		logoutButton.addActionListener(new btn_Logout());
 	}
 	
@@ -206,8 +177,19 @@ public class RegisteredUserView extends JFrame {
 	 {
 
 	     public void actionPerformed(ActionEvent e) 
+	     {	 
+	    	 mp3.play();
+
+	     }
+	 }
+	
+	 class btn_addSongtoP implements ActionListener 
+	 {
+
+	     public void actionPerformed(ActionEvent e) 
 	     {
-	        mp3.play();
+	        //JOptionPane.showMessageDialog(null,"Added " + new song);
+	    	 //mp3.addToPlayList();
 
 	     }
 	 }
@@ -220,13 +202,34 @@ public class RegisteredUserView extends JFrame {
 		 }
 	 }
 	 
+	 class btn_shuffle implements ActionListener 
+	 {
+		 public void actionPerformed(ActionEvent e)
+		 {
+			if(mp3.isShuffle())
+			{
+				mp3.setShuffle(true);
+			}
+			else 
+			{
+				mp3.setShuffle(false);
+			}
+		 
+		 }
+	 }
+	 
+	 class btn_repeat implements ActionListener 
+	 {
+		 public void actionPerformed(ActionEvent e)
+		 {
+			 mp3.setRepeat(true);
+		 }
+	 }
 	 class btn_UploadSong implements ActionListener
 	 {
 		 public void actionPerformed(ActionEvent e)
 		 {
-			 AddSong as = new AddSong();
-			 as.setVisible(true);
-			 
+			 AddSong.getInstance().setVisible(true);
 		 }
 	 }
 	 
@@ -234,14 +237,35 @@ public class RegisteredUserView extends JFrame {
 	 {
 		 public void actionPerformed(ActionEvent e)
 		 {
+			 
+			 
 			 SongList sList = new SongList();
 			 DefaultListModel DLM = new DefaultListModel();
 			 
 			 for(int x = 0; x < sList.getSongSize(); x++)
-			 DLM.addElement(sList.getSongList().get(x).getArtistName());
-			 
+			 DLM.addElement(sList.getSongList().get(x).getSongName());
+
 			 yourSongsList.setModel(DLM);
 			 
+			 PlaylistList pList = new PlaylistList();
+			 DefaultListModel DLM2 = new DefaultListModel();
+			 
+			 for(int x = 0; x < pList.getPlaylistSize(); x++)
+			 DLM2.addElement(pList.getPlaylistList().get(x).getPlaylistName());
+
+			 playlistList.setModel(DLM2);
+			 
+			 
+		 }
+	 }
+	 
+	 class btn_CreatePlaylist implements ActionListener
+	 {
+		 public void actionPerformed(ActionEvent e)
+		 {
+			 
+			 CreatePlaylist cp = new CreatePlaylist();
+			 cp.setVisible(true);
 			 
 			 
 		 }
@@ -257,7 +281,38 @@ public class RegisteredUserView extends JFrame {
 		 }
 	 }
 	 
+	 class btn_editsong implements ActionListener
+	 {
+		 public void actionPerformed(ActionEvent e)
+		 {
+			EditSongView.getInstance().setVisible(true);
+			
+		 }
+	 }
+	 
+	 class btn_nextSong implements ActionListener
+	 {
+		 public void actionPerformed(ActionEvent e)
+		 {
+			mp3.skipForward();
+			
+		 }
+	 }
+	 
+	 class btn_prevSong implements ActionListener
+	 {
+		 public void actionPerformed(ActionEvent e)
+		 {
+			mp3.skipBackward();
+			
+		 }
+	 }
 		public void closingWindow() {
 			this.setVisible(false);
+		}
+		
+		public void setUserName(String currentUser) {
+			this.currentUser = currentUser;
+			lblUser.setText("Current User: " + currentUser);
 		}
 }

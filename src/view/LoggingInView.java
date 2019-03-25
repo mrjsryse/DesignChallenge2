@@ -89,7 +89,7 @@ public class LoggingInView extends JFrame{
 			String registeredPassword = PasswordTextField.getText();
 			logIn = new account(registeredUsername,registeredPassword);
 			generalController.getInstance().gettingRegisteredAccountData(registeredUsername, registeredPassword);
-
+			RegisteredUserView.getInstance().setUserName(registeredUsername);
 			closingWindow();
 		}
 	}
