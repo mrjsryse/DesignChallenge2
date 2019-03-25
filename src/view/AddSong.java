@@ -15,13 +15,14 @@ import model.SongList;
 import model.generalModel;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
+import java.awt.Toolkit;
 
 public class AddSong extends JFrame {
 	private volatile static AddSong instance = null;
-	MusicPlaer mp;
 	private JPanel contentPane;
 	private JTextField textFieldArtistName;
 	private JTextField textFieldAlbum;
@@ -48,6 +49,8 @@ public class AddSong extends JFrame {
 	 * Create the frame.
 	 */
 	public AddSong() {
+		setTitle("Not So Spotify");
+		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Antonello Santos\\Documents\\DesignChallenge2\\src\\images\\spotify.png"));
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -68,18 +71,18 @@ public class AddSong extends JFrame {
 		contentPane.add(lblAlbum);
 		
 		textFieldArtistName = new JTextField();
-		textFieldArtistName.setBounds(87, 137, 86, 20);
+		textFieldArtistName.setBounds(87, 137, 162, 20);
 		contentPane.add(textFieldArtistName);
 		textFieldArtistName.setColumns(10);
 		
 		textFieldAlbum = new JTextField();
 		textFieldAlbum.setColumns(10);
-		textFieldAlbum.setBounds(87, 164, 86, 20);
+		textFieldAlbum.setBounds(87, 164, 162, 20);
 		contentPane.add(textFieldAlbum);
 		
 		textFieldGenre = new JTextField();
 		textFieldGenre.setColumns(10);
-		textFieldGenre.setBounds(87, 191, 86, 20);
+		textFieldGenre.setBounds(87, 191, 162, 20);
 		contentPane.add(textFieldGenre);
 		
 		 btnNewButton = new JButton("Add Song");
@@ -94,7 +97,7 @@ public class AddSong extends JFrame {
 		
 		textFieldYear = new JTextField();
 		textFieldYear.setColumns(10);
-		textFieldYear.setBounds(87, 220, 86, 20);
+		textFieldYear.setBounds(87, 220, 162, 20);
 		contentPane.add(textFieldYear);
 		
 		JLabel lblYear = new JLabel("Year");
@@ -103,12 +106,12 @@ public class AddSong extends JFrame {
 		
 		textFieldChosenFile = new JTextField();
 		textFieldChosenFile.setColumns(10);
-		textFieldChosenFile.setBounds(29, 40, 144, 20);
+		textFieldChosenFile.setBounds(29, 40, 220, 20);
 		contentPane.add(textFieldChosenFile);
 		
 		textFieldSongName = new JTextField();
 		textFieldSongName.setColumns(10);
-		textFieldSongName.setBounds(87, 111, 86, 20);
+		textFieldSongName.setBounds(87, 111, 162, 20);
 		contentPane.add(textFieldSongName);
 		
 		lblSongName = new JLabel("Song Name");
@@ -130,7 +133,7 @@ public class AddSong extends JFrame {
 	 }
 	
 	class btn_Add implements ActionListener
-	 {		MusicPlaer mp;
+	 {		
 		 public void actionPerformed(ActionEvent e)
 		 {
 			 String songName = textFieldSongName.getText();
@@ -157,6 +160,8 @@ public class AddSong extends JFrame {
 			 
 			 generalModel.getInstance().getSongData(addedSong);;
 			 
+			 JOptionPane.showMessageDialog(null,"Added " + songName + ".mp3");
+			 closingWindow();
 			 
 		 }
 		
@@ -185,5 +190,9 @@ public class AddSong extends JFrame {
 	public String gettingYear() {
 		String year = textFieldYear.getText();
 		return year;
+	}
+	
+	public void closingWindow() {
+		this.setVisible(false);
 	}
 }

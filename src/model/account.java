@@ -1,5 +1,7 @@
 package model;
 
+import view.AddSong;
+
 public class account {
 	private String username,password;
 	

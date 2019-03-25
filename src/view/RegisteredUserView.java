@@ -21,21 +21,23 @@ import javax.swing.border.EmptyBorder;
 import jaco.mp3.player.MP3Player;
 import model.PlaylistList;
 import model.SongList;
+import model.account;
 
-public class guestView extends JFrame {
-	private volatile static guestView instance = null;
+public class RegisteredUserView extends JFrame {
+	private volatile static RegisteredUserView instance = null;
 	MP3Player mp3 = new MP3Player(new File("currentSong.mp3"));
 
 	private JPanel contentPane;
-	//private signingUp currentUser;
+	private String currentUser;
 	JButton btnPickPlaylist, btnPickSong, btnCreatePlaylist, btnUploadSong, btnEditSong, btnPlay, btnPause, btnNextSong, btnPreviousSong;
 	JList yourSongsList, playlistList;
 	JTextPane txtpnSongNameGenre;
 	private JButton btnRefresh;
+	JLabel lblUser;
 	
-	public static guestView getInstance() {
+	public static RegisteredUserView getInstance() {
         if (instance == null) {
-        	instance = new guestView();
+        	instance = new RegisteredUserView();
         }
 		return instance;
 	}
@@ -48,8 +50,8 @@ public class guestView extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public guestView() {
-		setIconImage(Toolkit.getDefaultToolkit().getImage(guestView.class.getResource("/images/spotify.png")));
+	public RegisteredUserView() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(RegisteredUserView.class.getResource("/images/spotify.png")));
 		setTitle("Not So Spotify");
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -63,27 +65,28 @@ public class guestView extends JFrame {
 		contentPane.setLayout(null);
 		
 		 btnPlay = new JButton("");
-		 btnPlay.setIcon(new ImageIcon("C:\\Users\\Antonello Santos\\Documents\\GitHub\\DesignChallenge2\\src\\images\\play-button.png"));
+		 btnPlay.setIcon(new ImageIcon("C:\\Users\\Antonello Santos\\Documents\\DesignChallenge2\\src\\images\\play-button.png"));
 		btnPlay.addActionListener(new btn_Play());
 		btnPlay.setBounds(492, 681, 89, 45);
 		contentPane.add(btnPlay);
 		
 		 btnPause = new JButton("");
-		 btnPause.setIcon(new ImageIcon(guestView.class.getResource("/images/pause-button.png")));
+		 btnPause.setIcon(new ImageIcon(RegisteredUserView.class.getResource("/images/pause-button.png")));
 		btnPause.addActionListener(new btn_Pause());
 		btnPause.setBounds(593, 681, 89, 45);
 		contentPane.add(btnPause);
 		
 		 btnNextSong = new JButton("");
-		 btnNextSong.setIcon(new ImageIcon(guestView.class.getResource("/images/skip-to-next-track.png")));
+		 btnNextSong.setIcon(new ImageIcon(RegisteredUserView.class.getResource("/images/skip-to-next-track.png")));
 		btnNextSong.setBounds(705, 681, 89, 45);
 		contentPane.add(btnNextSong);
 		btnNextSong.addActionListener(new btn_nextSong());
 		
 		 btnPreviousSong = new JButton("");
-		 btnPreviousSong.setIcon(new ImageIcon(guestView.class.getResource("/images/back-track.png")));
+		 btnPreviousSong.setIcon(new ImageIcon(RegisteredUserView.class.getResource("/images/back-track.png")));
 		btnPreviousSong.setBounds(380, 681, 89, 45);
 		contentPane.add(btnPreviousSong);
+		btnPreviousSong.addActionListener(new btn_prevSong());
 		
 		 playlistList = new JList();
 		playlistList.setBounds(25, 93, 322, 558);
@@ -147,19 +150,19 @@ public class guestView extends JFrame {
 		btnRefresh.setBounds(760, 21, 97, 25);
 		contentPane.add(btnRefresh);
 		
-		JLabel lblUser = new JLabel("Guest");
+		lblUser = new JLabel("Current User: " + currentUser );
 		lblUser.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblUser.setBounds(418, 20, 118, 16);
+		lblUser.setBounds(346, 20, 342, 16);
 		contentPane.add(lblUser);
 		
 		JButton shuffleButton = new JButton("");
-		shuffleButton.setIcon(new ImageIcon(guestView.class.getResource("/images/shuffle.png")));
+		shuffleButton.setIcon(new ImageIcon(RegisteredUserView.class.getResource("/images/shuffle.png")));
 		shuffleButton.setBounds(279, 681, 89, 45);
 		contentPane.add(shuffleButton);
 		shuffleButton.addActionListener(new btn_shuffle());
 		
 		JButton repeatButton = new JButton("");
-		repeatButton.setIcon(new ImageIcon(guestView.class.getResource("/images/repeat.png")));
+		repeatButton.setIcon(new ImageIcon(RegisteredUserView.class.getResource("/images/repeat.png")));
 		repeatButton.setBounds(806, 681, 89, 45);
 		contentPane.add(repeatButton);
 		repeatButton.addActionListener(new btn_repeat());
@@ -174,8 +177,8 @@ public class guestView extends JFrame {
 	 {
 
 	     public void actionPerformed(ActionEvent e) 
-	     {
-	        mp3.play();
+	     {	 
+	    	 mp3.play();
 
 	     }
 	 }
@@ -185,8 +188,8 @@ public class guestView extends JFrame {
 
 	     public void actionPerformed(ActionEvent e) 
 	     {
-	        JOptionPane.showMessageDialog(null,"Added" + Tite);
-	    	 mp3.addToPlayList(file2);
+	        //JOptionPane.showMessageDialog(null,"Added " + new song);
+	    	 //mp3.addToPlayList();
 
 	     }
 	 }
@@ -203,7 +206,15 @@ public class guestView extends JFrame {
 	 {
 		 public void actionPerformed(ActionEvent e)
 		 {
-			 mp3.setShuffle(true);
+			if(mp3.isShuffle())
+			{
+				mp3.setShuffle(true);
+			}
+			else 
+			{
+				mp3.setShuffle(false);
+			}
+		 
 		 }
 	 }
 	 
@@ -265,7 +276,7 @@ public class guestView extends JFrame {
 		 public void actionPerformed(ActionEvent e)
 		 {
 			JOptionPane.showMessageDialog(null,"You have been Logged out!");
-			selectAccount.getInstance().setVisible(true);
+			SelectAccount.getInstance().setVisible(true);
 			closingWindow();
 		 }
 	 }
@@ -274,7 +285,7 @@ public class guestView extends JFrame {
 	 {
 		 public void actionPerformed(ActionEvent e)
 		 {
-			EditSong.getInstance().setVisible(true);
+			EditSongView.getInstance().setVisible(true);
 			
 		 }
 	 }
@@ -287,7 +298,21 @@ public class guestView extends JFrame {
 			
 		 }
 	 }
+	 
+	 class btn_prevSong implements ActionListener
+	 {
+		 public void actionPerformed(ActionEvent e)
+		 {
+			mp3.skipBackward();
+			
+		 }
+	 }
 		public void closingWindow() {
 			this.setVisible(false);
+		}
+		
+		public void setUserName(String currentUser) {
+			this.currentUser = currentUser;
+			lblUser.setText("Current User: " + currentUser);
 		}
 }

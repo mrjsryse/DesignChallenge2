@@ -15,28 +15,28 @@ import model.account;
 
 import javax.swing.ImageIcon;
 
-public class selectAccount extends JFrame{
-	private volatile static selectAccount instance = null;
-	signingUpView signingUpViewing;
+public class SelectAccount extends JFrame{
+	private volatile static SelectAccount instance = null;
+	SigningUpView signingUpViewing;
 	account signUpData,registeredData;
-	loggingInView loggingInViewing;
+	LoggingInView loggingInViewing;
 	public JButton btnSignUp,btnGuestAccount,btnRegisteredAccount;
 	
 	
-	public static selectAccount getInstance() {
+	public static SelectAccount getInstance() {
         if (instance == null) {
-        	instance = new selectAccount();
+        	instance = new SelectAccount();
         }
 		return instance;
 	}
 	
 	
-	public selectAccount() {
-		setIconImage(Toolkit.getDefaultToolkit().getImage(selectAccount.class.getResource("/images/spotify.png")));
+	public SelectAccount() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(SelectAccount.class.getResource("/images/spotify.png")));
 		setTitle("Not So Spotify ");
 		
-		signingUpViewing = new signingUpView();
-		loggingInViewing = new loggingInView();
+		signingUpViewing = new SigningUpView();
+		loggingInViewing = new LoggingInView();
 		JPanel backgroundPanel = new JPanel();
 		getContentPane().add(backgroundPanel, BorderLayout.CENTER);
 		backgroundPanel.setLayout(null);
@@ -67,7 +67,7 @@ public class selectAccount extends JFrame{
 		backgroundPanel.add(btnSignUp);
 		
 		JLabel label = new JLabel("");
-		label.setIcon(new ImageIcon(selectAccount.class.getResource("/images/spotify.png")));
+		label.setIcon(new ImageIcon(SelectAccount.class.getResource("/images/spotify.png")));
 		label.setFont(new Font("Tahoma", Font.PLAIN, 29));
 		label.setBackground(Color.WHITE);
 		label.setBounds(328, 27, 129, 129);
@@ -92,7 +92,7 @@ public class selectAccount extends JFrame{
 		System.out.println("After Click");
 		}
 }
-	public void addAccount(signingUpView signingUpViewing) {
+	public void addAccount(SigningUpView signingUpViewing) {
 		this.signingUpViewing = signingUpViewing;
 	}
 	
@@ -105,7 +105,7 @@ public class selectAccount extends JFrame{
 		System.out.println("After Click Two");
 		}
 }
-	public void loggingInAccount(loggingInView loggingInViewing) {
+	public void loggingInAccount(LoggingInView loggingInViewing) {
 		this.loggingInViewing = loggingInViewing;
 	}
 	
@@ -113,7 +113,7 @@ public class selectAccount extends JFrame{
 	{
 		public void actionPerformed(ActionEvent e) {
 			System.out.println("Click Three");
-			guestView.getInstance().setVisible(true);
+			GuestView.getInstance().setVisible(true);
 			System.out.println("After Click Three");
 			JOptionPane.showMessageDialog(null,"Logged in as Guest!");
 			closingWindow();

@@ -22,9 +22,8 @@ import javax.swing.JList;
 import javax.swing.JComboBox;
 import java.awt.Toolkit;
 
-public class EditSong extends JFrame {
-	private volatile static EditSong instance = null;
-	MusicPlaer mp;
+public class EditSongView extends JFrame {
+	private volatile static EditSongView instance = null;
 	private JPanel contentPane;
 	private JTextField textFieldArtistName;
 	private JTextField textFieldAlbum;
@@ -41,9 +40,9 @@ public class EditSong extends JFrame {
 	 */
 
 	
-	public static EditSong getInstance() {
+	public static EditSongView getInstance() {
         if (instance == null) {
-        	instance = new EditSong();
+        	instance = new EditSongView();
         }
 		return instance;
 	}
@@ -51,7 +50,7 @@ public class EditSong extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public EditSong() {
+	public EditSongView() {
 		setTitle("Not So Spotify");
 		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Nello Santos\\Documents\\GitHub\\DesignChallenge2\\src\\images\\spotify.png"));
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

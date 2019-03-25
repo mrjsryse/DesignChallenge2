@@ -1,6 +1,6 @@
 package controller;
 import model.Database;
-import view.selectAccount;
+import view.SelectAccount;
 
 public class Driver {
 
@@ -10,15 +10,15 @@ public class Driver {
 		//jdbc:mysql://192.168.0.110:3306/
 		
 		//test adding for Git REEEE
-		String URL = "jdbc:mysql://127.0.0.1:3306/";
+		String URL = "jdbc:mysql://localhost:3306/";
 		String USERNAME = "root";
-		String PASSWORD = "arielariel0";
+		String PASSWORD = "mdrd0508";
 		String DATABASE = "swdespa";
 
 		Database.getInstance().setConnection(URL, USERNAME, PASSWORD, DATABASE);
 		//Database.getInstance().testerTemplate();
-		//Database.getInstance().readBLOB(1);
-		selectAccount sa = new selectAccount();
+		Database.getInstance().readBLOB(1);
+		SelectAccount sa = new SelectAccount();
 		
 	}
 

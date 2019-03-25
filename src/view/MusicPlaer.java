@@ -20,7 +20,7 @@ import model.PlaylistList;
 import model.SongList;
 import model.account;
 import model.generalModel;
-import view.loggingInView.confirmButton;
+import view.LoggingInView.confirmButton;
 
 public class MusicPlaer extends JFrame {
 
@@ -34,7 +34,7 @@ public class MusicPlaer extends JFrame {
 	account registeredAccount;
 	private volatile static MusicPlaer instance = null;
 	String registeredUsername;
-	infoSong songInformation;
+	InfoSong songInformation;
 
 	public static MusicPlaer getInstance() {
         if (instance == null) {
@@ -66,7 +66,7 @@ public class MusicPlaer extends JFrame {
 	public MusicPlaer() {
 
 		MP3Player mp3 = new MP3Player(new File("C:\\Users\\Nello Santos\\Desktop\\Music\\DecAve.mp3"));
-		songInformation = new infoSong();
+		songInformation = new InfoSong();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -84,18 +84,18 @@ public class MusicPlaer extends JFrame {
 		contentPane.add(btnPlay);
 		
 		 btnPause = new JButton("");
-		 btnPause.setIcon(new ImageIcon(registeredUserView.class.getResource("/images/pause-button.png")));
+		 btnPause.setIcon(new ImageIcon(RegisteredUserView.class.getResource("/images/pause-button.png")));
 		btnPause.addActionListener(new btn_Pause());
 		btnPause.setBounds(593, 681, 89, 45);
 		contentPane.add(btnPause);
 		
 		 btnNextSong = new JButton("");
-		 btnNextSong.setIcon(new ImageIcon(registeredUserView.class.getResource("/images/skip-to-next-track.png")));
+		 btnNextSong.setIcon(new ImageIcon(RegisteredUserView.class.getResource("/images/skip-to-next-track.png")));
 		btnNextSong.setBounds(705, 681, 89, 45);
 		contentPane.add(btnNextSong);
 		
 		 btnPreviousSong = new JButton("");
-		 btnPreviousSong.setIcon(new ImageIcon(registeredUserView.class.getResource("/images/back-track.png")));
+		 btnPreviousSong.setIcon(new ImageIcon(RegisteredUserView.class.getResource("/images/back-track.png")));
 		btnPreviousSong.setBounds(380, 681, 89, 45);
 		contentPane.add(btnPreviousSong);
 		
@@ -177,12 +177,12 @@ public class MusicPlaer extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});
-		shuffleButton.setIcon(new ImageIcon(registeredUserView.class.getResource("/images/shuffle.png")));
+		shuffleButton.setIcon(new ImageIcon(RegisteredUserView.class.getResource("/images/shuffle.png")));
 		shuffleButton.setBounds(279, 681, 89, 45);
 		contentPane.add(shuffleButton);
 		
 		JButton repeatButton = new JButton("");
-		repeatButton.setIcon(new ImageIcon(registeredUserView.class.getResource("/images/repeat.png")));
+		repeatButton.setIcon(new ImageIcon(RegisteredUserView.class.getResource("/images/repeat.png")));
 		repeatButton.setBounds(806, 681, 89, 45);
 		contentPane.add(repeatButton);
 		
@@ -278,7 +278,7 @@ public class MusicPlaer extends JFrame {
 		 }
 	 }
 	 
-	 public void seeingSongInformation(infoSong songInformation) {
+	 public void seeingSongInformation(InfoSong songInformation) {
 			this.songInformation = songInformation;
 		}
 }
