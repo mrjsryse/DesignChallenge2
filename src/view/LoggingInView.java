@@ -91,11 +91,12 @@ public class LoggingInView extends JFrame{
 			generalController.getInstance().gettingRegisteredAccountData(registeredUsername, registeredPassword);
 			RegisteredUserView.getInstance().setUserName(registeredUsername);
 			closingWindow();
+			SelectAccount.getInstance().setVisible(false);
 		}
 	}
 	
 	public void entranceAllowed() {
-		JOptionPane.showMessageDialog(null,"Successfully Logged In!");
+		JOptionPane.showMessageDialog(null,"Successfully Logged In! Welcome back!");
 		RegisteredUserView.getInstance().setVisible(true);
 	}
 	

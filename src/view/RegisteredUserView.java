@@ -65,7 +65,7 @@ public class RegisteredUserView extends JFrame {
 		contentPane.setLayout(null);
 		
 		 btnPlay = new JButton("");
-		 btnPlay.setIcon(new ImageIcon("C:\\Users\\Antonello Santos\\Documents\\GitHub\\DesignChallenge2\\src\\images\\play-button.png"));
+		 btnPlay.setIcon(new ImageIcon("C:\\Users\\Antonello Santos\\Documents\\DesignChallenge2\\src\\images\\play-button.png"));
 		btnPlay.addActionListener(new btn_Play());
 		btnPlay.setBounds(492, 681, 89, 45);
 		contentPane.add(btnPlay);
