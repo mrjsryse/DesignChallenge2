@@ -27,7 +27,7 @@ public class MusicPlaer extends JFrame {
 	MP3Player mp3 = new MP3Player(new File("C:\\Users\\Nello Santos\\Desktop\\Music\\DecAve.mp3"));
 	private JPanel contentPane;
 	//private signingUp currentUser;
-	JButton btnPickPlaylist, btnPickSong, btnCreatePlaylist, btnUploadSong, btnEditSong, btnPlay, btnPause, btnNextSong, btnPreviousSong, btnSongInfo;
+	JButton btnPickPlaylist, btnAddSongToPlaylist, btnCreatePlaylist, btnUploadSong, btnEditSong, btnPlay, btnPause, btnNextSong, btnPreviousSong, btnSongInfo;
 	JList yourSongsList, playlistList;
 	JTextPane txtpnSongNameGenre;
 	private JButton btnRefresh;
@@ -115,9 +115,10 @@ public class MusicPlaer extends JFrame {
 		btnPickPlaylist.setBounds(25, 664, 136, 45);
 		contentPane.add(btnPickPlaylist);
 		
-		 btnPickSong = new JButton("Add Song to Playlist");
-		btnPickSong.setBounds(957, 664, 190, 45);
-		contentPane.add(btnPickSong);
+		 btnAddSongToPlaylist = new JButton("Add Song to Playlist");
+		btnAddSongToPlaylist.addActionListener(new btn_AddSongToPlaylist());
+		btnAddSongToPlaylist.setBounds(957, 664, 190, 45);
+		contentPane.add(btnAddSongToPlaylist);
 		
 		 txtpnSongNameGenre = new JTextPane();
 		txtpnSongNameGenre.setBounds(403, 405, 375, 209);
@@ -262,6 +263,23 @@ public class MusicPlaer extends JFrame {
 			 cp.setVisible(true);
 			 
 			 
+		 }
+	 }
+	 
+	 class btn_AddSongToPlaylist implements ActionListener
+	 {
+		 public void actionPerformed(ActionEvent e)
+		 {
+			 
+			 AddSongToPlaylist astp = new AddSongToPlaylist();
+			 astp.setVisible(true);
+			 
+			 SongList sList = new SongList();
+			 
+			 for(int x = 0; x < sList.getSongSize(); x++)
+			 {
+				 astp.comboBoxSongs.addItem(sList.getSongList().get(x).getSongName());;
+			 }
 		 }
 	 }
 	 

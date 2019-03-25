@@ -3,6 +3,8 @@ package model;
 import java.util.ArrayList;
 
 public class PlaylistList {
+
+
 	private static ArrayList<Playlist> playlistList = new ArrayList<Playlist>();
 	
 	public void addEvent(Playlist playlist)

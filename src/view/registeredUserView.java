@@ -1,6 +1,7 @@
 package view;
 
 import jaco.mp3.player.MP3Player;
+import model.PlaylistList;
 import model.SongList;
 import view.AddSong;
 import view.guestView;
@@ -38,7 +39,7 @@ public class registeredUserView extends JFrame {
 	private JPanel contentPane;
 	//private signingUp currentUser;
 	JButton btnPickPlaylist, btnPickSong, btnCreatePlaylist, btnUploadSong, btnEditSong, btnPlay, btnPause, btnNextSong, btnPreviousSong;
-	JList yourSongsList;
+	JList yourSongsList, playlistList;
 	JTextPane txtpnSongNameGenre;
 	private JButton btnRefresh;
 	private JButton button;
@@ -93,7 +94,7 @@ public class registeredUserView extends JFrame {
 		btnPreviousSong.setBounds(380, 681, 89, 45);
 		contentPane.add(btnPreviousSong);
 		
-		JList playlistList = new JList();
+		 playlistList = new JList();
 		playlistList.setBounds(25, 93, 322, 558);
 		contentPane.add(playlistList);
 		
@@ -234,14 +235,35 @@ public class registeredUserView extends JFrame {
 	 {
 		 public void actionPerformed(ActionEvent e)
 		 {
+			 
+			 
 			 SongList sList = new SongList();
 			 DefaultListModel DLM = new DefaultListModel();
 			 
 			 for(int x = 0; x < sList.getSongSize(); x++)
-			 DLM.addElement(sList.getSongList().get(x).getArtistName());
-			 
+			 DLM.addElement(sList.getSongList().get(x).getSongName());
+
 			 yourSongsList.setModel(DLM);
 			 
+			 PlaylistList pList = new PlaylistList();
+			 DefaultListModel DLM2 = new DefaultListModel();
+			 
+			 for(int x = 0; x < pList.getPlaylistSize(); x++)
+			 DLM2.addElement(pList.getPlaylistList().get(x).getPlaylistName());
+
+			 playlistList.setModel(DLM2);
+			 
+			 
+		 }
+	 }
+	 
+	 class btn_CreatePlaylist implements ActionListener
+	 {
+		 public void actionPerformed(ActionEvent e)
+		 {
+			 
+			 CreatePlaylist cp = new CreatePlaylist();
+			 cp.setVisible(true);
 			 
 			 
 		 }

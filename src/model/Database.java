@@ -64,7 +64,7 @@ public class Database{
 			PreparedStatement ps = getConnection().prepareStatement(query);
 			ps.execute();
 			PreparedStatement ps2 = getConnection().prepareStatement(query2);
-			//ps2.execute();
+			ps2.execute();
 			PreparedStatement ps3 = getConnection().prepareStatement(query3);
 			ps3.execute();
 			PreparedStatement ps4 = getConnection().prepareStatement(query4);
@@ -76,7 +76,7 @@ public class Database{
 			ps = getConnection().prepareStatement(queryIncrement);
 			ps.execute();
 			ps2 = getConnection().prepareStatement(queryIncrement2);
-			//ps2.execute();
+			ps2.execute();
 			ps3 = getConnection().prepareStatement(queryIncrement3);
 			ps3.execute();
 			ps4 = getConnection().prepareStatement(queryIncrement4);

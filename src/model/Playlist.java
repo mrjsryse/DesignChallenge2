@@ -1,26 +1,36 @@
 package model;
 
+
 import java.util.ArrayList;
+
+import view.AddSong;
 
 public class Playlist {
 	private static ArrayList<Song> SongInPlaylist = new ArrayList<Song>();
-	String playlistName;
-	
+	static String playlistName;
+	private volatile static Playlist instance = null;
 
-	public Playlist(ArrayList<Song> SongInPlaylist, String playlistName) {
-		super();
-		this.SongInPlaylist = SongInPlaylist;
-		this.playlistName = playlistName;
+
+	public static Playlist getInstance() {
+        if (instance == null) {
+        	instance = new Playlist();
+        }
+		return instance;
 	}
-
+	
 	public static ArrayList<Song> getSongInPlaylist() {
 		return SongInPlaylist;
 	}
+
 
 	public String getPlaylistName() {
 		return playlistName;
 	}
 
+
+	public void setPlaylistName(String playlistName) {
+		this.playlistName = playlistName;
+	}
 	public void addSongToPlaylist(Song song)
 	{
 		SongInPlaylist.add(song);
@@ -44,6 +54,7 @@ public class Playlist {
 				System.out.print(SongInPlaylist.get(i).SongName);
 				System.out.println("");
 		}
+
 	}
 	
 	
