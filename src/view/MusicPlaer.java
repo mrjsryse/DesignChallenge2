@@ -193,7 +193,7 @@ public class MusicPlaer extends JFrame {
 		contentPane.add(usernameField);
 		
 		btnSongInfo = new JButton("Song Info");
-		btnSongInfo.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		btnSongInfo.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnSongInfo.setBounds(854, 11, 89, 45);
 		contentPane.add(btnSongInfo);
 		btnSongInfo.addActionListener(new songInfo());

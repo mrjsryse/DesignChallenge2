@@ -12,12 +12,12 @@ public class generalController {
 		return instance;
 	}
 	
-	public void gettingAccountData(String username, String password) {
+	public void gettingAccountData(String username, String password) { //SINGING UP
 		account newAccount = new account(username, password);
 		generalModel.getInstance().getAccountData(newAccount);
 	}
 	
-	public void gettingRegisteredAccountData(String registeredUsername,String registeredPassword) {
+	public void gettingRegisteredAccountData(String registeredUsername,String registeredPassword) { //LOGGING IN
 		account registeredAccount = new account(registeredUsername, registeredPassword);
 		generalModel.getInstance().checkingAccountData(registeredAccount);
 	}

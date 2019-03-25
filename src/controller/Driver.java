@@ -10,8 +10,8 @@ public class Driver {
 		//jdbc:mysql://192.168.0.110:3306/
 		
 		//test adding for Git REEEE
-		String URL = "jdbc:mysql://127.0.0.1:3306/";
-		String USERNAME = "root";
+		String URL = "jdbc:mysql://localhost:3306/";
+		String USERNAME = "ariel";
 		String PASSWORD = "arielariel0";
 		String DATABASE = "swdespa";
 
