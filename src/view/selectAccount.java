@@ -96,7 +96,7 @@ public class selectAccount extends JFrame{
 		this.signingUpViewing = signingUpViewing;
 	}
 	
-	class registeredButton implements ActionListener
+	class registeredButton implements ActionListener //LOGGING IN
 	{
 	public void actionPerformed (ActionEvent e)
 		{
@@ -109,7 +109,7 @@ public class selectAccount extends JFrame{
 		this.loggingInViewing = loggingInViewing;
 	}
 	
-	class guestButton implements ActionListener 
+	class guestButton implements ActionListener //SIGNING UP
 	{
 		public void actionPerformed(ActionEvent e) {
 			System.out.println("Click Three");

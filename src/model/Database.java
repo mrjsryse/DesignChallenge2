@@ -143,7 +143,7 @@ public class Database{
 		Connection cnt = getConnection(); 
 		boolean loggedIn = false;
 		
-		String query = "SELECT * FROM swdespa.accounts WHERE Username = ('"+registeredAccount.getUsername()+"') AND Password = ('"+registeredAccount.getPassword()+"');";
+		String query = "SELECT * FROM swdespa.accounts WHERE username = ('"+registeredAccount.getUsername()+"') AND password = ('"+registeredAccount.getPassword()+"');";
 		
 		try {
 			//create prepared statement
@@ -152,7 +152,15 @@ public class Database{
 			//get result and store in result set
 			ResultSet rs = ps.executeQuery();
 			
-			loggedIn = rs.next() == false;
+			
+			if(rs.next()) {
+				loggedIn = true;
+			}
+			else {
+				loggedIn = false;
+				
+			}
+			
 			//close all the resources
 			ps.close();
 			rs.close();
