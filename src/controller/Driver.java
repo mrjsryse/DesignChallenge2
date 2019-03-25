@@ -14,7 +14,7 @@ public class Driver {
 		String USERNAME = "root";
 		String PASSWORD = "mdrd0508";
 		String DATABASE = "swdespa";
-
+ 
 		Database.getInstance().setConnection(URL, USERNAME, PASSWORD, DATABASE);
 		//Database.getInstance().testerTemplate();
 		Database.getInstance().readBLOB(1);

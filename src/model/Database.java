@@ -64,7 +64,7 @@ public class Database{
 			PreparedStatement ps = getConnection().prepareStatement(query);
 			ps.execute();
 			PreparedStatement ps2 = getConnection().prepareStatement(query2);
-			//ps2.execute();
+			ps2.execute();
 			PreparedStatement ps3 = getConnection().prepareStatement(query3);
 			ps3.execute();
 			PreparedStatement ps4 = getConnection().prepareStatement(query4);
@@ -76,7 +76,7 @@ public class Database{
 			ps = getConnection().prepareStatement(queryIncrement);
 			ps.execute();
 			ps2 = getConnection().prepareStatement(queryIncrement2);
-			//ps2.execute();
+			ps2.execute();
 			ps3 = getConnection().prepareStatement(queryIncrement3);
 			ps3.execute();
 			ps4 = getConnection().prepareStatement(queryIncrement4);
@@ -143,7 +143,7 @@ public class Database{
 		Connection cnt = getConnection(); 
 		boolean loggedIn = false;
 		
-		String query = "SELECT * FROM swdespa.accounts WHERE Username = ('"+registeredAccount.getUsername()+"') AND Password = ('"+registeredAccount.getPassword()+"');";
+		String query = "SELECT * FROM swdespa.accounts WHERE username = ('"+registeredAccount.getUsername()+"') AND password = ('"+registeredAccount.getPassword()+"');";
 		
 		try {
 			//create prepared statement
@@ -152,7 +152,15 @@ public class Database{
 			//get result and store in result set
 			ResultSet rs = ps.executeQuery();
 			
-			loggedIn = rs.next() == false;
+			
+			if(rs.next()) {
+				loggedIn = true;
+			}
+			else {
+				loggedIn = false;
+				
+			}
+			
 			//close all the resources
 			ps.close();
 			rs.close();

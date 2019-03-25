@@ -1,10 +1,27 @@
 package view;
 
+
 import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+
+import jaco.mp3.player.MP3Player;
+import model.PlaylistList;
+import model.SongList;
+import view.AddSong;
+import view.GuestView;
+import view.SelectAccount;
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
 
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;

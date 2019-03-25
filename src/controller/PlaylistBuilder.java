@@ -1,5 +1,6 @@
 package controller;
 
+
 import java.util.ArrayList;
 
 import model.Playlist;
@@ -22,8 +23,9 @@ public class PlaylistBuilder
 	
 	public Playlist getPlaylist()
 	{
-		return new Playlist(SongInPlaylist, playlistName);
+		return new Playlist();
 	}
 	
 	
+
 }
