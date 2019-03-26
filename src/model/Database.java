@@ -297,6 +297,38 @@ public class Database{
 		
 	}
 	
+	public void getSongs(String username) {
+		
+		//get getConnection() from db
+		Connection cnt = getConnection();
+		
+		String query = "SELECT * FROM songs WHERE username = '"+username+"';";
+		//create string qu
+		
+		try {
+			//create prepared statement	
+			PreparedStatement ps = cnt.prepareStatement(query);
+			
+			//get result and store in result set
+			ResultSet rs = ps.executeQuery();
+			
+			//transform set into list
+			while(rs.next()) {
+				System.out.println(rs.getInt("SongID"));
+				System.out.println(rs.getString("Title"));
+			}
+			
+			//close all the resources
+			ps.close();
+			rs.close();
+			cnt.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} 
+		
+	}
+
 	public int addingSong(Song s){ //Signing Up
 		String getSongName, getArtistName, getAlbumName, getGenre;
 		String getYear, getUsername;
