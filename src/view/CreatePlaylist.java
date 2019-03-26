@@ -82,6 +82,7 @@ public class CreatePlaylist extends JFrame {
 			 generalModel.getInstance().getPlaylistData(addedPlaylist);;
 			 
 			 
+			 
 		 }
 		
 	 }

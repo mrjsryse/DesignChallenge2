@@ -75,7 +75,7 @@ public class AddSongToPlaylist extends JFrame {
 		 public void actionPerformed(ActionEvent e)
 		 {		
 			 int i, j;
-			 Playlist p = new Playlist();
+			 
 		 	 SongList sl = new SongList();
 		 	 PlaylistList pl = new PlaylistList();
 		 	 
@@ -86,8 +86,8 @@ public class AddSongToPlaylist extends JFrame {
 		 			for(j = 0; j < sl.getSongSize(); j++)
 					 	if (comboBoxSongs.getSelectedItem() == SongList.getSongList().get(j).getSongName())
 					 	{				
-					 		p.addSongToPlaylist(sl.getSongList().get(j));
-					 		System.out.print(p.getSongInPlaylist().get(j).getSongName());
+					 		pl.getPlaylistList().get(i).addSongToPlaylist(sl.getSongList().get(j));
+					 		System.out.print(pl.getPlaylistList().get(i).getSongInPlaylist().get(j).getSongName());
 					 	}
 		 		 }
 		 	 }

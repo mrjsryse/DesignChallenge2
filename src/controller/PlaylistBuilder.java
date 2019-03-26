@@ -23,7 +23,7 @@ public class PlaylistBuilder
 	
 	public Playlist getPlaylist()
 	{
-		return new Playlist();
+		return new Playlist(playlistName);
 	}
 	
 	

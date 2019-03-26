@@ -7,17 +7,14 @@ import view.AddSong;
 
 public class Playlist {
 	private static ArrayList<Song> SongInPlaylist = new ArrayList<Song>();
-	static String playlistName;
-	private volatile static Playlist instance = null;
+	String playlistName;
 
-
-	public static Playlist getInstance() {
-        if (instance == null) {
-        	instance = new Playlist();
-        }
-		return instance;
+	public Playlist(String playlistName) {
+		super();
+		this.playlistName = playlistName;
 	}
-	
+
+
 	public static ArrayList<Song> getSongInPlaylist() {
 		return SongInPlaylist;
 	}
