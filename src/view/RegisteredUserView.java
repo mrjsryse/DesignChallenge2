@@ -45,12 +45,13 @@ public class RegisteredUserView extends JFrame {
 	MP3Player mp3 = new MP3Player(new File("currentSong.mp3"));
 
 	private JPanel contentPane;
-	private String currentUser;
+	public String currentUser;
 	JButton btnPickPlaylist, btnPickSong, btnCreatePlaylist, btnUploadSong, btnEditSong, btnPlay, btnPause, btnNextSong, btnPreviousSong;
-	JList yourSongsList, playlistList;
+	JList yourSongsList, playlistListJList;
 	JTextPane txtpnSongNameGenre;
 	private JButton btnRefresh;
 	JLabel lblUser;
+	PlaylistList pl;
 	
 	public static RegisteredUserView getInstance() {
         if (instance == null) {
@@ -112,10 +113,14 @@ public class RegisteredUserView extends JFrame {
 		contentPane.add(btnPreviousSong);
 		btnPreviousSong.addActionListener(new btn_prevSong());
 		
-		 playlistList = new JList();
 		playlistList.setBounds(25, 93, 322, 558);
 		playlistList.setBackground(new Color(175,224,238));
-		contentPane.add(playlistList);
+		playlistListJList = new JList();
+		playlistListJList.setBounds(25, 93, 322, 558);
+		contentPane.add(playlistListJList);
+		for(int x = 0; x < pl.getPlaylistSize() ;x++) {
+			playlistListJList.add(playlistListJList.getComponent(x));
+		}
 		
 		JList playlistSongList = new JList();
 		playlistSongList.setBounds(395, 93, 375, 224);
@@ -292,7 +297,7 @@ public class RegisteredUserView extends JFrame {
 			 for(int x = 0; x < pList.getPlaylistSize(); x++)
 			 DLM2.addElement(pList.getPlaylistList().get(x).getPlaylistName());
 
-			 playlistList.setModel(DLM2);
+			 
 			 
 			 
 		 }

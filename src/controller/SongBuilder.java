@@ -4,13 +4,18 @@ import model.Song;
 
 public class SongBuilder 
 {
-	
+	String UserName;
 	String SongName;
 	String ArtistName;
 	String Album;
 	String Genre;
 	String Year;
 	String Path;
+	
+	public SongBuilder setUserName(String username) {
+		UserName = username;
+		return this;
+	}
 	
 	public SongBuilder setSongName(String songName) {
 		SongName = songName;
@@ -39,7 +44,7 @@ public class SongBuilder
 	
 	public Song getSong()
 	{
-		return new Song(SongName, ArtistName, Album, Genre, Year, Path);
+		return new Song(UserName, SongName, ArtistName, Album, Genre, Year, Path);
 	}
 	
 	

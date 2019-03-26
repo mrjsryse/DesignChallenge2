@@ -1,5 +1,6 @@
 package controller;
 import model.generalModel;
+import model.Playlist;
 import model.account;
 
 public class generalController {
@@ -20,5 +21,11 @@ public class generalController {
 	public void gettingRegisteredAccountData(String registeredUsername,String registeredPassword) { //LOGGING IN
 		account registeredAccount = new account(registeredUsername, registeredPassword);
 		generalModel.getInstance().checkingAccountData(registeredAccount);
+	}
+	
+	public void gettingUserPlaylist(String username, String playlistName)
+	{
+		Playlist p = new Playlist(playlistName, username);
+		generalModel.getInstance().getUserPlaylistData(p);
 	}
 }

@@ -141,6 +141,7 @@ public class AddSong extends JFrame {
 	 {		
 		 public void actionPerformed(ActionEvent e)
 		 {
+			 String username = RegisteredUserView.getInstance().currentUser;
 			 String songName = textFieldSongName.getText();
 			 String artistName = textFieldArtistName.getText();
 			 String albumName = textFieldAlbum.getText();
@@ -149,6 +150,7 @@ public class AddSong extends JFrame {
 			 String path = textFieldChosenFile.getText();
 			 
 			 Song addedSong = new SongBuilder()
+					 .setUserName(username)
 					 .setSongName(songName)
 					 .setArtistName(artistName)
 					 .setAlbum(albumName)

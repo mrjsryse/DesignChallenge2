@@ -2,6 +2,7 @@ package model;
 
 import controller.SongBuilder;
 import view.LoggingInView;
+import view.SigningUpView;
 
 public class generalModel {
 
@@ -22,10 +23,15 @@ public class generalModel {
 	}
 	
 	public void getAccountData(account x) {
-		Database.getInstance().addingAccount(x);
+		if(Database.getInstance().addingAccount(x) == false) {
+			SigningUpView.getInstance().signingSuccessful();
+		}
+		else {
+			SigningUpView.getInstance().signingFailed();
+		}
 	}
 	
-	public void checkingAccountData(account w) {
+	public void checkingAccountData(account w) { //LOGGING IN
 		if(Database.getInstance().loggingAccount(w) == true) {
 			LoggingInView.getInstance().entranceAllowed();
 		}
@@ -37,5 +43,10 @@ public class generalModel {
 	public void getPlaylistData(Playlist p)
 	{
 		Database.getInstance().addingPlaylist(p);
+	}
+	
+	public void getUserPlaylistData(Playlist p)
+	{
+		Database.getInstance().addingUserPlaylist(p);
 	}
 }

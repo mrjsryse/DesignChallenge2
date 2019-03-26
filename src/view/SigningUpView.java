@@ -88,12 +88,20 @@ public class SigningUpView extends JFrame{
 			signUp = new account(username,password); 
 			generalController.getInstance().gettingAccountData(username, password);
 			RegisteredUserView.getInstance().setUserName(username);
-			JOptionPane.showMessageDialog(null,"Successfully Signed Up!");
-			RegisteredUserView.getInstance().setVisible(true);
 			closingWindow();
 			SelectAccount.getInstance().setVisible(false);
 			
 		}
+	}
+	
+	public void signingSuccessful() {
+		String username = usernameField.getText();
+		JOptionPane.showMessageDialog(null, "Signing Up Successful!");
+		RegisteredUserView.getInstance().setVisible(true);
+	}
+	
+	public void signingFailed() {
+		JOptionPane.showMessageDialog(null, "Username already exisits! Please Try Again!");
 	}
 	
 	public void closingWindow() {

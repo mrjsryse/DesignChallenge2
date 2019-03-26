@@ -11,6 +11,7 @@ import javax.swing.border.EmptyBorder;
 
 import controller.PlaylistBuilder;
 import controller.SongBuilder;
+import controller.generalController;
 import model.Playlist;
 import model.PlaylistList;
 import model.Song;
@@ -70,9 +71,11 @@ public class CreatePlaylist extends JFrame {
 		 {
 			 
 			 String playlistName = textFieldEnterPlaylistName.getText();
+			 String username = RegisteredUserView.getInstance().currentUser;
 
 			 Playlist addedPlaylist = new PlaylistBuilder()
 					 .setPlaylistName(playlistName)
+					 .setUsername(username)
 					 .getPlaylist();
 
 			 PlaylistList pList = new PlaylistList();
@@ -80,6 +83,8 @@ public class CreatePlaylist extends JFrame {
 			 int index = pList.getIndex(addedPlaylist);
 			 
 			 generalModel.getInstance().getPlaylistData(addedPlaylist);;
+			 
+			 generalController.getInstance().gettingUserPlaylist(username, playlistName);;
 			 
 			 
 			 
