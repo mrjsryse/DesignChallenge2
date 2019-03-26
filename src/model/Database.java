@@ -112,31 +112,47 @@ public class Database{
 		
 	}
 	
-	public void addingAccount(account newAccount){ //Signing Up
+	public boolean addingAccount(account newAccount){ //Signing Up
 		String x,y;
+		boolean unique = false;
 		//get getConnection() from db
 		Connection cnt = getConnection();
 		x = newAccount.getUsername();
 		y = newAccount.getPassword();
 		
 		
-		String query = "insert into accounts values ("+0+",'"+x+"','"+y+"')";
-
+		
+		String query2 = "SELECT * FROM swdespa.accounts WHERE username =('"+newAccount.getUsername()+"') AND password = ('"+newAccount.getPassword()+"')";
 
 		//create string query
 		
 		try {
-			PreparedStatement ps = getConnection().prepareStatement(query);
-			ps.execute();
+			
+			PreparedStatement ps2 = getConnection().prepareStatement(query2);
+		
+			
+			ResultSet rs = ps2.executeQuery();
+	
+			if(rs.next()) { //User already exists
+				unique = true;
+			}
+			else {
+				unique = false;
+				String query = "insert into accounts values ("+0+",'"+x+"','"+y+"')";
+				PreparedStatement ps = getConnection().prepareStatement(query);
+				ps.execute();		
+				ps.close();
+			}
 			
 			//close all the resources
-			ps.close();
+			
+			rs.close();
 			cnt.close();
 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		//return null;
+		return unique;
 	}
 	
 	public boolean loggingAccount(account registeredAccount) { //Logging In
