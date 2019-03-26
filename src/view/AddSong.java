@@ -20,6 +20,7 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import java.awt.Toolkit;
+import javax.swing.JComboBox;
 
 public class AddSong extends JFrame {
 	private volatile static AddSong instance = null;
@@ -28,11 +29,11 @@ public class AddSong extends JFrame {
 	private JTextField textFieldAlbum;
 	private JTextField textFieldGenre;
 	JButton btnChooseFile, btnNewButton;
-	private JTextField textFieldYear;
 	String fileName;
 	private JTextField textFieldChosenFile;
 	private JTextField textFieldSongName;
 	private JLabel lblSongName;
+	private JComboBox yearComboBox;
 	/**
 	 * Launch the application.
 	 */
@@ -95,11 +96,6 @@ public class AddSong extends JFrame {
 		btnChooseFile.setBounds(33, 73, 140, 25);
 		contentPane.add(btnChooseFile);
 		
-		textFieldYear = new JTextField();
-		textFieldYear.setColumns(10);
-		textFieldYear.setBounds(87, 220, 162, 20);
-		contentPane.add(textFieldYear);
-		
 		JLabel lblYear = new JLabel("Year");
 		lblYear.setBounds(29, 221, 46, 14);
 		contentPane.add(lblYear);
@@ -117,6 +113,15 @@ public class AddSong extends JFrame {
 		lblSongName = new JLabel("Song Name");
 		lblSongName.setBounds(0, 111, 86, 14);
 		contentPane.add(lblSongName);
+		
+		yearComboBox = new JComboBox();
+		yearComboBox.setBounds(87, 224, 70, 22);
+		for(int i = 1900; i < 2020; i++) {
+			String strI = Integer.toString(i);
+			yearComboBox.addItem(strI);	
+		}
+		
+		contentPane.add(yearComboBox);
 	}
 	
 	class btn_ChooseFile implements ActionListener
@@ -141,7 +146,7 @@ public class AddSong extends JFrame {
 			 String artistName = textFieldArtistName.getText();
 			 String albumName = textFieldAlbum.getText();
 			 String genre = textFieldGenre.getText();
-			 String year = textFieldYear.getText();
+			 String year = (String) yearComboBox.getSelectedItem();
 			 String path = textFieldChosenFile.getText();
 			 
 			 Song addedSong = new SongBuilder()
@@ -190,7 +195,7 @@ public class AddSong extends JFrame {
 	}
 	
 	public String gettingYear() {
-		String year = textFieldYear.getText();
+		String year = (String) yearComboBox.getSelectedItem();
 		return year;
 	}
 	

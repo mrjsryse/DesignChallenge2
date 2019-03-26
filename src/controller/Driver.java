@@ -10,6 +10,7 @@ public class Driver {
 		//jdbc:mysql://192.168.0.110:3306/
 		
 		//test adding for Git REEEE
+
 		String URL = "jdbc:mysql://192.168.0.124:3306/";
 		String USERNAME = "ariel";
 		String PASSWORD = "arielariel0";
@@ -17,7 +18,7 @@ public class Driver {
  
 		Database.getInstance().setConnection(URL, USERNAME, PASSWORD, DATABASE);
 		//Database.getInstance().testerTemplate();
-		Database.getInstance().readBLOB(1);
+		Database.getInstance().readBLOB(1);	
 		SelectAccount sa = new SelectAccount();
 		
 	}

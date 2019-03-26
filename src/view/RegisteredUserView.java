@@ -11,7 +11,6 @@ import jaco.mp3.player.MP3Player;
 import model.PlaylistList;
 import model.SongList;
 import view.AddSong;
-import view.GuestView;
 import view.SelectAccount;
 
 import java.awt.BorderLayout;
@@ -39,6 +38,7 @@ import jaco.mp3.player.MP3Player;
 import model.PlaylistList;
 import model.SongList;
 import model.account;
+import java.awt.Color;
 
 public class RegisteredUserView extends JFrame {
 	private volatile static RegisteredUserView instance = null;
@@ -69,8 +69,10 @@ public class RegisteredUserView extends JFrame {
 	 * Create the frame.
 	 */
 	public RegisteredUserView() {
+		setResizable(false);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(RegisteredUserView.class.getResource("/images/spotify.png")));
 		setTitle("Not So Spotify");
+		
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -78,6 +80,7 @@ public class RegisteredUserView extends JFrame {
 
 		setBounds(100, 100, 1189, 813);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(124,196,216));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -86,26 +89,32 @@ public class RegisteredUserView extends JFrame {
 		 btnPlay.setIcon(new ImageIcon("C:\\Users\\Antonello Santos\\Documents\\DesignChallenge2\\src\\images\\play-button.png"));
 		btnPlay.addActionListener(new btn_Play());
 		btnPlay.setBounds(492, 681, 89, 45);
+		btnPlay.setBackground(new Color(175,224,238));
 		contentPane.add(btnPlay);
 		
 		 btnPause = new JButton("");
 		 btnPause.setIcon(new ImageIcon(RegisteredUserView.class.getResource("/images/pause-button.png")));
 		btnPause.addActionListener(new btn_Pause());
 		btnPause.setBounds(593, 681, 89, 45);
+		btnPause.setBackground(new Color(175,224,238));
 		contentPane.add(btnPause);
 		
 		 btnNextSong = new JButton("");
 		 btnNextSong.setIcon(new ImageIcon(RegisteredUserView.class.getResource("/images/skip-to-next-track.png")));
 		btnNextSong.setBounds(705, 681, 89, 45);
+		btnNextSong.setBackground(new Color(175,224,238));
 		contentPane.add(btnNextSong);
 		btnNextSong.addActionListener(new btn_nextSong());
 		
 		 btnPreviousSong = new JButton("");
 		 btnPreviousSong.setIcon(new ImageIcon(RegisteredUserView.class.getResource("/images/back-track.png")));
 		btnPreviousSong.setBounds(380, 681, 89, 45);
+		btnPreviousSong.setBackground(new Color(175,224,238));
 		contentPane.add(btnPreviousSong);
 		btnPreviousSong.addActionListener(new btn_prevSong());
 		
+		playlistList.setBounds(25, 93, 322, 558);
+		playlistList.setBackground(new Color(175,224,238));
 		playlistListJList = new JList();
 		playlistListJList.setBounds(25, 93, 322, 558);
 		contentPane.add(playlistListJList);
@@ -114,43 +123,52 @@ public class RegisteredUserView extends JFrame {
 		}
 		
 		JList playlistSongList = new JList();
-		playlistSongList.setBounds(403, 139, 375, 224);
+		playlistSongList.setBounds(395, 93, 375, 224);
+		playlistSongList.setBackground(new Color(175,224,238));
 		contentPane.add(playlistSongList);
 		
 		 btnPickPlaylist = new JButton("Pick Playlist");
 		btnPickPlaylist.setBounds(25, 664, 136, 45);
+		btnPickPlaylist.setBackground(new Color(175,224,238));
 		contentPane.add(btnPickPlaylist);
 		
 		JButton btnPickSong = new JButton("Add Song to Playlist");
 		btnPickSong.setBounds(957, 664, 190, 45);
+		btnPickSong.setBackground(new Color(175,224,238));
 		contentPane.add(btnPickSong);
 		btnPickSong.addActionListener(new btn_addSongtoP());
 		 
 		txtpnSongNameGenre = new JTextPane();
-		txtpnSongNameGenre.setBounds(403, 405, 375, 209);
+		txtpnSongNameGenre.setBounds(395, 427, 375, 224);
 		txtpnSongNameGenre.setText("Song Name: \r\nGenre: \r\n");
+		txtpnSongNameGenre.setBackground(new Color(175,224,238));
 		contentPane.add(txtpnSongNameGenre);
 		
 		JLabel lblSongInfo = new JLabel("Song Info");
-		lblSongInfo.setBounds(403, 373, 95, 26);
+		lblSongInfo.setBounds(416, 392, 95, 26);
+		lblSongInfo.setBackground(new Color(175,224,238));
 		contentPane.add(lblSongInfo);
 		
 		btnCreatePlaylist = new JButton("Create Playlist");
+		btnCreatePlaylist.setForeground(Color.DARK_GRAY);
 		btnCreatePlaylist.addActionListener(new btn_CreatePlaylist());
-		btnCreatePlaylist.setBounds(53, 11, 118, 45);
+		btnCreatePlaylist.setBounds(25, 11, 118, 45);
+		btnCreatePlaylist.setBackground(new Color(175,224,238));
 		contentPane.add(btnCreatePlaylist);
 		
 		 btnUploadSong = new JButton("Upload Song");
 		btnUploadSong.addActionListener(new btn_UploadSong());
 		btnUploadSong.setBounds(1021, 11, 126, 45);
+		btnUploadSong.setBackground(new Color(175,224,238));
 		contentPane.add(btnUploadSong);
 		
 		 yourSongsList = new JList();
 		yourSongsList.setBounds(806, 94, 341, 557);
+		yourSongsList.setBackground(new Color(175,224,238));
 		contentPane.add(yourSongsList);
 		
 		JLabel lblSongsInPlaylist = new JLabel("Songs in Playlist");
-		lblSongsInPlaylist.setBounds(403, 112, 101, 26);
+		lblSongsInPlaylist.setBounds(416, 63, 101, 26);
 		contentPane.add(lblSongsInPlaylist);
 		
 		JLabel lblPlaylists = new JLabel("Playlists");
@@ -164,21 +182,24 @@ public class RegisteredUserView extends JFrame {
 		 btnEditSong = new JButton("Edit Song");
 		btnEditSong.setBounds(905, 11, 89, 45);
 		contentPane.add(btnEditSong);
+		btnEditSong.setBackground(new Color(175,224,238));
 		btnEditSong.addActionListener(new btn_editsong());
 		
 		btnRefresh = new JButton("Refresh");
 		btnRefresh.addActionListener(new btn_Refresh());
-		btnRefresh.setBounds(760, 21, 97, 25);
+		btnRefresh.setBounds(154, 21, 97, 25);
+		btnRefresh.setBackground(new Color(175,224,238));
 		contentPane.add(btnRefresh);
 		
 		lblUser = new JLabel("Current User: " + currentUser );
 		lblUser.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblUser.setBounds(346, 20, 342, 16);
+		lblUser.setBounds(492, 23, 201, 16);
 		contentPane.add(lblUser);
 		
 		JButton shuffleButton = new JButton("");
 		shuffleButton.setIcon(new ImageIcon(RegisteredUserView.class.getResource("/images/shuffle.png")));
 		shuffleButton.setBounds(279, 681, 89, 45);
+		shuffleButton.setBackground(new Color(175,224,238));
 		contentPane.add(shuffleButton);
 		shuffleButton.addActionListener(new btn_shuffle());
 		
@@ -186,10 +207,12 @@ public class RegisteredUserView extends JFrame {
 		repeatButton.setIcon(new ImageIcon(RegisteredUserView.class.getResource("/images/repeat.png")));
 		repeatButton.setBounds(806, 681, 89, 45);
 		contentPane.add(repeatButton);
+		repeatButton.setBackground(new Color(175,224,238));
 		repeatButton.addActionListener(new btn_repeat());
 		
 		JButton logoutButton = new JButton("Logout");
 		logoutButton.setBounds(1050, 728, 97, 25);
+		logoutButton.setBackground(new Color(175,224,238));
 		contentPane.add(logoutButton);
 		logoutButton.addActionListener(new btn_Logout());
 	}
