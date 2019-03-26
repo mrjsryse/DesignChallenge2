@@ -80,118 +80,127 @@ public class RegisteredUserView extends JFrame {
 
 		setBounds(100, 100, 1189, 813);
 		contentPane = new JPanel();
-		contentPane.setBackground(new Color(124,196,216));
+		contentPane.setBackground(new Color(36,36,36));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		 btnPlay = new JButton("");
-		 btnPlay.setIcon(new ImageIcon("C:\\Users\\Antonello Santos\\Documents\\DesignChallenge2\\src\\images\\play-button.png"));
+		 btnPlay.setIcon(new ImageIcon(RegisteredUserView.class.getResource("/images/play-button.png")));
 		btnPlay.addActionListener(new btn_Play());
 		btnPlay.setBounds(492, 681, 89, 45);
-		btnPlay.setBackground(new Color(175,224,238));
+		btnPlay.setBackground(new Color(59,186,169));
 		contentPane.add(btnPlay);
 		
 		 btnPause = new JButton("");
 		 btnPause.setIcon(new ImageIcon(RegisteredUserView.class.getResource("/images/pause-button.png")));
 		btnPause.addActionListener(new btn_Pause());
 		btnPause.setBounds(593, 681, 89, 45);
-		btnPause.setBackground(new Color(175,224,238));
+		btnPause.setBackground(new Color(59,186,169));
 		contentPane.add(btnPause);
 		
 		 btnNextSong = new JButton("");
 		 btnNextSong.setIcon(new ImageIcon(RegisteredUserView.class.getResource("/images/skip-to-next-track.png")));
 		btnNextSong.setBounds(705, 681, 89, 45);
-		btnNextSong.setBackground(new Color(175,224,238));
+		btnNextSong.setBackground(new Color(59,186,169));
 		contentPane.add(btnNextSong);
 		btnNextSong.addActionListener(new btn_nextSong());
 		
 		 btnPreviousSong = new JButton("");
 		 btnPreviousSong.setIcon(new ImageIcon(RegisteredUserView.class.getResource("/images/back-track.png")));
 		btnPreviousSong.setBounds(380, 681, 89, 45);
-		btnPreviousSong.setBackground(new Color(175,224,238));
+		btnPreviousSong.setBackground(new Color(59,186,169));
 		contentPane.add(btnPreviousSong);
 		btnPreviousSong.addActionListener(new btn_prevSong());
 		
-		playlistList.setBounds(25, 93, 322, 558);
-		playlistList.setBackground(new Color(175,224,238));
 		playlistListJList = new JList();
 		playlistListJList.setBounds(25, 93, 322, 558);
+		playlistListJList.setBackground(new Color(224,224,224));
 		contentPane.add(playlistListJList);
-		for(int x = 0; x < pl.getPlaylistSize() ;x++) {
-			playlistListJList.add(playlistListJList.getComponent(x));
-		}
+		//for(int x = 0; x < pl.getPlaylistSize() ;x++) {
+		//	playlistListJList.add(playlistListJList.getComponent(x));
+		//}
 		
 		JList playlistSongList = new JList();
 		playlistSongList.setBounds(395, 93, 375, 224);
-		playlistSongList.setBackground(new Color(175,224,238));
+		playlistSongList.setBackground(new Color(224,224,224));
 		contentPane.add(playlistSongList);
 		
 		 btnPickPlaylist = new JButton("Pick Playlist");
+		 btnPickPlaylist.setForeground(Color.BLACK);
 		btnPickPlaylist.setBounds(25, 664, 136, 45);
-		btnPickPlaylist.setBackground(new Color(175,224,238));
+		btnPickPlaylist.setBackground(new Color(59,186,169));
 		contentPane.add(btnPickPlaylist);
 		
 		JButton btnPickSong = new JButton("Add Song to Playlist");
+		btnPickSong.setForeground(Color.BLACK);
 		btnPickSong.setBounds(957, 664, 190, 45);
-		btnPickSong.setBackground(new Color(175,224,238));
+		btnPickSong.setBackground(new Color(59,186,169));
 		contentPane.add(btnPickSong);
 		btnPickSong.addActionListener(new btn_addSongtoP());
 		 
 		txtpnSongNameGenre = new JTextPane();
 		txtpnSongNameGenre.setBounds(395, 427, 375, 224);
 		txtpnSongNameGenre.setText("Song Name: \r\nGenre: \r\n");
-		txtpnSongNameGenre.setBackground(new Color(175,224,238));
+		txtpnSongNameGenre.setBackground(new Color(224,224,224));
 		contentPane.add(txtpnSongNameGenre);
 		
 		JLabel lblSongInfo = new JLabel("Song Info");
+		lblSongInfo.setForeground(Color.WHITE);
 		lblSongInfo.setBounds(416, 392, 95, 26);
-		lblSongInfo.setBackground(new Color(175,224,238));
+		lblSongInfo.setBackground(new Color(224,224,224));
 		contentPane.add(lblSongInfo);
 		
 		btnCreatePlaylist = new JButton("Create Playlist");
-		btnCreatePlaylist.setForeground(Color.DARK_GRAY);
+		btnCreatePlaylist.setForeground(Color.BLACK);
 		btnCreatePlaylist.addActionListener(new btn_CreatePlaylist());
 		btnCreatePlaylist.setBounds(25, 11, 118, 45);
-		btnCreatePlaylist.setBackground(new Color(175,224,238));
+		btnCreatePlaylist.setBackground(new Color(59,186,169));
 		contentPane.add(btnCreatePlaylist);
 		
 		 btnUploadSong = new JButton("Upload Song");
+		 btnUploadSong.setForeground(Color.BLACK);
 		btnUploadSong.addActionListener(new btn_UploadSong());
 		btnUploadSong.setBounds(1021, 11, 126, 45);
-		btnUploadSong.setBackground(new Color(175,224,238));
+		btnUploadSong.setBackground(new Color(59,186,169));
 		contentPane.add(btnUploadSong);
 		
 		 yourSongsList = new JList();
 		yourSongsList.setBounds(806, 94, 341, 557);
-		yourSongsList.setBackground(new Color(175,224,238));
+		yourSongsList.setBackground(new Color(224,224,224));
 		contentPane.add(yourSongsList);
 		
 		JLabel lblSongsInPlaylist = new JLabel("Songs in Playlist");
+		lblSongsInPlaylist.setForeground(Color.WHITE);
 		lblSongsInPlaylist.setBounds(416, 63, 101, 26);
 		contentPane.add(lblSongsInPlaylist);
 		
 		JLabel lblPlaylists = new JLabel("Playlists");
+		lblPlaylists.setForeground(Color.WHITE);
 		lblPlaylists.setBounds(53, 69, 95, 14);
 		contentPane.add(lblPlaylists);
 		
 		JLabel lblYourSongs = new JLabel("Your Songs");
+		lblYourSongs.setForeground(Color.WHITE);
 		lblYourSongs.setBounds(825, 69, 95, 14);
 		contentPane.add(lblYourSongs);
 		
 		 btnEditSong = new JButton("Edit Song");
+		 btnEditSong.setForeground(Color.BLACK);
 		btnEditSong.setBounds(905, 11, 89, 45);
 		contentPane.add(btnEditSong);
-		btnEditSong.setBackground(new Color(175,224,238));
+		btnEditSong.setBackground(new Color(59,186,169));
 		btnEditSong.addActionListener(new btn_editsong());
 		
 		btnRefresh = new JButton("Refresh");
+		btnRefresh.setForeground(Color.BLACK);
 		btnRefresh.addActionListener(new btn_Refresh());
 		btnRefresh.setBounds(154, 21, 97, 25);
-		btnRefresh.setBackground(new Color(175,224,238));
+		btnRefresh.setBackground(new Color(59,186,169));
 		contentPane.add(btnRefresh);
 		
 		lblUser = new JLabel("Current User: " + currentUser );
+		lblUser.setForeground(Color.WHITE);
 		lblUser.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblUser.setBounds(492, 23, 201, 16);
 		contentPane.add(lblUser);
@@ -199,7 +208,7 @@ public class RegisteredUserView extends JFrame {
 		JButton shuffleButton = new JButton("");
 		shuffleButton.setIcon(new ImageIcon(RegisteredUserView.class.getResource("/images/shuffle.png")));
 		shuffleButton.setBounds(279, 681, 89, 45);
-		shuffleButton.setBackground(new Color(175,224,238));
+		shuffleButton.setBackground(new Color(59,186,169));
 		contentPane.add(shuffleButton);
 		shuffleButton.addActionListener(new btn_shuffle());
 		
@@ -207,12 +216,13 @@ public class RegisteredUserView extends JFrame {
 		repeatButton.setIcon(new ImageIcon(RegisteredUserView.class.getResource("/images/repeat.png")));
 		repeatButton.setBounds(806, 681, 89, 45);
 		contentPane.add(repeatButton);
-		repeatButton.setBackground(new Color(175,224,238));
+		repeatButton.setBackground(new Color(59,186,169));
 		repeatButton.addActionListener(new btn_repeat());
 		
 		JButton logoutButton = new JButton("Logout");
+		logoutButton.setForeground(Color.BLACK);
 		logoutButton.setBounds(1050, 728, 97, 25);
-		logoutButton.setBackground(new Color(175,224,238));
+		logoutButton.setBackground(new Color(59,186,169));
 		contentPane.add(logoutButton);
 		logoutButton.addActionListener(new btn_Logout());
 	}
