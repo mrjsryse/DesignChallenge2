@@ -94,9 +94,9 @@ public class SigningUpView extends JFrame{
 	}
 	
 	public void signingSuccessful() {
-		String usernameFinal = usernameField.getText();
+		String username = usernameField.getText();
 		JOptionPane.showMessageDialog(null, "Signing Up Successful!");
-		RegisteredUserView.getInstance().setUserName(usernameFinal);
+		RegisteredUserView.getInstance().setUserName(username);
 		RegisteredUserView.getInstance().setVisible(true);
 	}
 	
