@@ -47,10 +47,11 @@ public class RegisteredUserView extends JFrame {
 	private JPanel contentPane;
 	public String currentUser;
 	JButton btnPickPlaylist, btnPickSong, btnCreatePlaylist, btnUploadSong, btnEditSong, btnPlay, btnPause, btnNextSong, btnPreviousSong;
-	JList yourSongsList, playlistList;
+	JList yourSongsList, playlistListJList;
 	JTextPane txtpnSongNameGenre;
 	private JButton btnRefresh;
 	JLabel lblUser;
+	PlaylistList pl;
 	
 	public static RegisteredUserView getInstance() {
         if (instance == null) {
@@ -105,9 +106,12 @@ public class RegisteredUserView extends JFrame {
 		contentPane.add(btnPreviousSong);
 		btnPreviousSong.addActionListener(new btn_prevSong());
 		
-		 playlistList = new JList();
-		playlistList.setBounds(25, 93, 322, 558);
-		contentPane.add(playlistList);
+		playlistListJList = new JList();
+		playlistListJList.setBounds(25, 93, 322, 558);
+		contentPane.add(playlistListJList);
+		for(int x = 0; x < pl.getPlaylistSize() ;x++) {
+			playlistListJList.add(playlistListJList.getComponent(x));
+		}
 		
 		JList playlistSongList = new JList();
 		playlistSongList.setBounds(403, 139, 375, 224);
@@ -270,7 +274,7 @@ public class RegisteredUserView extends JFrame {
 			 for(int x = 0; x < pList.getPlaylistSize(); x++)
 			 DLM2.addElement(pList.getPlaylistList().get(x).getPlaylistName());
 
-			 playlistList.setModel(DLM2);
+			 
 			 
 			 
 		 }
