@@ -8,10 +8,17 @@ import view.AddSong;
 public class Playlist {
 	private static ArrayList<Song> SongInPlaylist = new ArrayList<Song>();
 	String playlistName;
+	String username;
 
-	public Playlist(String playlistName) {
+	public Playlist(String playlistName, String username) {
 		super();
 		this.playlistName = playlistName;
+		this.username = username;
+	}
+
+
+	public String getUsername() {
+		return username;
 	}
 
 

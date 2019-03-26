@@ -2,6 +2,8 @@ package model;
 import java.awt.*;
 public class Song {
 	
+	int SongID;
+	String UserName;
 	String SongName;
 	String ArtistName;
 	String Album;
@@ -9,14 +11,26 @@ public class Song {
 	String Year;
 	String Path;
 	
-	public Song(String songName, String artistName, String album, String genre, String year, String path) {
+	public Song(int songID, String username, String songName, String artistName, String album, String genre, String year, String path) {
 		super();
+		SongID = songID;
+		UserName = username;
 		SongName = songName;
 		ArtistName = artistName;
 		Album = album;
 		Genre = genre;
 		Year = year;
 		Path = path;
+	}
+	
+	public int getSongID()
+	{
+		return SongID;
+	}
+	
+	public String getUserName()
+	{
+		return UserName;
 	}
 
 	public String getSongName()

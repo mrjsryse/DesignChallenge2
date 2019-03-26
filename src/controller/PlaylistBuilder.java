@@ -10,6 +10,7 @@ public class PlaylistBuilder
 {
 	ArrayList<Song> SongInPlaylist = new ArrayList<Song>();
 	String playlistName;
+	String username;
 	
 	
 	public PlaylistBuilder setSongs(ArrayList<Song> SongInPlaylist) {
@@ -21,9 +22,14 @@ public class PlaylistBuilder
 		return this;
 	}
 	
+	public PlaylistBuilder setUsername(String username){
+		this.username = username;
+		return this;
+	}
+	
 	public Playlist getPlaylist()
 	{
-		return new Playlist(playlistName);
+		return new Playlist(playlistName, username);
 	}
 	
 	
