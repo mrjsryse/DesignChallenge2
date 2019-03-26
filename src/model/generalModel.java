@@ -1,5 +1,7 @@
 package model;
 
+import java.util.ArrayList;
+
 import controller.SongBuilder;
 import view.LoggingInView;
 import view.SigningUpView;
@@ -50,7 +52,11 @@ public class generalModel {
 		Database.getInstance().addingUserPlaylist(p);
 	}
 	
-	public void gettingSongs(String t) {
-		Database.getInstance().getSongs(t);
+	public ArrayList<Song> gettingSongs(String t) {
+		return Database.getInstance().getSongs(t);
+	}
+	
+	public void readSongData(int SongID) {
+		Database.getInstance().readBLOB(SongID);
 	}
 }

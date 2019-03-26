@@ -6,10 +6,12 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.util.ArrayList;
 
 import jaco.mp3.player.MP3Player;
 import model.Database;
 import model.PlaylistList;
+import model.Song;
 import model.SongList;
 import view.AddSong;
 import view.SelectAccount;
@@ -42,6 +44,8 @@ import model.account;
 import model.generalModel;
 
 import java.awt.Color;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.event.ListSelectionEvent;
 
 public class RegisteredUserView extends JFrame {
 	private volatile static RegisteredUserView instance = null;
@@ -50,12 +54,13 @@ public class RegisteredUserView extends JFrame {
 	private JPanel contentPane;
 	public String currentUser;
 	JButton btnPickPlaylist, btnPickSong, btnCreatePlaylist, btnUploadSong, btnEditSong, btnPlay, btnPause, btnNextSong, btnPreviousSong;
-	JList yourSongsListJList, playlistListJList;
+	JList yourSongsList, yourSongsListJList, playlistListJList;
 	JTextPane txtpnSongNameGenre;
 	private JButton btnRefresh;
 	JLabel lblUser;
 	PlaylistList pl;
 	SongList sl;
+	ArrayList<Song> userSongs;
 	
 	public static RegisteredUserView getInstance() {
         if (instance == null) {
@@ -67,6 +72,10 @@ public class RegisteredUserView extends JFrame {
 	public void setSong(String path) {
 		mp3.stop();
 		mp3 = new MP3Player(new File(path));
+	}
+	
+	public void refreshSongs(SongList sl) {
+		this.sl = sl;
 	}
 	
 	/**
@@ -144,7 +153,7 @@ public class RegisteredUserView extends JFrame {
 		 
 		txtpnSongNameGenre = new JTextPane();
 		txtpnSongNameGenre.setBounds(395, 427, 375, 224);
-		txtpnSongNameGenre.setText("Song Name: \r\nGenre: \r\n");
+		txtpnSongNameGenre.setText("Song Name:\r\nArtist:\r\nAlbum:\r\nGenre:\r\r\nYear:");
 		txtpnSongNameGenre.setBackground(new Color(224,224,224));
 		contentPane.add(txtpnSongNameGenre);
 		
@@ -168,7 +177,12 @@ public class RegisteredUserView extends JFrame {
 		btnUploadSong.setBackground(new Color(59,186,169));
 		contentPane.add(btnUploadSong);
 		
-		JList yourSongsList = new JList();
+		yourSongsList = new JList();
+		yourSongsList.addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent arg0) {
+				txtpnSongNameGenre.setText("Song Name: "+userSongs.get(yourSongsList.getSelectedIndex()).getSongName()+"\r\nArtist: "+userSongs.get(yourSongsList.getSelectedIndex()).getArtistName()+"\r\nAlbum: "+userSongs.get(yourSongsList.getSelectedIndex()).getAlbum()+"\r\nGenre: "+userSongs.get(yourSongsList.getSelectedIndex()).getGenre()+"\r\r\nYear: "+userSongs.get(yourSongsList.getSelectedIndex()).getYear()+"");
+			}
+		});
 		yourSongsList.setBounds(806, 94, 341, 557);
 		yourSongsList.setBackground(new Color(224,224,224));
 		contentPane.add(yourSongsList);
@@ -235,6 +249,8 @@ public class RegisteredUserView extends JFrame {
 
 	     public void actionPerformed(ActionEvent e) 
 	     {	 
+	    	 int SongID = userSongs.get(yourSongsList.getSelectedIndex()).getSongID();
+	    	 generalModel.getInstance().readSongData(SongID);
 	    	 mp3.play();
 
 	     }
@@ -297,14 +313,14 @@ public class RegisteredUserView extends JFrame {
 		 {
 			 
 			 
-			 SongList sList = new SongList();
+			 userSongs = generalModel.getInstance().gettingSongs(currentUser);
 			 DefaultListModel DLM = new DefaultListModel();
 			 
-			 for(int x = 0; x < sList.getSongSize(); x++)
-			 DLM.addElement(sList.getSongList().get(x).getSongName());
+			 for(int x = 0; x < userSongs.size(); x++)
+			 DLM.addElement(userSongs.get(x).getSongName());
 
-//			 yourSongsList.setModel(DLM);
-			 generalModel.getInstance().gettingSongs(currentUser);
+			 yourSongsList.setModel(DLM);
+			 
 			 PlaylistList pList = new PlaylistList();
 			 DefaultListModel DLM2 = new DefaultListModel();
 			 

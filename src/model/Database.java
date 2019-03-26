@@ -2,6 +2,9 @@ package model;
 import java.io.File;
 import javax.swing.*;
 import javax.swing.JOptionPane;
+
+import controller.SongBuilder;
+
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FilterOutputStream;
@@ -13,6 +16,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 import view.LoggingInView;
 
@@ -296,7 +300,7 @@ public class Database{
 		
 	}
 	
-	public void getSongs(String username) {
+	public ArrayList<Song> getSongs(String username) {
 		
 		//get getConnection() from db
 		Connection cnt = getConnection();
@@ -311,22 +315,33 @@ public class Database{
 			//get result and store in result set
 			ResultSet rs = ps.executeQuery();
 			
+			ArrayList<Song> sl = new ArrayList<>();
 			//transform set into list
 			while(rs.next()) {
-				System.out.println(rs.getInt("SongID"));
-				System.out.println(rs.getString("Title"));
-				
-				System.out.println(rs);
+				 Song newSong = new SongBuilder()
+						 .setSongID(rs.getInt("SongID"))
+						 .setUserName(rs.getString("Username"))
+						 .setSongName(rs.getString("Title"))
+						 .setArtistName(rs.getString("Artist"))
+						 .setAlbum(rs.getString("Album"))
+						 .setGenre(rs.getString("Genre"))
+						 .setYear(rs.getString("Year"))
+						 .setPath("")
+						 .getSong();
+				 sl.add(newSong);
 			}
 			
 			//close all the resources
 			ps.close();
 			rs.close();
 			cnt.close();
+			
+			return sl;
 
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} 
+		}
+		return null; 
 		
 	}
 
