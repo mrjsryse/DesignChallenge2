@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import java.io.File;
 
 import jaco.mp3.player.MP3Player;
+import model.Database;
 import model.PlaylistList;
 import model.SongList;
 import view.AddSong;
@@ -38,6 +39,8 @@ import jaco.mp3.player.MP3Player;
 import model.PlaylistList;
 import model.SongList;
 import model.account;
+import model.generalModel;
+
 import java.awt.Color;
 
 public class RegisteredUserView extends JFrame {
@@ -47,11 +50,12 @@ public class RegisteredUserView extends JFrame {
 	private JPanel contentPane;
 	public String currentUser;
 	JButton btnPickPlaylist, btnPickSong, btnCreatePlaylist, btnUploadSong, btnEditSong, btnPlay, btnPause, btnNextSong, btnPreviousSong;
-	JList yourSongsList, playlistListJList;
+	JList yourSongsListJList, playlistListJList;
 	JTextPane txtpnSongNameGenre;
 	private JButton btnRefresh;
 	JLabel lblUser;
 	PlaylistList pl;
+	SongList sl;
 	
 	public static RegisteredUserView getInstance() {
         if (instance == null) {
@@ -117,17 +121,16 @@ public class RegisteredUserView extends JFrame {
 		playlistListJList.setBounds(25, 93, 322, 558);
 		playlistListJList.setBackground(new Color(224,224,224));
 		contentPane.add(playlistListJList);
-		for(int x = 0; x < pl.getPlaylistSize() ;x++) {
-			playlistListJList.add(playlistListJList.getComponent(x));
-		}
 		
-		JList playlistSongList = new JList();
-		playlistSongList.setBounds(395, 93, 375, 224);
-		playlistSongList.setBackground(new Color(224,224,224));
-		contentPane.add(playlistSongList);
+		yourSongsListJList = new JList();
+		yourSongsListJList.setBounds(395, 93, 375, 224);
+		yourSongsListJList.setBackground(new Color(175,224,238));
+		contentPane.add(yourSongsListJList);
 		
-		 btnPickPlaylist = new JButton("Pick Playlist");
-		 btnPickPlaylist.setForeground(Color.BLACK);
+		
+		btnPickPlaylist = new JButton("Pick Playlist");
+		btnPickPlaylist.setForeground(Color.BLACK);
+
 		btnPickPlaylist.setBounds(25, 664, 136, 45);
 		btnPickPlaylist.setBackground(new Color(59,186,169));
 		contentPane.add(btnPickPlaylist);
@@ -165,7 +168,7 @@ public class RegisteredUserView extends JFrame {
 		btnUploadSong.setBackground(new Color(59,186,169));
 		contentPane.add(btnUploadSong);
 		
-		 yourSongsList = new JList();
+		JList yourSongsList = new JList();
 		yourSongsList.setBounds(806, 94, 341, 557);
 		yourSongsList.setBackground(new Color(224,224,224));
 		contentPane.add(yourSongsList);
@@ -236,6 +239,7 @@ public class RegisteredUserView extends JFrame {
 
 	     }
 	 }
+	 
 	
 	 class btn_addSongtoP implements ActionListener 
 	 {
@@ -299,8 +303,8 @@ public class RegisteredUserView extends JFrame {
 			 for(int x = 0; x < sList.getSongSize(); x++)
 			 DLM.addElement(sList.getSongList().get(x).getSongName());
 
-			 yourSongsList.setModel(DLM);
-			 
+//			 yourSongsList.setModel(DLM);
+			 generalModel.getInstance().gettingSongs(currentUser);
 			 PlaylistList pList = new PlaylistList();
 			 DefaultListModel DLM2 = new DefaultListModel();
 			 
