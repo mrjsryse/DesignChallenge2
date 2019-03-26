@@ -52,15 +52,14 @@ public class Database{
 				+ "Artist varchar(255),Album varchar(255),Genre varchar(255), Year varchar(255), Username varchar(255));";
 		String query4 = "CREATE TABLE IF NOT EXISTS user_playlists(Username varchar(255), PlaylistName varchar(255));";
 		String query5 = "CREATE TABLE IF NOT EXISTS songData(SongID int NOT NULL AUTO_INCREMENT PRIMARY KEY, data LONGBLOB);";
-		String query6 = "CREATE TABLE IF NOT EXISTS songs_in_playlist(PlaylistID int NOT NULL AUTO INCREMENT PRIMARY KEY, PlaylistName varchar(255), "
-					+ "SongID int(11), SongName varchar(255));";		
+		String query6 = "CREATE TABLE IF NOT EXISTS songs_in_playlist(PlaylistID int PRIMARY KEY, PlaylistName varchar(255),SongID int(11), SongName varchar(255));";		
 		
 		String queryIncrement = "ALTER TABLE accounts auto_increment = 1";
 		String queryIncrement2 = "ALTER TABLE playlists auto_increment = 1";
 		String queryIncrement3 = "ALTER TABLE songs auto_increment = 1";
 		String queryIncrement4 = "ALTER TABLE user_playlists auto_increment = 1";
 		String queryIncrement5 = "ALTER TABLE songData auto_increment = 1";
-		String queryIncrement6 = "ALTER TABLE song_in_playlist = 1";
+//		String queryIncrement6 = "ALTER TABLE song_in_playlist = 1";
 		
 		try {
 			PreparedStatement ps = getConnection().prepareStatement(query);
@@ -87,8 +86,8 @@ public class Database{
 			ps4.execute();
 			ps5 = getConnection().prepareStatement(queryIncrement5);
 			ps5.execute();
-			ps6 = getConnection().prepareStatement(queryIncrement6);
-			ps6.execute();
+//			ps6 = getConnection().prepareStatement(queryIncrement6);
+//			ps6.execute();
 			
 		}catch (SQLException e) {
 			e.printStackTrace();
@@ -316,6 +315,8 @@ public class Database{
 			while(rs.next()) {
 				System.out.println(rs.getInt("SongID"));
 				System.out.println(rs.getString("Title"));
+				
+				System.out.println(rs);
 			}
 			
 			//close all the resources
@@ -445,12 +446,12 @@ public class Database{
 		//get getConnection() from db
 		Connection cnt = getConnection();
 		
-		getPlaylistID = 0;
+	//	getPlaylistID = 0;
 		getPlaylistName = p.getPlaylistName();
 		getSongID = 0;
 		getSongName = s.getSongName();
 		
-		String query = "insert into user_playlists values ('"+getPlaylistID+"','"
+		String query = "insert into user_playlists values ('"+0+"','"
 																+getPlaylistName+"','"
 																+getSongID+"','"
 																+getSongName+"')";

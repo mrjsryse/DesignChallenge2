@@ -22,6 +22,10 @@ private static ArrayList<Song> songList = new ArrayList<Song>();
 	public int getSongSize() {
 		return songList.size();
 	}
+	
+	public int getSongListSize() {
+		return songList.size();
+	}
 
 	public int getIndex(Song s) {
 		return songList.indexOf(s);
