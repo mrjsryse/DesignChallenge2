@@ -46,19 +46,21 @@ public class Database{
 			return false;
 		//CREATE TABLE IF NOT EXISTS
 		
-		String query = "CREATE TABLE IF NOT EXISTS accounts (UserID int NOT NULL AUTO_INCREMENT PRIMARY KEY, Username varchar(255), Password varchar(255));"; //creating table
-		String query2 = "CREATE TABLE IF NOT EXISTS playlists(PlaylistID int NOT NULL AUTO_INCREMENT PRIMARY KEY, PlaylistName varchar(255), UserID int(11));";
+		String query = "CREATE TABLE IF NOT EXISTS accounts (Username varchar(255) PRIMARY KEY, Password varchar(255));"; //creating table
+		String query2 = "CREATE TABLE IF NOT EXISTS playlists(PlaylistID int NOT NULL AUTO_INCREMENT PRIMARY KEY, PlaylistName varchar(255), Username varchar(255));";
 		String query3 = "CREATE TABLE IF NOT EXISTS songs(SongID int NOT NULL AUTO_INCREMENT PRIMARY KEY, Title varchar(255), "
-				+ "Artist varchar(255),Album varchar(255),Genre varchar(255), Year varchar(255), UserID int(11));";
-		String query4 = "CREATE TABLE IF NOT EXISTS user_playlists(UserID int NOT NULL AUTO_INCREMENT PRIMARY KEY, PlaylistID int(11), PlaylistName varchar(255));";
+				+ "Artist varchar(255),Album varchar(255),Genre varchar(255), Year varchar(255), Username varchar(255));";
+		String query4 = "CREATE TABLE IF NOT EXISTS user_playlists(Username varchar(255), PlaylistName varchar(255));";
 		String query5 = "CREATE TABLE IF NOT EXISTS songData(SongID int NOT NULL AUTO_INCREMENT PRIMARY KEY, data LONGBLOB);";
-		
+		String query6 = "CREATE TABLE IF NOT EXISTS songs_in_playlist(PlaylistID int NOT NULL AUTO INCREMENT PRIMARY KEY, PlaylistName varchar(255), "
+					+ "SongID int(11), SongName varchar(255));";		
 		
 		String queryIncrement = "ALTER TABLE accounts auto_increment = 1";
 		String queryIncrement2 = "ALTER TABLE playlists auto_increment = 1";
 		String queryIncrement3 = "ALTER TABLE songs auto_increment = 1";
 		String queryIncrement4 = "ALTER TABLE user_playlists auto_increment = 1";
 		String queryIncrement5 = "ALTER TABLE songData auto_increment = 1";
+		String queryIncrement6 = "ALTER TABLE song_in_playlist = 1";
 		
 		try {
 			PreparedStatement ps = getConnection().prepareStatement(query);
@@ -71,6 +73,8 @@ public class Database{
 			ps4.execute();
 			PreparedStatement ps5 = getConnection().prepareStatement(query5);
 			ps5.execute();
+			PreparedStatement ps6 = getConnection().prepareStatement(query6);
+			ps6.execute();
 			
 			
 			ps = getConnection().prepareStatement(queryIncrement);
@@ -83,6 +87,8 @@ public class Database{
 			ps4.execute();
 			ps5 = getConnection().prepareStatement(queryIncrement5);
 			ps5.execute();
+			ps6 = getConnection().prepareStatement(queryIncrement6);
+			ps6.execute();
 			
 		}catch (SQLException e) {
 			e.printStackTrace();
@@ -121,7 +127,6 @@ public class Database{
 		y = newAccount.getPassword();
 		
 		
-		
 		String query2 = "SELECT * FROM swdespa.accounts WHERE username =('"+newAccount.getUsername()+"') AND password = ('"+newAccount.getPassword()+"')";
 
 		//create string query
@@ -138,7 +143,7 @@ public class Database{
 			}
 			else {
 				unique = false;
-				String query = "insert into accounts values ("+0+",'"+x+"','"+y+"')";
+				String query = "insert into accounts values ('"+x+"','"+y+"')";
 				PreparedStatement ps = getConnection().prepareStatement(query);
 				ps.execute();		
 				ps.close();
@@ -294,7 +299,7 @@ public class Database{
 	
 	public int addingSong(Song s){ //Signing Up
 		String getSongName, getArtistName, getAlbumName, getGenre;
-		String getYear;
+		String getYear, getUsername;
 		//get getConnection() from db
 		Connection cnt = getConnection();
 		getSongName = s.getSongName();
@@ -302,14 +307,15 @@ public class Database{
 		getAlbumName = s.getAlbum();
 		getGenre = s.getGenre();
 		getYear = s.getYear();
+		getUsername = s.getUserName();
 		
 		
 		String query = "insert into songs values ("+0+",'"+getSongName+"','" 
 															+getArtistName+"','" 
 															+getAlbumName+ "','"
 															+getGenre+ "','"
-															+getYear+ "','"
-															+0+ "')";
+															+getYear+"','"
+															+getUsername+"')";
 		
 
 		System.out.print(query);
@@ -335,17 +341,18 @@ public class Database{
 	}
 
 	
-	public void addingPlaylist(Playlist p){ //Signing Up
-		String getPlaylistName;
+	public void addingPlaylist(Playlist p){
+		String getPlaylistName, getUsername;
 		
 		
 		//get getConnection() from db
 		Connection cnt = getConnection();
 		getPlaylistName = p.getPlaylistName();
+		getUsername = p.getUsername();
 		
 		
 		String query = "insert into playlists values ("+0+",'"+getPlaylistName+"','"
-															+0+ "')";
+															+getUsername+ "')";
 
 		System.out.print(query);
 		//create string query
@@ -364,6 +371,67 @@ public class Database{
 		//return null;
 	}
 	
+	
+	public void addingUserPlaylist(Playlist p){ 
+		String getPlaylistName, getUsername;
+		
+		
+		//get getConnection() from db
+		Connection cnt = getConnection();
+		getPlaylistName = p.getPlaylistName();
+		getUsername = p.getUsername();
+		
+		
+		String query = "insert into user_playlists values ('"+getUsername+"','"
+															+getPlaylistName+ "')";
+
+		System.out.print(query);
+		//create string query
+		
+		try {
+			PreparedStatement ps = getConnection().prepareStatement(query);
+			ps.execute();
+			
+			//close all the resources
+			ps.close();
+			cnt.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		//return null;
+	}
+	
+	
+	public void addingSongsInPlaylist(Playlist p, Song s){ 
+		String getPlaylistID, getPlaylistName, getSongID, getSongName;
+		
+		
+		//get getConnection() from db
+		Connection cnt = getConnection();
+		
+		
+		
+		
+		String query = "insert into user_playlists values ('"+getUsername+"','"
+															+getPlaylistName+ "')";
+
+		System.out.print(query);
+		//create string query
+		
+		try {
+			PreparedStatement ps = getConnection().prepareStatement(query);
+			ps.execute();
+			
+			//close all the resources
+			ps.close();
+			cnt.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		//return null;
+	}
 	
 //	public void testerTemplate() {
 //		String x = "dad";

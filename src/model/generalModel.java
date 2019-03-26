@@ -44,4 +44,9 @@ public class generalModel {
 	{
 		Database.getInstance().addingPlaylist(p);
 	}
+	
+	public void getUserPlaylistData(Playlist p)
+	{
+		Database.getInstance().addingUserPlaylist(p);
+	}
 }

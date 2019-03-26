@@ -45,7 +45,7 @@ public class RegisteredUserView extends JFrame {
 	MP3Player mp3 = new MP3Player(new File("currentSong.mp3"));
 
 	private JPanel contentPane;
-	private String currentUser;
+	public String currentUser;
 	JButton btnPickPlaylist, btnPickSong, btnCreatePlaylist, btnUploadSong, btnEditSong, btnPlay, btnPause, btnNextSong, btnPreviousSong;
 	JList yourSongsList, playlistListJList;
 	JTextPane txtpnSongNameGenre;
