@@ -87,6 +87,7 @@ public class SigningUpView extends JFrame{
 			String password = passwordField.getText();
 			signUp = new account(username,password); 
 			generalController.getInstance().gettingAccountData(username, password);
+			RegisteredUserView.getInstance().setUserName(username);
 			closingWindow();
 			SelectAccount.getInstance().setVisible(false);
 			
@@ -96,7 +97,6 @@ public class SigningUpView extends JFrame{
 	public void signingSuccessful() {
 		String username = usernameField.getText();
 		JOptionPane.showMessageDialog(null, "Signing Up Successful!");
-		RegisteredUserView.getInstance().setUserName(username);
 		RegisteredUserView.getInstance().setVisible(true);
 	}
 	
