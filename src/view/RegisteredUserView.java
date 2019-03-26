@@ -117,9 +117,9 @@ public class RegisteredUserView extends JFrame {
 		playlistListJList.setBounds(25, 93, 322, 558);
 		playlistListJList.setBackground(new Color(224,224,224));
 		contentPane.add(playlistListJList);
-		//for(int x = 0; x < pl.getPlaylistSize() ;x++) {
-		//	playlistListJList.add(playlistListJList.getComponent(x));
-		//}
+		for(int x = 0; x < pl.getPlaylistSize() ;x++) {
+			playlistListJList.add(playlistListJList.getComponent(x));
+		}
 		
 		JList playlistSongList = new JList();
 		playlistSongList.setBounds(395, 93, 375, 224);
@@ -147,7 +147,7 @@ public class RegisteredUserView extends JFrame {
 		
 		JLabel lblSongInfo = new JLabel("Song Info");
 		lblSongInfo.setForeground(Color.WHITE);
-		lblSongInfo.setBounds(416, 392, 95, 26);
+		lblSongInfo.setBounds(395, 391, 95, 26);
 		lblSongInfo.setBackground(new Color(224,224,224));
 		contentPane.add(lblSongInfo);
 		
@@ -172,7 +172,7 @@ public class RegisteredUserView extends JFrame {
 		
 		JLabel lblSongsInPlaylist = new JLabel("Songs in Playlist");
 		lblSongsInPlaylist.setForeground(Color.WHITE);
-		lblSongsInPlaylist.setBounds(416, 63, 101, 26);
+		lblSongsInPlaylist.setBounds(395, 63, 101, 26);
 		contentPane.add(lblSongsInPlaylist);
 		
 		JLabel lblPlaylists = new JLabel("Playlists");
