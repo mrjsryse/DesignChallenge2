@@ -403,18 +403,25 @@ public class Database{
 	}
 	
 	
-	public void addingSongsInPlaylist(Playlist p, Song s){ 
-		String getPlaylistID, getPlaylistName, getSongID, getSongName;
+	public void addingSongsInPlaylist(Playlist p, Song s){ 	
+		int getPlaylistID;
+		int getSongID; 
+		String getPlaylistName;
+		String getSongName;
 		
 		
 		//get getConnection() from db
 		Connection cnt = getConnection();
 		
+		getPlaylistID = 0;
+		getPlaylistName = p.getPlaylistName();
+		getSongID = 0;
+		getSongName = s.getSongName();
 		
-		
-		
-		String query = "insert into user_playlists values ('"+getUsername+"','"
-															+getPlaylistName+ "')";
+		String query = "insert into user_playlists values ('"+getPlaylistID+"','"
+																+getPlaylistName+"','"
+																+getSongID+"','"
+																+getSongName+"')";
 
 		System.out.print(query);
 		//create string query
@@ -432,6 +439,8 @@ public class Database{
 		}
 		//return null;
 	}
+	
+	
 	
 //	public void testerTemplate() {
 //		String x = "dad";

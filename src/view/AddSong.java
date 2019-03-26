@@ -10,6 +10,8 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import controller.SongBuilder;
+import controller.generalController;
+import model.Database;
 import model.Song;
 import model.SongList;
 import model.generalModel;
@@ -141,6 +143,7 @@ public class AddSong extends JFrame {
 	 {		
 		 public void actionPerformed(ActionEvent e)
 		 {
+			 int songID = 0;
 			 String username = RegisteredUserView.getInstance().currentUser;
 			 String songName = textFieldSongName.getText();
 			 String artistName = textFieldArtistName.getText();
@@ -150,6 +153,7 @@ public class AddSong extends JFrame {
 			 String path = textFieldChosenFile.getText();
 			 
 			 Song addedSong = new SongBuilder()
+					 .setSongID(songID)
 					 .setUserName(username)
 					 .setSongName(songName)
 					 .setArtistName(artistName)
