@@ -58,6 +58,8 @@ public class Database{
 		String query5 = "CREATE TABLE IF NOT EXISTS songData(SongID int NOT NULL AUTO_INCREMENT PRIMARY KEY, data LONGBLOB);";
 		String query6 = "CREATE TABLE IF NOT EXISTS songs_in_playlist(PlaylistID int PRIMARY KEY, PlaylistName varchar(255),SongID int(11), SongName varchar(255));";		
 		
+		String packetQuery = "SET GLOBAL max_allowed_packet=16777216;";
+		
 		String queryIncrement = "ALTER TABLE accounts auto_increment = 1";
 		String queryIncrement2 = "ALTER TABLE playlists auto_increment = 1";
 		String queryIncrement3 = "ALTER TABLE songs auto_increment = 1";
@@ -79,6 +81,8 @@ public class Database{
 			PreparedStatement ps6 = getConnection().prepareStatement(query6);
 			ps6.execute();
 			
+			PreparedStatement pq = getConnection().prepareStatement(packetQuery);
+			pq.execute();
 			
 			ps = getConnection().prepareStatement(queryIncrement);
 			ps.execute();

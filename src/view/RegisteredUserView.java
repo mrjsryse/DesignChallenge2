@@ -61,6 +61,7 @@ public class RegisteredUserView extends JFrame {
 	PlaylistList pl;
 	SongList sl;
 	ArrayList<Song> userSongs;
+	boolean songChanged;
 	
 	public static RegisteredUserView getInstance() {
         if (instance == null) {
@@ -85,7 +86,7 @@ public class RegisteredUserView extends JFrame {
 		setResizable(false);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(RegisteredUserView.class.getResource("/images/spotify.png")));
 		setTitle("Not So Spotify");
-		
+		songChanged = false;
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -181,6 +182,7 @@ public class RegisteredUserView extends JFrame {
 		yourSongsList.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent arg0) {
 				txtpnSongNameGenre.setText("Song Name: "+userSongs.get(yourSongsList.getSelectedIndex()).getSongName()+"\r\nArtist: "+userSongs.get(yourSongsList.getSelectedIndex()).getArtistName()+"\r\nAlbum: "+userSongs.get(yourSongsList.getSelectedIndex()).getAlbum()+"\r\nGenre: "+userSongs.get(yourSongsList.getSelectedIndex()).getGenre()+"\r\r\nYear: "+userSongs.get(yourSongsList.getSelectedIndex()).getYear()+"");
+				songChanged = true;
 			}
 		});
 		yourSongsList.setBounds(806, 94, 341, 557);
@@ -249,9 +251,17 @@ public class RegisteredUserView extends JFrame {
 
 	     public void actionPerformed(ActionEvent e) 
 	     {	 
-	    	 int SongID = userSongs.get(yourSongsList.getSelectedIndex()).getSongID();
-	    	 generalModel.getInstance().readSongData(SongID);
-	    	 mp3.play();
+	    	 System.out.println("songChanged: "+songChanged);
+	    	 if(songChanged) {
+		    	 mp3.pause();
+		    	 int SongID = userSongs.get(yourSongsList.getSelectedIndex()).getSongID();
+		    	 generalModel.getInstance().readSongData(SongID);
+		    	 mp3 = new MP3Player(new File("currentSong.mp3"));
+		    	 mp3.play();	
+		    	 songChanged = false;
+	    	 }else {
+	    		 mp3.play();
+	    	 }
 
 	     }
 	 }
