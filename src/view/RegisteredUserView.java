@@ -326,7 +326,8 @@ public class RegisteredUserView extends JFrame {
 			 
 			 for(int x = 0; x < pList.getPlaylistSize(); x++)
 			 DLM2.addElement(pList.getPlaylistList().get(x).getPlaylistName());
-
+			 
+			 playlistListJList.setModel(DLM2);
 			 
 			 
 			 
