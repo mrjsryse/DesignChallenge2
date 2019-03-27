@@ -4,6 +4,7 @@ package view;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
 
 import java.awt.Font;
 import java.awt.Toolkit;
@@ -65,7 +66,7 @@ public class LoggingInView extends JFrame{
 		getContentPane().add(UsernameTextField);
 		UsernameTextField.setColumns(10);
 		
-		PasswordTextField = new JTextField();
+		JPasswordField PasswordTextField = new JPasswordField(40);
 		PasswordTextField.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		PasswordTextField.setColumns(10);
 		PasswordTextField.setBounds(40, 419, 443, 70);
