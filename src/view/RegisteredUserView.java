@@ -272,9 +272,22 @@ public class RegisteredUserView extends JFrame {
 
 	     public void actionPerformed(ActionEvent e) 
 	     {
-	        //JOptionPane.showMessageDialog(null,"Added " + new song);
-	    	 //mp3.addToPlayList();
-
+	    	 AddSongToPlaylist astp = new AddSongToPlaylist();
+			 astp.setVisible(true);
+			 
+			 SongList sList = new SongList();
+			 PlaylistList pList = new PlaylistList();
+			 
+			 for(int x = 0; x < sList.getSongSize(); x++)
+			 {
+				 astp.comboBoxSongs.addItem(sList.getSongList().get(x).getSongName());;
+			 }
+			 
+			 for(int y = 0; y < pList.getPlaylistSize(); y++)
+			 {
+				 astp.comboBoxPlaylists.addItem(pList.getPlaylistList().get(y).getPlaylistName());
+			 }
+	    	 
 	     }
 	 }
 	 
@@ -324,6 +337,8 @@ public class RegisteredUserView extends JFrame {
 			 
 			 
 			 userSongs = generalModel.getInstance().gettingSongs(currentUser);
+			 
+			 
 			 DefaultListModel DLM = new DefaultListModel();
 			 
 			 for(int x = 0; x < userSongs.size(); x++)
