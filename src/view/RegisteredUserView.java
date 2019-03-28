@@ -134,7 +134,7 @@ public class RegisteredUserView extends JFrame {
 		
 		yourSongsListJList = new JList();
 		yourSongsListJList.setBounds(395, 93, 375, 224);
-		yourSongsListJList.setBackground(new Color(175,224,238));
+		yourSongsListJList.setBackground(new Color(224,224,224));
 		contentPane.add(yourSongsListJList);
 		
 		

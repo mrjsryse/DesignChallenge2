@@ -23,7 +23,7 @@ import model.Database;
 
 public class LoggingInView extends JFrame{
 	private JTextField UsernameTextField;
-	private JTextField PasswordTextField;
+	private JPasswordField PasswordTextField;
 	account logIn;
 	Boolean entrance;
 	Database theAccounts;
@@ -66,7 +66,7 @@ public class LoggingInView extends JFrame{
 		getContentPane().add(UsernameTextField);
 		UsernameTextField.setColumns(10);
 		
-		JPasswordField PasswordTextField = new JPasswordField(40);
+		PasswordTextField = new JPasswordField(40);
 		PasswordTextField.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		PasswordTextField.setColumns(10);
 		PasswordTextField.setBounds(40, 419, 443, 70);
@@ -87,7 +87,7 @@ public class LoggingInView extends JFrame{
 	public void actionPerformed (ActionEvent account)
 		{
 			String registeredUsername = UsernameTextField.getText();
-			String registeredPassword = PasswordTextField.getText();
+			String registeredPassword = new String(PasswordTextField.getPassword());
 			logIn = new account(registeredUsername,registeredPassword);
 			generalController.getInstance().gettingRegisteredAccountData(registeredUsername, registeredPassword);
 			RegisteredUserView.getInstance().setUserName(registeredUsername);
