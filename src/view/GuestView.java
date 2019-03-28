@@ -47,7 +47,7 @@ public class GuestView extends JFrame {
 	private JPanel contentPane;
 	public String currentUser;
 	JButton btnPickPlaylist, btnPickSong, btnCreatePlaylist, btnUploadSong, btnEditSong, btnPlay, btnPause, btnNextSong, btnPreviousSong;
-	JList yourSongsList, playlistListJList;
+	JList yourSongsList, playlistListJList, playlistSongList;
 	JTextPane txtpnSongNameGenre;
 	private JButton btnRefresh;
 	JLabel lblUser;
@@ -121,7 +121,7 @@ public class GuestView extends JFrame {
 		//	playlistListJList.add(playlistListJList.getComponent(x));
 		//}
 		
-		JList playlistSongList = new JList();
+		 playlistSongList = new JList();
 		playlistSongList.setBounds(395, 93, 375, 224);
 		playlistSongList.setBackground(new Color(224,224,224));
 		contentPane.add(playlistSongList);
@@ -242,8 +242,21 @@ public class GuestView extends JFrame {
 
 	     public void actionPerformed(ActionEvent e) 
 	     {
-	        //JOptionPane.showMessageDialog(null,"Added " + new song);
-	    	 //mp3.addToPlayList();
+	    	 AddSongToPlaylist astp = new AddSongToPlaylist();
+			 astp.setVisible(true);
+			 
+			 SongList sList = new SongList();
+			 PlaylistList pList = new PlaylistList();
+			 
+			 for(int x = 0; x < sList.getSongSize(); x++)
+			 {
+				 astp.comboBoxSongs.addItem(sList.getSongList().get(x).getSongName());;
+			 }
+			 
+			 for(int y = 0; y < pList.getPlaylistSize(); y++)
+			 {
+				 astp.comboBoxPlaylists.addItem(pList.getPlaylistList().get(y).getPlaylistName());
+			 }
 
 	     }
 	 }
@@ -307,7 +320,15 @@ public class GuestView extends JFrame {
 			 for(int x = 0; x < pList.getPlaylistSize(); x++)
 			 DLM2.addElement(pList.getPlaylistList().get(x).getPlaylistName());
 
+			 playlistListJList.setModel(DLM2);
 			 
+			 DefaultListModel DLM3 = new DefaultListModel();
+			 
+			 for(int i = 0; i < pList.getPlaylistSize(); i++)
+				 for(int j = 0; j <  sList.getSongSize(); j++)
+					 DLM3.addElement(pList.getPlaylistList().get(i).getSongInPlaylist().get(j).getSongName());
+			 
+			 playlistSongList.setModel(DLM3);
 			 
 			 
 		 }

@@ -272,9 +272,22 @@ public class RegisteredUserView extends JFrame {
 
 	     public void actionPerformed(ActionEvent e) 
 	     {
-	        //JOptionPane.showMessageDialog(null,"Added " + new song);
-	    	 //mp3.addToPlayList();
-
+	    	 AddSongToPlaylist astp = new AddSongToPlaylist();
+			 astp.setVisible(true);
+			 
+			 SongList sList = new SongList();
+			 PlaylistList pList = new PlaylistList();
+			 
+			 for(int x = 0; x < sList.getSongSize(); x++)
+			 {
+				 astp.comboBoxSongs.addItem(sList.getSongList().get(x).getSongName());;
+			 }
+			 
+			 for(int y = 0; y < pList.getPlaylistSize(); y++)
+			 {
+				 astp.comboBoxPlaylists.addItem(pList.getPlaylistList().get(y).getPlaylistName());
+			 }
+	    	 
 	     }
 	 }
 	 
@@ -324,13 +337,15 @@ public class RegisteredUserView extends JFrame {
 			 
 			 
 			 userSongs = generalModel.getInstance().gettingSongs(currentUser);
+			 
+			 
 			 DefaultListModel DLM = new DefaultListModel();
 			 
 			 for(int x = 0; x < userSongs.size(); x++)
 			 DLM.addElement(userSongs.get(x).getSongName());
 
 			 yourSongsList.setModel(DLM);
-			 
+			 //==============================================
 			 PlaylistList pList = new PlaylistList();
 			 DefaultListModel DLM2 = new DefaultListModel();
 			 
@@ -339,6 +354,15 @@ public class RegisteredUserView extends JFrame {
 			 
 			 playlistListJList.setModel(DLM2);
 			 
+			 //==============================================
+			 SongList sList = new SongList();
+			 DefaultListModel DLM3 = new DefaultListModel();
+			 
+			 for(int i = 0; i < pList.getPlaylistSize(); i++)
+				 for(int j = 0; j <  sList.getSongSize(); j++)
+					 DLM3.addElement(pList.getPlaylistList().get(i).getSongInPlaylist().get(j).getSongName());
+			 
+			 yourSongsListJList.setModel(DLM3);
 			 
 			 
 		 }
