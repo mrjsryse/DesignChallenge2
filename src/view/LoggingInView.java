@@ -82,6 +82,7 @@ public class LoggingInView extends JFrame{
 		getContentPane().add(btnConfirm);
 		btnConfirm.addActionListener(new confirmButton());
 	}
+	
 	class confirmButton implements ActionListener
 	{
 	public void actionPerformed (ActionEvent account)
