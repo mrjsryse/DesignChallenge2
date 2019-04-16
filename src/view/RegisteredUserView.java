@@ -50,9 +50,10 @@ import javax.swing.event.ListSelectionEvent;
 public class RegisteredUserView extends JFrame {
 	private volatile static RegisteredUserView instance = null;
 	MP3Player mp3 = new MP3Player(new File("currentSong.mp3"));
-
+	RegisteredUserProfile profile;
 	private JPanel contentPane;
 	public String currentUser;
+	public String currentProfile;
 	JButton btnPickPlaylist, btnPickSong, btnCreatePlaylist, btnUploadSong, btnEditSong, btnPlay, btnPause, btnNextSong, btnPreviousSong;
 	JList yourSongsList, yourSongsListJList, playlistListJList;
 	JTextPane txtpnSongNameGenre;
@@ -62,6 +63,7 @@ public class RegisteredUserView extends JFrame {
 	SongList sl;
 	ArrayList<Song> userSongs;
 	boolean songChanged;
+	private JButton btnProfile;
 	
 	public static RegisteredUserView getInstance() {
         if (instance == null) {
@@ -144,7 +146,7 @@ public class RegisteredUserView extends JFrame {
 		
 		yourSongsListJList = new JList();
 		yourSongsListJList.setBounds(395, 93, 375, 224);
-		yourSongsListJList.setBackground(new Color(175,224,238));
+		yourSongsListJList.setBackground(new Color(224,224,224));
 		contentPane.add(yourSongsListJList);
 		
 		
@@ -253,8 +255,36 @@ public class RegisteredUserView extends JFrame {
 		logoutButton.setBounds(1050, 728, 97, 25);
 		logoutButton.setBackground(new Color(59,186,169));
 		contentPane.add(logoutButton);
+		
+		btnProfile = new JButton("Profile");
+		btnProfile.setBounds(522, 43, 89, 23);
+		contentPane.add(btnProfile);
+		btnProfile.addActionListener(new btn_Profile());
+		
 		logoutButton.addActionListener(new btn_Logout());
 	}
+	
+	
+	
+	 class btn_Profile implements ActionListener{
+		 
+		 public void actionPerformed(ActionEvent e)
+		 {
+			 String username;
+			 username = currentUser;
+			 System.out.println("First Test");
+			 RegisteredUserProfile.getInstance().setVisible(true);
+			 //System.out.println(currentUser); for testing
+			 RegisteredUserProfile.getInstance().getUserName(username);
+			 System.out.println("Second Test");
+			 
+		 }
+	 }
+	 
+	 public void profileViewing(RegisteredUserProfile profile) {
+		 	this.profile = profile;
+		}
+	 
 	
 	 class btn_Play implements ActionListener 
 	 {
