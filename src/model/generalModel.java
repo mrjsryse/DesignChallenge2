@@ -59,4 +59,7 @@ public class generalModel {
 	public void readSongData(int SongID) {
 		Database.getInstance().readBLOB(SongID);
 	}
+	public void updateCount(int SongID) {
+		Database.getInstance().countUpdate(SongID);
+	}
 }

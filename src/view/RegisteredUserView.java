@@ -202,6 +202,7 @@ public class RegisteredUserView extends JFrame {
 		yourSongsList = new JList();
 		yourSongsList.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent arg0) {
+				String s = yourSongsList.getName();
 				txtpnSongNameGenre.setText("Song Name: "+userSongs.get(yourSongsList.getSelectedIndex()).getSongName()+"\r\nArtist: "+userSongs.get(yourSongsList.getSelectedIndex()).getArtistName()+"\r\nAlbum: "+userSongs.get(yourSongsList.getSelectedIndex()).getAlbum()+"\r\nGenre: "+userSongs.get(yourSongsList.getSelectedIndex()).getGenre()+"\r\r\nYear: "+userSongs.get(yourSongsList.getSelectedIndex()).getYear()+"");
 				songChanged = true;
 			}
@@ -308,6 +309,8 @@ public class RegisteredUserView extends JFrame {
 		    	 mp3 = new MP3Player(new File("currentSong.mp3"));
 		    	 mp3.play();
 		    	 songChanged = false;
+		    	 generalModel.getInstance().updateCount(SongID);
+		    	 
 	    	 }else {
 	    		 mp3.play();
 	    	 }
@@ -317,11 +320,14 @@ public class RegisteredUserView extends JFrame {
 		    	 int SongID = pl.getPlaylistList().get(playlistListJList.getSelectedIndex()).getSongInPlaylist().get(yourSongsListJList.getSelectedIndex()).getSongID();
 		    	 generalModel.getInstance().readSongData(SongID);
 		    	 mp3 = new MP3Player(new File("currentSong.mp3"));
-		    	 mp3.play();	
+		    	 mp3.play();
+		    	 
 		    	 playSongInPlaylist = false;
 	    	 }else {
 	    		 mp3.play();
 	    	 }
+	    	 
+	    	 
 
 	     }
 	 }

@@ -271,6 +271,7 @@ public class Database{
 			
 		}
 	}
+	
 
 	public void queryTemplate(String parameters) {
 		
@@ -394,6 +395,24 @@ public class Database{
 			e.printStackTrace();
 		}
 		return 0;
+	}
+	
+	public void countUpdate(int SongID) {
+		Connection cnt = getConnection();
+		PreparedStatement myReadingStatement = null;
+		int ID = SongID;
+		String query = "UPDATE swdespa.songs SET Play_Count = Play_Count + 1 WHERE SongID = ('"+ID+"');";
+		ResultSet rs = null;
+		
+		try {
+			PreparedStatement ps = getConnection().prepareStatement(query);
+			ps.executeUpdate(query, Statement.RETURN_GENERATED_KEYS);
+			
+		}catch(Exception exc) {
+			exc.printStackTrace();
+		}finally {
+			
+		}
 	}
 
 	

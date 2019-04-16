@@ -42,7 +42,7 @@ public class RegisteredUserProfile extends JFrame{
 		
 		lblUser = new JLabel("User:" + currentUser );
 		lblUser.setHorizontalAlignment(SwingConstants.CENTER);
-		lblUser.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblUser.setFont(new Font("Tahoma", Font.BOLD, 20));
 		lblUser.setBounds(10, 34, 1071, 53);
 		getContentPane().add(lblUser);
 		
@@ -59,6 +59,7 @@ public class RegisteredUserProfile extends JFrame{
 		getContentPane().add(lblSongs);
 		
 		playlistJList = new JList();
+		playlistJList.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		playlistJList.setBounds(10, 173, 355, 430);
 		getContentPane().add(playlistJList);
 		
