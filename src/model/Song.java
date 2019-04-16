@@ -11,8 +11,9 @@ public class Song {
 	String Genre;
 	String Year;
 	String Path;
+	int count;
 	
-	public Song(int songID, String username, String songName, String artistName, String album, String genre, String year, String path) {
+	public Song(int songID, String username, String songName, String artistName, String album, String genre, String year, String path, int count) {
 		super();
 		SongID = songID;
 		UserName = username;
@@ -22,6 +23,7 @@ public class Song {
 		Genre = genre;
 		Year = year;
 		Path = path;
+		count = count;
 	}
 	
 	public int getSongID()
@@ -64,10 +66,15 @@ public class Song {
 		return Path;
 	}
 	
+	public int getCount() 
+	{
+		return count;
+	}
+	
 	@Override
 	public String toString() {
 		return "Song [SongName=" + SongName + ", ArtistName=" + ArtistName + ", Album=" + Album + ", Genre=" + Genre
-				+ ", Year=" + Year + "]";
+				+ ", Year=" + Year + ",Count=" + count + "]";
 	}
 	
 	

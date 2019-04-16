@@ -6,4 +6,5 @@ public interface SongPlan { //Builder Interface
 	public void setSongAlbum(String albumName);
 	public void setSongGenre(String songGenre);
 	public void setSongYear(String year);
+	public void setCount(int count);
 }

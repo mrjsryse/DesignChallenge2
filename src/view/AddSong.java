@@ -151,6 +151,7 @@ public class AddSong extends JFrame {
 			 String genre = textFieldGenre.getText();
 			 String year = (String) yearComboBox.getSelectedItem();
 			 String path = textFieldChosenFile.getText();
+			 int count = 0;
 			 
 			 Song addedSong = new SongBuilder()
 					 .setSongID(songID)
@@ -161,7 +162,9 @@ public class AddSong extends JFrame {
 					 .setGenre(genre)
 					 .setYear(year)
 					 .setPath(path)
+					 .setCount(count)
 					 .getSong();
+			 	     
 			 
 			 
 			 
