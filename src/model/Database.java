@@ -52,8 +52,8 @@ public class Database{
 		
 		String query = "CREATE TABLE IF NOT EXISTS accounts (Username varchar(255) PRIMARY KEY, Password varchar(255));"; //creating table
 		String query2 = "CREATE TABLE IF NOT EXISTS playlists(PlaylistID int NOT NULL AUTO_INCREMENT PRIMARY KEY, PlaylistName varchar(255), Username varchar(255));";
-		String query3 = "CREATE TABLE IF NOT EXISTS songs(SongID int NOT NULL AUTO_INCREMENT PRIMARY KEY, Title varchar(255), "
-				+ "Artist varchar(255),Album varchar(255),Genre varchar(255), Year varchar(255), Username varchar(255));";
+		String query3 = "CREATE TABLE IF NOT EXISTS songs(SongID int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY, Title varchar(255), "
+				+ "Artist varchar(255),Album varchar(255),Genre varchar(255), Year varchar(255), Username varchar(255), Play_Count int(11));";
 		String query4 = "CREATE TABLE IF NOT EXISTS user_playlists(Username varchar(255), PlaylistName varchar(255));";
 		String query5 = "CREATE TABLE IF NOT EXISTS songData(SongID int NOT NULL AUTO_INCREMENT PRIMARY KEY, data LONGBLOB);";
 		String query6 = "CREATE TABLE IF NOT EXISTS songs_in_playlist(PlaylistID int PRIMARY KEY, PlaylistName varchar(255),SongID int(11), SongName varchar(255));";		
@@ -331,6 +331,7 @@ public class Database{
 						 .setGenre(rs.getString("Genre"))
 						 .setYear(rs.getString("Year"))
 						 .setPath("")
+						 .setCount(0)
 						 .getSong();
 				 sl.add(newSong);
 			}
@@ -352,6 +353,7 @@ public class Database{
 	public int addingSong(Song s){ //Signing Up
 		String getSongName, getArtistName, getAlbumName, getGenre;
 		String getYear, getUsername;
+		int getCount;
 		//get getConnection() from db
 		Connection cnt = getConnection();
 		getSongName = s.getSongName();
@@ -360,6 +362,7 @@ public class Database{
 		getGenre = s.getGenre();
 		getYear = s.getYear();
 		getUsername = s.getUserName();
+		getCount = s.getCount();
 		
 		
 		String query = "insert into songs values ("+0+",'"+getSongName+"','" 
@@ -367,7 +370,8 @@ public class Database{
 															+getAlbumName+ "','"
 															+getGenre+ "','"
 															+getYear+"','"
-															+getUsername+"')";
+															+getUsername+"','"
+															+getCount+"')";
 		
 
 		System.out.print(query);

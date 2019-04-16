@@ -12,6 +12,7 @@ public class SongBuilder
 	String Genre;
 	String Year;
 	String Path;
+	int count;
 	
 	public SongBuilder setSongID(int songID) {
 		SongID = songID;
@@ -47,10 +48,14 @@ public class SongBuilder
 		Path = path;
 		return this;
 	}
+	public SongBuilder setCount(int count) {
+		count = count;
+		return this;
+	}
 	
 	public Song getSong()
 	{
-		return new Song(SongID, UserName, SongName, ArtistName, Album, Genre, Year, Path);
+		return new Song(SongID, UserName, SongName, ArtistName, Album, Genre, Year, Path, count);
 	}
 	
 	
