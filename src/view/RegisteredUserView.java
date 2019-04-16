@@ -54,7 +54,7 @@ public class RegisteredUserView extends JFrame {
 	private JPanel contentPane;
 	public String currentUser;
 	public String currentProfile;
-	JButton btnPickPlaylist, btnPickSong, btnCreatePlaylist, btnUploadSong, btnEditSong, btnPlay, btnPause, btnNextSong, btnPreviousSong;
+	JButton btnPickPlaylist, btnPickSong, btnCreatePlaylist, btnUploadSong, btnEditSong, btnPlay, btnPause, btnNextSong, btnPreviousSong, btnByGenre;
 	JList yourSongsList, yourSongsListJList, playlistListJList;
 	JTextPane txtpnSongNameGenre;
 	private JButton btnRefresh;
@@ -65,6 +65,8 @@ public class RegisteredUserView extends JFrame {
 	boolean songChanged;
 	private JButton btnProfile;
 	boolean playSongInPlaylist;
+	private JButton btnByAlbum;
+	private JButton btnByYear;
 	
 	public static RegisteredUserView getInstance() {
         if (instance == null) {
@@ -268,6 +270,21 @@ public class RegisteredUserView extends JFrame {
 		btnProfile = new JButton("Profile");
 		btnProfile.setBounds(522, 43, 89, 23);
 		contentPane.add(btnProfile);
+		
+		 btnByGenre = new JButton("By Genre");
+		btnByGenre.addActionListener(new btn_ByGenre());
+		btnByGenre.setBounds(689, 329, 89, 25);
+		contentPane.add(btnByGenre);
+		
+		btnByAlbum = new JButton("By Album");
+		btnByAlbum.addActionListener(new btn_ByAlbum());
+		btnByAlbum.setBounds(689, 357, 89, 25);
+		contentPane.add(btnByAlbum);
+		
+		btnByYear = new JButton("By Year");
+		btnByYear.addActionListener(new btn_ByYear());
+		btnByYear.setBounds(689, 391, 89, 25);
+		contentPane.add(btnByYear);
 		btnProfile.addActionListener(new btn_Profile());
 		
 		logoutButton.addActionListener(new btn_Logout());
@@ -311,6 +328,7 @@ public class RegisteredUserView extends JFrame {
 	    	 }else {
 	    		 mp3.play();
 	    	 }
+	    	 
 	    	 System.out.println("playSongInPlaylist: "+playSongInPlaylist);
 	    	 if(playSongInPlaylist) {
 		    	 mp3.pause();
@@ -470,6 +488,34 @@ public class RegisteredUserView extends JFrame {
 			
 		 }
 	 }
+	 
+	 class btn_ByGenre implements ActionListener
+	 {
+		 public void actionPerformed(ActionEvent e)
+		 {
+			
+			
+		 }
+	 }
+	 
+	 class btn_ByAlbum implements ActionListener
+	 {
+		 public void actionPerformed(ActionEvent e)
+		 {
+			
+			
+		 }
+	 }
+	 
+	 class btn_ByYear implements ActionListener
+	 {
+		 public void actionPerformed(ActionEvent e)
+		 {
+			
+			
+		 }
+	 }
+	 
 		public void closingWindow() {
 			this.setVisible(false);
 		}
