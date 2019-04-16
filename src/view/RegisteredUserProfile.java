@@ -21,7 +21,7 @@ public class RegisteredUserProfile extends JFrame{
 	public RegisteredUserProfile() {
 		getContentPane().setLayout(null);
 		
-		JLabel lblUser = new JLabel("User:" + currentUser );
+		lblUser = new JLabel("User:" + currentUser );
 		lblUser.setHorizontalAlignment(SwingConstants.CENTER);
 		lblUser.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblUser.setBounds(10, 34, 1071, 53);
