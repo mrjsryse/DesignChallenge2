@@ -130,6 +130,16 @@ public class RegisteredUserView extends JFrame {
 		btnPreviousSong.addActionListener(new btn_prevSong());
 		
 		playlistListJList = new JList();
+		playlistListJList.addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent arg0) {
+				DefaultListModel DLM3 = new DefaultListModel();
+				int i = playlistListJList.getSelectedIndex();
+					 for(int j = 0; j <  sl.getSongSize(); j++)
+						 DLM3.addElement(pl.getPlaylistList().get(i).getSongInPlaylist().get(j).getSongName());
+				
+				yourSongsListJList.setModel(DLM3);
+			}
+		});
 		playlistListJList.setBounds(25, 93, 322, 558);
 		playlistListJList.setBackground(new Color(224,224,224));
 		contentPane.add(playlistListJList);
@@ -386,13 +396,7 @@ public class RegisteredUserView extends JFrame {
 			 
 			 //==============================================
 			 SongList sList = new SongList();
-			 DefaultListModel DLM3 = new DefaultListModel();
 			 
-			 for(int i = 0; i < pList.getPlaylistSize(); i++)
-				 for(int j = 0; j <  sList.getSongSize(); j++)
-					 DLM3.addElement(pList.getPlaylistList().get(i).getSongInPlaylist().get(j).getSongName());
-			 
-			 yourSongsListJList.setModel(DLM3);
 			 
 			 
 		 }
