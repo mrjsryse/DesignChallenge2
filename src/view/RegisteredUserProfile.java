@@ -1,16 +1,34 @@
 package view;
 
 import javax.swing.JFrame;
+
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+
 import javax.swing.SwingConstants;
+
+import model.PlaylistList;
+import model.Song;
+import model.SongList;
+import model.generalModel;
+
 import javax.swing.JList;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
+
+import java.awt.Font;
 
 public class RegisteredUserProfile extends JFrame{
 	private volatile static RegisteredUserProfile instance = null;
 	public String currentUser;
 	public JLabel lblUser;
+	private JButton btnRefresh;
+	ArrayList<Song> userSongs;
+	JList songJlist,playlistJList;
+	PlaylistList pl;
 	
 	public static RegisteredUserProfile getInstance() {
         if (instance == null) {
@@ -40,19 +58,50 @@ public class RegisteredUserProfile extends JFrame{
 		lblSongs.setBounds(765, 133, 202, 53);
 		getContentPane().add(lblSongs);
 		
-		JList playlistJList = new JList();
+		playlistJList = new JList();
 		playlistJList.setBounds(10, 173, 355, 430);
 		getContentPane().add(playlistJList);
 		
-		JList songJList = new JList();
-		songJList.setBounds(726, 184, 355, 430);
-		getContentPane().add(songJList);
+		songJlist = new JList();
+		songJlist.setBounds(726, 184, 355, 430);
+		getContentPane().add(songJlist);
 		
-		JButton btnFavorite = new JButton("Favorite!");
-		btnFavorite.setBounds(475, 183, 139, 53);
+		JButton btnFavorite = new JButton("Favorite");
+		btnFavorite.setBounds(477, 256, 139, 53);
 		getContentPane().add(btnFavorite);
 		
+		btnRefresh = new JButton("Refresh");
+		btnRefresh.setBounds(477, 170, 139, 53);
+		getContentPane().add(btnRefresh);
+		btnRefresh.addActionListener((ActionListener) new btn_Refresh());
+		
 		this.setSize(1100, 700);
+	}
+	
+	class btn_Refresh implements ActionListener
+	{
+		public void actionPerformed(ActionEvent e)
+		{
+			userSongs = generalModel.getInstance().gettingSongs(currentUser);
+			
+			DefaultListModel DLM = new DefaultListModel();
+			
+			for(int x = 0; x < userSongs.size();x++)
+				DLM.addElement(userSongs.get(x).getSongName());
+			
+			songJlist.setModel(DLM);
+			
+			PlaylistList pList = new PlaylistList();
+			DefaultListModel DLM2 = new DefaultListModel();
+			
+			for(int x = 0; x <pList.getPlaylistSize();x++)
+				DLM2.addElement(pList.getPlaylistList().get(x).getPlaylistName());
+			
+			playlistJList.setModel(DLM2);
+			
+			SongList sList = new SongList();
+			
+		}
 	}
 	
 	public void getUserName(String currentUser) {
