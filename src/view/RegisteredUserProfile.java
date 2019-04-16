@@ -63,6 +63,7 @@ public class RegisteredUserProfile extends JFrame{
 		getContentPane().add(playlistJList);
 		
 		songJlist = new JList();
+		songJlist.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		songJlist.setBounds(726, 184, 355, 430);
 		getContentPane().add(songJlist);
 		
