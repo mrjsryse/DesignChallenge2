@@ -74,7 +74,7 @@ public class Song {
 	@Override
 	public String toString() {
 		return "Song [SongName=" + SongName + ", ArtistName=" + ArtistName + ", Album=" + Album + ", Genre=" + Genre
-				+ ", Year=" + Year + "]";
+				+ ", Year=" + Year + ",Count=" + count + "]";
 	}
 	
 	

@@ -331,6 +331,7 @@ public class Database{
 						 .setGenre(rs.getString("Genre"))
 						 .setYear(rs.getString("Year"))
 						 .setPath("")
+						 .setCount(0)
 						 .getSong();
 				 sl.add(newSong);
 			}
@@ -352,6 +353,7 @@ public class Database{
 	public int addingSong(Song s){ //Signing Up
 		String getSongName, getArtistName, getAlbumName, getGenre;
 		String getYear, getUsername;
+		int getCount;
 		//get getConnection() from db
 		Connection cnt = getConnection();
 		getSongName = s.getSongName();
@@ -360,6 +362,7 @@ public class Database{
 		getGenre = s.getGenre();
 		getYear = s.getYear();
 		getUsername = s.getUserName();
+		getCount = s.getCount();
 		
 		
 		String query = "insert into songs values ("+0+",'"+getSongName+"','" 
@@ -367,7 +370,8 @@ public class Database{
 															+getAlbumName+ "','"
 															+getGenre+ "','"
 															+getYear+"','"
-															+getUsername+"')";
+															+getUsername+"'"
+															+getCount+"')";
 		
 
 		System.out.print(query);
