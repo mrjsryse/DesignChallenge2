@@ -64,6 +64,7 @@ public class RegisteredUserView extends JFrame {
 	ArrayList<Song> userSongs;
 	boolean songChanged;
 	private JButton btnProfile;
+	boolean playSongInPlaylist;
 	
 	public static RegisteredUserView getInstance() {
         if (instance == null) {
@@ -134,10 +135,12 @@ public class RegisteredUserView extends JFrame {
 			public void valueChanged(ListSelectionEvent arg0) {
 				DefaultListModel DLM3 = new DefaultListModel();
 				int i = playlistListJList.getSelectedIndex();
-					 for(int j = 0; j <  sl.getSongSize(); j++)
+				String SongName;
+					 for(int j = 0; j <  pl.getPlaylistList().get(i).getSongSize(); j++)
 						 DLM3.addElement(pl.getPlaylistList().get(i).getSongInPlaylist().get(j).getSongName());
 				
 				yourSongsListJList.setModel(DLM3);
+				
 			}
 		});
 		playlistListJList.setBounds(25, 93, 322, 558);
@@ -145,6 +148,12 @@ public class RegisteredUserView extends JFrame {
 		contentPane.add(playlistListJList);
 		
 		yourSongsListJList = new JList();
+		yourSongsListJList.addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent arg0) {
+						playSongInPlaylist = true;
+
+			}
+		});
 		yourSongsListJList.setBounds(395, 93, 375, 224);
 		yourSongsListJList.setBackground(new Color(224,224,224));
 		contentPane.add(yourSongsListJList);
@@ -299,6 +308,17 @@ public class RegisteredUserView extends JFrame {
 		    	 mp3 = new MP3Player(new File("currentSong.mp3"));
 		    	 mp3.play();	
 		    	 songChanged = false;
+	    	 }else {
+	    		 mp3.play();
+	    	 }
+	    	 System.out.println("playSongInPlaylist: "+playSongInPlaylist);
+	    	 if(playSongInPlaylist) {
+		    	 mp3.pause();
+		    	 int SongID = pl.getPlaylistList().get(playlistListJList.getSelectedIndex()).getSongInPlaylist().get(yourSongsListJList.getSelectedIndex()).getSongID();
+		    	 generalModel.getInstance().readSongData(SongID);
+		    	 mp3 = new MP3Player(new File("currentSong.mp3"));
+		    	 mp3.play();	
+		    	 playSongInPlaylist = false;
 	    	 }else {
 	    		 mp3.play();
 	    	 }
