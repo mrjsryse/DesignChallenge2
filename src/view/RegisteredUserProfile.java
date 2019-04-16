@@ -5,6 +5,7 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.JList;
+import javax.swing.JButton;
 
 public class RegisteredUserProfile extends JFrame{
 	private volatile static RegisteredUserProfile instance = null;
@@ -46,6 +47,10 @@ public class RegisteredUserProfile extends JFrame{
 		JList songJList = new JList();
 		songJList.setBounds(726, 184, 355, 430);
 		getContentPane().add(songJList);
+		
+		JButton btnFavorite = new JButton("Favorite!");
+		btnFavorite.setBounds(475, 183, 139, 53);
+		getContentPane().add(btnFavorite);
 		
 		this.setSize(1100, 700);
 	}
