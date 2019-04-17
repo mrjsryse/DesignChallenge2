@@ -3,6 +3,7 @@ import java.io.File;
 import javax.swing.*;
 import javax.swing.JOptionPane;
 
+import controller.PlaylistBuilder;
 import controller.SongBuilder;
 
 import java.io.FileInputStream;
@@ -350,6 +351,45 @@ public class Database{
 		return null; 
 		
 	}
+	
+	public ArrayList<Playlist> getPlaylist(String username){
+		//get getConnection() from db
+				Connection cnt = getConnection();
+				
+				String query = "SELECT * FROM playlists WHERE username = '"+username+"';";
+				//create string qu
+				
+				try {
+					//create prepared statement	
+					PreparedStatement ps = cnt.prepareStatement(query);
+					
+					//get result and store in result set
+					ResultSet rs = ps.executeQuery();
+					
+					ArrayList<Playlist> pl = new ArrayList<>();
+					//transform set into list
+					while(rs.next()) {
+						 Playlist newPlaylist = new PlaylistBuilder()
+								 .setPlaylistName(rs.getString("playlistName"))
+								 .setUsername(rs.getString("username"))
+								 .setFavorite(rs.getString("Favorite"))
+								 .getPlaylist();
+						 pl.add(newPlaylist);
+					}
+					
+					//close all the resources
+					ps.close();
+					rs.close();
+					cnt.close();
+					
+					return pl;
+
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+				return null; 
+		
+	}
 
 	public int addingSong(Song s){ //Signing Up
 		String getSongName, getArtistName, getAlbumName, getGenre;
@@ -457,8 +497,6 @@ public class Database{
 		getUsername = p.getUsername();
 		String x = "0"; // if favorite or not
 		
-		
-		//String query = "insert into user_playlists values ('"+getUsername+"','"+getPlaylistName+"','"+x+"';)";
 		String query = "insert into user_playlists values ('"+getUsername+"','"+getPlaylistName+"','"+x+"')";
 
 		System.out.print(query);

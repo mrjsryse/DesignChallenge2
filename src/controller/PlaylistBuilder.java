@@ -11,6 +11,7 @@ public class PlaylistBuilder
 	ArrayList<Song> SongInPlaylist = new ArrayList<Song>();
 	String playlistName;
 	String username;
+	String favorite;
 	
 	
 	public PlaylistBuilder setSongs(ArrayList<Song> SongInPlaylist) {
@@ -24,6 +25,11 @@ public class PlaylistBuilder
 	
 	public PlaylistBuilder setUsername(String username){
 		this.username = username;
+		return this;
+	}
+	
+	public PlaylistBuilder setFavorite(String favorite) {
+		this.favorite = favorite;
 		return this;
 	}
 	

@@ -56,6 +56,10 @@ public class generalModel {
 		return Database.getInstance().getSongs(t);
 	}
 	
+	public ArrayList<Playlist> gettingPlaylists(String t){
+		return Database.getInstance().getPlaylist(t);
+	}
+	
 	public void readSongData(int SongID) {
 		Database.getInstance().readBLOB(SongID);
 	}

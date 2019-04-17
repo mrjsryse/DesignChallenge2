@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 import jaco.mp3.player.MP3Player;
 import model.Database;
+import model.Playlist;
 import model.PlaylistList;
 import model.Song;
 import model.SongList;
@@ -62,6 +63,7 @@ public class RegisteredUserView extends JFrame {
 	PlaylistList pl;
 	SongList sl;
 	ArrayList<Song> userSongs;
+	ArrayList<Playlist> userPlaylist;
 	boolean songChanged;
 	private JButton btnProfile;
 	boolean playSongInPlaylist;
@@ -403,7 +405,7 @@ public class RegisteredUserView extends JFrame {
 			 
 			 
 			 userSongs = generalModel.getInstance().gettingSongs(currentUser);
-			 
+			 userPlaylist = generalModel.getInstance().gettingPlaylists(currentUser);
 			 
 			 DefaultListModel DLM = new DefaultListModel();
 			 
@@ -415,8 +417,8 @@ public class RegisteredUserView extends JFrame {
 			 PlaylistList pList = new PlaylistList();
 			 DefaultListModel DLM2 = new DefaultListModel();
 			 
-			 for(int x = 0; x < pList.getPlaylistSize(); x++)
-			 DLM2.addElement(pList.getPlaylistList().get(x).getPlaylistName());
+			 for(int y = 0; y < userPlaylist.size(); y++)
+			 DLM2.addElement(userPlaylist.get(y).getPlaylistName());
 			 
 			 playlistListJList.setModel(DLM2);
 			 
