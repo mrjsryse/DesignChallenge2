@@ -2,6 +2,7 @@ package view;
 
 import javax.swing.JFrame;
 
+
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -9,6 +10,8 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.SwingConstants;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 import model.PlaylistList;
 import model.Song;
@@ -19,16 +22,16 @@ import javax.swing.JList;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 
-import java.awt.Font;
 
 public class RegisteredUserProfile extends JFrame{
 	private volatile static RegisteredUserProfile instance = null;
 	public String currentUser;
 	public JLabel lblUser;
-	private JButton btnRefresh;
+	private JButton btnRefresh,btnFavorite;
 	ArrayList<Song> userSongs;
 	JList songJlist,playlistJList;
 	PlaylistList pl;
+	boolean songChanged;
 	
 	public static RegisteredUserProfile getInstance() {
         if (instance == null) {
@@ -64,13 +67,21 @@ public class RegisteredUserProfile extends JFrame{
 		getContentPane().add(playlistJList);
 		
 		songJlist = new JList();
+		songJlist.addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent arg0) {
+				String s = songJlist.getName();
+				songChanged = true;
+			}
+		});
 		songJlist.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		songJlist.setBounds(726, 184, 355, 430);
 		getContentPane().add(songJlist);
 		
-		JButton btnFavorite = new JButton("Favorite");
+		btnFavorite = new JButton("Favorite");
 		btnFavorite.setBounds(477, 256, 139, 53);
 		getContentPane().add(btnFavorite);
+		btnFavorite.addActionListener((ActionListener) new btn_Favorite());
+		
 		
 		btnRefresh = new JButton("Refresh");
 		btnRefresh.setBounds(477, 170, 139, 53);
@@ -103,6 +114,15 @@ public class RegisteredUserProfile extends JFrame{
 			
 			SongList sList = new SongList();
 			
+		}
+	}
+	
+	class btn_Favorite implements ActionListener
+	{
+		
+		public void actionPerformed(ActionEvent e)
+		{
+			userSongs = generalModel.getInstance().gettingSongs(currentUser);
 		}
 	}
 	
