@@ -35,7 +35,7 @@ public class PlaylistBuilder
 	
 	public Playlist getPlaylist()
 	{
-		return new Playlist(playlistName, username);
+		return new Playlist(playlistName, username, favorite);
 	}
 	
 	

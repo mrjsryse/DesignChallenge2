@@ -495,7 +495,7 @@ public class Database{
 		Connection cnt = getConnection();
 		getPlaylistName = p.getPlaylistName();
 		getUsername = p.getUsername();
-		String x = "0"; // if favorite or not
+		String x = p.getFavorite(); // if favorite or not
 		
 		String query = "insert into user_playlists values ('"+getUsername+"','"+getPlaylistName+"','"+x+"')";
 
