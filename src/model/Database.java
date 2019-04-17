@@ -54,7 +54,7 @@ public class Database{
 		String query2 = "CREATE TABLE IF NOT EXISTS playlists(PlaylistID int NOT NULL AUTO_INCREMENT PRIMARY KEY, PlaylistName varchar(255), Username varchar(255));";
 		String query3 = "CREATE TABLE IF NOT EXISTS songs(SongID int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY, Title varchar(255), "
 				+ "Artist varchar(255),Album varchar(255),Genre varchar(255), Year varchar(255), Username varchar(255), Play_Count int(11));";
-		String query4 = "CREATE TABLE IF NOT EXISTS user_playlists(Username varchar(255), PlaylistName varchar(255), Favorite varchar(255));";
+		String query4 = "CREATE TABLE IF NOT EXISTS user_playlists(Username varchar(255) PRIMARY KEY, PlaylistName varchar(255), Favorite varchar(255));";
 		String query5 = "CREATE TABLE IF NOT EXISTS songData(SongID int NOT NULL AUTO_INCREMENT PRIMARY KEY, data LONGBLOB);";
 		String query6 = "CREATE TABLE IF NOT EXISTS songs_in_playlist(PlaylistID int PRIMARY KEY, PlaylistName varchar(255),SongID int(11), SongName varchar(255));";		
 		
@@ -424,10 +424,10 @@ public class Database{
 		Connection cnt = getConnection();
 		getPlaylistName = p.getPlaylistName();
 		getUsername = p.getUsername();
+		String x = "0";
+		int y = 0;
 		
-		
-		String query = "insert into playlists values ("+0+",'"+getPlaylistName+"','"
-															+getUsername+ "')";
+		String query = "insert into playlists values ('"+y+"','"+getPlaylistName+"','"+getUsername+"')";
 
 		System.out.print(query);
 		//create string query
@@ -458,9 +458,8 @@ public class Database{
 		String x = "0"; // if favorite or not
 		
 		
-		String query = "insert into user_playlists values ('"+x+"','"
-															+getPlaylistName+ "',"
-															+ "'"+getUsername+"')";
+		//String query = "insert into user_playlists values ('"+getUsername+"','"+getPlaylistName+"','"+x+"';)";
+		String query = "insert into user_playlists values ('"+getUsername+"','"+getPlaylistName+"','"+x+"')";
 
 		System.out.print(query);
 		//create string query

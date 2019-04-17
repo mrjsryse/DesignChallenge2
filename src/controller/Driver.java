@@ -12,7 +12,7 @@ public class Driver {
 		//test adding for Git REEEE
 
 		String URL = "jdbc:mysql://localhost:3306/";
-		String USERNAME = "root";
+		String USERNAME = "ariel";
 		String PASSWORD = "arielariel0";
 		String DATABASE = "swdespa";
  
