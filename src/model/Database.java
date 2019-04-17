@@ -3,6 +3,7 @@ import java.io.File;
 import javax.swing.*;
 import javax.swing.JOptionPane;
 
+import controller.PlaylistBuilder;
 import controller.SongBuilder;
 
 import java.io.FileInputStream;
@@ -618,6 +619,46 @@ public ArrayList<Song> getSongsByYear() {
 					 .setCount(0)
 					 .getSong();
 			 sl.add(newSong);
+		}
+		
+		//close all the resources
+		ps.close();
+		rs.close();
+		cnt.close();
+		
+		return sl;
+
+	} catch (SQLException e) {
+		e.printStackTrace();
+	}
+	return null; 
+	
+}
+
+public ArrayList<Playlist> gettingUserPlaylist() {
+	
+	//get getConnection() from db
+	Connection cnt = getConnection();
+	
+	String query = "SELECT * FROM playlist";
+	//create string qu
+	
+	try {
+		//create prepared statement	
+		PreparedStatement ps = cnt.prepareStatement(query);
+		
+		//get result and store in result set
+		ResultSet rs = ps.executeQuery();
+		
+		ArrayList<Playlist> sl = new ArrayList<>();
+		//transform set into list
+		while(rs.next()) {
+			 Playlist newPlaylist = new PlaylistBuilder()
+					 .setPlaylistName(rs.getString("PlaylistName"))
+					 .setUsername(rs.getString("UserName"))
+					 .getPlaylist();
+					 
+			 sl.add(newPlaylist);
 		}
 		
 		//close all the resources
