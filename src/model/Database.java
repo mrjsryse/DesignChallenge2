@@ -479,6 +479,31 @@ public class Database{
 		//return null;
 	}
 	
+	public void favoritingPlaylist(String PlaylistID){ 
+		String ID = PlaylistID;
+		
+		
+		//get getConnection() from db
+		Connection cnt = getConnection();
+		
+		String x = "0"; // if favorite or not
+		
+		
+		String query = "UPDATE swdespa.user_playlists SET Favorite = 1 WHERE Username = ('"+ID+"');";
+
+		System.out.print(query);
+		//create string query
+		
+		try {
+			PreparedStatement ps = getConnection().prepareStatement(query);
+			ps.executeUpdate(query, Statement.RETURN_GENERATED_KEYS);
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		//return null;
+	}
+	
 	
 	public void addingSongsInPlaylist(Playlist p, Song s){ 	
 		int getPlaylistID;

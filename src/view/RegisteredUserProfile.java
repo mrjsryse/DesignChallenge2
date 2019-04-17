@@ -13,6 +13,7 @@ import javax.swing.SwingConstants;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import model.Playlist;
 import model.PlaylistList;
 import model.Song;
 import model.SongList;
@@ -29,8 +30,9 @@ public class RegisteredUserProfile extends JFrame{
 	public JLabel lblUser;
 	private JButton btnRefresh,btnFavorite;
 	ArrayList<Song> userSongs;
-	JList songJlist,playlistJList;
+	ArrayList<Playlist> userPlaylists;
 	PlaylistList pl;
+	JList songJlist,playlistJList;
 	boolean songChanged;
 	
 	public static RegisteredUserProfile getInstance() {
@@ -133,7 +135,9 @@ public class RegisteredUserProfile extends JFrame{
 		
 		public void actionPerformed(ActionEvent e)
 		{
-			userSongs = generalModel.getInstance().gettingSongs(currentUser);
+			String playlistOfUser = userPlaylists.get(playlistJList.getSelectedIndex()).getUsername();
+			//userSongs = generalModel.getInstance().gettingSongs(currentUser);
+			generalModel.getInstance().favoritingPlaylist(playlistOfUser);
 		}
 	}
 	

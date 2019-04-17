@@ -62,4 +62,7 @@ public class generalModel {
 	public void updateCount(int SongID) {
 		Database.getInstance().countUpdate(SongID);
 	}
+	public void favoritingPlaylist(String PlaylistID) {
+		Database.getInstance().favoritingPlaylist(PlaylistID);
+	}
 }
