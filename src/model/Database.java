@@ -458,9 +458,9 @@ public class Database{
 		String x = "0"; // if favorite or not
 		
 		
-		String query = "insert into user_playlists values ('"+getUsername+"','"
+		String query = "insert into user_playlists values ('"+x+"','"
 															+getPlaylistName+ "',"
-															+ "'"+x+"')";
+															+ "'"+getUsername+"')";
 
 		System.out.print(query);
 		//create string query
@@ -487,9 +487,10 @@ public class Database{
 		Connection cnt = getConnection();
 		
 		String x = "0"; // if favorite or not
+		String y = "1";
 		
 		
-		String query = "UPDATE swdespa.user_playlists SET Favorite = 1 WHERE Username = ('"+ID+"');";
+		String query = "UPDATE swdespa.user_playlists SET Favorite = ('"+y+"') WHERE Username = ('"+ID+"');";
 
 		System.out.print(query);
 		//create string query
