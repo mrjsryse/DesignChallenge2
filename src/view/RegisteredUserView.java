@@ -493,7 +493,15 @@ public class RegisteredUserView extends JFrame {
 	 {
 		 public void actionPerformed(ActionEvent e)
 		 {
-			
+			 String s;
+			 DefaultListModel DLM = new DefaultListModel();
+			 for(int i = 0; i < generalModel.getInstance().getSongsByGenre().size(); i++)
+			 {
+				 s = generalModel.getInstance().getSongsByGenre().get(i).getSongName();
+				 DLM.addElement(s);
+			 }
+			 
+			 yourSongsList.setModel(DLM);
 			
 		 }
 	 }
@@ -502,7 +510,15 @@ public class RegisteredUserView extends JFrame {
 	 {
 		 public void actionPerformed(ActionEvent e)
 		 {
-			
+			 String s;
+			 DefaultListModel DLM = new DefaultListModel();
+			 for(int i = 0; i < generalModel.getInstance().getSongsByAlbum().size(); i++)
+			 {
+				 s = generalModel.getInstance().getSongsByAlbum().get(i).getSongName();
+				 DLM.addElement(s);
+			 }
+			 
+			 yourSongsList.setModel(DLM);
 			
 		 }
 	 }
@@ -511,7 +527,15 @@ public class RegisteredUserView extends JFrame {
 	 {
 		 public void actionPerformed(ActionEvent e)
 		 {
-			
+			 String s;
+			 DefaultListModel DLM = new DefaultListModel();
+			 for(int i = 0; i < generalModel.getInstance().getSongsByYear().size(); i++)
+			 {
+				 s = generalModel.getInstance().getSongsByYear().get(i).getSongName();
+				 DLM.addElement(s);
+			 }
+			 
+			 yourSongsList.setModel(DLM);
 			
 		 }
 	 }
