@@ -112,10 +112,11 @@ public class CreatePlaylist extends JFrame {
 			 closingWindow();
 
 		 }
-		
+		 }
 	 }
 	
 	public void closingWindow() {
 		this.setVisible(false);
 	}
-} //songID, username, songName,artistName,albumName,genre,year,path,count,favorite
+ }
+ //songID, username, songName,artistName,albumName,genre,year,path,count,favorite
