@@ -410,7 +410,7 @@ public class RegisteredUserView extends JFrame {
 			 DefaultListModel DLM = new DefaultListModel();
 			 
 			 for(int x = 0; x < userSongs.size(); x++)
-			 DLM.addElement(userSongs.get(x).getSongName());
+				 DLM.addElement(userSongs.get(x).getSongName());
 
 			 yourSongsList.setModel(DLM);
 			 //==============================================
@@ -420,7 +420,7 @@ public class RegisteredUserView extends JFrame {
 			 DefaultListModel DLM2 = new DefaultListModel();
 			 
 			 for(int y = 0; y < userPlaylist.size(); y++)
-			 DLM2.addElement(userPlaylist.get(y).getPlaylistName());
+				 DLM2.addElement(userPlaylist.get(y).getPlaylistName());
 			 
 			 playlistListJList.setModel(DLM2);
 			 

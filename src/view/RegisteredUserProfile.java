@@ -30,7 +30,7 @@ public class RegisteredUserProfile extends JFrame{
 	public JLabel lblUser;
 	private JButton btnRefresh,btnFavorite;
 	ArrayList<Song> userSongs;
-	ArrayList<Playlist> userPlaylists;
+	ArrayList<Playlist> userPlaylist;
 	PlaylistList pl;
 	JList songJlist,playlistJList;
 	boolean songChanged;
@@ -117,15 +117,20 @@ public class RegisteredUserProfile extends JFrame{
 			
 			songJlist.setModel(DLM);
 			
-			PlaylistList pList = new PlaylistList();
+			//==============================================
+			
+			userPlaylist = generalModel.getInstance().gettingPlaylists(currentUser);
+			
 			DefaultListModel DLM2 = new DefaultListModel();
 			
-			for(int x = 0; x <pList.getPlaylistSize();x++)
-				DLM2.addElement(pList.getPlaylistList().get(x).getPlaylistName());
+			for(int y = 0; y < userPlaylist.size(); y++)
+				DLM2.addElement(userPlaylist.get(y).getPlaylistName());
 			
 			playlistJList.setModel(DLM2);
 			
 			SongList sList = new SongList();
+			PlaylistList pList1 = new PlaylistList();
+			
 			
 		}
 	}
@@ -135,7 +140,7 @@ public class RegisteredUserProfile extends JFrame{
 		
 		public void actionPerformed(ActionEvent e)
 		{
-			String playlistOfUser = userPlaylists.get(playlistJList.getSelectedIndex()).getUsername();
+			String playlistOfUser = userPlaylist.get(playlistJList.getSelectedIndex()).getUsername();
 			//userSongs = generalModel.getInstance().gettingSongs(currentUser);
 			generalModel.getInstance().favoritingPlaylist(playlistOfUser);
 		}
