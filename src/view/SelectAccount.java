@@ -45,36 +45,31 @@ public class SelectAccount extends JFrame{
 		JLabel applicationName = new JLabel("Not So");
 		applicationName.setFont(new Font("Palatino Linotype", Font.PLAIN, 29));
 		applicationName.setBackground(Color.WHITE);
-		applicationName.setBounds(211, 47, 87, 62);
+		applicationName.setBounds(162, 55, 87, 62);
 		backgroundPanel.add(applicationName);
 		
-		JLabel lblAreYouA = new JLabel("What do you want to do?");
-		lblAreYouA.setHorizontalAlignment(SwingConstants.CENTER);
-		lblAreYouA.setBounds(212, 223, 183, 14);
-		backgroundPanel.add(lblAreYouA);
-		
 		btnGuestAccount = new JButton("Guest Account");
-		btnGuestAccount.setBounds(212, 413, 183, 62);
+		btnGuestAccount.setBounds(197, 341, 183, 62);
 		backgroundPanel.add(btnGuestAccount);
 		
 		btnRegisteredAccount = new JButton("Registered Account");
-		btnRegisteredAccount.setBounds(212, 340, 183, 62);
+		btnRegisteredAccount.setBounds(197, 268, 183, 62);
 		backgroundPanel.add(btnRegisteredAccount);
 		
 		
 		btnSignUp = new JButton("Sign Up");
-		btnSignUp.setBounds(212, 267, 183, 62);
+		btnSignUp.setBounds(197, 195, 183, 62);
 		backgroundPanel.add(btnSignUp);
 		
 		JLabel label = new JLabel("");
 		label.setIcon(new ImageIcon(SelectAccount.class.getResource("/images/spotify.png")));
 		label.setFont(new Font("Tahoma", Font.PLAIN, 29));
 		label.setBackground(Color.WHITE);
-		label.setBounds(328, 27, 129, 129);
+		label.setBounds(279, 35, 129, 129);
 		backgroundPanel.add(label);
 
 		this.setVisible(true);
-		this.setSize(625, 700);
+		this.setSize(593, 485);
 		
 		//Making the action listeners
 		btnSignUp.addActionListener(new signUpButton());
