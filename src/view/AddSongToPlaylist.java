@@ -90,7 +90,7 @@ public class AddSongToPlaylist extends JFrame {
 		 			for(j = 0; j < generalModel.getInstance().gettingSongs(currUser).size(); j++)
 					 	if (comboBoxSongs.getSelectedItem().equals(generalModel.getInstance().gettingSongs(currUser).get(j).getSongName()))
 					 	{				
-					 		generalModel.getInstance().getUserPlaylist(currUser).get(i).addSongToPlaylist(generalModel.getInstance().gettingSongs(currUser).get(j));
+					 		generalModel.getInstance().getUserPlaylist(currUser).get(i).addSongToPlaylist(generalModel.getInstance().gettingSongs(currUser).get(j));       
 					 		System.out.print(generalModel.getInstance().getUserPlaylist(currUser).get(i).getSongInPlaylist().get(j).getSongName());
 					 		//System.out.print(pl.getPlaylistList().get(i).getSongInPlaylist().get(j).getSongName());
 					 		System.out.println("yes");

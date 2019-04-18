@@ -160,10 +160,12 @@ public class RegisteredUserView extends JFrame {
 		btnPickPlaylist.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				DefaultListModel DLM3 = new DefaultListModel();
+				yourSongsListJList.removeAll();
+				
 				int i = playlistListJList.getSelectedIndex();
 				String SongName;
-					 for(int j = 0; j <  pl.getPlaylistList().get(i).getSongSize(); j++)
-						 DLM3.addElement(pl.getPlaylistList().get(i).getSongInPlaylist().get(j).getSongName());
+					 for(int j = 0; j <  generalModel.getInstance().getUserPlaylist(currentUser).get(i).getSongInPlaylist().size(); j++)
+						 DLM3.addElement(generalModel.getInstance().getUserPlaylist(currentUser).get(i).getSongInPlaylist().get(j).getSongName());
 				
 				yourSongsListJList.setModel(DLM3);
 				
@@ -325,21 +327,31 @@ public class RegisteredUserView extends JFrame {
 	     public void actionPerformed(ActionEvent e) 
 	     {	 
 	    	 System.out.println("songChanged: "+songChanged);
-	    	 if(songChanged) {
+	    	 if(songChanged == true) {
 		    	 mp3.pause();
 		    	 int SongID = userSongs.get(yourSongsList.getSelectedIndex()).getSongID();
-		    	 generalModel.getInstance().readSongData(SongID);
-		    	 mp3 = new MP3Player(new File("currentSong.mp3"));
+	    		 generalModel.getInstance().readSongData(SongID);
+	    		 mp3 = new MP3Player(new File("currentSong.mp3"));
 		    	 mp3.play();
 		    	 songChanged = false;
-	    	 }else {
+	    	 }
+	    	 else if(playSongInPlaylist == true)
+		     {
+	    		 mp3.pause();
+		    	 int SongID2 = userPlaylists.get(playlistListJList.getSelectedIndex()).getSongInPlaylist().get(yourSongsListJList.getSelectedIndex()).getSongID();
+		    	 generalModel.getInstance().readSongData(SongID2);
+		    	 mp3 = new MP3Player(new File("currentSong.mp3"));
+			     mp3.play();
+			   	 playSongInPlaylist = false;
+		     }
+	    	 else {
 	    		 mp3.play();
 	    	 }
-	    	 
+	    /*	 
 	    	 System.out.println("playSongInPlaylist: "+playSongInPlaylist);
-	    	 if(playSongInPlaylist) {
+	    	 if(playSongInPlaylist == true) {
 		    	 mp3.pause();
-		    	 int SongID = pl.getPlaylistList().get(playlistListJList.getSelectedIndex()).getSongInPlaylist().get(yourSongsListJList.getSelectedIndex()).getSongID();
+		    	 int SongID = userPlaylists.get(playlistListJList.getSelectedIndex()).getSongInPlaylist().get(yourSongsListJList.getSelectedIndex()).getSongID();
 		    	 generalModel.getInstance().readSongData(SongID);
 		    	 mp3 = new MP3Player(new File("currentSong.mp3"));
 		    	 mp3.play();	
@@ -347,7 +359,7 @@ public class RegisteredUserView extends JFrame {
 	    	 }else {
 	    		 mp3.play();
 	    	 }
-
+*/
 	     }
 	 }
 	 
