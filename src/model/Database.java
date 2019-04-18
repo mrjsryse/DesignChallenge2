@@ -635,12 +635,12 @@ public ArrayList<Song> getSongsByYear() {
 	
 }
 
-public ArrayList<Playlist> gettingUserPlaylist() {
+public ArrayList<Playlist> gettingUserPlaylist(String username) {
 	
 	//get getConnection() from db
 	Connection cnt = getConnection();
 	
-	String query = "SELECT * FROM playlist";
+	String query = "SELECT * FROM swdespa.user_playlists WHERE username = '"+username+"';";
 	//create string qu
 	
 	try {
@@ -654,8 +654,8 @@ public ArrayList<Playlist> gettingUserPlaylist() {
 		//transform set into list
 		while(rs.next()) {
 			 Playlist newPlaylist = new PlaylistBuilder()
+					 .setUsername(rs.getString("Username"))
 					 .setPlaylistName(rs.getString("PlaylistName"))
-					 .setUsername(rs.getString("UserName"))
 					 .getPlaylist();
 					 
 			 sl.add(newPlaylist);
@@ -675,6 +675,51 @@ public ArrayList<Playlist> gettingUserPlaylist() {
 	
 }
 
+public ArrayList<Song> gettingSongs() {
+	
+	//get getConnection() from db
+	Connection cnt = getConnection();
+	
+	String query = "SELECT * FROM songs";
+	//create string qu
+	
+	try {
+		//create prepared statement	
+		PreparedStatement ps = cnt.prepareStatement(query);
+		
+		//get result and store in result set
+		ResultSet rs = ps.executeQuery();
+		
+		ArrayList<Song> sl = new ArrayList<>();
+		//transform set into list
+		while(rs.next()) {
+			 Song newSong = new SongBuilder()
+					 .setSongID(rs.getInt("SongID"))
+					 .setUserName(rs.getString("Username"))
+					 .setSongName(rs.getString("Title"))
+					 .setArtistName(rs.getString("Artist"))
+					 .setAlbum(rs.getString("Album"))
+					 .setGenre(rs.getString("Genre"))
+					 .setYear(rs.getString("Year"))
+					 .setPath("")
+					 .setCount(0)
+					 .getSong();
+			 sl.add(newSong);
+		}
+		
+		//close all the resources
+		ps.close();
+		rs.close();
+		cnt.close();
+		
+		return sl;
+
+	} catch (SQLException e) {
+		e.printStackTrace();
+	}
+	return null; 
+	
+}
 //	public void testerTemplate() {
 //		String x = "dad";
 //		String y = "d";

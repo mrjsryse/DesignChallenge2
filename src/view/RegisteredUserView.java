@@ -361,7 +361,7 @@ public class RegisteredUserView extends JFrame {
 			 astp.setVisible(true);
 			 
 			 userSongs = generalModel.getInstance().gettingSongs(currentUser);
-			 userPlaylists = generalModel.getInstance().getUserPlaylist();
+			 userPlaylists = generalModel.getInstance().getUserPlaylist(currentUser);
 			 
 			 SongList sList = new SongList();
 			 PlaylistList pList = new PlaylistList();
@@ -371,9 +371,9 @@ public class RegisteredUserView extends JFrame {
 				 astp.comboBoxSongs.addItem(userSongs.get(x).getSongName());;
 			 }
 			 
-			 for(int y = 0; y < pl.getPlaylistSize(); y++)
+			 for(int y = 0; y < userPlaylists.size(); y++)
 			 {
-				 astp.comboBoxPlaylists.addItem(userPlaylists.get(y).getPlaylistName());
+				 astp.comboBoxPlaylists.addItem(userPlaylists.get(y).getPlaylistName());;
 			 }
 	    	 
 	     }
@@ -425,7 +425,7 @@ public class RegisteredUserView extends JFrame {
 			 
 			 
 			 userSongs = generalModel.getInstance().gettingSongs(currentUser);
-			 userPlaylists = generalModel.getInstance().getUserPlaylist();
+			 userPlaylists = generalModel.getInstance().getUserPlaylist(currentUser);
 			 
 			 DefaultListModel DLM = new DefaultListModel();
 			 

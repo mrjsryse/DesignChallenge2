@@ -75,8 +75,12 @@ public class generalModel {
 		return Database.getInstance().getSongsByYear();
 	}
 	
-	public ArrayList<Playlist> getUserPlaylist()
+	public ArrayList<Playlist> getUserPlaylist(String username)
 	{
-		return Database.getInstance().gettingUserPlaylist();
+		return Database.getInstance().gettingUserPlaylist(username);
+	}
+	
+	public ArrayList<Song> getSongStuff() {
+		return Database.getInstance().gettingSongs();
 	}
 }
