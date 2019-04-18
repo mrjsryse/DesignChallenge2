@@ -50,11 +50,11 @@ public class SongBuilder
 		return this;
 	}
 	public SongBuilder setCount(int Count) {
-		Count = Count;
+		this.Count = Count;
 		return this;
 	}
 	public SongBuilder setFavorite(String Favorite) {
-		Favorite = Favorite;
+		this.Favorite = Favorite;
 		return this;
 	}
 	

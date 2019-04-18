@@ -23,9 +23,6 @@ public class generalModel {
 		int SongID = Database.getInstance().addingSong(s);
 		Database.getInstance().writeBLOB(SongID, s.getPath());
 	}
-	public void getUserSongData(Song s) {
-		Database.getInstance().addingUserSongs(s);
-	}
 	
 	public void getAccountData(account x) {
 		if(Database.getInstance().addingAccount(x) == false) {

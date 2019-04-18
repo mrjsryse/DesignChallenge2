@@ -24,8 +24,8 @@ public class Song {
 		Genre = genre;
 		Year = year;
 		Path = path;
-		count = count;
-		favorite = favorite;
+		this.count = count;
+		this.favorite = favorite;
 	}
 	
 	public int getSongID()
