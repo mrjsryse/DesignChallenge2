@@ -414,7 +414,6 @@ public class RegisteredUserView extends JFrame {
 
 			 yourSongsList.setModel(DLM);
 			 //==============================================
-			 PlaylistList pList = new PlaylistList();
 			 DefaultListModel DLM2 = new DefaultListModel();
 			 
 			 for(int y = 0; y < userPlaylist.size(); y++)
@@ -424,7 +423,7 @@ public class RegisteredUserView extends JFrame {
 			 
 			 //==============================================
 			 SongList sList = new SongList();
-			 
+			 PlaylistList pList1 = new PlaylistList();
 			 
 			 
 		 }
