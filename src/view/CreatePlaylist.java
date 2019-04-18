@@ -107,13 +107,15 @@ public class CreatePlaylist extends JFrame {
 			 generalModel.getInstance().getPlaylistData(addedPlaylist);
 			 
 
-			 generalController.getInstance().gettingUserPlaylist(username, playlistName);
-			 dispose();
-			 
-			 }
-			 
+			 generalController.getInstance().gettingUserPlaylist(username, playlistName, favorite);
+			 JOptionPane.showMessageDialog(null, "Added " + playlistName + " playlist!");
+			 closingWindow();
 
 		 }
 		
 	 }
-}
+	
+	public void closingWindow() {
+		this.setVisible(false);
+	}
+} //songID, username, songName,artistName,albumName,genre,year,path,count,favorite

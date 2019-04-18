@@ -191,7 +191,7 @@ public class RegisteredUserView extends JFrame {
 		 
 		txtpnSongNameGenre = new JTextPane();
 		txtpnSongNameGenre.setBounds(395, 427, 375, 224);
-		txtpnSongNameGenre.setText("Song Name:\r\nArtist:\r\nAlbum:\r\nGenre:\r\r\nYear:");
+		txtpnSongNameGenre.setText("Song Name:\r\nArtist:\r\nAlbum:\r\nGenre:\r\r\nYear:\r\rFavorite");
 		txtpnSongNameGenre.setBackground(new Color(224,224,224));
 		contentPane.add(txtpnSongNameGenre);
 		
@@ -219,7 +219,9 @@ public class RegisteredUserView extends JFrame {
 		yourSongsList.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent arg0) {
 				String s = yourSongsList.getName();
+				String t = "0";
 				txtpnSongNameGenre.setText("Song Name: "+userSongs.get(yourSongsList.getSelectedIndex()).getSongName()+"\r\nArtist: "+userSongs.get(yourSongsList.getSelectedIndex()).getArtistName()+"\r\nAlbum: "+userSongs.get(yourSongsList.getSelectedIndex()).getAlbum()+"\r\nGenre: "+userSongs.get(yourSongsList.getSelectedIndex()).getGenre()+"\r\r\nYear: "+userSongs.get(yourSongsList.getSelectedIndex()).getYear()+"");
+	
 				songChanged = true;
 			}
 		});
@@ -313,12 +315,9 @@ public class RegisteredUserView extends JFrame {
 		 {
 			 String username;
 			 username = currentUser;
-			 System.out.println("First Test");
 			 RegisteredUserProfile.getInstance().setVisible(true);
 			 //System.out.println(currentUser); for testing
-			 RegisteredUserProfile.getInstance().getUserName(username);
-			 System.out.println("Second Test");
-			 
+			 RegisteredUserProfile.getInstance().getUserName(username);		
 		 }
 	 }
 	 
