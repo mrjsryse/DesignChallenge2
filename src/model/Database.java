@@ -488,7 +488,7 @@ public class Database{
 	
 	public void addingUserPlaylist(Playlist p){ 
 		String getPlaylistName, getUsername;
-		
+		int y = 0;
 		
 		//get getConnection() from db
 		Connection cnt = getConnection();
@@ -496,7 +496,7 @@ public class Database{
 		getUsername = p.getUsername();
 		String x = p.getFavorite(); // if favorite or not
 		
-		String query = "insert into user_playlists values ('"+getUsername+"','"+getPlaylistName+"','"+x+"')";
+		String query = "insert into user_playlists values ('"+y+"','"+getUsername+"','"+getPlaylistName+"','"+x+"')";
 
 		System.out.print(query);
 		//create string query
@@ -515,9 +515,9 @@ public class Database{
 		//return null;
 	}
 	
-	public void favoritingPlaylist(String PlaylistID){ 
+	public void favoritingPlaylist(String PlaylistID, String PlaylistName){ 
 		String ID = PlaylistID;
-		
+		String Name = PlaylistName;
 		
 		//get getConnection() from db
 		Connection cnt = getConnection();
@@ -526,7 +526,7 @@ public class Database{
 		String y = "1";
 		
 		
-		String query = "UPDATE swdespa.user_playlists SET Favorite = ('"+y+"') WHERE Username = ('"+ID+"');";
+		String query = "UPDATE swdespa.user_playlists SET Favorite = ('"+y+"') WHERE Username = ('"+ID+"') AND PlaylistName = ('"+Name+"');";
 
 		System.out.print(query);
 		//create string query
