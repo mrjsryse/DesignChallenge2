@@ -6,21 +6,36 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import controller.generalController;
 import model.account;
+import view.LoggingInView.confirmButton;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
+
+
+import java.awt.Font;
+import java.awt.Toolkit;
+
+
+import model.generalModel;
+
+
+import model.Database;
+
+import java.awt.Color;
 
 public class SigningUpView extends JFrame{
 	private volatile static SigningUpView instance = null;
-	private JTextField usernameField;
-	private JTextField passwordField;
 	account signUp;
 	generalController controller;
+	private JTextField UsernameTextField;
+	private JTextField PasswordTextField;
 	
 	public static SigningUpView getInstance() {
         if (instance == null) {
@@ -30,72 +45,67 @@ public class SigningUpView extends JFrame{
 	}
 	
 	public SigningUpView() {
-		
+		getContentPane().setBackground(new Color(254,254,250));
 		setIconImage(Toolkit.getDefaultToolkit().getImage(GuestView.class.getResource("/images/spotify.png")));
 		setTitle("Not So Spotify");
 		
-		JPanel backgroundPanel = new JPanel();
-		getContentPane().add(backgroundPanel, BorderLayout.CENTER);
-		backgroundPanel.setLayout(null);
+		this.setSize(600, 450);
+		getContentPane().setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Signing Up");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 22));
-		lblNewLabel.setBounds(242, 49, 117, 76);
-		backgroundPanel.add(lblNewLabel);
+		JLabel lblUsername = new JLabel("Username");
+		lblUsername.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblUsername.setBounds(100, 204, 89, 50);
+		getContentPane().add(lblUsername);
 		
-		JLabel lblNewLabel_1 = new JLabel("Username");
-		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblNewLabel_1.setBounds(27, 174, 122, 37);
-		backgroundPanel.add(lblNewLabel_1);
+		UsernameTextField = new JTextField();
+		UsernameTextField.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		UsernameTextField.setBounds(189, 213, 295, 32);
+		getContentPane().add(UsernameTextField);
+		UsernameTextField.setColumns(10);
+		
+		PasswordTextField = new JPasswordField(40);
+		PasswordTextField.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		PasswordTextField.setColumns(10);
+		PasswordTextField.setBounds(189, 251, 295, 32);
+		getContentPane().add(PasswordTextField);
 		
 		JLabel lblPassword = new JLabel("Password");
 		lblPassword.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblPassword.setBounds(27, 293, 122, 37);
-		backgroundPanel.add(lblPassword);
+		lblPassword.setBounds(100, 242, 89, 50);
+		getContentPane().add(lblPassword);
 		
-		usernameField = new JTextField();
-		usernameField.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		usernameField.setBounds(27, 209, 390, 61);
-		backgroundPanel.add(usernameField);
-		usernameField.setColumns(10);
+		JButton btnConfirm = new JButton("LOG IN");
+		btnConfirm.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnConfirm.setBackground(new Color(254,254,250));
+		btnConfirm.setBounds(375, 318, 109, 49);
+		getContentPane().add(btnConfirm);
 		
-		passwordField = new JTextField();
-		passwordField.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		passwordField.setColumns(10);
-		passwordField.setBounds(27, 329, 390, 61);
-		backgroundPanel.add(passwordField);
+		JButton btnNotSoSpotify = new JButton("");
+		btnNotSoSpotify.setBackground(new Color(254,254,250));
+		btnNotSoSpotify.setIcon(new ImageIcon(LoggingInView.class.getResource("/images/spotify.png")));
+		btnNotSoSpotify.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		btnNotSoSpotify.setBounds(242, 11, 182, 153);
+		btnNotSoSpotify.setBorder(null);
+		getContentPane().add(btnNotSoSpotify);
 		
-		JLabel lblWhatDoYyou = new JLabel("What Do You Want Your Account Details To Be?");
-		lblWhatDoYyou.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblWhatDoYyou.setBounds(141, 108, 313, 44);
-		backgroundPanel.add(lblWhatDoYyou);
+		JLabel lblNewLabel = new JLabel("Not So");
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		lblNewLabel.setBounds(159, 51, 99, 86);
+		getContentPane().add(lblNewLabel);
 		
-		JButton btnConfirm = new JButton("Confirm");
-		btnConfirm.setBounds(453, 441, 109, 23);
-		backgroundPanel.add(btnConfirm);
-		this.setVisible(false);
-		btnConfirm.addActionListener(new confirmButton());
+		UsernameTextField = new JTextField();
+		UsernameTextField.setBounds(189, 213, 295, 32);
+		getContentPane().add(UsernameTextField);
+		UsernameTextField.setColumns(10);
 		
-		this.setSize(650, 700);
-	}
-	
-	class confirmButton implements ActionListener
-	{
-	public void actionPerformed (ActionEvent account)
-		{
-			String username = usernameField.getText();
-			String password = passwordField.getText();
-			signUp = new account(username,password); 
-			generalController.getInstance().gettingAccountData(username, password);
-			RegisteredUserView.getInstance().setUserName(username);
-			closingWindow();
-			SelectAccount.getInstance().setVisible(false);
-			
-		}
+		PasswordTextField = new JTextField();
+		PasswordTextField.setColumns(10);
+		PasswordTextField.setBounds(189, 251, 295, 32);
+		getContentPane().add(PasswordTextField);
 	}
 	
 	public void signingSuccessful() {
-		String username = usernameField.getText();
+		String username = UsernameTextField.getText();
 		JOptionPane.showMessageDialog(null, "Signing Up Successful!");
 		RegisteredUserView.getInstance().setVisible(true);
 	}

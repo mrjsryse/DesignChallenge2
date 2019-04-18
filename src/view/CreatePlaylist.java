@@ -73,7 +73,13 @@ public class CreatePlaylist extends JFrame {
 			 
 			 String playlistName = textFieldEnterPlaylistName.getText();
 			 String username = RegisteredUserView.getInstance().currentUser;
+
+			 
+			 boolean isTrue = true;
+			 
+
 			 String favorite = "0";
+
 
 			 Playlist addedPlaylist = new PlaylistBuilder()
 					 .setPlaylistName(playlistName)
@@ -82,14 +88,29 @@ public class CreatePlaylist extends JFrame {
 					 .getPlaylist();
 
 			 PlaylistList pList = new PlaylistList();
+			 
+			 for(int i = 0; i < generalModel.getInstance().getUserPlaylist(username).size();i++)
+			 {
+				 if(playlistName.equals(generalModel.getInstance().getUserPlaylist(username).get(i).getPlaylistName()))
+				 {
+					 JOptionPane.showMessageDialog(null,"Playlist already exists");
+					 dispose();
+					 isTrue = false;
+				 }
+			 }
+			 
+			 if(isTrue != false)
+			 {
 			 pList.addEvent(addedPlaylist);
 			 int index = pList.getIndex(addedPlaylist);
 			 
 			 generalModel.getInstance().getPlaylistData(addedPlaylist);
 			 
+
 			 generalController.getInstance().gettingUserPlaylist(username, playlistName, favorite);
 			 JOptionPane.showMessageDialog(null, "Added " + playlistName + " playlist!");
 			 closingWindow();
+
 		 }
 		
 	 }

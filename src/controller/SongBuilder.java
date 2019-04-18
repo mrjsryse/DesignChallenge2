@@ -49,12 +49,14 @@ public class SongBuilder
 		Path = path;
 		return this;
 	}
+
 	public SongBuilder setCount(int Count) {
 		this.Count = Count;
 		return this;
 	}
 	public SongBuilder setFavorite(String Favorite) {
 		this.Favorite = Favorite;
+
 		return this;
 	}
 	

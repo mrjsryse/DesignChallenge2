@@ -326,7 +326,7 @@ public class GuestView extends JFrame {
 			 
 			 for(int i = 0; i < pList.getPlaylistSize(); i++)
 				 for(int j = 0; j <  sList.getSongSize(); j++)
-					 DLM3.addElement(pList.getPlaylistList().get(i).getSongInPlaylist().get(j).getSongName());
+				//	 DLM3.addElement(pList.getPlaylistList().get(i).getSongInPlaylist().get(j).getSongName());
 			 
 			 playlistSongList.setModel(DLM3);
 			 
