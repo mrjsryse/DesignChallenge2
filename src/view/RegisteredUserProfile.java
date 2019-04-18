@@ -76,8 +76,7 @@ public class RegisteredUserProfile extends JFrame{
 		songJlist = new JList();
 		songJlist.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent arg0) {
-				String s = songJlist.getName();
-				songChanged = true;
+				
 			}
 		});
 		songJlist.setFont(new Font("Tahoma", Font.PLAIN, 12));
@@ -166,9 +165,12 @@ public class RegisteredUserProfile extends JFrame{
 		{
 			String playlistOfUser = userPlaylist.get(playlistJList.getSelectedIndex()).getUsername();
 			String playlistName = userPlaylist.get(playlistJList.getSelectedIndex()).getPlaylistName();
+			
+			generalModel.getInstance().favoritingPlaylist(playlistOfUser,playlistName);
+			
 			String songOfUser = userSongs.get(songJlist.getSelectedIndex()).getUserName();
 			String songName = userSongs.get(songJlist.getSelectedIndex()).getSongName();
-			generalModel.getInstance().favoritingPlaylist(playlistOfUser,playlistName);
+			
 			generalModel.getInstance().favoritingSongs(songOfUser,songName);
 		}
 	}

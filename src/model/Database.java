@@ -54,7 +54,7 @@ public class Database{
 		String query = "CREATE TABLE IF NOT EXISTS accounts (Username varchar(255) PRIMARY KEY, Password varchar(255));"; //creating table
 		String query2 = "CREATE TABLE IF NOT EXISTS playlists(PlaylistID int NOT NULL AUTO_INCREMENT PRIMARY KEY, PlaylistName varchar(255), Username varchar(255));";
 		String query3 = "CREATE TABLE IF NOT EXISTS songs(SongID int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY, Title varchar(255), "
-				+ "Artist varchar(255),Album varchar(255),Genre varchar(255), Year varchar(255), Username varchar(255), Play_Count int(11), Favorite String(255));";
+				+ "Artist varchar(255),Album varchar(255),Genre varchar(255), Year varchar(255), Username varchar(255), Play_Count int(11), Favorite varchar(255));";
 		String query4 = "CREATE TABLE IF NOT EXISTS user_playlists(PlaylistID int NOT NULL AUTO_INCREMENT PRIMARY KEY,Username varchar(255), PlaylistName varchar(255), Favorite varchar(255));";
 		String query5 = "CREATE TABLE IF NOT EXISTS songData(SongID int NOT NULL AUTO_INCREMENT PRIMARY KEY, data LONGBLOB);";
 		String query6 = "CREATE TABLE IF NOT EXISTS songs_in_playlist(PlaylistID int PRIMARY KEY, PlaylistName varchar(255),SongID int(11), SongName varchar(255));";		
@@ -445,6 +445,7 @@ public class Database{
 		getYear = s.getYear();
 		getUsername = s.getUserName();
 		getCount = s.getCount();
+		String x = s.getFavorite();
 		
 		
 		String query = "insert into songs values ("+0+",'"+getSongName+"','" 
@@ -453,7 +454,8 @@ public class Database{
 															+getGenre+ "','"
 															+getYear+"','"
 															+getUsername+"','"
-															+getCount+"')";
+															+getCount+"','"
+															+x+"')"; 
 		
 
 		System.out.print(query);
@@ -596,7 +598,9 @@ public class Database{
 		String y = "1";
 		
 		
-		String query = "UPDATE swdespa.user_playlists SET Favorite = ('"+y+"') WHERE Username = ('"+ID+"') AND PlaylistName = ('"+Name+"');";
+		String query = "UPDATE swdespa.songs SET Favorite = ('"+y+"') WHERE Username = ('"+ID+"') AND SongName = ('"+Name+"');";
+		System.out.println(ID);
+		System.out.println(Name);
 
 		System.out.print(query);
 		//create string query
