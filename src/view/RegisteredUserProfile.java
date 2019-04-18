@@ -2,6 +2,7 @@ package view;
 
 import javax.swing.JFrame;
 
+
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -9,7 +10,10 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.SwingConstants;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
+import model.Playlist;
 import model.PlaylistList;
 import model.Song;
 import model.SongList;
@@ -19,16 +23,17 @@ import javax.swing.JList;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 
-import java.awt.Font;
 
 public class RegisteredUserProfile extends JFrame{
 	private volatile static RegisteredUserProfile instance = null;
 	public String currentUser;
 	public JLabel lblUser;
-	private JButton btnRefresh;
+	private JButton btnRefresh,btnFavorite;
 	ArrayList<Song> userSongs;
-	JList songJlist,playlistJList;
+	ArrayList<Playlist> userPlaylist;
 	PlaylistList pl;
+	JList songJlist,playlistJList;
+	boolean songChanged;
 	
 	public static RegisteredUserProfile getInstance() {
         if (instance == null) {
@@ -42,7 +47,7 @@ public class RegisteredUserProfile extends JFrame{
 		
 		lblUser = new JLabel("User:" + currentUser );
 		lblUser.setHorizontalAlignment(SwingConstants.CENTER);
-		lblUser.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblUser.setFont(new Font("Tahoma", Font.BOLD, 20));
 		lblUser.setBounds(10, 34, 1071, 53);
 		getContentPane().add(lblUser);
 		
@@ -59,17 +64,37 @@ public class RegisteredUserProfile extends JFrame{
 		getContentPane().add(lblSongs);
 		
 		playlistJList = new JList();
+		playlistJList.addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent arg0) {
+				DefaultListModel DLM = new DefaultListModel();
+				int i = playlistJList.getSelectedIndex();
+				String SongName;
+					for(int j = 0; j < pl.getPlaylistList().get(i).getSongSize();j++)
+						DLM.addElement(pl.getPlaylistList().get(i).getSongInPlaylist().get(j).getSongName());
+					
+					songJlist.setModel(DLM);
+			}
+		});
+		playlistJList.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		playlistJList.setBounds(10, 173, 355, 430);
 		getContentPane().add(playlistJList);
 		
 		songJlist = new JList();
+		songJlist.addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent arg0) {
+				String s = songJlist.getName();
+				songChanged = true;
+			}
+		});
 		songJlist.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		songJlist.setBounds(726, 184, 355, 430);
 		getContentPane().add(songJlist);
 		
-		JButton btnFavorite = new JButton("Favorite");
+		btnFavorite = new JButton("Favorite");
 		btnFavorite.setBounds(477, 256, 139, 53);
 		getContentPane().add(btnFavorite);
+		btnFavorite.addActionListener((ActionListener) new btn_Favorite());
+		
 		
 		btnRefresh = new JButton("Refresh");
 		btnRefresh.setBounds(477, 170, 139, 53);
@@ -92,16 +117,32 @@ public class RegisteredUserProfile extends JFrame{
 			
 			songJlist.setModel(DLM);
 			
-			PlaylistList pList = new PlaylistList();
+			//==============================================
+			
+			userPlaylist = generalModel.getInstance().gettingPlaylists(currentUser);
+			
 			DefaultListModel DLM2 = new DefaultListModel();
 			
-			for(int x = 0; x <pList.getPlaylistSize();x++)
-				DLM2.addElement(pList.getPlaylistList().get(x).getPlaylistName());
+			for(int y = 0; y < userPlaylist.size(); y++)
+				DLM2.addElement(userPlaylist.get(y).getPlaylistName());
 			
 			playlistJList.setModel(DLM2);
 			
 			SongList sList = new SongList();
+			PlaylistList pList1 = new PlaylistList();
 			
+			
+		}
+	}
+	
+	class btn_Favorite implements ActionListener
+	{
+		
+		public void actionPerformed(ActionEvent e)
+		{
+			String playlistOfUser = userPlaylist.get(playlistJList.getSelectedIndex()).getUsername();
+			//userSongs = generalModel.getInstance().gettingSongs(currentUser);
+			generalModel.getInstance().favoritingPlaylist(playlistOfUser);
 		}
 	}
 	

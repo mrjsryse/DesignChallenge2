@@ -63,6 +63,7 @@ public class RegisteredUserView extends JFrame {
 	PlaylistList pl;
 	SongList sl;
 	ArrayList<Song> userSongs;
+	ArrayList<Playlist> userPlaylist;
 	boolean songChanged;
 	private JButton btnProfile;
 	boolean playSongInPlaylist;
@@ -211,6 +212,7 @@ public class RegisteredUserView extends JFrame {
 		yourSongsList = new JList();
 		yourSongsList.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent arg0) {
+				String s = yourSongsList.getName();
 				txtpnSongNameGenre.setText("Song Name: "+userSongs.get(yourSongsList.getSelectedIndex()).getSongName()+"\r\nArtist: "+userSongs.get(yourSongsList.getSelectedIndex()).getArtistName()+"\r\nAlbum: "+userSongs.get(yourSongsList.getSelectedIndex()).getAlbum()+"\r\nGenre: "+userSongs.get(yourSongsList.getSelectedIndex()).getGenre()+"\r\r\nYear: "+userSongs.get(yourSongsList.getSelectedIndex()).getYear()+"");
 				songChanged = true;
 			}
@@ -332,6 +334,8 @@ public class RegisteredUserView extends JFrame {
 		    	 mp3 = new MP3Player(new File("currentSong.mp3"));
 		    	 mp3.play();
 		    	 songChanged = false;
+		    	 generalModel.getInstance().updateCount(SongID);
+		    	 
 	    	 }else {
 	    		 mp3.play();
 	    	 }
@@ -342,11 +346,14 @@ public class RegisteredUserView extends JFrame {
 		    	 int SongID = pl.getPlaylistList().get(playlistListJList.getSelectedIndex()).getSongInPlaylist().get(yourSongsListJList.getSelectedIndex()).getSongID();
 		    	 generalModel.getInstance().readSongData(SongID);
 		    	 mp3 = new MP3Player(new File("currentSong.mp3"));
-		    	 mp3.play();	
+		    	 mp3.play();
+		    	 
 		    	 playSongInPlaylist = false;
 	    	 }else {
 	    		 mp3.play();
 	    	 }
+	    	 
+	    	 
 
 	     }
 	 }
@@ -430,21 +437,25 @@ public class RegisteredUserView extends JFrame {
 			 DefaultListModel DLM = new DefaultListModel();
 			 
 			 for(int x = 0; x < userSongs.size(); x++)
-			 DLM.addElement(userSongs.get(x).getSongName());
+				 DLM.addElement(userSongs.get(x).getSongName());
 
 			 yourSongsList.setModel(DLM);
 			 //==============================================
-			 PlaylistList pList = new PlaylistList();
+			 
+			 userPlaylist = generalModel.getInstance().gettingPlaylists(currentUser);
+			 
 			 DefaultListModel DLM2 = new DefaultListModel();
 			 
-			 for(int x = 0; x < userPlaylists.size(); x++)
-			 DLM2.addElement(userPlaylists.get(x).getPlaylistName());
+
+			 for(int y = 0; y < userPlaylist.size(); y++)
+				 DLM2.addElement(userPlaylist.get(y).getPlaylistName());
+
 			 
 			 playlistListJList.setModel(DLM2);
 			 
 			 //==============================================
 			 SongList sList = new SongList();
-			 
+			 PlaylistList pList1 = new PlaylistList();
 			 
 			 
 		 }
