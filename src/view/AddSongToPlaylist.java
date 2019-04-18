@@ -15,6 +15,7 @@ import model.Playlist;
 import model.PlaylistList;
 import model.Song;
 import model.SongList;
+import model.generalModel;
 
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -79,9 +80,11 @@ public class AddSongToPlaylist extends JFrame {
 		 	 SongList sl = new SongList();
 		 	 PlaylistList pl = new PlaylistList();
 		 	 
-		 	 for(i = 0; i < pl.getPlaylistSize(); i++)
+		 	 String currUser = RegisteredUserView.getInstance().currentUser;
+		 	 
+		 	 for(i = 0; i < generalModel.getInstance().getUserPlaylist(currUser).size(); i++)
 		 	 {
-		 		 if(comboBoxPlaylists.getSelectedItem() == PlaylistList.getPlaylistList().get(i).getPlaylistName())
+		 		 if(comboBoxPlaylists.getSelectedItem() ==  generalModel.getInstance().getUserPlaylist(currUser).get(i).getPlaylistName())
 		 		 {
 		 			for(j = 0; j < sl.getSongSize(); j++)
 					 	if (comboBoxSongs.getSelectedItem() == SongList.getSongList().get(j).getSongName())
