@@ -23,6 +23,9 @@ public class generalModel {
 		int SongID = Database.getInstance().addingSong(s);
 		Database.getInstance().writeBLOB(SongID, s.getPath());
 	}
+	public void getUserSongData(Song s) {
+		Database.getInstance().addingUserSongs(s);
+	}
 	
 	public void getAccountData(account x) {
 		if(Database.getInstance().addingAccount(x) == false) {
@@ -70,8 +73,16 @@ public class generalModel {
 	public void favoritingPlaylist(String PlaylistID, String PlaylistName) {
 		Database.getInstance().favoritingPlaylist(PlaylistID, PlaylistName);
 	}
+	
+	public void favoritingSongs(String SongID, String SongName) {
+		Database.getInstance().favoritingSong(SongID, SongName);
+	}
+	
+	public ArrayList<Playlist> gettingFavoritePlaylist(String t) {
+		return Database.getInstance().getFavoritePlaylist(t);
+	}
 
-
+	//=========================================================================== Everything Sorting
 	
 	public ArrayList<Song> getSongsByGenre()
 	{

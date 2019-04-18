@@ -152,6 +152,7 @@ public class AddSong extends JFrame {
 			 String year = (String) yearComboBox.getSelectedItem();
 			 String path = textFieldChosenFile.getText();
 			 int count = 0;
+			 String favorite = "0";
 			 
 			 Song addedSong = new SongBuilder()
 					 .setSongID(songID)
@@ -163,6 +164,7 @@ public class AddSong extends JFrame {
 					 .setYear(year)
 					 .setPath(path)
 					 .setCount(count)
+					 .setFavorite(favorite);
 					 .getSong();
 			 	     
 			 
@@ -173,7 +175,6 @@ public class AddSong extends JFrame {
 			 int index = sList.getIndex(addedSong);
 			 
 			 generalModel.getInstance().getSongData(addedSong);
-			 
 			 JOptionPane.showMessageDialog(null,"Added " + songName + ".mp3");
 			 closingWindow();
 			 

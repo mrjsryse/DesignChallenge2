@@ -1,6 +1,7 @@
 package controller;
 import model.generalModel;
 import model.Playlist;
+import model.Song;
 import model.account;
 
 public class generalController {

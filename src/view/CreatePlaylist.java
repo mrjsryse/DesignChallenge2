@@ -97,4 +97,4 @@ public class CreatePlaylist extends JFrame {
 	public void closingWindow() {
 		this.setVisible(false);
 	}
-}
+} //songID, username, songName,artistName,albumName,genre,year,path,count,favorite
