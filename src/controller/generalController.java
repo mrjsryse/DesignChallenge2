@@ -23,9 +23,9 @@ public class generalController {
 		generalModel.getInstance().checkingAccountData(registeredAccount);
 	}
 	
-	public void gettingUserPlaylist(String username, String playlistName)
+	public void gettingUserPlaylist(String username, String playlistName, String favorite)
 	{
-		Playlist p = new Playlist(playlistName, username);
+		Playlist p = new Playlist(playlistName, username, favorite);
 		generalModel.getInstance().getUserPlaylistData(p);
 	}
 }

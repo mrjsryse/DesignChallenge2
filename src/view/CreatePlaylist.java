@@ -73,12 +73,18 @@ public class CreatePlaylist extends JFrame {
 			 
 			 String playlistName = textFieldEnterPlaylistName.getText();
 			 String username = RegisteredUserView.getInstance().currentUser;
+
 			 
 			 boolean isTrue = true;
 			 
+
+			 String favorite = "0";
+
+
 			 Playlist addedPlaylist = new PlaylistBuilder()
 					 .setPlaylistName(playlistName)
 					 .setUsername(username)
+					 .setFavorite(favorite)
 					 .getPlaylist();
 
 			 PlaylistList pList = new PlaylistList();
@@ -100,12 +106,13 @@ public class CreatePlaylist extends JFrame {
 			 
 			 generalModel.getInstance().getPlaylistData(addedPlaylist);
 			 
+
 			 generalController.getInstance().gettingUserPlaylist(username, playlistName);
 			 dispose();
 			 
 			 }
 			 
-			 
+
 		 }
 		
 	 }

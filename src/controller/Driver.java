@@ -12,8 +12,9 @@ public class Driver {
 		//test adding for Git REEEE
 
 		String URL = "jdbc:mysql://localhost:3306/";
+
 		String USERNAME = "root";
-		String PASSWORD = "1234";
+		String PASSWORD = "arielariel0";
 		String DATABASE = "swdespa";
  
 		Database.getInstance().setConnection(URL, USERNAME, PASSWORD, DATABASE);
