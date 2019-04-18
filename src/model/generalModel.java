@@ -78,6 +78,11 @@ public class generalModel {
 	public ArrayList<Playlist> gettingFavoritePlaylist(String t) {
 		return Database.getInstance().getFavoritePlaylist(t);
 	}
+	
+	public ArrayList<Song> gettingFavoriteSong(String t)
+	{
+		return Database.getInstance().getFavoriteSong(t);
+	}
 
 	//=========================================================================== Everything Sorting
 	

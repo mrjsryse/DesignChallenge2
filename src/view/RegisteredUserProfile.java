@@ -29,10 +29,10 @@ public class RegisteredUserProfile extends JFrame{
 	public String currentUser;
 	public JLabel lblUser;
 	private JButton btnRefresh,btnFavoritePlaylist,btnFavoriteSong;
-	ArrayList<Song> userSongs;
+	ArrayList<Song> userSongs,userSongsFavorites;
 	ArrayList<Playlist> userPlaylist,userPlaylistFavorites;
 	PlaylistList pl;
-	JList songJlist,playlistJList,FavoriteplaylistJList;
+	JList songJlist,playlistJList,FavoriteplaylistJList,FavoritesongJList;
 	boolean songChanged;
 	
 	public static RegisteredUserProfile getInstance() {
@@ -112,6 +112,22 @@ public class RegisteredUserProfile extends JFrame{
 		btnFavoriteSong = new JButton("Favorite Song");
 		btnFavoriteSong.setBounds(798, 69, 139, 53);
 		getContentPane().add(btnFavoriteSong);
+		
+		FavoritesongJList = new JList();
+		FavoriteplaylistJList.addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent arg0) {
+				
+			}
+		});
+		FavoritesongJList.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		FavoritesongJList.setBounds(741, 454, 355, 179);
+		getContentPane().add(FavoritesongJList);
+		
+		JLabel lblFavoriteSongs = new JLabel("Favorite Song/s");
+		lblFavoriteSongs.setHorizontalAlignment(SwingConstants.CENTER);
+		lblFavoriteSongs.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblFavoriteSongs.setBounds(765, 390, 202, 53);
+		getContentPane().add(lblFavoriteSongs);
 		btnFavoriteSong.addActionListener((ActionListener) new btn_FavoriteSong());
 		
 		btnRefresh.addActionListener((ActionListener) new btn_Refresh());
@@ -158,7 +174,15 @@ public class RegisteredUserProfile extends JFrame{
 			SongList sList = new SongList();
 			PlaylistList pList1 = new PlaylistList();
 			
+			//============================================== Favorite Playlists
+			userSongsFavorites = generalModel.getInstance().gettingFavoriteSong(currentUser);
 			
+			DefaultListModel DLM4 = new DefaultListModel();
+			
+			for(int a = 0; a < userSongsFavorites.size();a++)
+				DLM4.addElement(userSongsFavorites.get(a).getSongName());
+			
+			FavoritesongJList.setModel(DLM4);
 		}
 	}
 	
@@ -182,7 +206,7 @@ public class RegisteredUserProfile extends JFrame{
 			String songOfUser = userSongs.get(songJlist.getSelectedIndex()).getUserName();
 			String songName = userSongs.get(songJlist.getSelectedIndex()).getSongName();
 			
-			generalModel.getInstance().favoritingSongs(songOfUser,songName);
+			generalModel.getInstance().favoritingSongs(songOfUser, songName);
 		}
 	}
 	
