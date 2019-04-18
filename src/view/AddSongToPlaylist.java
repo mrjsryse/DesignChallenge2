@@ -83,18 +83,27 @@ public class AddSongToPlaylist extends JFrame {
 		 	 String currUser = RegisteredUserView.getInstance().currentUser;
 		 	 
 		 	 for(i = 0; i < generalModel.getInstance().getUserPlaylist(currUser).size(); i++)
-		 	 {
-		 		 if(comboBoxPlaylists.getSelectedItem() ==  generalModel.getInstance().getUserPlaylist(currUser).get(i).getPlaylistName())
+		 	 {	
+		 		 if(comboBoxPlaylists.getSelectedItem().equals(generalModel.getInstance().getUserPlaylist(currUser).get(i).getPlaylistName()))
 		 		 {
-		 			for(j = 0; j < sl.getSongSize(); j++)
-					 	if (comboBoxSongs.getSelectedItem() == SongList.getSongList().get(j).getSongName())
+
+		 			for(j = 0; j < generalModel.getInstance().gettingSongs(currUser).size(); j++)
+					 	if (comboBoxSongs.getSelectedItem().equals(generalModel.getInstance().gettingSongs(currUser).get(j).getSongName()))
 					 	{				
-					 		pl.getPlaylistList().get(i).addSongToPlaylist(sl.getSongList().get(j));
-					 		System.out.print(pl.getPlaylistList().get(i).getSongInPlaylist().get(j).getSongName());
+					 		generalModel.getInstance().getUserPlaylist(currUser).get(i).addSongToPlaylist(generalModel.getInstance().gettingSongs(currUser).get(j));       
+					 		//System.out.print(generalModel.getInstance().getUserPlaylist(currUser).get(i).getSongInPlaylist().get(j).getSongName());
+					 		//System.out.print(pl.getPlaylistList().get(i).getSongInPlaylist().get(j).getSongName());
+					 		
+					 		
 					 	}
 		 		 }
 		 	 }
 		 	 
+		 	 
+		 		System.out.println(generalModel.getInstance().getUserPlaylist(currUser).get(comboBoxPlaylists.getSelectedIndex()).getSongInPlaylist().get(0).getSongName());
+		 	 
+				
+		 		dispose();
 		 	 
 		 	 
 			 
