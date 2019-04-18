@@ -58,7 +58,7 @@ public class Database{
 		String query4 = "CREATE TABLE IF NOT EXISTS user_playlists(PlaylistID int NOT NULL AUTO_INCREMENT PRIMARY KEY,Username varchar(255), PlaylistName varchar(255), Favorite varchar(255));";
 		String query5 = "CREATE TABLE IF NOT EXISTS songData(SongID int NOT NULL AUTO_INCREMENT PRIMARY KEY, data LONGBLOB);";
 		String query6 = "CREATE TABLE IF NOT EXISTS songs_in_playlist(PlaylistID int PRIMARY KEY, PlaylistName varchar(255),SongID int(11), SongName varchar(255));";		
-		//String query7 = "CREATE TABLE IF NOT EXISTS user_songs(SongID int NOT NULL AUTO_INCREMENT PRIMARY KEY,Username varchar(255), PlaylistName varchar(255), Favorite varchar(255));";
+//		String query7 = "CREATE TABLE IF NOT EXISTS user_songs(SongID int NOT NULL AUTO_INCREMENT PRIMARY KEY,Username varchar(255), PlaylistName varchar(255), Favorite varchar(255));";
 		
 		String packetQuery = "SET GLOBAL max_allowed_packet=16777216;";
 		
@@ -67,7 +67,7 @@ public class Database{
 		String queryIncrement3 = "ALTER TABLE songs auto_increment = 1";
 		String queryIncrement4 = "ALTER TABLE user_playlists auto_increment = 1";
 		String queryIncrement5 = "ALTER TABLE songData auto_increment = 1";
-		//String queryIncrement7 = "ALTER TABLE user_songs auto_increment = 1";
+//		String queryIncrement7 = "ALTER TABLE user_songs auto_increment = 1";
 //		String queryIncrement6 = "ALTER TABLE song_in_playlist = 1";
 		
 		try {

@@ -176,6 +176,7 @@ public class AddSong extends JFrame {
 			 int index = sList.getIndex(addedSong);
 			 
 			 generalModel.getInstance().getSongData(addedSong);
+			 
 			 JOptionPane.showMessageDialog(null,"Added " + songName + ".mp3");
 			 closingWindow();
 			 
