@@ -368,12 +368,12 @@ public class RegisteredUserView extends JFrame {
 			 
 			 for(int x = 0; x < userSongs.size(); x++)
 			 {
-				 astp.comboBoxSongs.addItem(userSongs.get(x).getSongName());;
+				 astp.comboBoxSongs.addItem(userSongs.get(x).getSongName());
 			 }
 			 
 			 for(int y = 0; y < userPlaylists.size(); y++)
 			 {
-				 astp.comboBoxPlaylists.addItem(userPlaylists.get(y).getPlaylistName());;
+				 astp.comboBoxPlaylists.addItem(userPlaylists.get(y).getPlaylistName());
 			 }
 	    	 
 	     }
