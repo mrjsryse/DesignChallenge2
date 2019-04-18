@@ -405,7 +405,7 @@ public class RegisteredUserView extends JFrame {
 			 
 			 
 			 userSongs = generalModel.getInstance().gettingSongs(currentUser);
-			 userPlaylist = generalModel.getInstance().gettingPlaylists(currentUser);
+			 
 			 
 			 DefaultListModel DLM = new DefaultListModel();
 			 
@@ -414,6 +414,9 @@ public class RegisteredUserView extends JFrame {
 
 			 yourSongsList.setModel(DLM);
 			 //==============================================
+			 
+			 userPlaylist = generalModel.getInstance().gettingPlaylists(currentUser);
+			 
 			 DefaultListModel DLM2 = new DefaultListModel();
 			 
 			 for(int y = 0; y < userPlaylist.size(); y++)

@@ -372,7 +372,6 @@ public class Database{
 						 Playlist newPlaylist = new PlaylistBuilder()
 								 .setPlaylistName(rs.getString("playlistName"))
 								 .setUsername(rs.getString("username"))
-								 .setFavorite(rs.getString("Favorite"))
 								 .getPlaylist();
 						 pl.add(newPlaylist);
 					}
