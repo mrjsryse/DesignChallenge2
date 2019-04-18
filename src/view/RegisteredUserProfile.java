@@ -28,7 +28,7 @@ public class RegisteredUserProfile extends JFrame{
 	private volatile static RegisteredUserProfile instance = null;
 	public String currentUser;
 	public JLabel lblUser;
-	private JButton btnRefresh,btnFavorite;
+	private JButton btnRefresh,btnFavoritePlaylist,btnFavoriteSong;
 	ArrayList<Song> userSongs;
 	ArrayList<Playlist> userPlaylist,userPlaylistFavorites;
 	PlaylistList pl;
@@ -83,10 +83,10 @@ public class RegisteredUserProfile extends JFrame{
 		songJlist.setBounds(726, 184, 355, 179);
 		getContentPane().add(songJlist);
 		
-		btnFavorite = new JButton("Favorite");
-		btnFavorite.setBounds(477, 256, 139, 53);
-		getContentPane().add(btnFavorite);
-		btnFavorite.addActionListener((ActionListener) new btn_Favorite());
+		btnFavoritePlaylist = new JButton("Favorite Playlist");
+		btnFavoritePlaylist.setBounds(108, 69, 139, 53);
+		getContentPane().add(btnFavoritePlaylist);
+		btnFavoritePlaylist.addActionListener((ActionListener) new btn_FavoritePlaylist());
 		
 		
 		btnRefresh = new JButton("Refresh");
@@ -109,6 +109,10 @@ public class RegisteredUserProfile extends JFrame{
 		FavoriteplaylistJList.setBounds(10, 430, 355, 190);
 		getContentPane().add(FavoriteplaylistJList);
 		
+		btnFavoriteSong = new JButton("Favorite Song");
+		btnFavoriteSong.setBounds(798, 69, 139, 53);
+		getContentPane().add(btnFavoriteSong);
+		btnFavoriteSong.addActionListener((ActionListener) new btn_FavoriteSong());
 		
 		btnRefresh.addActionListener((ActionListener) new btn_Refresh());
 		
@@ -158,7 +162,7 @@ public class RegisteredUserProfile extends JFrame{
 		}
 	}
 	
-	class btn_Favorite implements ActionListener
+	class btn_FavoritePlaylist implements ActionListener
 	{
 		
 		public void actionPerformed(ActionEvent e)
@@ -167,7 +171,14 @@ public class RegisteredUserProfile extends JFrame{
 			String playlistName = userPlaylist.get(playlistJList.getSelectedIndex()).getPlaylistName();
 			
 			generalModel.getInstance().favoritingPlaylist(playlistOfUser,playlistName);
-			
+		}
+	}	
+	
+	class btn_FavoriteSong implements ActionListener
+	{
+		
+		public void actionPerformed(ActionEvent e)
+		{
 			String songOfUser = userSongs.get(songJlist.getSelectedIndex()).getUserName();
 			String songName = userSongs.get(songJlist.getSelectedIndex()).getSongName();
 			

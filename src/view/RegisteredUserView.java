@@ -309,7 +309,7 @@ public class RegisteredUserView extends JFrame {
 			 username = currentUser;
 			 RegisteredUserProfile.getInstance().setVisible(true);
 			 //System.out.println(currentUser); for testing
-			 RegisteredUserProfile.getInstance().getUserName(username);			 
+			 RegisteredUserProfile.getInstance().getUserName(username);		
 		 }
 	 }
 	 
