@@ -165,10 +165,14 @@ public class RegisteredUserView extends JFrame {
 				int i = playlistListJList.getSelectedIndex();
 				String SongName;
 					 for(int j = 0; j <  generalModel.getInstance().getUserPlaylist(currentUser).get(i).getSongInPlaylist().size(); j++)
-						 DLM3.addElement(generalModel.getInstance().getUserPlaylist(currentUser).get(i).getSongInPlaylist().get(j).getSongName());
-				
+					 {
+						 SongName = generalModel.getInstance().getUserPlaylist(currentUser).get(i).getSongInPlaylist().get(j).getSongName();
+						 DLM3.addElement(SongName);
+					 }
 				yourSongsListJList.setModel(DLM3);
 				
+				
+				System.out.print(generalModel.getInstance().getUserPlaylist(currentUser).get(0).getSongInPlaylist().get(1).getSongName());
 			}
 		});
 		btnPickPlaylist.setForeground(Color.BLACK);
