@@ -66,13 +66,7 @@ public class RegisteredUserProfile extends JFrame{
 		playlistJList = new JList();
 		playlistJList.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent arg0) {
-				DefaultListModel DLM = new DefaultListModel();
-				int i = playlistJList.getSelectedIndex();
-				String SongName;
-					for(int j = 0; j < pl.getPlaylistList().get(i).getSongSize();j++)
-						DLM.addElement(pl.getPlaylistList().get(i).getSongInPlaylist().get(j).getSongName());
-					
-					songJlist.setModel(DLM);
+				
 			}
 		});
 		playlistJList.setFont(new Font("Tahoma", Font.PLAIN, 14));

@@ -20,6 +20,7 @@ import model.generalModel;
 
 import javax.swing.JTextField;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JButton;
 
 public class CreatePlaylist extends JFrame {
@@ -87,8 +88,13 @@ public class CreatePlaylist extends JFrame {
 			 generalModel.getInstance().getPlaylistData(addedPlaylist);
 			 
 			 generalController.getInstance().gettingUserPlaylist(username, playlistName, favorite);
-		
+			 JOptionPane.showMessageDialog(null, "Added " + playlistName + " playlist!");
+			 closingWindow();
 		 }
 		
 	 }
+	
+	public void closingWindow() {
+		this.setVisible(false);
+	}
 }

@@ -70,7 +70,7 @@ public class generalModel {
 	public void favoritingPlaylist(String PlaylistID) {
 		Database.getInstance().favoritingPlaylist(PlaylistID);
 	}
-}
+
 
 	
 	public ArrayList<Song> getSongsByGenre()
