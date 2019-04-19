@@ -75,6 +75,7 @@ public class SigningUpView extends JFrame{
 		getContentPane().add(lblPassword);
 		
 		JButton btnConfirm = new JButton("LOG IN");
+		btnConfirm.addActionListener(new btn_Confirm());
 		btnConfirm.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnConfirm.setBackground(new Color(254,254,250));
 		btnConfirm.setBounds(375, 318, 109, 49);
@@ -93,28 +94,34 @@ public class SigningUpView extends JFrame{
 		lblNewLabel.setBounds(159, 51, 99, 86);
 		getContentPane().add(lblNewLabel);
 		
-		UsernameTextField = new JTextField();
-		UsernameTextField.setBounds(189, 213, 295, 32);
-		getContentPane().add(UsernameTextField);
-		UsernameTextField.setColumns(10);
+	}
+	
+	class btn_Confirm implements ActionListener
+	{
+		public void actionPerformed (ActionEvent account)
+			{
+				String username = UsernameTextField.getText();
+				String password = PasswordTextField.getText();
+				signUp = new account(username,password); 
+				generalController.getInstance().gettingAccountData(username, password);
+				RegisteredUserView.getInstance().setUserName(username);
+				closingWindow();
+				SelectAccount.getInstance().setVisible(false);
+				
+			}
+		}
 		
-		PasswordTextField = new JTextField();
-		PasswordTextField.setColumns(10);
-		PasswordTextField.setBounds(189, 251, 295, 32);
-		getContentPane().add(PasswordTextField);
-	}
-	
-	public void signingSuccessful() {
-		String username = UsernameTextField.getText();
-		JOptionPane.showMessageDialog(null, "Signing Up Successful!");
-		RegisteredUserView.getInstance().setVisible(true);
-	}
-	
-	public void signingFailed() {
-		JOptionPane.showMessageDialog(null, "Username already exisits! Please Try Again!");
-	}
-	
-	public void closingWindow() {
-		this.setVisible(false);
-	}
+		public void signingSuccessful() {
+			String username = UsernameTextField.getText();
+			JOptionPane.showMessageDialog(null, "Signing Up Successful!");
+			RegisteredUserView.getInstance().setVisible(true);
+		}
+		
+		public void signingFailed() {
+			JOptionPane.showMessageDialog(null, "Username already exisits! Please Try Again!");
+		}
+		
+		public void closingWindow() {
+			this.setVisible(false);
+		}
 }
