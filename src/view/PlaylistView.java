@@ -17,6 +17,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JTextField;
 import java.awt.SystemColor;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class PlaylistView extends JFrame {
 
@@ -490,35 +492,32 @@ public class PlaylistView extends JFrame {
 		Title_Dashboard.setHorizontalAlignment(SwingConstants.LEFT);
 		Title_Dashboard.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		Title_Dashboard.setBackground(new Color(254, 254, 250));
-		Title_Dashboard.setBounds(10, 170, 200, 30);
+		Title_Dashboard.setBounds(10, 170, 164, 30);
 		Dashboard.add(Title_Dashboard);
 		
 		Artist_Dashboard = new JButton("Artist");
 		Artist_Dashboard.setHorizontalAlignment(SwingConstants.LEFT);
 		Artist_Dashboard.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		Artist_Dashboard.setBackground(new Color(254, 254, 250));
-		Artist_Dashboard.setBounds(206, 170, 200, 30);
+		Artist_Dashboard.setBounds(173, 170, 164, 30);
 		Dashboard.add(Artist_Dashboard);
 		
 		JButton Album_Dashboard = new JButton("Album");
 		Album_Dashboard.setHorizontalAlignment(SwingConstants.LEFT);
 		Album_Dashboard.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		Album_Dashboard.setBackground(new Color(254, 254, 250));
-		Album_Dashboard.setBounds(404, 170, 172, 30);
+		Album_Dashboard.setBounds(335, 170, 172, 30);
 		Dashboard.add(Album_Dashboard);
 		
-		JButton Year_Dashboard = new JButton("Year");
-		Year_Dashboard.setHorizontalAlignment(SwingConstants.LEFT);
-		Year_Dashboard.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		Year_Dashboard.setBackground(new Color(254, 254, 250));
-		Year_Dashboard.setBounds(666, 170, 78, 30);
-		Dashboard.add(Year_Dashboard);
-		
 		JButton Genre_Dashboard = new JButton("Genre");
+		Genre_Dashboard.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		Genre_Dashboard.setHorizontalAlignment(SwingConstants.LEFT);
 		Genre_Dashboard.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		Genre_Dashboard.setBackground(new Color(254, 254, 250));
-		Genre_Dashboard.setBounds(575, 170, 95, 30);
+		Genre_Dashboard.setBounds(503, 170, 100, 30);
 		Dashboard.add(Genre_Dashboard);
 		
 		JButton AddQueuebtn = new JButton("");
@@ -547,6 +546,55 @@ public class PlaylistView extends JFrame {
 		Public_Privatebtn.setBorder(null);
 		Public_Privatebtn.setToolTipText("Set Playlist to Public/Private");
 		Dashboard.add(Public_Privatebtn);
+		
+		JButton Year_Dashboard = new JButton("Year");
+		Year_Dashboard.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		Year_Dashboard.setBackground(new Color(254, 254, 250));
+		Year_Dashboard.setBounds(600, 170, 80, 30);
+		Dashboard.add(Year_Dashboard);
+		
+		JButton Favorite_Dashboard = new JButton("");
+		Favorite_Dashboard.setIcon(new ImageIcon(PlaylistView.class.getResource("/images2/star.png")));
+		Favorite_Dashboard.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		Favorite_Dashboard.setBackground(new Color(254, 254, 250));
+		Favorite_Dashboard.setBounds(680, 170, 74, 30);
+		Dashboard.add(Favorite_Dashboard);
+		
+		JButton btnNewButton_1 = new JButton("");
+		btnNewButton_1.setEnabled(false);
+		btnNewButton_1.setBackground(new Color(254,254,250));
+		btnNewButton_1.setBounds(10, 197, 164, 299);
+		Dashboard.add(btnNewButton_1);
+		
+		JButton button_1 = new JButton("");
+		button_1.setEnabled(false);
+		button_1.setBackground(new Color(254,254,250));
+		button_1.setBounds(173, 197, 164, 299);
+		Dashboard.add(button_1);
+		
+		JButton button_3 = new JButton("");
+		button_3.setEnabled(false);
+		button_3.setBackground(new Color(254,254,250));
+		button_3.setBounds(335, 197, 172, 299);
+		Dashboard.add(button_3);
+		
+		JButton button_4 = new JButton("");
+		button_4.setEnabled(false);
+		button_4.setBackground(new Color(254,254,250));
+		button_4.setBounds(503, 197, 100, 299);
+		Dashboard.add(button_4);
+		
+		JButton button_5 = new JButton("");
+		button_5.setEnabled(false);
+		button_5.setBackground(new Color(254,254,250));
+		button_5.setBounds(600, 197, 80, 299);
+		Dashboard.add(button_5);
+		
+		JButton button_6 = new JButton("");
+		button_6.setEnabled(false);
+		button_6.setBackground(new Color(254,254,250));
+		button_6.setBounds(674, 197, 80, 299);
+		Dashboard.add(button_6);
 		
 
 		
