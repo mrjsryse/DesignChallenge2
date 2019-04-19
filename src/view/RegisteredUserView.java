@@ -46,6 +46,7 @@ import model.generalModel;
 
 import java.awt.Color;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.event.ListDataListener;
 import javax.swing.event.ListSelectionEvent;
 
 public class RegisteredUserView extends JFrame {
@@ -62,7 +63,7 @@ public class RegisteredUserView extends JFrame {
 	JLabel lblUser;
 	PlaylistList pl;
 	SongList sl;
-	ArrayList<Song> userSongs;
+	ArrayList<Song> userSongs,userSongsUpdated;
 	ArrayList<Playlist> userPlaylist;
 	boolean songChanged;
 	private JButton btnProfile;
@@ -222,10 +223,10 @@ public class RegisteredUserView extends JFrame {
 				String s = yourSongsList.getName();
 				String t = "0";
 				txtpnSongNameGenre.setText("Song Name: "+userSongs.get(yourSongsList.getSelectedIndex()).getSongName()+"\r\nArtist: "+userSongs.get(yourSongsList.getSelectedIndex()).getArtistName()+"\r\nAlbum: "+userSongs.get(yourSongsList.getSelectedIndex()).getAlbum()+"\r\nGenre: "+userSongs.get(yourSongsList.getSelectedIndex()).getGenre()+"\r\r\nYear: "+userSongs.get(yourSongsList.getSelectedIndex()).getYear()+"");
-	
 				songChanged = true;
 			}
 		});
+		yourSongsList.clearSelection();
 		yourSongsList.setBounds(806, 94, 341, 557);
 		yourSongsList.setBackground(new Color(224,224,224));
 		contentPane.add(yourSongsList);
@@ -326,6 +327,9 @@ public class RegisteredUserView extends JFrame {
 		 	this.profile = profile;
 		}
 	 
+	 public void deselectJList() {
+		 yourSongsList.clearSelection();
+	 }
 	
 	 class btn_Play implements ActionListener 
 	 {
@@ -451,9 +455,9 @@ public class RegisteredUserView extends JFrame {
 			 
 			 for(int x = 0; x < userSongs.size(); x++)
 				 DLM.addElement(userSongs.get(x).getSongName());
-
+			 
 			 yourSongsList.setModel(DLM);
-			 //==============================================
+			 //============================================== Above is songs to the JList
 			 
 			 userPlaylist = generalModel.getInstance().gettingPlaylists(currentUser);
 			 
@@ -466,10 +470,9 @@ public class RegisteredUserView extends JFrame {
 			 
 			 playlistListJList.setModel(DLM2);
 			 
-			 //==============================================
+			 //============================================== Above is playlists to the JList
 			 SongList sList = new SongList();
 			 PlaylistList pList1 = new PlaylistList();
-			 
 			 
 		 }
 	 }
@@ -500,9 +503,37 @@ public class RegisteredUserView extends JFrame {
 	 {
 		 public void actionPerformed(ActionEvent e)
 		 {
+			String songOfUserForEditing = userSongs.get(yourSongsList.getSelectedIndex()).getUserName();
+			String songNameForEditing = userSongs.get(yourSongsList.getSelectedIndex()).getSongName();
+			EditSongView.getInstance().getUsername(currentUser);
+			EditSongView.getInstance().getOldSongName(songNameForEditing);
 			EditSongView.getInstance().setVisible(true);
-			
 		 }
+	 }
+	 
+	 public String getSongName() {
+		 String songTitle = userSongs.get(yourSongsList.getSelectedIndex()).getSongName();
+		 return songTitle;
+	 }
+	 
+	 public String getArtistName() {
+		 String artistName = userSongs.get(yourSongsList.getSelectedIndex()).getArtistName();
+		 return artistName;
+	 }
+	 
+	 public String getAlbumName() {
+		 String albumName = userSongs.get(yourSongsList.getSelectedIndex()).getAlbum();
+		 return albumName;
+	 }
+	 
+	 public String getGenreName() {
+		 String genreName = userSongs.get(yourSongsList.getSelectedIndex()).getGenre();
+		 return genreName;
+	 }
+	 
+	 public String getYearDate() {
+		 String yearDate = userSongs.get(yourSongsList.getSelectedIndex()).getYear();
+		 return yearDate;
 	 }
 	 
 	 class btn_nextSong implements ActionListener

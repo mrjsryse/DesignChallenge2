@@ -37,6 +37,7 @@ public class SigningUpView extends JFrame{
 	private JTextField UsernameTextField;
 	private JTextField PasswordTextField;
 	
+	
 	public static SigningUpView getInstance() {
         if (instance == null) {
         	instance = new SigningUpView();
@@ -74,12 +75,15 @@ public class SigningUpView extends JFrame{
 		lblPassword.setBounds(100, 242, 89, 50);
 		getContentPane().add(lblPassword);
 		
-		JButton btnConfirm = new JButton("LOG IN");
+
+		JButton btnConfirm = new JButton("SIGN UP");
 		btnConfirm.addActionListener(new btn_Confirm());
+
 		btnConfirm.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnConfirm.setBackground(new Color(254,254,250));
 		btnConfirm.setBounds(375, 318, 109, 49);
 		getContentPane().add(btnConfirm);
+		btnConfirm.addActionListener(new btn_Confirm());
 		
 		JButton btnNotSoSpotify = new JButton("");
 		btnNotSoSpotify.setBackground(new Color(254,254,250));
@@ -93,11 +97,12 @@ public class SigningUpView extends JFrame{
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		lblNewLabel.setBounds(159, 51, 99, 86);
 		getContentPane().add(lblNewLabel);
-		
+
 	}
 	
 	class btn_Confirm implements ActionListener
 	{
+
 		public void actionPerformed (ActionEvent account)
 			{
 				String username = UsernameTextField.getText();
@@ -124,4 +129,5 @@ public class SigningUpView extends JFrame{
 		public void closingWindow() {
 			this.setVisible(false);
 		}
+
 }
