@@ -18,7 +18,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JList;
 
-public class QueueView extends JFrame {
+public class QueueViewA extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField txtSearch;
@@ -33,7 +33,7 @@ public class QueueView extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					QueueView frame = new QueueView();
+					QueueViewA frame = new QueueViewA();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -45,7 +45,7 @@ public class QueueView extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public QueueView() {
+	public QueueViewA() {
 		setBackground(new Color(254,254,250));
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -218,11 +218,19 @@ public class QueueView extends JFrame {
 		TopBar.add(button_2);
 		
 		JButton Refreshbtn = new JButton("");
-		Refreshbtn.setIcon(new ImageIcon(QueueView.class.getResource("/images2/reload.png")));
+		Refreshbtn.setIcon(new ImageIcon(QueueViewA.class.getResource("/images2/reload.png")));
 		Refreshbtn.setBorder(null);
 		Refreshbtn.setBackground(new Color(30, 58, 42));
 		Refreshbtn.setBounds(1035, 11, 39, 39);
 		TopBar.add(Refreshbtn);
+		
+		JButton button_1 = new JButton("");
+		button_1.setIcon(new ImageIcon(QueueViewA.class.getResource("/images2/correct (4).png")));
+		button_1.setEnabled(false);
+		button_1.setBorder(null);
+		button_1.setBackground(new Color(30, 58, 42));
+		button_1.setBounds(448, 22, 28, 28);
+		TopBar.add(button_1);
 		
 		JPanel MusicPanel = new JPanel();
 		MusicPanel.setBackground(new Color(254, 254, 250));
