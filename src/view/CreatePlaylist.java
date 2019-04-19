@@ -101,22 +101,18 @@ public class CreatePlaylist extends JFrame {
 			 
 			 if(isTrue != false)
 			 {
-			 pList.addEvent(addedPlaylist);
-			 int index = pList.getIndex(addedPlaylist);
+				 pList.addEvent(addedPlaylist);
+				 int index = pList.getIndex(addedPlaylist);
 			 
-			 generalModel.getInstance().getPlaylistData(addedPlaylist);
-			 generalController.getInstance().gettingUserPlaylist(username, playlistName, favorite);
+				 generalModel.getInstance().getPlaylistData(addedPlaylist);
+				 generalController.getInstance().gettingUserPlaylist(username, playlistName, favorite);
+				 JOptionPane.showMessageDialog(null, "Added " + playlistName + " playlist!");
 			 
-
-			 dispose();
+				 
+				 dispose();
 			 
 			 }
 			 
-
-
-			 generalController.getInstance().gettingUserPlaylist(username, playlistName, favorite);
-			 JOptionPane.showMessageDialog(null, "Added " + playlistName + " playlist!");
-			 closingWindow();
 
 
 		 }
