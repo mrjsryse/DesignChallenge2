@@ -2,9 +2,12 @@ package view;
 
 import java.awt.EventQueue;
 
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.JLabel;
 import java.awt.Color;
 import javax.swing.JButton;
@@ -21,12 +24,15 @@ import javax.swing.JTextField;
 import java.awt.SystemColor;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JList;
+import java.awt.event.ActionListener;
 
 public class HomeView extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField txtSearch;
 	boolean evenClick = false;
+	JList songJList;
 
 	/**
 	 * Launch the application.
@@ -403,41 +409,6 @@ public class HomeView extends JFrame {
 		RPSONG_5.setBounds(0, 146, 186, 30);
 		RecentlyPlayedPanel.add(RPSONG_5);
 		
-		JButton MPSONG_3 = new JButton("Song Name");
-		MPSONG_3.setHorizontalAlignment(SwingConstants.LEFT);
-		MPSONG_3.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		MPSONG_3.setBackground(new Color(254, 254, 250));
-		MPSONG_3.setBounds(0, 344, 186, 30);
-		RecentlyPlayedPanel.add(MPSONG_3);
-		
-		JButton MPSONG_2 = new JButton("Song Name");
-		MPSONG_2.setHorizontalAlignment(SwingConstants.LEFT);
-		MPSONG_2.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		MPSONG_2.setBackground(new Color(242, 203, 155));
-		MPSONG_2.setBounds(0, 315, 186, 30);
-		RecentlyPlayedPanel.add(MPSONG_2);
-		
-		JButton MPSONG_1 = new JButton("Song Name");
-		MPSONG_1.setHorizontalAlignment(SwingConstants.LEFT);
-		MPSONG_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		MPSONG_1.setBackground(new Color(254, 254, 250));
-		MPSONG_1.setBounds(0, 287, 186, 30);
-		RecentlyPlayedPanel.add(MPSONG_1);
-		
-		JButton MPSONG_5 = new JButton("Song Name");
-		MPSONG_5.setHorizontalAlignment(SwingConstants.LEFT);
-		MPSONG_5.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		MPSONG_5.setBackground(new Color(254, 254, 250));
-		MPSONG_5.setBounds(0, 401, 186, 30);
-		RecentlyPlayedPanel.add(MPSONG_5);
-		
-		JButton MPSONG_4 = new JButton("Song Name");
-		MPSONG_4.setHorizontalAlignment(SwingConstants.LEFT);
-		MPSONG_4.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		MPSONG_4.setBackground(new Color(242, 203, 155));
-		MPSONG_4.setBounds(0, 372, 186, 30);
-		RecentlyPlayedPanel.add(MPSONG_4);
-		
 		JButton AddSongbtn = new JButton("Add Song");
 		AddSongbtn.setIcon(new ImageIcon(HomeView.class.getResource("/images2/add-circular-outlined-button (1).png")));
 		AddSongbtn.setHorizontalAlignment(SwingConstants.LEFT);
@@ -451,6 +422,16 @@ public class HomeView extends JFrame {
 		MostPlayedSongs.setBackground(new Color(254, 254, 250));
 		MostPlayedSongs.setBounds(0, 231, 186, 61);
 		RecentlyPlayedPanel.add(MostPlayedSongs);
+		
+		songJList = new JList();
+		songJList.addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent arg0) {
+				String s = songJList.getName();
+				String t = "0";
+			}
+		});
+		songJList.setBounds(0, 274, 186, 156);
+		RecentlyPlayedPanel.add(songJList);
 		
 		JPanel Dashboard = new JPanel();
 		Dashboard.setBackground(new Color(254, 254, 250));
