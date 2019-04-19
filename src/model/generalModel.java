@@ -105,6 +105,11 @@ public class generalModel {
 		return Database.getInstance().getSongsByYear();
 	}
 	
+	public ArrayList<Song> getMostPlayed()
+	{
+		return Database.getInstance().getMostPlayed();
+	}
+	
 	public ArrayList<Playlist> getUserPlaylist(String username)
 	{
 		return Database.getInstance().gettingUserPlaylist(username);

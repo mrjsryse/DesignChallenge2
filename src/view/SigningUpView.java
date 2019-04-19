@@ -75,7 +75,10 @@ public class SigningUpView extends JFrame{
 		lblPassword.setBounds(100, 242, 89, 50);
 		getContentPane().add(lblPassword);
 		
+
 		JButton btnConfirm = new JButton("SIGN UP");
+		btnConfirm.addActionListener(new btn_Confirm());
+
 		btnConfirm.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnConfirm.setBackground(new Color(254,254,250));
 		btnConfirm.setBounds(375, 318, 109, 49);
@@ -94,33 +97,37 @@ public class SigningUpView extends JFrame{
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		lblNewLabel.setBounds(159, 51, 99, 86);
 		getContentPane().add(lblNewLabel);
+
 	}
 	
 	class btn_Confirm implements ActionListener
 	{
-	public void actionPerformed (ActionEvent e)
-	{
-		String signUsername = UsernameTextField.getText();
-		String signPassword = PasswordTextField.getText();
-		signUp = new account(signUsername,signPassword);
-		generalController.getInstance().gettingAccountData(signUsername, signPassword);
-		RegisteredUserView.getInstance().setUserName(signUsername);
-		closingWindow();
-	}
-	}
-	public void signingSuccessful() {
-		String username = UsernameTextField.getText();
-		JOptionPane.showMessageDialog(null, "Signing Up Successful!");
-		RegisteredUserView.getInstance().setUserName(username);
-		RegisteredUserView.getInstance().setVisible(true);
-		SelectAccount.getInstance().setVisible(false);
-	}
-	
-	public void signingFailed() {
-		JOptionPane.showMessageDialog(null, "Username already exisits! Please Try Again!");
-	}
-	
-	public void closingWindow() {
-		this.setVisible(false);
-	}
+
+		public void actionPerformed (ActionEvent account)
+			{
+				String username = UsernameTextField.getText();
+				String password = PasswordTextField.getText();
+				signUp = new account(username,password); 
+				generalController.getInstance().gettingAccountData(username, password);
+				RegisteredUserView.getInstance().setUserName(username);
+				closingWindow();
+				SelectAccount.getInstance().setVisible(false);
+				
+			}
+		}
+		
+		public void signingSuccessful() {
+			String username = UsernameTextField.getText();
+			JOptionPane.showMessageDialog(null, "Signing Up Successful!");
+			RegisteredUserView.getInstance().setVisible(true);
+		}
+		
+		public void signingFailed() {
+			JOptionPane.showMessageDialog(null, "Username already exisits! Please Try Again!");
+		}
+		
+		public void closingWindow() {
+			this.setVisible(false);
+		}
+
 }
