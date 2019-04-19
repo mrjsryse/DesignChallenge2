@@ -1,31 +1,32 @@
 package view;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.EventQueue;
-import java.awt.Font;
-import java.awt.SystemColor;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+import java.awt.Color;
+import javax.swing.JButton;
+
 
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-import javax.swing.border.EmptyBorder;
+import java.awt.Font;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import javax.swing.JTextField;
+import java.awt.SystemColor;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 import javax.swing.JList;
 
-public class QueueView extends JFrame {
+public class PlaylistViewA extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField txtSearch;
 	boolean evenClick = false;
-	private JList NIQ_Year3;
-	private JList NU_Year1;
-
+	private JButton Artist_Dashboard;
 	/**
 	 * Launch the application.
 	 */
@@ -33,7 +34,7 @@ public class QueueView extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					QueueView frame = new QueueView();
+					PlaylistViewA frame = new PlaylistViewA();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -45,7 +46,7 @@ public class QueueView extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public QueueView() {
+	public PlaylistViewA() {
 		setBackground(new Color(254,254,250));
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -70,7 +71,7 @@ public class QueueView extends JFrame {
 		MainRectangle.add(SongDetails);
 		SongDetails.setLayout(null);
 		
-		JLabel SongName = new JLabel("()");
+		JLabel SongName = new JLabel("(Song Name)");
 		SongName.setHorizontalAlignment(SwingConstants.CENTER);
 		SongName.setForeground(new Color(255, 255, 255));
 		SongName.setFont(new Font("Calibri", Font.PLAIN, 14));
@@ -218,11 +219,19 @@ public class QueueView extends JFrame {
 		TopBar.add(button_2);
 		
 		JButton Refreshbtn = new JButton("");
-		Refreshbtn.setIcon(new ImageIcon(QueueView.class.getResource("/images2/reload.png")));
+		Refreshbtn.setIcon(new ImageIcon(PlaylistViewA.class.getResource("/images2/reload.png")));
 		Refreshbtn.setBorder(null);
 		Refreshbtn.setBackground(new Color(30, 58, 42));
 		Refreshbtn.setBounds(1035, 11, 39, 39);
 		TopBar.add(Refreshbtn);
+		
+		JButton verified = new JButton("");
+		verified.setIcon(new ImageIcon(QueueViewA.class.getResource("/images2/correct (4).png")));
+		verified.setEnabled(false);
+		verified.setBorder(null);
+		verified.setBackground(new Color(30, 58, 42));
+		verified.setBounds(448, 22, 28, 28);
+		TopBar.add(verified);
 		
 		JPanel MusicPanel = new JPanel();
 		MusicPanel.setBackground(new Color(254, 254, 250));
@@ -273,6 +282,7 @@ public class QueueView extends JFrame {
 		MusicPanel.add(Albums_Music);
 		
 		JButton Playlist_Name3 = new JButton("");
+		Playlist_Name3.setEnabled(false);
 		Playlist_Name3.setHorizontalAlignment(SwingConstants.LEFT);
 		Playlist_Name3.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		Playlist_Name3.setBackground(new Color(254, 254, 250));
@@ -280,6 +290,7 @@ public class QueueView extends JFrame {
 		MusicPanel.add(Playlist_Name3);
 		
 		JButton Playlist_Name2 = new JButton("");
+		Playlist_Name2.setEnabled(false);
 		Playlist_Name2.setHorizontalAlignment(SwingConstants.LEFT);
 		Playlist_Name2.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		Playlist_Name2.setBackground(new Color(242, 203, 155));
@@ -287,6 +298,7 @@ public class QueueView extends JFrame {
 		MusicPanel.add(Playlist_Name2);
 		
 		JButton Playlist_Name1 = new JButton("");
+		Playlist_Name1.setEnabled(false);
 		Playlist_Name1.setHorizontalAlignment(SwingConstants.LEFT);
 		Playlist_Name1.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		Playlist_Name1.setBackground(new Color(254, 254, 250));
@@ -301,6 +313,7 @@ public class QueueView extends JFrame {
 		MusicPanel.add(Playlists_Music);
 		
 		JButton Playlist_Name7 = new JButton("");
+		Playlist_Name7.setEnabled(false);
 		Playlist_Name7.setHorizontalAlignment(SwingConstants.LEFT);
 		Playlist_Name7.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		Playlist_Name7.setBackground(new Color(254, 254, 250));
@@ -308,6 +321,7 @@ public class QueueView extends JFrame {
 		MusicPanel.add(Playlist_Name7);
 		
 		JButton Playlist_Name6 = new JButton("");
+		Playlist_Name6.setEnabled(false);
 		Playlist_Name6.setHorizontalAlignment(SwingConstants.LEFT);
 		Playlist_Name6.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		Playlist_Name6.setBackground(new Color(242, 203, 155));
@@ -315,6 +329,7 @@ public class QueueView extends JFrame {
 		MusicPanel.add(Playlist_Name6);
 		
 		JButton Playlist_Name5 = new JButton("");
+		Playlist_Name5.setEnabled(false);
 		Playlist_Name5.setHorizontalAlignment(SwingConstants.LEFT);
 		Playlist_Name5.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		Playlist_Name5.setBackground(new Color(254, 254, 250));
@@ -322,6 +337,7 @@ public class QueueView extends JFrame {
 		MusicPanel.add(Playlist_Name5);
 		
 		JButton Playlist_Name4 = new JButton("");
+		Playlist_Name4.setEnabled(false);
 		Playlist_Name4.setHorizontalAlignment(SwingConstants.LEFT);
 		Playlist_Name4.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		Playlist_Name4.setBackground(new Color(242, 203, 155));
@@ -329,6 +345,7 @@ public class QueueView extends JFrame {
 		MusicPanel.add(Playlist_Name4);
 		
 		JButton Playlist_Name9 = new JButton("");
+		Playlist_Name9.setEnabled(false);
 		Playlist_Name9.setHorizontalAlignment(SwingConstants.LEFT);
 		Playlist_Name9.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		Playlist_Name9.setBackground(new Color(254, 254, 250));
@@ -336,15 +353,16 @@ public class QueueView extends JFrame {
 		MusicPanel.add(Playlist_Name9);
 		
 		JButton Playlist_Name8 = new JButton("");
+		Playlist_Name8.setEnabled(false);
 		Playlist_Name8.setHorizontalAlignment(SwingConstants.LEFT);
 		Playlist_Name8.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		Playlist_Name8.setBackground(new Color(242, 203, 155));
 		Playlist_Name8.setBounds(0, 372, 186, 30);
 		MusicPanel.add(Playlist_Name8);
 		
-		JList Playlist_list = new JList();
-		Playlist_list.setBounds(0, 175, 186, 256);
-		MusicPanel.add(Playlist_list);
+		JList Playlist_List = new JList();
+		Playlist_List.setBounds(0, 175, 186, 253);
+		MusicPanel.add(Playlist_List);
 		
 		JPanel RecentlyPlayedPanel = new JPanel();
 		RecentlyPlayedPanel.setLayout(null);
@@ -470,12 +488,12 @@ public class QueueView extends JFrame {
 		RecentlyPlayedPanel.add(MostPlayedSongs);
 		
 		JList RP_List = new JList();
-		RP_List.setBounds(0, 33, 186, 200);
+		RP_List.setBounds(0, 33, 186, 201);
 		RecentlyPlayedPanel.add(RP_List);
 		
-		JList MP_list = new JList();
-		MP_list.setBounds(0, 287, 186, 142);
-		RecentlyPlayedPanel.add(MP_list);
+		JList MP_List = new JList();
+		MP_List.setBounds(0, 287, 186, 138);
+		RecentlyPlayedPanel.add(MP_List);
 		
 		JPanel Dashboard = new JPanel();
 		Dashboard.setBackground(new Color(254, 254, 250));
@@ -484,380 +502,451 @@ public class QueueView extends JFrame {
 		contentPane.add(Dashboard);
 		Dashboard.setLayout(null);
 		
-		JLabel lblQueue = new JLabel("Queue");
-		lblQueue.setBackground(new Color(254,254,250));
-		lblQueue.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblQueue.setBounds(10, 11, 186, 23);
-		Dashboard.add(lblQueue);
+		JLabel PlaylistArt_1 = new JLabel("ALBUM ART");
+		PlaylistArt_1.setIcon(new ImageIcon(HomeView.class.getResource("/images2/KDRLK.png")));
+		PlaylistArt_1.setBackground(new Color(254,254,250));
+		PlaylistArt_1.setHorizontalAlignment(SwingConstants.CENTER);
+		PlaylistArt_1.setBounds(10, 0, 164, 164);
+		Dashboard.add(PlaylistArt_1);
+		
+		JLabel lblPlaylistName = new JLabel("(Playlist Name)");
+		lblPlaylistName.setBackground(new Color(254,254,250));
+		lblPlaylistName.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblPlaylistName.setBounds(184, 55, 186, 23);
+		Dashboard.add(lblPlaylistName);
+		
+		JLabel lblPlaylistDetails = new JLabel("(Playlist details)");
+		lblPlaylistDetails.setHorizontalAlignment(SwingConstants.CENTER);
+		lblPlaylistDetails.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblPlaylistDetails.setBackground(new Color(254, 254, 250));
+		lblPlaylistDetails.setBounds(184, 82, 377, 55);
+		Dashboard.add(lblPlaylistDetails);
+		
+		JLabel Created_bylbl = new JLabel("Created by");
+		Created_bylbl.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		Created_bylbl.setBackground(new Color(254, 254, 250));
+		Created_bylbl.setBounds(184, 136, 74, 23);
+		Dashboard.add(Created_bylbl);
+		
+		JButton ProfileName_Dashboard = new JButton("Profile Name");
+		ProfileName_Dashboard.setHorizontalAlignment(SwingConstants.LEFT);
+		ProfileName_Dashboard.setForeground(Color.BLACK);
+		ProfileName_Dashboard.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		ProfileName_Dashboard.setBorder(null);
+		ProfileName_Dashboard.setBackground(new Color(254,254,250));
+		ProfileName_Dashboard.setBounds(256, 136, 305, 23);
+		Dashboard.add(ProfileName_Dashboard);
 		
 		JButton Title_Dashboard = new JButton("Title");
 		Title_Dashboard.setHorizontalAlignment(SwingConstants.LEFT);
 		Title_Dashboard.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		Title_Dashboard.setBackground(new Color(254, 254, 250));
-		Title_Dashboard.setBounds(2, 77, 200, 30);
+		Title_Dashboard.setBounds(10, 170, 164, 30);
 		Dashboard.add(Title_Dashboard);
+		
+		Artist_Dashboard = new JButton("Artist");
+		Artist_Dashboard.setHorizontalAlignment(SwingConstants.LEFT);
+		Artist_Dashboard.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		Artist_Dashboard.setBackground(new Color(254, 254, 250));
+		Artist_Dashboard.setBounds(173, 170, 164, 30);
+		Dashboard.add(Artist_Dashboard);
 		
 		JButton Album_Dashboard = new JButton("Album");
 		Album_Dashboard.setHorizontalAlignment(SwingConstants.LEFT);
 		Album_Dashboard.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		Album_Dashboard.setBackground(new Color(254, 254, 250));
-		Album_Dashboard.setBounds(396, 77, 172, 30);
+		Album_Dashboard.setBounds(335, 170, 172, 30);
 		Dashboard.add(Album_Dashboard);
 		
-		JButton Year_Dashboard = new JButton("Year");
-		Year_Dashboard.setHorizontalAlignment(SwingConstants.LEFT);
-		Year_Dashboard.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		Year_Dashboard.setBackground(new Color(254, 254, 250));
-		Year_Dashboard.setBounds(658, 77, 78, 30);
-		Dashboard.add(Year_Dashboard);
-		
 		JButton Genre_Dashboard = new JButton("Genre");
+		Genre_Dashboard.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		Genre_Dashboard.setHorizontalAlignment(SwingConstants.LEFT);
 		Genre_Dashboard.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		Genre_Dashboard.setBackground(new Color(254, 254, 250));
-		Genre_Dashboard.setBounds(567, 77, 95, 30);
+		Genre_Dashboard.setBounds(503, 170, 100, 30);
 		Dashboard.add(Genre_Dashboard);
 		
 		JButton AddQueuebtn = new JButton("");
-		AddQueuebtn.setIcon(new ImageIcon(PlaylistView.class.getResource("/images2/add-to-queue-button (1).png")));
+		AddQueuebtn.setIcon(new ImageIcon(PlaylistViewA.class.getResource("/images2/add-to-queue-button (1).png")));
 		AddQueuebtn.setBorder(null);
 		AddQueuebtn.setBackground(new Color(254,254,250));
 		AddQueuebtn.setBounds(607, 11, 39, 39);
 		AddQueuebtn.setBorder(null);
-		AddQueuebtn.setToolTipText("Add Song to Queue");
+		AddQueuebtn.setToolTipText("Add Song to Playlist");
 		Dashboard.add(AddQueuebtn);
 		
 		JButton RemoveSongfromPlaylistbtn = new JButton("");
-		RemoveSongfromPlaylistbtn.setIcon(new ImageIcon(PlaylistView.class.getResource("/images2/prohibition (1).png")));
+		RemoveSongfromPlaylistbtn.setIcon(new ImageIcon(PlaylistViewA.class.getResource("/images2/prohibition (1).png")));
 		RemoveSongfromPlaylistbtn.setBorder(null);
 		RemoveSongfromPlaylistbtn.setBackground(new Color(254, 254, 250));
 		RemoveSongfromPlaylistbtn.setBounds(656, 11, 39, 39);
 		RemoveSongfromPlaylistbtn.setBorder(null);
-		RemoveSongfromPlaylistbtn.setToolTipText("Remove Song from Queue");
+		RemoveSongfromPlaylistbtn.setToolTipText("Remove Song from Playlist");
 		Dashboard.add(RemoveSongfromPlaylistbtn);
 		
-		JButton Artist_Dashboard = new JButton("Artist");
-		Artist_Dashboard.setHorizontalAlignment(SwingConstants.LEFT);
-		Artist_Dashboard.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		Artist_Dashboard.setBackground(new Color(254, 254, 250));
-		Artist_Dashboard.setBounds(199, 77, 200, 30);
-		Dashboard.add(Artist_Dashboard);
+		JButton Public_Privatebtn = new JButton("");
+		Public_Privatebtn.setIcon(new ImageIcon(PlaylistViewA.class.getResource("/images2/private_(1).png")));
+		Public_Privatebtn.setBorder(null);
+		Public_Privatebtn.setBackground(new Color(254, 254, 250));
+		Public_Privatebtn.setBounds(705, 11, 39, 39);
+		Public_Privatebtn.setBorder(null);
+		Public_Privatebtn.setToolTipText("Set Playlist to Public/Private");
+		Dashboard.add(Public_Privatebtn);
 		
-		JLabel NowPlayinglbl = new JLabel("Now Playing");
-		NowPlayinglbl.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		NowPlayinglbl.setBackground(new Color(254, 254, 250));
-		NowPlayinglbl.setBounds(10, 45, 188, 30);
-		Dashboard.add(NowPlayinglbl);
+		JButton Year_Dashboard = new JButton("Year");
+		Year_Dashboard.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		Year_Dashboard.setBackground(new Color(254, 254, 250));
+		Year_Dashboard.setBounds(600, 170, 80, 30);
+		Dashboard.add(Year_Dashboard);
 		
-		JLabel NextInQueuelbl = new JLabel("Next In Queue");
-		NextInQueuelbl.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		NextInQueuelbl.setBackground(new Color(254, 254, 250));
-		NextInQueuelbl.setBounds(10, 144, 188, 30);
-		Dashboard.add(NextInQueuelbl);
+		JButton Favorite_Dashboard = new JButton("");
+		Favorite_Dashboard.setIcon(new ImageIcon(PlaylistViewA.class.getResource("/images2/star.png")));
+		Favorite_Dashboard.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		Favorite_Dashboard.setBackground(new Color(254, 254, 250));
+		Favorite_Dashboard.setBounds(680, 170, 74, 30);
+		Dashboard.add(Favorite_Dashboard);
 		
-		JLabel NextUplbl = new JLabel("Next Up");
-		NextUplbl.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		NextUplbl.setBackground(new Color(254, 254, 250));
-		NextUplbl.setBounds(10, 284, 188, 30);
-		Dashboard.add(NextUplbl);
+		JList Titlelist = new JList();
+		Titlelist.setBackground(new Color(254,254,250));
+		Titlelist.setBounds(12, 197, 160, 30);
+		Dashboard.add(Titlelist);
 		
-		JButton Title_NIQ = new JButton("Title");
-		Title_NIQ.setHorizontalAlignment(SwingConstants.LEFT);
-		Title_NIQ.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		Title_NIQ.setBackground(new Color(254, 254, 250));
-		Title_NIQ.setBounds(0, 176, 200, 30);
-		Dashboard.add(Title_NIQ);
+		JList Titlelist_1 = new JList();
+		Titlelist_1.setBackground(new Color(254, 254, 250));
+		Titlelist_1.setBounds(12, 226, 160, 30);
+		Dashboard.add(Titlelist_1);
 		
-		JButton Arist_NIQ = new JButton("Artist");
-		Arist_NIQ.setHorizontalAlignment(SwingConstants.LEFT);
-		Arist_NIQ.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		Arist_NIQ.setBackground(new Color(254, 254, 250));
-		Arist_NIQ.setBounds(197, 176, 200, 30);
-		Dashboard.add(Arist_NIQ);
+		JList Titlelist_2 = new JList();
+		Titlelist_2.setBackground(new Color(254, 254, 250));
+		Titlelist_2.setBounds(12, 286, 160, 30);
+		Dashboard.add(Titlelist_2);
 		
-		JButton Album_NIQ = new JButton("Album");
-		Album_NIQ.setHorizontalAlignment(SwingConstants.LEFT);
-		Album_NIQ.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		Album_NIQ.setBackground(new Color(254, 254, 250));
-		Album_NIQ.setBounds(394, 176, 172, 30);
-		Dashboard.add(Album_NIQ);
+		JList Titlelist_3 = new JList();
+		Titlelist_3.setBackground(new Color(254, 254, 250));
+		Titlelist_3.setBounds(12, 256, 160, 30);
+		Dashboard.add(Titlelist_3);
 		
-		JButton Genre_NIQ = new JButton("Genre");
-		Genre_NIQ.setHorizontalAlignment(SwingConstants.LEFT);
-		Genre_NIQ.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		Genre_NIQ.setBackground(new Color(254, 254, 250));
-		Genre_NIQ.setBounds(565, 176, 95, 30);
-		Dashboard.add(Genre_NIQ);
+		JList Titlelist_4 = new JList();
+		Titlelist_4.setBackground(new Color(254, 254, 250));
+		Titlelist_4.setBounds(12, 315, 160, 30);
+		Dashboard.add(Titlelist_4);
 		
-		JButton Year_NIQ = new JButton("Year");
-		Year_NIQ.setHorizontalAlignment(SwingConstants.LEFT);
-		Year_NIQ.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		Year_NIQ.setBackground(new Color(254, 254, 250));
-		Year_NIQ.setBounds(656, 176, 78, 30);
-		Dashboard.add(Year_NIQ);
+		JList Titlelist_5 = new JList();
+		Titlelist_5.setBackground(new Color(254, 254, 250));
+		Titlelist_5.setBounds(12, 344, 160, 30);
+		Dashboard.add(Titlelist_5);
 		
-		JButton Title_NU = new JButton("Title");
-		Title_NU.setHorizontalAlignment(SwingConstants.LEFT);
-		Title_NU.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		Title_NU.setBackground(new Color(254, 254, 250));
-		Title_NU.setBounds(2, 320, 200, 30);
-		Dashboard.add(Title_NU);
+		JList Titlelist_6 = new JList();
+		Titlelist_6.setBackground(new Color(254, 254, 250));
+		Titlelist_6.setBounds(12, 404, 160, 30);
+		Dashboard.add(Titlelist_6);
 		
-		JButton Artist_NIQ = new JButton("Artist");
-		Artist_NIQ.setHorizontalAlignment(SwingConstants.LEFT);
-		Artist_NIQ.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		Artist_NIQ.setBackground(new Color(254, 254, 250));
-		Artist_NIQ.setBounds(199, 320, 200, 30);
-		Dashboard.add(Artist_NIQ);
+		JList Titlelist_7 = new JList();
+		Titlelist_7.setBackground(new Color(254, 254, 250));
+		Titlelist_7.setBounds(12, 374, 160, 30);
+		Dashboard.add(Titlelist_7);
 		
-		JButton Album_NU = new JButton("Album");
-		Album_NU.setHorizontalAlignment(SwingConstants.LEFT);
-		Album_NU.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		Album_NU.setBackground(new Color(254, 254, 250));
-		Album_NU.setBounds(396, 320, 172, 30);
-		Dashboard.add(Album_NU);
+		JList Titlelist_8 = new JList();
+		Titlelist_8.setBackground(new Color(254, 254, 250));
+		Titlelist_8.setBounds(12, 434, 160, 30);
+		Dashboard.add(Titlelist_8);
 		
-		JButton Genre_NU = new JButton("Genre");
-		Genre_NU.setHorizontalAlignment(SwingConstants.LEFT);
-		Genre_NU.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		Genre_NU.setBackground(new Color(254, 254, 250));
-		Genre_NU.setBounds(567, 320, 95, 30);
-		Dashboard.add(Genre_NU);
+		JList Titlelist_9 = new JList();
+		Titlelist_9.setBackground(new Color(254, 254, 250));
+		Titlelist_9.setBounds(12, 464, 160, 30);
+		Dashboard.add(Titlelist_9);
 		
-		JButton Year_NU = new JButton("Year");
-		Year_NU.setHorizontalAlignment(SwingConstants.LEFT);
-		Year_NU.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		Year_NU.setBackground(new Color(254, 254, 250));
-		Year_NU.setBounds(658, 320, 78, 30);
-		Dashboard.add(Year_NU);
+		JButton btnNewButton_1 = new JButton("");
+		btnNewButton_1.setEnabled(false);
+		btnNewButton_1.setBackground(new Color(254,254,250));
+		btnNewButton_1.setBounds(10, 197, 164, 299);
+		Dashboard.add(btnNewButton_1);
 		
-		JList NP_Title = new JList();
-		NP_Title.setBackground(new Color(254,254,250));
-		NP_Title.setBounds(2, 106, 200, 30);
-		Dashboard.add(NP_Title);
+		JList Artistlist = new JList();
+		Artistlist.setBackground(new Color(254, 254, 250));
+		Artistlist.setBounds(173, 197, 160, 30);
+		Dashboard.add(Artistlist);
 		
-		JList NP_Artist = new JList();
-		NP_Artist.setBackground(new Color(254, 254, 250));
-		NP_Artist.setBounds(199, 106, 200, 30);
-		Dashboard.add(NP_Artist);
+		JList Artistlist_1 = new JList();
+		Artistlist_1.setBackground(new Color(254, 254, 250));
+		Artistlist_1.setBounds(173, 226, 160, 30);
+		Dashboard.add(Artistlist_1);
 		
-		JList NP_Album = new JList();
-		NP_Album.setBackground(new Color(254, 254, 250));
-		NP_Album.setBounds(396, 106, 172, 30);
-		Dashboard.add(NP_Album);
+		JList Artistlist_2 = new JList();
+		Artistlist_2.setBackground(new Color(254, 254, 250));
+		Artistlist_2.setBounds(173, 286, 160, 30);
+		Dashboard.add(Artistlist_2);
 		
-		JList NP_Genre = new JList();
-		NP_Genre.setBackground(new Color(254, 254, 250));
-		NP_Genre.setBounds(567, 106, 95, 30);
-		Dashboard.add(NP_Genre);
+		JList Artistlist_3 = new JList();
+		Artistlist_3.setBackground(new Color(254, 254, 250));
+		Artistlist_3.setBounds(173, 256, 160, 30);
+		Dashboard.add(Artistlist_3);
 		
-		JList NP_Year = new JList();
-		NP_Year.setBackground(new Color(254, 254, 250));
-		NP_Year.setBounds(658, 106, 78, 30);
-		Dashboard.add(NP_Year);
+		JList Artistlist_4 = new JList();
+		Artistlist_4.setBackground(new Color(254, 254, 250));
+		Artistlist_4.setBounds(173, 315, 160, 30);
+		Dashboard.add(Artistlist_4);
 		
-		JList NIQ_Title1 = new JList();
-		NIQ_Title1.setBackground(new Color(254, 254, 250));
-		NIQ_Title1.setBounds(0, 204, 196, 30);
-		Dashboard.add(NIQ_Title1);
+		JList Artistlist_5 = new JList();
+		Artistlist_5.setBackground(new Color(254, 254, 250));
+		Artistlist_5.setBounds(173, 344, 160, 30);
+		Dashboard.add(Artistlist_5);
 		
-		JList NIQ_Artist1 = new JList();
-		NIQ_Artist1.setBackground(new Color(254, 254, 250));
-		NIQ_Artist1.setBounds(197, 204, 202, 30);
-		Dashboard.add(NIQ_Artist1);
+		JList Artistlist_6 = new JList();
+		Artistlist_6.setBackground(new Color(254, 254, 250));
+		Artistlist_6.setBounds(173, 374, 160, 30);
+		Dashboard.add(Artistlist_6);
 		
-		JList NIQ_Album1 = new JList();
-		NIQ_Album1.setBackground(new Color(254, 254, 250));
-		NIQ_Album1.setBounds(394, 204, 172, 30);
-		Dashboard.add(NIQ_Album1);
+		JList Artistlist_7 = new JList();
+		Artistlist_7.setBackground(new Color(254, 254, 250));
+		Artistlist_7.setBounds(173, 404, 160, 30);
+		Dashboard.add(Artistlist_7);
 		
-		JList NIQ_Genre1 = new JList();
-		NIQ_Genre1.setBackground(new Color(254, 254, 250));
-		NIQ_Genre1.setBounds(565, 204, 95, 30);
-		Dashboard.add(NIQ_Genre1);
+		JList Artistlist_8 = new JList();
+		Artistlist_8.setBackground(new Color(254, 254, 250));
+		Artistlist_8.setBounds(173, 434, 160, 30);
+		Dashboard.add(Artistlist_8);
 		
-		JList NIQ_Year1 = new JList();
-		NIQ_Year1.setBackground(new Color(254, 254, 250));
-		NIQ_Year1.setBounds(656, 204, 78, 30);
-		Dashboard.add(NIQ_Year1);
+		JList Artistlist_9 = new JList();
+		Artistlist_9.setBackground(new Color(254, 254, 250));
+		Artistlist_9.setBounds(173, 464, 160, 30);
+		Dashboard.add(Artistlist_9);
 		
-		JList NIQ_Title2 = new JList();
-		NIQ_Title2.setBackground(new Color(254, 254, 250));
-		NIQ_Title2.setBounds(2, 232, 194, 30);
-		Dashboard.add(NIQ_Title2);
+		JButton button_1 = new JButton("");
+		button_1.setEnabled(false);
+		button_1.setBackground(new Color(254,254,250));
+		button_1.setBounds(173, 197, 164, 299);
+		Dashboard.add(button_1);
 		
-		JList NIQ_Artist2 = new JList();
-		NIQ_Artist2.setBackground(new Color(254, 254, 250));
-		NIQ_Artist2.setBounds(199, 232, 200, 30);
-		Dashboard.add(NIQ_Artist2);
+		JList Albumlist = new JList();
+		Albumlist.setBackground(new Color(254, 254, 250));
+		Albumlist.setBounds(335, 199, 169, 30);
+		Dashboard.add(Albumlist);
 		
-		JList NIQ_Album2 = new JList();
-		NIQ_Album2.setBackground(new Color(254, 254, 250));
-		NIQ_Album2.setBounds(396, 232, 172, 30);
-		Dashboard.add(NIQ_Album2);
+		JList Albumlist_1 = new JList();
+		Albumlist_1.setBackground(new Color(254, 254, 250));
+		Albumlist_1.setBounds(335, 228, 169, 30);
+		Dashboard.add(Albumlist_1);
 		
-		JList NIQ_Genre2 = new JList();
-		NIQ_Genre2.setBackground(new Color(254, 254, 250));
-		NIQ_Genre2.setBounds(567, 232, 95, 30);
-		Dashboard.add(NIQ_Genre2);
+		JList Albumlist_2 = new JList();
+		Albumlist_2.setBackground(new Color(254, 254, 250));
+		Albumlist_2.setBounds(335, 258, 169, 30);
+		Dashboard.add(Albumlist_2);
 		
-		JList NIQ_Year2 = new JList();
-		NIQ_Year2.setBackground(new Color(254, 254, 250));
-		NIQ_Year2.setBounds(658, 232, 78, 30);
-		Dashboard.add(NIQ_Year2);
+		JList Albumlist_3 = new JList();
+		Albumlist_3.setBackground(new Color(254, 254, 250));
+		Albumlist_3.setBounds(335, 288, 169, 30);
+		Dashboard.add(Albumlist_3);
 		
-		JList NIQ_Title3 = new JList();
-		NIQ_Title3.setBackground(new Color(254, 254, 250));
-		NIQ_Title3.setBounds(2, 263, 194, 30);
-		Dashboard.add(NIQ_Title3);
+		JList Albumlist_4 = new JList();
+		Albumlist_4.setBackground(new Color(254, 254, 250));
+		Albumlist_4.setBounds(335, 317, 169, 30);
+		Dashboard.add(Albumlist_4);
 		
-		JList NIQ_Artist3 = new JList();
-		NIQ_Artist3.setBackground(new Color(254, 254, 250));
-		NIQ_Artist3.setBounds(199, 263, 200, 30);
-		Dashboard.add(NIQ_Artist3);
+		JList Albumlist_5 = new JList();
+		Albumlist_5.setBackground(new Color(254, 254, 250));
+		Albumlist_5.setBounds(335, 346, 169, 30);
+		Dashboard.add(Albumlist_5);
 		
-		JList NIQ_Album3 = new JList();
-		NIQ_Album3.setBackground(new Color(254, 254, 250));
-		NIQ_Album3.setBounds(396, 263, 172, 30);
-		Dashboard.add(NIQ_Album3);
+		JList Albumlist_6 = new JList();
+		Albumlist_6.setBackground(new Color(254, 254, 250));
+		Albumlist_6.setBounds(335, 376, 169, 30);
+		Dashboard.add(Albumlist_6);
 		
-		JList NIQ_Genre3 = new JList();
-		NIQ_Genre3.setBackground(new Color(254, 254, 250));
-		NIQ_Genre3.setBounds(567, 263, 95, 30);
-		Dashboard.add(NIQ_Genre3);
+		JList Albumlist_7 = new JList();
+		Albumlist_7.setBackground(new Color(254, 254, 250));
+		Albumlist_7.setBounds(335, 406, 169, 30);
+		Dashboard.add(Albumlist_7);
 		
-		NIQ_Year3 = new JList();
-		NIQ_Year3.setBackground(new Color(254, 254, 250));
-		NIQ_Year3.setBounds(658, 263, 78, 30);
-		Dashboard.add(NIQ_Year3);
+		JList Albumlist_8 = new JList();
+		Albumlist_8.setBackground(new Color(254, 254, 250));
+		Albumlist_8.setBounds(335, 436, 169, 30);
+		Dashboard.add(Albumlist_8);
 		
-		JList NU_Title1 = new JList();
-		NU_Title1.setBackground(new Color(254, 254, 250));
-		NU_Title1.setBounds(2, 349, 196, 30);
-		Dashboard.add(NU_Title1);
+		JList Albumlist_9 = new JList();
+		Albumlist_9.setBackground(new Color(254, 254, 250));
+		Albumlist_9.setBounds(335, 466, 169, 30);
+		Dashboard.add(Albumlist_9);
 		
-		JList NU_Artist1 = new JList();
-		NU_Artist1.setBackground(new Color(254, 254, 250));
-		NU_Artist1.setBounds(199, 349, 202, 30);
-		Dashboard.add(NU_Artist1);
+		JButton button_3 = new JButton("");
+		button_3.setEnabled(false);
+		button_3.setBackground(new Color(254,254,250));
+		button_3.setBounds(335, 197, 172, 299);
+		Dashboard.add(button_3);
 		
-		JList NU_Album1 = new JList();
-		NU_Album1.setBackground(new Color(254, 254, 250));
-		NU_Album1.setBounds(396, 349, 172, 30);
-		Dashboard.add(NU_Album1);
+		JList Genrelist = new JList();
+		Genrelist.setBackground(new Color(254, 254, 250));
+		Genrelist.setBounds(503, 197, 97, 30);
+		Dashboard.add(Genrelist);
 		
-		JList NU_Genre1 = new JList();
-		NU_Genre1.setBackground(new Color(254, 254, 250));
-		NU_Genre1.setBounds(567, 349, 95, 30);
-		Dashboard.add(NU_Genre1);
+		JList Genrelist_1 = new JList();
+		Genrelist_1.setBackground(new Color(254, 254, 250));
+		Genrelist_1.setBounds(503, 226, 97, 30);
+		Dashboard.add(Genrelist_1);
 		
-		NU_Year1 = new JList();
-		NU_Year1.setBackground(new Color(254, 254, 250));
-		NU_Year1.setBounds(658, 349, 78, 30);
-		Dashboard.add(NU_Year1);
+		JList Genrelist_2 = new JList();
+		Genrelist_2.setBackground(new Color(254, 254, 250));
+		Genrelist_2.setBounds(503, 256, 97, 30);
+		Dashboard.add(Genrelist_2);
 		
-		JList NU_Title2 = new JList();
-		NU_Title2.setBackground(new Color(254, 254, 250));
-		NU_Title2.setBounds(2, 377, 196, 30);
-		Dashboard.add(NU_Title2);
+		JList Genrelist_3 = new JList();
+		Genrelist_3.setBackground(new Color(254, 254, 250));
+		Genrelist_3.setBounds(503, 286, 97, 30);
+		Dashboard.add(Genrelist_3);
 		
-		JList NU_Artist2 = new JList();
-		NU_Artist2.setBackground(new Color(254, 254, 250));
-		NU_Artist2.setBounds(199, 377, 202, 30);
-		Dashboard.add(NU_Artist2);
+		JList Genrelist_4 = new JList();
+		Genrelist_4.setBackground(new Color(254, 254, 250));
+		Genrelist_4.setBounds(503, 315, 97, 30);
+		Dashboard.add(Genrelist_4);
 		
-		JList NU_Album2 = new JList();
-		NU_Album2.setBackground(new Color(254, 254, 250));
-		NU_Album2.setBounds(398, 377, 172, 30);
-		Dashboard.add(NU_Album2);
+		JList Genrelist_5 = new JList();
+		Genrelist_5.setBackground(new Color(254, 254, 250));
+		Genrelist_5.setBounds(503, 344, 97, 30);
+		Dashboard.add(Genrelist_5);
 		
-		JList NU_Genre2 = new JList();
-		NU_Genre2.setBackground(new Color(254, 254, 250));
-		NU_Genre2.setBounds(567, 377, 95, 30);
-		Dashboard.add(NU_Genre2);
+		JList Genrelist_6 = new JList();
+		Genrelist_6.setBackground(new Color(254, 254, 250));
+		Genrelist_6.setBounds(503, 374, 97, 30);
+		Dashboard.add(Genrelist_6);
 		
-		JList NU_Year2 = new JList();
-		NU_Year2.setBackground(new Color(254, 254, 250));
-		NU_Year2.setBounds(658, 377, 78, 30);
-		Dashboard.add(NU_Year2);
+		JList Genrelist_7 = new JList();
+		Genrelist_7.setBackground(new Color(254, 254, 250));
+		Genrelist_7.setBounds(503, 404, 97, 30);
+		Dashboard.add(Genrelist_7);
 		
-		JList NU_Title3 = new JList();
-		NU_Title3.setBackground(new Color(254, 254, 250));
-		NU_Title3.setBounds(2, 408, 196, 30);
-		Dashboard.add(NU_Title3);
+		JList Genrelist_8 = new JList();
+		Genrelist_8.setBackground(new Color(254, 254, 250));
+		Genrelist_8.setBounds(503, 434, 97, 30);
+		Dashboard.add(Genrelist_8);
 		
-		JList NU_Artist3 = new JList();
-		NU_Artist3.setBackground(new Color(254, 254, 250));
-		NU_Artist3.setBounds(199, 408, 202, 30);
-		Dashboard.add(NU_Artist3);
+		JList Genrelist_9 = new JList();
+		Genrelist_9.setBackground(new Color(254, 254, 250));
+		Genrelist_9.setBounds(503, 464, 97, 30);
+		Dashboard.add(Genrelist_9);
 		
-		JList NU_Album3 = new JList();
-		NU_Album3.setBackground(new Color(254, 254, 250));
-		NU_Album3.setBounds(398, 408, 172, 30);
-		Dashboard.add(NU_Album3);
+		JButton button_4 = new JButton("");
+		button_4.setEnabled(false);
+		button_4.setBackground(new Color(254,254,250));
+		button_4.setBounds(503, 197, 100, 299);
+		Dashboard.add(button_4);
 		
-		JList NU_Genre3 = new JList();
-		NU_Genre3.setBackground(new Color(254, 254, 250));
-		NU_Genre3.setBounds(567, 408, 95, 30);
-		Dashboard.add(NU_Genre3);
+		JList Yearlist = new JList();
+		Yearlist.setBackground(new Color(254, 254, 250));
+		Yearlist.setBounds(600, 197, 76, 30);
+		Dashboard.add(Yearlist);
 		
-		JList NU_Year3 = new JList();
-		NU_Year3.setBackground(new Color(254, 254, 250));
-		NU_Year3.setBounds(658, 408, 78, 30);
-		Dashboard.add(NU_Year3);
+		JList Yearlist_1 = new JList();
+		Yearlist_1.setBackground(new Color(254, 254, 250));
+		Yearlist_1.setBounds(600, 226, 76, 30);
+		Dashboard.add(Yearlist_1);
 		
-		JList NU_Title4 = new JList();
-		NU_Title4.setBackground(new Color(254, 254, 250));
-		NU_Title4.setBounds(2, 438, 196, 30);
-		Dashboard.add(NU_Title4);
+		JList Yearlist_2 = new JList();
+		Yearlist_2.setBackground(new Color(254, 254, 250));
+		Yearlist_2.setBounds(600, 256, 76, 30);
+		Dashboard.add(Yearlist_2);
 		
-		JList NU_Artist4 = new JList();
-		NU_Artist4.setBackground(new Color(254, 254, 250));
-		NU_Artist4.setBounds(199, 438, 202, 30);
-		Dashboard.add(NU_Artist4);
+		JList Yearlist_3 = new JList();
+		Yearlist_3.setBackground(new Color(254, 254, 250));
+		Yearlist_3.setBounds(600, 286, 76, 30);
+		Dashboard.add(Yearlist_3);
 		
-		JList NU_Album4 = new JList();
-		NU_Album4.setBackground(new Color(254, 254, 250));
-		NU_Album4.setBounds(396, 438, 172, 30);
-		Dashboard.add(NU_Album4);
+		JList Yearlist_4 = new JList();
+		Yearlist_4.setBackground(new Color(254, 254, 250));
+		Yearlist_4.setBounds(600, 315, 76, 30);
+		Dashboard.add(Yearlist_4);
 		
-		JList NU_Genre4 = new JList();
-		NU_Genre4.setBackground(new Color(254, 254, 250));
-		NU_Genre4.setBounds(567, 438, 95, 30);
-		Dashboard.add(NU_Genre4);
+		JList Yearlist_5 = new JList();
+		Yearlist_5.setBackground(new Color(254, 254, 250));
+		Yearlist_5.setBounds(600, 344, 76, 30);
+		Dashboard.add(Yearlist_5);
 		
-		JList NU_Year4 = new JList();
-		NU_Year4.setBackground(new Color(254, 254, 250));
-		NU_Year4.setBounds(658, 438, 78, 30);
-		Dashboard.add(NU_Year4);
+		JList Yearlist_6 = new JList();
+		Yearlist_6.setBackground(new Color(254, 254, 250));
+		Yearlist_6.setBounds(600, 374, 76, 30);
+		Dashboard.add(Yearlist_6);
 		
-		JList NU_Title5 = new JList();
-		NU_Title5.setBackground(new Color(254, 254, 250));
-		NU_Title5.setBounds(2, 466, 196, 30);
-		Dashboard.add(NU_Title5);
+		JList Yearlist_7 = new JList();
+		Yearlist_7.setBackground(new Color(254, 254, 250));
+		Yearlist_7.setBounds(600, 404, 76, 30);
+		Dashboard.add(Yearlist_7);
 		
-		JList NU_Artist5 = new JList();
-		NU_Artist5.setBackground(new Color(254, 254, 250));
-		NU_Artist5.setBounds(199, 466, 202, 30);
-		Dashboard.add(NU_Artist5);
+		JList Yearlist_8 = new JList();
+		Yearlist_8.setBackground(new Color(254, 254, 250));
+		Yearlist_8.setBounds(600, 434, 76, 30);
+		Dashboard.add(Yearlist_8);
 		
-		JList NU_Album5 = new JList();
-		NU_Album5.setBackground(new Color(254, 254, 250));
-		NU_Album5.setBounds(398, 466, 172, 30);
-		Dashboard.add(NU_Album5);
+		JList Yearlist_9 = new JList();
+		Yearlist_9.setBackground(new Color(254, 254, 250));
+		Yearlist_9.setBounds(600, 464, 76, 30);
+		Dashboard.add(Yearlist_9);
 		
-		JList NU_Genre5 = new JList();
-		NU_Genre5.setBackground(new Color(254, 254, 250));
-		NU_Genre5.setBounds(567, 466, 95, 30);
-		Dashboard.add(NU_Genre5);
+		JButton button_5 = new JButton("");
+		button_5.setEnabled(false);
+		button_5.setBackground(new Color(254,254,250));
+		button_5.setBounds(600, 197, 80, 299);
+		Dashboard.add(button_5);
 		
-		JList NU_Year5 = new JList();
-		NU_Year5.setBackground(new Color(254, 254, 250));
-		NU_Year5.setBounds(658, 466, 78, 30);
-		Dashboard.add(NU_Year5);
+		JList Favoritelist = new JList();
+		Favoritelist.setBackground(new Color(254, 254, 250));
+		Favoritelist.setBounds(680, 197, 69, 30);
+		Dashboard.add(Favoritelist);
+		
+		JList Favoritelist_1 = new JList();
+		Favoritelist_1.setBackground(new Color(254, 254, 250));
+		Favoritelist_1.setBounds(680, 226, 69, 30);
+		Dashboard.add(Favoritelist_1);
+		
+		JList Favoritelist_2 = new JList();
+		Favoritelist_2.setBackground(new Color(254, 254, 250));
+		Favoritelist_2.setBounds(680, 256, 69, 30);
+		Dashboard.add(Favoritelist_2);
+		
+		JList Favoritelist_3 = new JList();
+		Favoritelist_3.setBackground(new Color(254, 254, 250));
+		Favoritelist_3.setBounds(680, 286, 69, 30);
+		Dashboard.add(Favoritelist_3);
+		
+		JList Favoritelist_4 = new JList();
+		Favoritelist_4.setBackground(new Color(254, 254, 250));
+		Favoritelist_4.setBounds(680, 315, 69, 30);
+		Dashboard.add(Favoritelist_4);
+		
+		JList Favoritelist_5 = new JList();
+		Favoritelist_5.setBackground(new Color(254, 254, 250));
+		Favoritelist_5.setBounds(680, 344, 69, 30);
+		Dashboard.add(Favoritelist_5);
+		
+		JList Favoritelist_6 = new JList();
+		Favoritelist_6.setBackground(new Color(254, 254, 250));
+		Favoritelist_6.setBounds(680, 374, 69, 30);
+		Dashboard.add(Favoritelist_6);
+		
+		JList Favoritelist_7 = new JList();
+		Favoritelist_7.setBackground(new Color(254, 254, 250));
+		Favoritelist_7.setBounds(680, 404, 69, 30);
+		Dashboard.add(Favoritelist_7);
+		
+		JList Favoritelist_8 = new JList();
+		Favoritelist_8.setBackground(new Color(254, 254, 250));
+		Favoritelist_8.setBounds(680, 434, 69, 30);
+		Dashboard.add(Favoritelist_8);
+		
+		JList Favoritelist_9 = new JList();
+		Favoritelist_9.setBackground(new Color(254, 254, 250));
+		Favoritelist_9.setBounds(680, 464, 69, 30);
+		Dashboard.add(Favoritelist_9);
+		
+		JButton button_6 = new JButton("");
+		button_6.setEnabled(false);
+		button_6.setBackground(new Color(254,254,250));
+		button_6.setBounds(680, 197, 74, 299);
+		Dashboard.add(button_6);
 		
 
 		
+
 	}
-
 }
