@@ -637,7 +637,7 @@ public class Database{
 		String y = "1";
 		
 		
-		String query = "UPDATE swdespa.songs SET Favorite = ('"+y+"') WHERE Username = ('"+ID+"') AND SongName = ('"+Name+"');";
+		String query = "UPDATE swdespa.songs SET Favorite = ('"+y+"') WHERE Username = ('"+ID+"') AND Title = ('"+Name+"');";
 		System.out.println(ID);
 		System.out.println(Name);
 
@@ -653,6 +653,99 @@ public class Database{
 		}
 		//return null;
 	}
+	
+	//======================================================================================All editing
+	public void editSongName(String username,String oldSongName, String newSongName){
+		String userName = username;
+		String oldSong = oldSongName;
+		String newSong = newSongName;
+		
+	
+		
+		
+		String query = "UPDATE swdespa.songs SET Title = ('"+newSong+"') WHERE username = ('"+username+"') AND Title = ('"+oldSong+"');";
+		
+		try {
+			PreparedStatement ps = getConnection().prepareStatement(query);
+			ps.executeUpdate(query, Statement.RETURN_GENERATED_KEYS);
+			
+			//get result and store in result set
+			
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void editArtistName(String username,String oldSongName,String newSongName, String newArtistName){
+		String userName = username;
+		String newSong = newSongName;
+		String oldSong = oldSongName;
+		String newArtist = newArtistName;
+		
+		String query = "UPDATE swdespa.songs SET Artist = ('"+newArtist+"') WHERE username = ('"+username+"') AND Title = ('"+newSong+"');";
+		
+		try {
+			PreparedStatement ps = getConnection().prepareStatement(query);
+			ps.executeUpdate(query, Statement.RETURN_GENERATED_KEYS);
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void editAlbumName(String username,String oldSongName, String newSongName, String newAlbumName){
+		String userName = username;
+		String newSong = newSongName;
+		String oldSong = oldSongName;
+		String newAlbum = newAlbumName;
+		
+		String query = "UPDATE swdespa.songs SET Album = ('"+newAlbum+"') WHERE username = ('"+username+"') AND Title = ('"+newSong+"');";
+		
+		try {
+			PreparedStatement ps = getConnection().prepareStatement(query);
+			ps.executeUpdate(query, Statement.RETURN_GENERATED_KEYS);
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void editGenreName(String username,String oldSongName, String newSongName, String newGenreName){
+		String userName = username;
+		String newSong = newSongName;
+		String oldSong = oldSongName;
+		String newGenre = newGenreName;
+		
+		String query = "UPDATE swdespa.songs SET Genre = ('"+newGenre+"') WHERE username = ('"+username+"') AND Title = ('"+newSong+"');";
+		
+		try {
+			PreparedStatement ps = getConnection().prepareStatement(query);
+			ps.executeUpdate(query, Statement.RETURN_GENERATED_KEYS);
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void editYearDate(String username,String oldSongName, String newSongName, String newYearDate){
+		String userName = username;
+		String newSong = newSongName;
+		String oldSong = oldSongName;
+		String newYear = newYearDate;
+		
+		String query = "UPDATE swdespa.songs SET Year = ('"+newYear+"') WHERE username = ('"+username+"') AND Title = ('"+newSong+"');";
+		
+		try {
+			PreparedStatement ps = getConnection().prepareStatement(query);
+			ps.executeUpdate(query, Statement.RETURN_GENERATED_KEYS);
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	//======================================================================================All editing
 	
 	
 	public void addingSongsInPlaylist(Playlist p, Song s){ 	
@@ -696,7 +789,6 @@ public ArrayList<Song> getSongsByGenre() {
 		
 		//get getConnection() from db
 		Connection cnt = getConnection();
-		
 		String query = "SELECT * FROM songs ORDER BY genre";
 		//create string qu
 		
@@ -722,6 +814,7 @@ public ArrayList<Song> getSongsByGenre() {
 						 .setCount(0)
 						 .getSong();
 				 sl.add(newSong);
+				
 			}
 			
 			//close all the resources
@@ -790,6 +883,52 @@ public ArrayList<Song> getSongsByYear() {
 	Connection cnt = getConnection();
 	
 	String query = "SELECT * FROM songs ORDER BY year";
+	//create string qu
+	
+	try {
+		//create prepared statement	
+		PreparedStatement ps = cnt.prepareStatement(query);
+		
+		//get result and store in result set
+		ResultSet rs = ps.executeQuery();
+		
+		ArrayList<Song> sl = new ArrayList<>();
+		//transform set into list
+		while(rs.next()) {
+			 Song newSong = new SongBuilder()
+					 .setSongID(rs.getInt("SongID"))
+					 .setUserName(rs.getString("Username"))
+					 .setSongName(rs.getString("Title"))
+					 .setArtistName(rs.getString("Artist"))
+					 .setAlbum(rs.getString("Album"))
+					 .setGenre(rs.getString("Genre"))
+					 .setYear(rs.getString("Year"))
+					 .setPath("")
+					 .setCount(0)
+					 .getSong();
+			 sl.add(newSong);
+		}
+		
+		//close all the resources
+		ps.close();
+		rs.close();
+		cnt.close();
+		
+		return sl;
+
+	} catch (SQLException e) {
+		e.printStackTrace();
+	}
+	return null; 
+	
+}
+
+public ArrayList<Song> getMostPlayed() {
+	
+	//get getConnection() from db
+	Connection cnt = getConnection();
+	
+	String query = "SELECT * FROM songs ORDER BY Play_Count DESC";
 	//create string qu
 	
 	try {

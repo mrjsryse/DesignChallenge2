@@ -32,7 +32,9 @@ public class RegisteredUserProfile extends JFrame{
 	ArrayList<Song> userSongs,userSongsFavorites;
 	ArrayList<Playlist> userPlaylist,userPlaylistFavorites;
 	PlaylistList pl;
-	JList songJlist,playlistJList,FavoriteplaylistJList,FavoritesongJList;
+
+	JList songJlist,playlistJList,FavoriteplaylistJList,FavoritesongJList, mostPlayedList;
+
 	boolean songChanged;
 	
 	public static RegisteredUserProfile getInstance() {
@@ -80,7 +82,7 @@ public class RegisteredUserProfile extends JFrame{
 			}
 		});
 		songJlist.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		songJlist.setBounds(726, 184, 355, 179);
+		songJlist.setBounds(726, 184, 355, 109);
 		getContentPane().add(songJlist);
 		
 		btnFavoritePlaylist = new JButton("Favorite Playlist");
@@ -110,7 +112,7 @@ public class RegisteredUserProfile extends JFrame{
 		getContentPane().add(FavoriteplaylistJList);
 		
 		btnFavoriteSong = new JButton("Favorite Song");
-		btnFavoriteSong.setBounds(798, 69, 139, 53);
+		btnFavoriteSong.setBounds(726, 69, 139, 53);
 		getContentPane().add(btnFavoriteSong);
 		
 		FavoritesongJList = new JList();
@@ -120,14 +122,38 @@ public class RegisteredUserProfile extends JFrame{
 			}
 		});
 		FavoritesongJList.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		FavoritesongJList.setBounds(741, 454, 355, 179);
+		FavoritesongJList.setBounds(726, 332, 355, 109);
 		getContentPane().add(FavoritesongJList);
 		
 		JLabel lblFavoriteSongs = new JLabel("Favorite Song/s");
 		lblFavoriteSongs.setHorizontalAlignment(SwingConstants.CENTER);
 		lblFavoriteSongs.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblFavoriteSongs.setBounds(765, 390, 202, 53);
+		lblFavoriteSongs.setBounds(765, 292, 202, 53);
 		getContentPane().add(lblFavoriteSongs);
+		
+		JButton btnMostplayed = new JButton("MostPlayed");
+		btnMostplayed.addActionListener(new btn_MostPlayed());
+		btnMostplayed.setBounds(477, 251, 139, 53);
+		getContentPane().add(btnMostplayed);
+		
+		 mostPlayedList = new JList();
+		mostPlayedList.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		mostPlayedList.setBounds(477, 315, 139, 84);
+		getContentPane().add(mostPlayedList);
+		btnFavoriteSong.addActionListener((ActionListener) new btn_FavoriteSong());
+
+		
+		
+		JLabel songCount = new JLabel("Most Played Song/s");
+		songCount.setHorizontalAlignment(SwingConstants.CENTER);
+		songCount.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		songCount.setBounds(765, 447, 202, 53);
+		getContentPane().add(songCount);
+		
+		JButton btnCount = new JButton("Sort High Song Count");
+		btnCount.setBounds(897, 69, 139, 53);
+		getContentPane().add(btnCount);
+		
 		btnFavoriteSong.addActionListener((ActionListener) new btn_FavoriteSong());
 		
 		btnRefresh.addActionListener((ActionListener) new btn_Refresh());
@@ -183,6 +209,16 @@ public class RegisteredUserProfile extends JFrame{
 				DLM4.addElement(userSongsFavorites.get(a).getSongName());
 			
 			FavoritesongJList.setModel(DLM4);
+			
+			//============================================== Most Played Song
+			
+			userSongs = generalModel.getInstance().getMostPlayed();
+			DefaultListModel DLM5 = new DefaultListModel();
+			
+			DLM5.addElement(userSongs.get(0).getSongName());
+			
+			 
+			mostPlayedList.setModel(DLM5);
 		}
 	}
 	
@@ -207,6 +243,24 @@ public class RegisteredUserProfile extends JFrame{
 			String songName = userSongs.get(songJlist.getSelectedIndex()).getSongName();
 			
 			generalModel.getInstance().favoritingSongs(songOfUser, songName);
+		}
+	}
+	
+
+	class btn_MostPlayed implements ActionListener
+
+	{
+		
+		public void actionPerformed(ActionEvent e)
+		{
+
+			userSongs = generalModel.getInstance().getMostPlayed();
+			DefaultListModel DLM = new DefaultListModel();
+			
+			DLM.addElement(userSongs.get(0).getSongName());
+		
+			mostPlayedList.setModel(DLM);
+
 		}
 	}
 	

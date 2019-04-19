@@ -56,7 +56,6 @@ public class SongBuilder
 	}
 	public SongBuilder setFavorite(String Favorite) {
 		this.Favorite = Favorite;
-
 		return this;
 	}
 	

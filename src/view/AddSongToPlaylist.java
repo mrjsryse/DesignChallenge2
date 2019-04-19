@@ -86,8 +86,8 @@ public class AddSongToPlaylist extends JFrame {
 		 	 {	
 		 		 if(comboBoxPlaylists.getSelectedItem().equals(generalModel.getInstance().getUserPlaylist(currUser).get(i).getPlaylistName()))
 		 		 {
-
 		 			for(j = 0; j < generalModel.getInstance().gettingSongs(currUser).size(); j++)
+		 			{
 					 	if (comboBoxSongs.getSelectedItem().equals(generalModel.getInstance().gettingSongs(currUser).get(j).getSongName()))
 					 	{				
 					 		generalModel.getInstance().getUserPlaylist(currUser).get(i).addSongToPlaylist(generalModel.getInstance().gettingSongs(currUser).get(j));       
@@ -96,6 +96,7 @@ public class AddSongToPlaylist extends JFrame {
 					 		
 					 		
 					 	}
+		 			}
 		 		 }
 		 	 }
 		 	 
