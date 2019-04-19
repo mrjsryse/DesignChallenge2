@@ -26,6 +26,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JList;
 import java.awt.event.ActionListener;
+import javax.swing.JTextPane;
 
 public class HomeView extends JFrame {
 
@@ -33,6 +34,7 @@ public class HomeView extends JFrame {
 	private JTextField txtSearch;
 	boolean evenClick = false;
 	JList songJList;
+	JTextPane txtpnSongNameGenre;
 
 	/**
 	 * Launch the application.
@@ -68,7 +70,7 @@ public class HomeView extends JFrame {
 		
 		JPanel MainRectangle = new JPanel();
 		MainRectangle.setBackground(new Color(30,58,42));
-		MainRectangle.setBounds(110, 579, 1036, 92);
+		MainRectangle.setBounds(315, 579, 831, 92);
 		contentPane.add(MainRectangle);
 		MainRectangle.setLayout(null);
 		
@@ -77,27 +79,6 @@ public class HomeView extends JFrame {
 		SongDetails.setBounds(0, 0, 147, 101);
 		MainRectangle.add(SongDetails);
 		SongDetails.setLayout(null);
-		
-		JLabel SongName = new JLabel("(Song Name)");
-		SongName.setHorizontalAlignment(SwingConstants.CENTER);
-		SongName.setForeground(new Color(255, 255, 255));
-		SongName.setFont(new Font("Calibri", Font.PLAIN, 14));
-		SongName.setBounds(0, 0, 147, 40);
-		SongDetails.add(SongName);
-		
-		JLabel Artist = new JLabel("(Artist)");
-		Artist.setHorizontalAlignment(SwingConstants.CENTER);
-		Artist.setForeground(Color.WHITE);
-		Artist.setFont(new Font("Calibri", Font.PLAIN, 12));
-		Artist.setBounds(0, 39, 147, 28);
-		SongDetails.add(Artist);
-		
-		JLabel Album = new JLabel("(Album)");
-		Album.setHorizontalAlignment(SwingConstants.CENTER);
-		Album.setForeground(Color.WHITE);
-		Album.setFont(new Font("Calibri", Font.PLAIN, 12));
-		Album.setBounds(0, 62, 147, 28);
-		SongDetails.add(Album);
 		
 		JButton Shufflebtn = new JButton("");
 		Shufflebtn.setIcon(new ImageIcon(HomeView.class.getResource("/images2/shuffle (4).png")));
@@ -534,6 +515,11 @@ public class HomeView extends JFrame {
 		lblMadeForYou.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblMadeForYou.setBounds(0, 0, 186, 23);
 		Dashboard.add(lblMadeForYou);
+		
+		txtpnSongNameGenre = new JTextPane();
+		txtpnSongNameGenre.setBounds(118, 579, 198, 92);
+		txtpnSongNameGenre.setText("Song Name:\r\nArtist:\r\nAlbum:\r\nGenre:\r\r\nYear:\r\rFavorite");
+		contentPane.add(txtpnSongNameGenre);
 		
 
 		
