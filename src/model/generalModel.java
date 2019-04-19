@@ -24,9 +24,6 @@ public class generalModel {
 		Database.getInstance().writeBLOB(SongID, s.getPath());
 	}
 	
-	public void editSongData(String username,String oldSongName, String newSongName,String newArtistName, String newAlbumName,String newGenreName ,String newYearDate) {
-		Database.getInstance().editingSong(username, oldSongName, newSongName, newArtistName, newAlbumName, newGenreName ,newYearDate);
-	}
 	
 	public void getAccountData(account x) { //SIGNING IN 
 		if(Database.getInstance().addingAccount(x) == false) {
@@ -113,5 +110,32 @@ public class generalModel {
 	public ArrayList<Song> getSongStuff() {
 		return Database.getInstance().gettingSongs();
 	}
+	
+	//=========================================================================== Everything Editing
+	public void editSongData(String username,String oldSongName, String newSongName,String newArtistName, String newAlbumName,String newGenreName ,String newYearDate) {
+//		Database.getInstance().editingSong(username, oldSongName, newSongName, newArtistName, newAlbumName, newGenreName ,newYearDate);
+		Database.getInstance().editSongName(username,oldSongName,newSongName);
+		Database.getInstance().editArtistName(username,oldSongName,newSongName,newArtistName);
+		Database.getInstance().editAlbumName(username,oldSongName,newSongName,newAlbumName);
+		Database.getInstance().editGenreName(username,oldSongName,newSongName,newGenreName);
+		Database.getInstance().editYearDate(username,oldSongName,newSongName,newYearDate);
+	}
+	
+//	public void editSongName(String username, String oldName, String newSongName) {
+//		
+//	}
+//	
+//	public void editArtistName(String username, String oldName, String newArtistName) {
+//		
+//	}
+//	
+//	public void editAlbumName(String username, String oldName, String newAlbumName) {
+//		
+//	}
+//	
+//	public void editGenreName(String username, String oldName, String newGenreName) {
+//		
+//	}
+//	public
 }
 
