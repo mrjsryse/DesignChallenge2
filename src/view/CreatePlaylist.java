@@ -105,9 +105,8 @@ public class CreatePlaylist extends JFrame {
 			 int index = pList.getIndex(addedPlaylist);
 			 
 			 generalModel.getInstance().getPlaylistData(addedPlaylist);
+			 generalController.getInstance().gettingUserPlaylist(username, playlistName, favorite);
 			 
-
-			 generalController.getInstance().gettingUserPlaylist(username, playlistName);
 			 dispose();
 			 
 			 }

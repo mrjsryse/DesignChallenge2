@@ -49,7 +49,7 @@ public class SongBuilder
 		return this;
 	}
 	public SongBuilder setCount(int count) {
-		this.count = count;
+		count = count;
 		return this;
 	}
 	
