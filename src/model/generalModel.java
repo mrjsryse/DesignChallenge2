@@ -24,6 +24,10 @@ public class generalModel {
 		Database.getInstance().writeBLOB(SongID, s.getPath());
 	}
 	
+	public void editSongData(String username,String oldSongName, String newSongName,String newArtistName, String newAlbumName,String newGenreName ,String newYearDate) {
+		Database.getInstance().editingSong(username, oldSongName, newSongName, newArtistName, newAlbumName, newGenreName ,newYearDate);
+	}
+	
 	public void getAccountData(account x) {
 		if(Database.getInstance().addingAccount(x) == false) {
 			SigningUpView.getInstance().signingSuccessful();

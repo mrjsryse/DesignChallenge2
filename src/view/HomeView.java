@@ -19,6 +19,8 @@ import javax.swing.JPopupMenu;
 import java.awt.Component;
 import javax.swing.JTextField;
 import java.awt.SystemColor;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class HomeView extends JFrame {
 
@@ -203,6 +205,10 @@ public class HomeView extends JFrame {
 		ProfilePic.setBackground(new Color(170, 187, 204));
 		
 		JButton Profile = new JButton("Profile Name");
+		Profile.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
 		Profile.setBackground(new Color(30,58,42));
 		Profile.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		Profile.setForeground(Color.WHITE);

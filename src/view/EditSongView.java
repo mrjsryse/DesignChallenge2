@@ -19,6 +19,7 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JComboBox;
 import java.awt.Toolkit;
 
@@ -33,8 +34,10 @@ public class EditSongView extends JFrame {
 	String fileName;
 	private JTextField textFieldSongName;
 	private JLabel lblSongName;
-	private JLabel lblcurrPlaylist;
-	private JComboBox currPlaylistDropdown;
+	String currentUser;
+	String songName;
+	private JComboBox comboBox;
+	private JComboBox comboBox_1;
 	/**
 	 * Launch the application.
 	 */
@@ -73,35 +76,31 @@ public class EditSongView extends JFrame {
 		contentPane.add(lblAlbum);
 		
 		textFieldArtistName = new JTextField();
-		textFieldArtistName.setBounds(97, 37, 86, 20);
+		textFieldArtistName.setBounds(97, 37, 205, 20);
 		contentPane.add(textFieldArtistName);
 		textFieldArtistName.setColumns(10);
 		
 		textFieldAlbum = new JTextField();
-		textFieldAlbum.setBounds(97, 64, 86, 20);
+		textFieldAlbum.setBounds(97, 64, 205, 20);
 		textFieldAlbum.setColumns(10);
 		contentPane.add(textFieldAlbum);
 		
 		textFieldGenre = new JTextField();
-		textFieldGenre.setBounds(97, 91, 86, 20);
+		textFieldGenre.setBounds(97, 91, 205, 20);
 		textFieldGenre.setColumns(10);
 		contentPane.add(textFieldGenre);
 		
 		 btn_editsong = new JButton("Edit Song");
+		 btn_editsong.addActionListener(new btn_Edit());
 		 btn_editsong.setBounds(289, 119, 116, 23);
 		contentPane.add(btn_editsong);
-		
-		textFieldYear = new JTextField();
-		textFieldYear.setBounds(97, 120, 86, 20);
-		textFieldYear.setColumns(10);
-		contentPane.add(textFieldYear);
 		
 		JLabel lblYear = new JLabel("Year");
 		lblYear.setBounds(39, 121, 46, 14);
 		contentPane.add(lblYear);
 		
 		textFieldSongName = new JTextField();
-		textFieldSongName.setBounds(97, 11, 86, 20);
+		textFieldSongName.setBounds(97, 11, 205, 20);
 		textFieldSongName.setColumns(10);
 		contentPane.add(textFieldSongName);
 		
@@ -109,20 +108,60 @@ public class EditSongView extends JFrame {
 		lblSongName.setBounds(10, 11, 86, 14);
 		contentPane.add(lblSongName);
 		
-		JComboBox currSongDropdown = new JComboBox();
-		currSongDropdown.setBounds(289, 11, 116, 20);
-		contentPane.add(currSongDropdown);
 		
-		JLabel lblcurrSong = new JLabel("Current Song");
-		lblcurrSong.setBounds(193, 14, 86, 14);
-		contentPane.add(lblcurrSong);
-		
-		lblcurrPlaylist = new JLabel("Current Playlist");
-		lblcurrPlaylist.setBounds(193, 43, 86, 14);
-		contentPane.add(lblcurrPlaylist);
-		
-		currPlaylistDropdown = new JComboBox();
-		currPlaylistDropdown.setBounds(289, 40, 116, 20);
-		contentPane.add(currPlaylistDropdown);
+		comboBox = new JComboBox();
+		comboBox.setBounds(97, 122, 86, 20);
+		for(int i = 1900; i < 2020; i++) {
+			String strI = Integer.toString(i);
+			comboBox.addItem(strI);
+		}
+		contentPane.add(comboBox);
+	}
+	
+	class btn_Edit implements ActionListener{
+		 
+		 public void actionPerformed(ActionEvent e)
+		 {
+			 	int songID = 0;
+			 	String username = RegisteredUserView.getInstance().currentUser;
+			 	String songName = RegisteredUserView.getInstance().getSongName();
+			 	String artistName = RegisteredUserView.getInstance().getArtistName();
+			 	String albumName = RegisteredUserView.getInstance().getAlbumName();
+			 	String genreName = RegisteredUserView.getInstance().getGenreName();
+			 	String yearDate = RegisteredUserView.getInstance().getYearDate();
+			 	
+			 	String songNameNew = textFieldSongName.getText(); //New Song Name
+			 	String artistNameNew = textFieldArtistName.getText(); //New Artist Name
+			 	String albumNameNew = textFieldAlbum.getText();// New Album Name
+			 	String genreNameNew = textFieldGenre.getText();//New Genre Name
+			 	String yearNew = (String) comboBox.getSelectedItem(); //New Year Date
+			 	
+			 	if(songName == songNameNew)
+			 		songNameNew = songName;
+			 	if(artistName == artistNameNew)
+			 		artistNameNew = artistName;
+			 	if(albumName == albumNameNew)
+			 		albumNameNew = albumName;
+			 	if(genreName == genreNameNew)
+			 		genreNameNew = genreName;
+			 	if(yearDate == yearNew)
+			 		yearNew = yearDate;
+			 	
+			 	generalModel.getInstance().editSongData(username, songName, songNameNew, artistNameNew, albumNameNew,genreNameNew, yearNew);
+			 			
+			 	
+			 	JOptionPane.showMessageDialog(null, "Your song (" + songName + ") has been changed to (" + songNameNew + ")");
+			 	closingWindow();
+		 }
+	 }
+	
+	public void getUsername(String currentUser) {
+		this.currentUser = currentUser;
+	}
+	public void getOldSongName(String songName) {
+		this.songName = songName;
+	}
+	public void closingWindow() {
+		this.setVisible(false);
 	}
 }

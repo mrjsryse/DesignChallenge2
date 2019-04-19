@@ -486,9 +486,38 @@ public class RegisteredUserView extends JFrame {
 	 {
 		 public void actionPerformed(ActionEvent e)
 		 {
+			String songOfUserForEditing = userSongs.get(yourSongsList.getSelectedIndex()).getUserName();
+			String songNameForEditing = userSongs.get(yourSongsList.getSelectedIndex()).getSongName();
+			EditSongView.getInstance().getUsername(currentUser);
+			EditSongView.getInstance().getOldSongName(songNameForEditing);
 			EditSongView.getInstance().setVisible(true);
 			
 		 }
+	 }
+	 
+	 public String getSongName() {
+		 String songTitle = userSongs.get(yourSongsList.getSelectedIndex()).getSongName();
+		 return songTitle;
+	 }
+	 
+	 public String getArtistName() {
+		 String artistName = userSongs.get(yourSongsList.getSelectedIndex()).getArtistName();
+		 return artistName;
+	 }
+	 
+	 public String getAlbumName() {
+		 String albumName = userSongs.get(yourSongsList.getSelectedIndex()).getAlbum();
+		 return albumName;
+	 }
+	 
+	 public String getGenreName() {
+		 String genreName = userSongs.get(yourSongsList.getSelectedIndex()).getGenre();
+		 return genreName;
+	 }
+	 
+	 public String getYearDate() {
+		 String yearDate = userSongs.get(yourSongsList.getSelectedIndex()).getYear();
+		 return yearDate;
 	 }
 	 
 	 class btn_nextSong implements ActionListener

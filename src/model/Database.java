@@ -654,6 +654,27 @@ public class Database{
 		//return null;
 	}
 	
+	public void editingSong(String username,String oldSongName, String newSongName,String newArtistName, String newAlbumName,String newGenreName ,String newYearDate){
+		String userName = username;
+		String oldSong = oldSongName;
+		String newSong = newSongName;
+		String newArtist = newArtistName;
+		String newAlbum = newAlbumName;
+		String newGenre = newGenreName;
+		String newYear = newYearDate;
+		
+		String query = "UPDATE swdespa.songs SET Title = ('"+newSong+"') AND Artist = ('"+newArtist+"') AND Album = ('"+newAlbum+"') AND Genre = ('"+newGenre+"') AND Year = ('"+newYear+"')"
+				+ "WHERE username =  ('"+username+"') AND Title = ('"+oldSong+"');";
+		
+		try {
+			PreparedStatement ps = getConnection().prepareStatement(query);
+			ps.executeUpdate(query, Statement.RETURN_GENERATED_KEYS);
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	
 	public void addingSongsInPlaylist(Playlist p, Song s){ 	
 		int getPlaylistID;
