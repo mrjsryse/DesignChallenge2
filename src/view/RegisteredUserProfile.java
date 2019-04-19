@@ -32,7 +32,7 @@ public class RegisteredUserProfile extends JFrame{
 	ArrayList<Song> userSongs,userSongsFavorites;
 	ArrayList<Playlist> userPlaylist,userPlaylistFavorites;
 	PlaylistList pl;
-	JList songJlist,playlistJList,FavoriteplaylistJList,FavoritesongJList;
+	JList songJlist,playlistJList,FavoriteplaylistJList,FavoritesongJList, mostPlayedList;
 	boolean songChanged;
 	
 	public static RegisteredUserProfile getInstance() {
@@ -128,6 +128,16 @@ public class RegisteredUserProfile extends JFrame{
 		lblFavoriteSongs.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblFavoriteSongs.setBounds(765, 390, 202, 53);
 		getContentPane().add(lblFavoriteSongs);
+		
+		JButton btnMostplayed = new JButton("MostPlayed");
+		btnMostplayed.addActionListener(new btn_MostPlayed());
+		btnMostplayed.setBounds(477, 251, 139, 53);
+		getContentPane().add(btnMostplayed);
+		
+		 mostPlayedList = new JList();
+		mostPlayedList.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		mostPlayedList.setBounds(477, 315, 139, 84);
+		getContentPane().add(mostPlayedList);
 		btnFavoriteSong.addActionListener((ActionListener) new btn_FavoriteSong());
 		
 		btnRefresh.addActionListener((ActionListener) new btn_Refresh());
@@ -183,6 +193,16 @@ public class RegisteredUserProfile extends JFrame{
 				DLM4.addElement(userSongsFavorites.get(a).getSongName());
 			
 			FavoritesongJList.setModel(DLM4);
+			
+			//============================================== Most Played Song
+			
+			userSongs = generalModel.getInstance().getMostPlayed();
+			DefaultListModel DLM5 = new DefaultListModel();
+			
+			DLM5.addElement(userSongs.get(0).getSongName());
+			
+			 
+			mostPlayedList.setModel(DLM5);
 		}
 	}
 	
@@ -207,6 +227,20 @@ public class RegisteredUserProfile extends JFrame{
 			String songName = userSongs.get(songJlist.getSelectedIndex()).getSongName();
 			
 			generalModel.getInstance().favoritingSongs(songOfUser, songName);
+		}
+	}
+	
+	class btn_MostPlayed implements ActionListener
+	{
+		
+		public void actionPerformed(ActionEvent e)
+		{
+			userSongs = generalModel.getInstance().getMostPlayed();
+			DefaultListModel DLM = new DefaultListModel();
+			
+			DLM.addElement(userSongs.get(0).getSongName());
+		
+			mostPlayedList.setModel(DLM);
 		}
 	}
 	
