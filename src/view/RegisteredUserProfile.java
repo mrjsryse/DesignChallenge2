@@ -143,15 +143,6 @@ public class RegisteredUserProfile extends JFrame{
 		btnFavoriteSong.addActionListener((ActionListener) new btn_FavoriteSong());
 
 		
-		countList = new JList();
-		countList.addListSelectionListener(new ListSelectionListener() {
-			public void valueChanged(ListSelectionEvent arg0) {
-				
-			}
-		});
-		countList.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		countList.setBounds(726, 487, 355, 109);
-		getContentPane().add(countList);
 		
 		JLabel songCount = new JLabel("Most Played Song/s");
 		songCount.setHorizontalAlignment(SwingConstants.CENTER);
