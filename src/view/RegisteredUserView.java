@@ -62,7 +62,7 @@ public class RegisteredUserView extends JFrame {
 	JLabel lblUser;
 	PlaylistList pl;
 	SongList sl;
-	ArrayList<Song> userSongs;
+	ArrayList<Song> userSongs,userSongsUpdated;
 	ArrayList<Playlist> userPlaylist;
 	boolean songChanged;
 	private JButton btnProfile;
@@ -218,6 +218,7 @@ public class RegisteredUserView extends JFrame {
 				songChanged = true;
 			}
 		});
+		yourSongsList.clearSelection();
 		yourSongsList.setBounds(806, 94, 341, 557);
 		yourSongsList.setBackground(new Color(224,224,224));
 		contentPane.add(yourSongsList);
@@ -428,7 +429,6 @@ public class RegisteredUserView extends JFrame {
 		 public void actionPerformed(ActionEvent e)
 		 {
 			 
-			 
 			 userSongs = generalModel.getInstance().gettingSongs(currentUser);
 			 userPlaylists = generalModel.getInstance().getUserPlaylist(currentUser);
 			 
@@ -455,7 +455,7 @@ public class RegisteredUserView extends JFrame {
 			 SongList sList = new SongList();
 			 PlaylistList pList1 = new PlaylistList();
 			 
-			 
+			 yourSongsList.clearSelection();
 		 }
 	 }
 	 
@@ -490,7 +490,6 @@ public class RegisteredUserView extends JFrame {
 			EditSongView.getInstance().getUsername(currentUser);
 			EditSongView.getInstance().getOldSongName(songNameForEditing);
 			EditSongView.getInstance().setVisible(true);
-			
 		 }
 	 }
 	 
@@ -542,6 +541,7 @@ public class RegisteredUserView extends JFrame {
 		 public void actionPerformed(ActionEvent e)
 		 {
 			 String s;
+			 userSongs = generalModel.getInstance().getSongsByGenre();
 			 DefaultListModel DLM = new DefaultListModel();
 			 for(int i = 0; i < generalModel.getInstance().getSongsByGenre().size(); i++)
 			 {
@@ -559,6 +559,7 @@ public class RegisteredUserView extends JFrame {
 		 public void actionPerformed(ActionEvent e)
 		 {
 			 String s;
+			 userSongs = generalModel.getInstance().getSongsByAlbum();
 			 DefaultListModel DLM = new DefaultListModel();
 			 for(int i = 0; i < generalModel.getInstance().getSongsByAlbum().size(); i++)
 			 {
@@ -576,6 +577,7 @@ public class RegisteredUserView extends JFrame {
 		 public void actionPerformed(ActionEvent e)
 		 {
 			 String s;
+			 userSongs = generalModel.getInstance().getSongsByYear();
 			 DefaultListModel DLM = new DefaultListModel();
 			 for(int i = 0; i < generalModel.getInstance().getSongsByYear().size(); i++)
 			 {

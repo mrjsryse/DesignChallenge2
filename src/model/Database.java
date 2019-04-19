@@ -654,36 +654,23 @@ public class Database{
 		//return null;
 	}
 	
-//	public void editingSong(String username,String oldSongName, String newSongName,String newArtistName, String newAlbumName,String newGenreName ,String newYearDate){
-//		String userName = username;
-//		String oldSong = oldSongName;
-//		String newSong = newSongName;
-//		String newArtist = newArtistName;
-//		String newAlbum = newAlbumName;
-//		String newGenre = newGenreName;
-//		String newYear = newYearDate;
-//		
-//		String query = "UPDATE swdespa.songs SET Title = ('"+newSong+"') AND Artist = ('"+newArtist+"') AND Album = ('"+newAlbum+"') AND Genre = ('"+newGenre+"') AND Year = ('"+newYear+"')"
-//				+ "WHERE username =  ('"+username+"') AND Title = ('"+oldSong+"');";
-//		
-//		try {
-//			PreparedStatement ps = getConnection().prepareStatement(query);
-//			ps.executeUpdate(query, Statement.RETURN_GENERATED_KEYS);
-//
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		}
-//	}
+	//======================================================================================All editing
 	public void editSongName(String username,String oldSongName, String newSongName){
 		String userName = username;
 		String oldSong = oldSongName;
 		String newSong = newSongName;
+		
+	
+		
 		
 		String query = "UPDATE swdespa.songs SET Title = ('"+newSong+"') WHERE username = ('"+username+"') AND Title = ('"+oldSong+"');";
 		
 		try {
 			PreparedStatement ps = getConnection().prepareStatement(query);
 			ps.executeUpdate(query, Statement.RETURN_GENERATED_KEYS);
+			
+			//get result and store in result set
+			
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -758,6 +745,8 @@ public class Database{
 		}
 	}
 	
+	//======================================================================================All editing
+	
 	public void addingSongsInPlaylist(Playlist p, Song s){ 	
 		int getPlaylistID;
 		int getSongID; 
@@ -799,7 +788,6 @@ public ArrayList<Song> getSongsByGenre() {
 		
 		//get getConnection() from db
 		Connection cnt = getConnection();
-		
 		String query = "SELECT * FROM songs ORDER BY genre";
 		//create string qu
 		
@@ -825,6 +813,7 @@ public ArrayList<Song> getSongsByGenre() {
 						 .setCount(0)
 						 .getSong();
 				 sl.add(newSong);
+				
 			}
 			
 			//close all the resources
