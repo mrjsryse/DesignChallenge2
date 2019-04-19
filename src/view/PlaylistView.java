@@ -15,17 +15,15 @@ import javax.swing.SwingConstants;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import javax.swing.JPopupMenu;
-import java.awt.Component;
 import javax.swing.JTextField;
 import java.awt.SystemColor;
 
-public class HomeView extends JFrame {
+public class PlaylistView extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField txtSearch;
 	boolean evenClick = false;
-
+	private JButton Artist_Dashboard;
 	/**
 	 * Launch the application.
 	 */
@@ -33,7 +31,7 @@ public class HomeView extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					HomeView frame = new HomeView();
+					PlaylistView frame = new PlaylistView();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -45,7 +43,7 @@ public class HomeView extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public HomeView() {
+	public PlaylistView() {
 		setBackground(new Color(254,254,250));
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -457,116 +455,101 @@ public class HomeView extends JFrame {
 		PlaylistArt_1.setIcon(new ImageIcon(HomeView.class.getResource("/images2/KDRLK.png")));
 		PlaylistArt_1.setBackground(new Color(254,254,250));
 		PlaylistArt_1.setHorizontalAlignment(SwingConstants.CENTER);
-		PlaylistArt_1.setBounds(51, 27, 164, 164);
+		PlaylistArt_1.setBounds(10, 0, 164, 164);
 		Dashboard.add(PlaylistArt_1);
 		
-		JLabel PlaylistArt_2 = new JLabel("ALBUM ART");
-		PlaylistArt_2.setIcon(new ImageIcon(HomeView.class.getResource("/images2/khalid.png")));
-		PlaylistArt_2.setHorizontalAlignment(SwingConstants.CENTER);
-		PlaylistArt_2.setBackground(new Color(254, 254, 250));
-		PlaylistArt_2.setBounds(285, 27, 164, 164);
-		Dashboard.add(PlaylistArt_2);
+		JLabel lblPlaylistName = new JLabel("(Playlist Name)");
+		lblPlaylistName.setBackground(new Color(254,254,250));
+		lblPlaylistName.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblPlaylistName.setBounds(184, 55, 186, 23);
+		Dashboard.add(lblPlaylistName);
 		
-		JLabel PlaylistArt_3 = new JLabel("ALBUM ART");
-		PlaylistArt_3.setIcon(new ImageIcon(HomeView.class.getResource("/images2/Africa.png")));
-		PlaylistArt_3.setHorizontalAlignment(SwingConstants.CENTER);
-		PlaylistArt_3.setBackground(new Color(254, 254, 250));
-		PlaylistArt_3.setBounds(530, 27, 164, 164);
-		Dashboard.add(PlaylistArt_3);
+		JLabel lblPlaylistDetails = new JLabel("(Playlist details)");
+		lblPlaylistDetails.setHorizontalAlignment(SwingConstants.CENTER);
+		lblPlaylistDetails.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblPlaylistDetails.setBackground(new Color(254, 254, 250));
+		lblPlaylistDetails.setBounds(184, 82, 377, 55);
+		Dashboard.add(lblPlaylistDetails);
 		
-		JLabel PlaylistArt_4 = new JLabel("ALBUM ART");
-		PlaylistArt_4.setIcon(new ImageIcon(HomeView.class.getResource("/images2/images.png")));
-		PlaylistArt_4.setHorizontalAlignment(SwingConstants.CENTER);
-		PlaylistArt_4.setBackground(new Color(254, 254, 250));
-		PlaylistArt_4.setBounds(51, 242, 164, 164);
-		Dashboard.add(PlaylistArt_4);
+		JLabel Created_bylbl = new JLabel("Created by");
+		Created_bylbl.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		Created_bylbl.setBackground(new Color(254, 254, 250));
+		Created_bylbl.setBounds(184, 136, 74, 23);
+		Dashboard.add(Created_bylbl);
 		
-		JLabel PlaylistArt_5 = new JLabel("ALBUM ART");
-		PlaylistArt_5.setIcon(new ImageIcon(HomeView.class.getResource("/images2/brownbag.png")));
-		PlaylistArt_5.setHorizontalAlignment(SwingConstants.CENTER);
-		PlaylistArt_5.setBackground(new Color(254, 254, 250));
-		PlaylistArt_5.setBounds(285, 242, 164, 164);
-		Dashboard.add(PlaylistArt_5);
+		JButton ProfileName_Dashboard = new JButton("Profile Name");
+		ProfileName_Dashboard.setHorizontalAlignment(SwingConstants.LEFT);
+		ProfileName_Dashboard.setForeground(Color.BLACK);
+		ProfileName_Dashboard.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		ProfileName_Dashboard.setBorder(null);
+		ProfileName_Dashboard.setBackground(new Color(254,254,250));
+		ProfileName_Dashboard.setBounds(256, 136, 305, 23);
+		Dashboard.add(ProfileName_Dashboard);
 		
-		JLabel PlaylistArt_6 = new JLabel("ALBUM ART");
-		PlaylistArt_6.setIcon(new ImageIcon(HomeView.class.getResource("/images2/yourname.png")));
-		PlaylistArt_6.setHorizontalAlignment(SwingConstants.CENTER);
-		PlaylistArt_6.setBackground(new Color(254, 254, 250));
-		PlaylistArt_6.setBounds(530, 242, 164, 164);
-		Dashboard.add(PlaylistArt_6);
+		JButton Title_Dashboard = new JButton("Title");
+		Title_Dashboard.setHorizontalAlignment(SwingConstants.LEFT);
+		Title_Dashboard.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		Title_Dashboard.setBackground(new Color(254, 254, 250));
+		Title_Dashboard.setBounds(10, 170, 200, 30);
+		Dashboard.add(Title_Dashboard);
 		
-		JButton AlbumName_1 = new JButton("Dec my Ave");
-		AlbumName_1.setHorizontalAlignment(SwingConstants.LEFT);
-		AlbumName_1.setFont(new Font("Tahoma", Font.BOLD, 12));
-		AlbumName_1.setBackground(new Color(254, 254, 250));
-		AlbumName_1.setBounds(51, 197, 164, 23);
-		AlbumName_1.setBorder(null);
-		Dashboard.add(AlbumName_1);
+		Artist_Dashboard = new JButton("Artist");
+		Artist_Dashboard.setHorizontalAlignment(SwingConstants.LEFT);
+		Artist_Dashboard.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		Artist_Dashboard.setBackground(new Color(254, 254, 250));
+		Artist_Dashboard.setBounds(206, 170, 200, 30);
+		Dashboard.add(Artist_Dashboard);
 		
-		JButton AlbumName_2 = new JButton("Khalid Beats ");
-		AlbumName_2.setHorizontalAlignment(SwingConstants.LEFT);
-		AlbumName_2.setFont(new Font("Tahoma", Font.BOLD, 12));
-		AlbumName_2.setBackground(new Color(254, 254, 250));
-		AlbumName_2.setBounds(285, 197, 164, 23);
-		AlbumName_2.setBorder(null);
-		Dashboard.add(AlbumName_2);
+		JButton Album_Dashboard = new JButton("Album");
+		Album_Dashboard.setHorizontalAlignment(SwingConstants.LEFT);
+		Album_Dashboard.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		Album_Dashboard.setBackground(new Color(254, 254, 250));
+		Album_Dashboard.setBounds(404, 170, 172, 30);
+		Dashboard.add(Album_Dashboard);
 		
-		JButton AlbumName_3 = new JButton("Toto by Africa");
-		AlbumName_3.setHorizontalAlignment(SwingConstants.LEFT);
-		AlbumName_3.setFont(new Font("Tahoma", Font.BOLD, 12));
-		AlbumName_3.setBackground(new Color(254, 254, 250));
-		AlbumName_3.setBounds(530, 197, 175, 23);
-		AlbumName_3.setBorder(null);
-		Dashboard.add(AlbumName_3);
+		JButton Year_Dashboard = new JButton("Year");
+		Year_Dashboard.setHorizontalAlignment(SwingConstants.LEFT);
+		Year_Dashboard.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		Year_Dashboard.setBackground(new Color(254, 254, 250));
+		Year_Dashboard.setBounds(666, 170, 78, 30);
+		Dashboard.add(Year_Dashboard);
 		
-		JButton AlbumName_4 = new JButton("Old People Music - 80's");
-		AlbumName_4.setHorizontalAlignment(SwingConstants.LEFT);
-		AlbumName_4.setFont(new Font("Tahoma", Font.BOLD, 12));
-		AlbumName_4.setBackground(new Color(254, 254, 250));
-		AlbumName_4.setBounds(51, 418, 164, 23);
-		AlbumName_4.setBorder(null);
-		Dashboard.add(AlbumName_4);
+		JButton Genre_Dashboard = new JButton("Genre");
+		Genre_Dashboard.setHorizontalAlignment(SwingConstants.LEFT);
+		Genre_Dashboard.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		Genre_Dashboard.setBackground(new Color(254, 254, 250));
+		Genre_Dashboard.setBounds(575, 170, 95, 30);
+		Dashboard.add(Genre_Dashboard);
 		
-		JButton AlbumName_5 = new JButton("Brownbag Music");
-		AlbumName_5.setHorizontalAlignment(SwingConstants.LEFT);
-		AlbumName_5.setFont(new Font("Tahoma", Font.BOLD, 12));
-		AlbumName_5.setBackground(new Color(254, 254, 250));
-		AlbumName_5.setBounds(285, 418, 164, 23);
-		AlbumName_5.setBorder(null);
-		Dashboard.add(AlbumName_5);
+		JButton AddQueuebtn = new JButton("");
+		AddQueuebtn.setIcon(new ImageIcon(PlaylistView.class.getResource("/images2/add-to-queue-button (1).png")));
+		AddQueuebtn.setBorder(null);
+		AddQueuebtn.setBackground(new Color(254,254,250));
+		AddQueuebtn.setBounds(607, 11, 39, 39);
+		AddQueuebtn.setBorder(null);
+		AddQueuebtn.setToolTipText("Add Song to Playlist");
+		Dashboard.add(AddQueuebtn);
 		
-		JButton AlbumName_6 = new JButton("Your Name. (Original Motion Picture Soundtrack)");
-		AlbumName_6.setHorizontalAlignment(SwingConstants.LEFT);
-		AlbumName_6.setFont(new Font("Tahoma", Font.BOLD, 12));
-		AlbumName_6.setBackground(new Color(254, 254, 250));
-		AlbumName_6.setBounds(530, 418, 175, 23);
-		AlbumName_6.setBorder(null);
-		Dashboard.add(AlbumName_6);
+		JButton RemoveSongfromPlaylistbtn = new JButton("");
+		RemoveSongfromPlaylistbtn.setIcon(new ImageIcon(PlaylistView.class.getResource("/images2/prohibition (1).png")));
+		RemoveSongfromPlaylistbtn.setBorder(null);
+		RemoveSongfromPlaylistbtn.setBackground(new Color(254, 254, 250));
+		RemoveSongfromPlaylistbtn.setBounds(656, 11, 39, 39);
+		RemoveSongfromPlaylistbtn.setBorder(null);
+		RemoveSongfromPlaylistbtn.setToolTipText("Remove Song from Playlist");
+		Dashboard.add(RemoveSongfromPlaylistbtn);
 		
-		JLabel lblMadeForYou = new JLabel("Playlists you might like");
-		lblMadeForYou.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblMadeForYou.setBounds(0, 0, 186, 23);
-		Dashboard.add(lblMadeForYou);
+		JButton Public_Privatebtn = new JButton("");
+		Public_Privatebtn.setIcon(new ImageIcon(PlaylistView.class.getResource("/images2/private_(1).png")));
+		Public_Privatebtn.setBorder(null);
+		Public_Privatebtn.setBackground(new Color(254, 254, 250));
+		Public_Privatebtn.setBounds(705, 11, 39, 39);
+		Public_Privatebtn.setBorder(null);
+		Public_Privatebtn.setToolTipText("Set Playlist to Public/Private");
+		Dashboard.add(Public_Privatebtn);
 		
 
 		
 
-	}
-	private static void addPopup(Component component, final JPopupMenu popup) {
-		component.addMouseListener(new MouseAdapter() {
-			public void mousePressed(MouseEvent e) {
-				if (e.isPopupTrigger()) {
-					showMenu(e);
-				}
-			}
-			public void mouseReleased(MouseEvent e) {
-				if (e.isPopupTrigger()) {
-					showMenu(e);
-				}
-			}
-			private void showMenu(MouseEvent e) {
-				popup.show(e.getComponent(), e.getX(), e.getY());
-			}
-		});
 	}
 }

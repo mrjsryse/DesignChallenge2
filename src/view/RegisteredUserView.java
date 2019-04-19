@@ -174,6 +174,7 @@ public class RegisteredUserView extends JFrame {
 				
 				
 				System.out.print(generalModel.getInstance().getUserPlaylist(currentUser).get(0).getSongInPlaylist().get(1).getSongName());
+				
 			}
 		});
 		btnPickPlaylist.setForeground(Color.BLACK);
@@ -191,7 +192,7 @@ public class RegisteredUserView extends JFrame {
 		 
 		txtpnSongNameGenre = new JTextPane();
 		txtpnSongNameGenre.setBounds(395, 427, 375, 224);
-		txtpnSongNameGenre.setText("Song Name:\r\nArtist:\r\nAlbum:\r\nGenre:\r\r\nYear:");
+		txtpnSongNameGenre.setText("Song Name:\r\nArtist:\r\nAlbum:\r\nGenre:\r\r\nYear:\r\rFavorite");
 		txtpnSongNameGenre.setBackground(new Color(224,224,224));
 		contentPane.add(txtpnSongNameGenre);
 		
@@ -219,7 +220,9 @@ public class RegisteredUserView extends JFrame {
 		yourSongsList.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent arg0) {
 				String s = yourSongsList.getName();
+				String t = "0";
 				txtpnSongNameGenre.setText("Song Name: "+userSongs.get(yourSongsList.getSelectedIndex()).getSongName()+"\r\nArtist: "+userSongs.get(yourSongsList.getSelectedIndex()).getArtistName()+"\r\nAlbum: "+userSongs.get(yourSongsList.getSelectedIndex()).getAlbum()+"\r\nGenre: "+userSongs.get(yourSongsList.getSelectedIndex()).getGenre()+"\r\r\nYear: "+userSongs.get(yourSongsList.getSelectedIndex()).getYear()+"");
+	
 				songChanged = true;
 			}
 		});
@@ -313,12 +316,9 @@ public class RegisteredUserView extends JFrame {
 		 {
 			 String username;
 			 username = currentUser;
-			 System.out.println("First Test");
 			 RegisteredUserProfile.getInstance().setVisible(true);
 			 //System.out.println(currentUser); for testing
-			 RegisteredUserProfile.getInstance().getUserName(username);
-			 System.out.println("Second Test");
-			 
+			 RegisteredUserProfile.getInstance().getUserName(username);		
 		 }
 	 }
 	 
@@ -332,54 +332,46 @@ public class RegisteredUserView extends JFrame {
 
 	     public void actionPerformed(ActionEvent e) 
 	     {	 
-	    	 
 	    	 System.out.println("songChanged: "+songChanged);
-	    	if(songChanged == true) {
-		    	 mp3.pause();
-		    	 int SongID = userSongs.get(yourSongsList.getSelectedIndex()).getSongID();
-	    		 generalModel.getInstance().readSongData(SongID);
-	    		 generalModel.getInstance().updateCount(SongID);
-	    		 mp3 = new MP3Player(new File("currentSong.mp3"));
-		    	 mp3.play();
-		    	 songChanged = false;
+		    	if(songChanged == true) {
+			    	 mp3.pause();
+			    	 int SongID = userSongs.get(yourSongsList.getSelectedIndex()).getSongID();
+		    		 generalModel.getInstance().readSongData(SongID);
+		    		 generalModel.getInstance().updateCount(SongID);
+		    		 mp3 = new MP3Player(new File("currentSong.mp3"));
+			    	 mp3.play();
+			    	 songChanged = false;
 
-	    	 }
-	    	 else if(playSongInPlaylist == true)
-		     {
-	    		 mp3.pause();
-		    	 int SongID2 = userPlaylists.get(playlistListJList.getSelectedIndex()).getSongInPlaylist().get(yourSongsListJList.getSelectedIndex()).getSongID();
-		    	 generalModel.getInstance().readSongData(SongID2);
-		    	 generalModel.getInstance().updateCount(SongID2);
-		    	 mp3 = new MP3Player(new File("currentSong.mp3"));
-			     mp3.play();
-			   	 playSongInPlaylist = false;
-		     }else 
-	    	 {
-	    		 mp3.play();
-	    	 }
-	    /*	 
-	    	 System.out.println("playSongInPlaylist: "+playSongInPlaylist);
-	    	 if(playSongInPlaylist == true) {
-		    	 mp3.pause();
-		    	 int SongID = userPlaylists.get(playlistListJList.getSelectedIndex()).getSongInPlaylist().get(yourSongsListJList.getSelectedIndex()).getSongID();
-		    	 generalModel.getInstance().readSongData(SongID);
-		    	 mp3 = new MP3Player(new File("currentSong.mp3"));
-		    	 mp3.play();
+		    	 }
+		    	 else if(playSongInPlaylist == true)
+			     {
+		    		 mp3.pause();
+			    	 int SongID2 = userPlaylists.get(playlistListJList.getSelectedIndex()).getSongInPlaylist().get(yourSongsListJList.getSelectedIndex()).getSongID();
+			    	 generalModel.getInstance().readSongData(SongID2);
+			    	 generalModel.getInstance().updateCount(SongID2);
+			    	 mp3 = new MP3Player(new File("currentSong.mp3"));
+				     mp3.play();
+				   	 playSongInPlaylist = false;
+			     }else 
+		    	 {
+		    		 mp3.play();
+		    	 }
+	    	 /*else {
+		    	 if(songChanged) {
+		    		 mp3.pause();
+		    		 int SongID = userSongs.get(yourSongsList.getSelectedIndex()).getSongID();
+		    		 generalModel.getInstance().readSongData(SongID);
+		    		 mp3 = new MP3Player(new File("currentSong.mp3"));
+		    		 mp3.play();
+		    		 songChanged = false;
+		    		 generalModel.getInstance().updateCount(SongID);
 		    	 
-		    	 playSongInPlaylist = false;
-	    	 }else {
-	    		 mp3.play();
-	    	 }
-
-*/
-
-	    	 
-	    	 
+	    	 }*/
 
 
-	     }
-	 }
-	 
+		   }
+	    }
+	  
 	
 	 class btn_addSongtoP implements ActionListener 
 	 {
@@ -397,12 +389,12 @@ public class RegisteredUserView extends JFrame {
 			 
 			 for(int x = 0; x < userSongs.size(); x++)
 			 {
-				 astp.comboBoxSongs.addItem(userSongs.get(x).getSongName());
+				 astp.comboBoxSongs.addItem(userSongs.get(x).getSongName());;
 			 }
 			 
 			 for(int y = 0; y < userPlaylists.size(); y++)
 			 {
-				 astp.comboBoxPlaylists.addItem(userPlaylists.get(y).getPlaylistName());
+				 astp.comboBoxPlaylists.addItem(userPlaylists.get(y).getPlaylistName());;
 			 }
 	    	 
 	     }
@@ -590,4 +582,6 @@ public class RegisteredUserView extends JFrame {
 			this.currentUser = currentUser;
 			lblUser.setText("Current User: " + currentUser);
 		}
+	 
+	 
 }

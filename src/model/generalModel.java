@@ -67,11 +67,24 @@ public class generalModel {
 	public void updateCount(int SongID) {
 		Database.getInstance().countUpdate(SongID);
 	}
-	public void favoritingPlaylist(String PlaylistID) {
-		Database.getInstance().favoritingPlaylist(PlaylistID);
+	public void favoritingPlaylist(String PlaylistID, String PlaylistName) {
+		Database.getInstance().favoritingPlaylist(PlaylistID, PlaylistName);
+	}
+	
+	public void favoritingSongs(String SongID, String SongName) {
+		Database.getInstance().favoritingSong(SongID, SongName);
+	}
+	
+	public ArrayList<Playlist> gettingFavoritePlaylist(String t) {
+		return Database.getInstance().getFavoritePlaylist(t);
+	}
+	
+	public ArrayList<Song> gettingFavoriteSong(String t)
+	{
+		return Database.getInstance().getFavoriteSong(t);
 	}
 
-
+	//=========================================================================== Everything Sorting
 	
 	public ArrayList<Song> getSongsByGenre()
 	{
