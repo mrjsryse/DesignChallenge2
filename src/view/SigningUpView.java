@@ -37,6 +37,7 @@ public class SigningUpView extends JFrame{
 	private JTextField UsernameTextField;
 	private JTextField PasswordTextField;
 	
+	
 	public static SigningUpView getInstance() {
         if (instance == null) {
         	instance = new SigningUpView();
@@ -74,11 +75,12 @@ public class SigningUpView extends JFrame{
 		lblPassword.setBounds(100, 242, 89, 50);
 		getContentPane().add(lblPassword);
 		
-		JButton btnConfirm = new JButton("LOG IN");
+		JButton btnConfirm = new JButton("SIGN UP");
 		btnConfirm.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnConfirm.setBackground(new Color(254,254,250));
 		btnConfirm.setBounds(375, 318, 109, 49);
 		getContentPane().add(btnConfirm);
+		btnConfirm.addActionListener(new btn_Confirm());
 		
 		JButton btnNotSoSpotify = new JButton("");
 		btnNotSoSpotify.setBackground(new Color(254,254,250));
@@ -104,10 +106,22 @@ public class SigningUpView extends JFrame{
 		getContentPane().add(PasswordTextField);
 	}
 	
+	class btn_Confirm implements ActionListener
+	{
+	public void actionPerformed (ActionEvent e)
+	{
+		String signUsername = UsernameTextField.getText();
+		String signPassword = PasswordTextField.getText();
+		signUp = new account(signUsername,signPassword);
+		generalController.getInstance().gettingAccountData(signUsername, signPassword);
+		closingWindow();
+	}
+	}
 	public void signingSuccessful() {
 		String username = UsernameTextField.getText();
 		JOptionPane.showMessageDialog(null, "Signing Up Successful!");
 		RegisteredUserView.getInstance().setVisible(true);
+		SelectAccount.getInstance().setVisible(false);
 	}
 	
 	public void signingFailed() {

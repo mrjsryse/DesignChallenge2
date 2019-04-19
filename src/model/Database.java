@@ -637,7 +637,7 @@ public class Database{
 		String y = "1";
 		
 		
-		String query = "UPDATE swdespa.songs SET Favorite = ('"+y+"') WHERE Username = ('"+ID+"') AND SongName = ('"+Name+"');";
+		String query = "UPDATE swdespa.songs SET Favorite = ('"+y+"') WHERE Username = ('"+ID+"') AND Title = ('"+Name+"');";
 		System.out.println(ID);
 		System.out.println(Name);
 

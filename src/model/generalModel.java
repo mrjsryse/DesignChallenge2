@@ -28,7 +28,7 @@ public class generalModel {
 		Database.getInstance().editingSong(username, oldSongName, newSongName, newArtistName, newAlbumName, newGenreName ,newYearDate);
 	}
 	
-	public void getAccountData(account x) {
+	public void getAccountData(account x) { //SIGNING IN 
 		if(Database.getInstance().addingAccount(x) == false) {
 			SigningUpView.getInstance().signingSuccessful();
 		}
