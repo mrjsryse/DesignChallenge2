@@ -94,16 +94,6 @@ public class SigningUpView extends JFrame{
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		lblNewLabel.setBounds(159, 51, 99, 86);
 		getContentPane().add(lblNewLabel);
-		
-		UsernameTextField = new JTextField();
-		UsernameTextField.setBounds(189, 213, 295, 32);
-		getContentPane().add(UsernameTextField);
-		UsernameTextField.setColumns(10);
-		
-		PasswordTextField = new JTextField();
-		PasswordTextField.setColumns(10);
-		PasswordTextField.setBounds(189, 251, 295, 32);
-		getContentPane().add(PasswordTextField);
 	}
 	
 	class btn_Confirm implements ActionListener
@@ -114,12 +104,14 @@ public class SigningUpView extends JFrame{
 		String signPassword = PasswordTextField.getText();
 		signUp = new account(signUsername,signPassword);
 		generalController.getInstance().gettingAccountData(signUsername, signPassword);
+		RegisteredUserView.getInstance().setUserName(signUsername);
 		closingWindow();
 	}
 	}
 	public void signingSuccessful() {
 		String username = UsernameTextField.getText();
 		JOptionPane.showMessageDialog(null, "Signing Up Successful!");
+		RegisteredUserView.getInstance().setUserName(username);
 		RegisteredUserView.getInstance().setVisible(true);
 		SelectAccount.getInstance().setVisible(false);
 	}

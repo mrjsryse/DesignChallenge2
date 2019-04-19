@@ -46,6 +46,7 @@ import model.generalModel;
 
 import java.awt.Color;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.event.ListDataListener;
 import javax.swing.event.ListSelectionEvent;
 
 public class RegisteredUserView extends JFrame {
@@ -319,6 +320,9 @@ public class RegisteredUserView extends JFrame {
 		 	this.profile = profile;
 		}
 	 
+	 public void deselectJList() {
+		 yourSongsList.clearSelection();
+	 }
 	
 	 class btn_Play implements ActionListener 
 	 {
@@ -436,7 +440,7 @@ public class RegisteredUserView extends JFrame {
 			 
 			 for(int x = 0; x < userSongs.size(); x++)
 				 DLM.addElement(userSongs.get(x).getSongName());
-
+			 
 			 yourSongsList.setModel(DLM);
 			 //============================================== Above is songs to the JList
 			 
@@ -455,7 +459,6 @@ public class RegisteredUserView extends JFrame {
 			 SongList sList = new SongList();
 			 PlaylistList pList1 = new PlaylistList();
 			 
-			 yourSongsList.clearSelection();
 		 }
 	 }
 	 
