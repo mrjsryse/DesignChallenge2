@@ -215,7 +215,6 @@ public class RegisteredUserView extends JFrame {
 				String s = yourSongsList.getName();
 				String t = "0";
 				txtpnSongNameGenre.setText("Song Name: "+userSongs.get(yourSongsList.getSelectedIndex()).getSongName()+"\r\nArtist: "+userSongs.get(yourSongsList.getSelectedIndex()).getArtistName()+"\r\nAlbum: "+userSongs.get(yourSongsList.getSelectedIndex()).getAlbum()+"\r\nGenre: "+userSongs.get(yourSongsList.getSelectedIndex()).getGenre()+"\r\r\nYear: "+userSongs.get(yourSongsList.getSelectedIndex()).getYear()+"");
-	
 				songChanged = true;
 			}
 		});
@@ -439,7 +438,7 @@ public class RegisteredUserView extends JFrame {
 				 DLM.addElement(userSongs.get(x).getSongName());
 
 			 yourSongsList.setModel(DLM);
-			 //==============================================
+			 //============================================== Above is songs to the JList
 			 
 			 userPlaylist = generalModel.getInstance().gettingPlaylists(currentUser);
 			 
@@ -452,7 +451,7 @@ public class RegisteredUserView extends JFrame {
 			 
 			 playlistListJList.setModel(DLM2);
 			 
-			 //==============================================
+			 //============================================== Above is playlists to the JList
 			 SongList sList = new SongList();
 			 PlaylistList pList1 = new PlaylistList();
 			 
