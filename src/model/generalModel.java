@@ -56,7 +56,58 @@ public class generalModel {
 		return Database.getInstance().getSongs(t);
 	}
 	
+	public ArrayList<Playlist> gettingPlaylists(String t){
+		return Database.getInstance().getPlaylist(t);
+	}
+	
 	public void readSongData(int SongID) {
 		Database.getInstance().readBLOB(SongID);
 	}
+
+	public void updateCount(int SongID) {
+		Database.getInstance().countUpdate(SongID);
+	}
+	public void favoritingPlaylist(String PlaylistID, String PlaylistName) {
+		Database.getInstance().favoritingPlaylist(PlaylistID, PlaylistName);
+	}
+	
+	public void favoritingSongs(String SongID, String SongName) {
+		Database.getInstance().favoritingSong(SongID, SongName);
+	}
+	
+	public ArrayList<Playlist> gettingFavoritePlaylist(String t) {
+		return Database.getInstance().getFavoritePlaylist(t);
+	}
+	
+	public ArrayList<Song> gettingFavoriteSong(String t)
+	{
+		return Database.getInstance().getFavoriteSong(t);
+	}
+
+	//=========================================================================== Everything Sorting
+	
+	public ArrayList<Song> getSongsByGenre()
+	{
+		return Database.getInstance().getSongsByGenre();
+	}
+	
+	public ArrayList<Song> getSongsByAlbum()
+	{
+		return Database.getInstance().getSongsByAlbum();
+	}
+	
+	public ArrayList<Song> getSongsByYear()
+	{
+		return Database.getInstance().getSongsByYear();
+	}
+	
+	public ArrayList<Playlist> getUserPlaylist(String username)
+	{
+		return Database.getInstance().gettingUserPlaylist(username);
+	}
+	
+	public ArrayList<Song> getSongStuff() {
+		return Database.getInstance().gettingSongs();
+	}
 }
+

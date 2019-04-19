@@ -3,6 +3,7 @@ import java.io.File;
 import javax.swing.*;
 import javax.swing.JOptionPane;
 
+import controller.PlaylistBuilder;
 import controller.SongBuilder;
 
 import java.io.FileInputStream;
@@ -53,10 +54,11 @@ public class Database{
 		String query = "CREATE TABLE IF NOT EXISTS accounts (Username varchar(255) PRIMARY KEY, Password varchar(255));"; //creating table
 		String query2 = "CREATE TABLE IF NOT EXISTS playlists(PlaylistID int NOT NULL AUTO_INCREMENT PRIMARY KEY, PlaylistName varchar(255), Username varchar(255));";
 		String query3 = "CREATE TABLE IF NOT EXISTS songs(SongID int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY, Title varchar(255), "
-				+ "Artist varchar(255),Album varchar(255),Genre varchar(255), Year varchar(255), Username varchar(255), Play_Count int(11));";
-		String query4 = "CREATE TABLE IF NOT EXISTS user_playlists(Username varchar(255), PlaylistName varchar(255));";
+				+ "Artist varchar(255),Album varchar(255),Genre varchar(255), Year varchar(255), Username varchar(255), Play_Count int(11), Favorite varchar(255));";
+		String query4 = "CREATE TABLE IF NOT EXISTS user_playlists(PlaylistID int NOT NULL AUTO_INCREMENT PRIMARY KEY,Username varchar(255), PlaylistName varchar(255), Favorite varchar(255));";
 		String query5 = "CREATE TABLE IF NOT EXISTS songData(SongID int NOT NULL AUTO_INCREMENT PRIMARY KEY, data LONGBLOB);";
 		String query6 = "CREATE TABLE IF NOT EXISTS songs_in_playlist(PlaylistID int PRIMARY KEY, PlaylistName varchar(255),SongID int(11), SongName varchar(255));";		
+//	String query7 = "CREATE TABLE IF NOT EXISTS user_songs(SongID int NOT NULL AUTO_INCREMENT PRIMARY KEY,Username varchar(255), PlaylistName varchar(255), Favorite varchar(255));";
 		
 		String packetQuery = "SET GLOBAL max_allowed_packet=16777216;";
 		
@@ -65,6 +67,7 @@ public class Database{
 		String queryIncrement3 = "ALTER TABLE songs auto_increment = 1";
 		String queryIncrement4 = "ALTER TABLE user_playlists auto_increment = 1";
 		String queryIncrement5 = "ALTER TABLE songData auto_increment = 1";
+//		String queryIncrement7 = "ALTER TABLE user_songs auto_increment = 1";
 //		String queryIncrement6 = "ALTER TABLE song_in_playlist = 1";
 		
 		try {
@@ -80,6 +83,8 @@ public class Database{
 			ps5.execute();
 			PreparedStatement ps6 = getConnection().prepareStatement(query6);
 			ps6.execute();
+//			PreparedStatement ps7 = getConnection().prepareStatement(query7);
+//			ps7.execute();
 			
 			PreparedStatement pq = getConnection().prepareStatement(packetQuery);
 			pq.execute();
@@ -96,6 +101,8 @@ public class Database{
 			ps5.execute();
 //			ps6 = getConnection().prepareStatement(queryIncrement6);
 //			ps6.execute();
+//			ps7 = getConnection().prepareStatement(queryIncrement7);
+//			ps7.execute();
 			
 		}catch (SQLException e) {
 			e.printStackTrace();
@@ -271,6 +278,7 @@ public class Database{
 			
 		}
 	}
+	
 
 	public void queryTemplate(String parameters) {
 		
@@ -349,6 +357,119 @@ public class Database{
 		return null; 
 		
 	}
+	
+	public ArrayList<Playlist> getPlaylist(String username){
+		//get getConnection() from db
+				Connection cnt = getConnection();
+				
+				String query = "SELECT * FROM playlists WHERE username = '"+username+"';";
+				//create string qu
+				
+				try {
+					//create prepared statement	
+					PreparedStatement ps = cnt.prepareStatement(query);
+					
+					//get result and store in result set
+					ResultSet rs = ps.executeQuery();
+					
+					ArrayList<Playlist> pl = new ArrayList<>();
+					//transform set into list
+					while(rs.next()) {
+						 Playlist newPlaylist = new PlaylistBuilder()
+								 .setPlaylistName(rs.getString("playlistName"))
+								 .setUsername(rs.getString("username"))
+								 .getPlaylist();
+						 pl.add(newPlaylist);
+					}
+					
+					//close all the resources
+					ps.close();
+					rs.close();
+					cnt.close();
+					
+					return pl;
+
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+				return null; 
+	}
+	
+	public ArrayList<Playlist> getFavoritePlaylist(String username){
+		//get getConnection() from db
+				Connection cnt = getConnection();
+				String y = "1";
+				String query = "SELECT * FROM user_playlists WHERE username = ('"+username+"') AND Favorite = ('"+y+"');";
+				//create string query
+				
+				try {
+					//create prepared statement	
+					PreparedStatement ps = cnt.prepareStatement(query);
+					
+					//get result and store in result set
+					ResultSet rs = ps.executeQuery();
+					
+					ArrayList<Playlist> pl = new ArrayList<>();
+					//transform set into list
+					while(rs.next()) {
+						 Playlist newPlaylist = new PlaylistBuilder()
+								 .setPlaylistName(rs.getString("playlistName"))
+								 .setUsername(rs.getString("username"))
+								 .getPlaylist();
+						 pl.add(newPlaylist);
+					}
+					
+					//close all the resources
+					ps.close();
+					rs.close();
+					cnt.close();
+					
+					return pl;
+
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+				return null; 
+	}
+	
+	public ArrayList<Song> getFavoriteSong(String username){
+		//get getConnection() from db
+				Connection cnt = getConnection();
+				String y = "1";
+				String query = "SELECT * FROM songs WHERE username = ('"+username+"') AND Favorite = ('"+y+"');";
+				//create string query
+				
+				try {
+					//create prepared statement	
+					PreparedStatement ps = cnt.prepareStatement(query);
+					
+					//get result and store in result set
+					ResultSet rs = ps.executeQuery();
+					
+					ArrayList<Song> s = new ArrayList<>();
+					//transform set into list
+					while(rs.next()) {
+						 Song newSong = new SongBuilder()
+								 //.setSongName(rs.getString("songName"))
+								 //.setUsername(rs.getString("username"))
+								 .setSongName(rs.getString("title"))
+								 .setUserName(rs.getString("username"))
+								 .getSong();
+						 s.add(newSong);
+					}
+					
+					//close all the resources
+					ps.close();
+					rs.close();
+					cnt.close();
+					
+					return s;
+
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+				return null; 
+	}
 
 	public int addingSong(Song s){ //Signing Up
 		String getSongName, getArtistName, getAlbumName, getGenre;
@@ -363,6 +484,7 @@ public class Database{
 		getYear = s.getYear();
 		getUsername = s.getUserName();
 		getCount = s.getCount();
+		String x = s.getFavorite();
 		
 		
 		String query = "insert into songs values ("+0+",'"+getSongName+"','" 
@@ -371,7 +493,8 @@ public class Database{
 															+getGenre+ "','"
 															+getYear+"','"
 															+getUsername+"','"
-															+getCount+"')";
+															+getCount+"','"
+															+x+"')"; 
 		
 
 		System.out.print(query);
@@ -395,6 +518,26 @@ public class Database{
 		}
 		return 0;
 	}
+	
+	
+	
+	public void countUpdate(int SongID) {
+		Connection cnt = getConnection();
+		PreparedStatement myReadingStatement = null;
+		int ID = SongID;
+		String query = "UPDATE swdespa.songs SET Play_Count = Play_Count + 1 WHERE SongID = ('"+ID+"');";
+		ResultSet rs = null;
+		
+		try {
+			PreparedStatement ps = getConnection().prepareStatement(query);
+			ps.executeUpdate(query, Statement.RETURN_GENERATED_KEYS);
+			
+		}catch(Exception exc) {
+			exc.printStackTrace();
+		}finally {
+			
+		}
+	}
 
 	
 	public void addingPlaylist(Playlist p){
@@ -405,10 +548,10 @@ public class Database{
 		Connection cnt = getConnection();
 		getPlaylistName = p.getPlaylistName();
 		getUsername = p.getUsername();
+		String x = "0";
+		int y = 0;
 		
-		
-		String query = "insert into playlists values ("+0+",'"+getPlaylistName+"','"
-															+getUsername+ "')";
+		String query = "insert into playlists values ('"+y+"','"+getPlaylistName+"','"+getUsername+"')";
 
 		System.out.print(query);
 		//create string query
@@ -430,16 +573,15 @@ public class Database{
 	
 	public void addingUserPlaylist(Playlist p){ 
 		String getPlaylistName, getUsername;
-		
+		int y = 0;
 		
 		//get getConnection() from db
 		Connection cnt = getConnection();
 		getPlaylistName = p.getPlaylistName();
 		getUsername = p.getUsername();
+		String x = p.getFavorite(); // if favorite or not
 		
-		
-		String query = "insert into user_playlists values ('"+getUsername+"','"
-															+getPlaylistName+ "')";
+		String query = "insert into user_playlists values ('"+y+"','"+getUsername+"','"+getPlaylistName+"','"+x+"')";
 
 		System.out.print(query);
 		//create string query
@@ -451,6 +593,60 @@ public class Database{
 			//close all the resources
 			ps.close();
 			cnt.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		//return null;
+	}
+	
+	public void favoritingPlaylist(String PlaylistID, String PlaylistName){ 
+		String ID = PlaylistID;
+		String Name = PlaylistName;
+		
+		//get getConnection() from db
+		Connection cnt = getConnection();
+		
+		String x = "0"; // if favorite or not
+		String y = "1";
+		
+		
+		String query = "UPDATE swdespa.user_playlists SET Favorite = ('"+y+"') WHERE Username = ('"+ID+"') AND PlaylistName = ('"+Name+"');";
+
+		System.out.print(query);
+		//create string query
+		
+		try {
+			PreparedStatement ps = getConnection().prepareStatement(query);
+			ps.executeUpdate(query, Statement.RETURN_GENERATED_KEYS);
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		//return null;
+	}
+	
+	public void favoritingSong(String SongID, String SongName){ 
+		String ID = SongID;
+		String Name = SongName;
+		
+		//get getConnection() from db
+		Connection cnt = getConnection();
+		
+		String x = "0"; // if favorite or not
+		String y = "1";
+		
+		
+		String query = "UPDATE swdespa.songs SET Favorite = ('"+y+"') WHERE Username = ('"+ID+"') AND SongName = ('"+Name+"');";
+		System.out.println(ID);
+		System.out.println(Name);
+
+		System.out.print(query);
+		//create string query
+		
+		try {
+			PreparedStatement ps = getConnection().prepareStatement(query);
+			ps.executeUpdate(query, Statement.RETURN_GENERATED_KEYS);
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -496,8 +692,229 @@ public class Database{
 		//return null;
 	}
 	
+public ArrayList<Song> getSongsByGenre() {
+		
+		//get getConnection() from db
+		Connection cnt = getConnection();
+		
+		String query = "SELECT * FROM songs ORDER BY genre";
+		//create string qu
+		
+		try {
+			//create prepared statement	
+			PreparedStatement ps = cnt.prepareStatement(query);
+			
+			//get result and store in result set
+			ResultSet rs = ps.executeQuery();
+			
+			ArrayList<Song> sl = new ArrayList<>();
+			//transform set into list
+			while(rs.next()) {
+				 Song newSong = new SongBuilder()
+						 .setSongID(rs.getInt("SongID"))
+						 .setUserName(rs.getString("Username"))
+						 .setSongName(rs.getString("Title"))
+						 .setArtistName(rs.getString("Artist"))
+						 .setAlbum(rs.getString("Album"))
+						 .setGenre(rs.getString("Genre"))
+						 .setYear(rs.getString("Year"))
+						 .setPath("")
+						 .setCount(0)
+						 .getSong();
+				 sl.add(newSong);
+			}
+			
+			//close all the resources
+			ps.close();
+			rs.close();
+			cnt.close();
+			
+			return sl;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null; 
+		
+	}
 	
+public ArrayList<Song> getSongsByAlbum() {
 	
+	//get getConnection() from db
+	Connection cnt = getConnection();
+	
+	String query = "SELECT * FROM songs ORDER BY album";
+	//create string qu
+	
+	try {
+		//create prepared statement	
+		PreparedStatement ps = cnt.prepareStatement(query);
+		
+		//get result and store in result set
+		ResultSet rs = ps.executeQuery();
+		
+		ArrayList<Song> sl = new ArrayList<>();
+		//transform set into list
+		while(rs.next()) {
+			 Song newSong = new SongBuilder()
+					 .setSongID(rs.getInt("SongID"))
+					 .setUserName(rs.getString("Username"))
+					 .setSongName(rs.getString("Title"))
+					 .setArtistName(rs.getString("Artist"))
+					 .setAlbum(rs.getString("Album"))
+					 .setGenre(rs.getString("Genre"))
+					 .setYear(rs.getString("Year"))
+					 .setPath("")
+					 .setCount(0)
+					 .getSong();
+			 sl.add(newSong);
+		}
+		
+		//close all the resources
+		ps.close();
+		rs.close();
+		cnt.close();
+		
+		return sl;
+
+	} catch (SQLException e) {
+		e.printStackTrace();
+	}
+	return null; 
+	
+}
+
+public ArrayList<Song> getSongsByYear() {
+	
+	//get getConnection() from db
+	Connection cnt = getConnection();
+	
+	String query = "SELECT * FROM songs ORDER BY year";
+	//create string qu
+	
+	try {
+		//create prepared statement	
+		PreparedStatement ps = cnt.prepareStatement(query);
+		
+		//get result and store in result set
+		ResultSet rs = ps.executeQuery();
+		
+		ArrayList<Song> sl = new ArrayList<>();
+		//transform set into list
+		while(rs.next()) {
+			 Song newSong = new SongBuilder()
+					 .setSongID(rs.getInt("SongID"))
+					 .setUserName(rs.getString("Username"))
+					 .setSongName(rs.getString("Title"))
+					 .setArtistName(rs.getString("Artist"))
+					 .setAlbum(rs.getString("Album"))
+					 .setGenre(rs.getString("Genre"))
+					 .setYear(rs.getString("Year"))
+					 .setPath("")
+					 .setCount(0)
+					 .getSong();
+			 sl.add(newSong);
+		}
+		
+		//close all the resources
+		ps.close();
+		rs.close();
+		cnt.close();
+		
+		return sl;
+
+	} catch (SQLException e) {
+		e.printStackTrace();
+	}
+	return null; 
+	
+}
+
+public ArrayList<Playlist> gettingUserPlaylist(String username) {
+	
+	//get getConnection() from db
+	Connection cnt = getConnection();
+	
+	String query = "SELECT * FROM swdespa.user_playlists WHERE username = '"+username+"';";
+	//create string qu
+	
+	try {
+		//create prepared statement	
+		PreparedStatement ps = cnt.prepareStatement(query);
+		
+		//get result and store in result set
+		ResultSet rs = ps.executeQuery();
+		
+		ArrayList<Playlist> sl = new ArrayList<>();
+		//transform set into list
+		while(rs.next()) {
+			 Playlist newPlaylist = new PlaylistBuilder()
+					 .setUsername(rs.getString("Username"))
+					 .setPlaylistName(rs.getString("PlaylistName"))
+					 .getPlaylist();
+					 
+			 sl.add(newPlaylist);
+		}
+		
+		//close all the resources
+		ps.close();
+		rs.close();
+		cnt.close();
+		
+		return sl;
+
+	} catch (SQLException e) {
+		e.printStackTrace();
+	}
+	return null; 
+	
+}
+
+public ArrayList<Song> gettingSongs() {
+	
+	//get getConnection() from db
+	Connection cnt = getConnection();
+	
+	String query = "SELECT * FROM songs";
+	//create string qu
+	
+	try {
+		//create prepared statement	
+		PreparedStatement ps = cnt.prepareStatement(query);
+		
+		//get result and store in result set
+		ResultSet rs = ps.executeQuery();
+		
+		ArrayList<Song> sl = new ArrayList<>();
+		//transform set into list
+		while(rs.next()) {
+			 Song newSong = new SongBuilder()
+					 .setSongID(rs.getInt("SongID"))
+					 .setUserName(rs.getString("Username"))
+					 .setSongName(rs.getString("Title"))
+					 .setArtistName(rs.getString("Artist"))
+					 .setAlbum(rs.getString("Album"))
+					 .setGenre(rs.getString("Genre"))
+					 .setYear(rs.getString("Year"))
+					 .setPath("")
+					 .setCount(0)
+					 .getSong();
+			 sl.add(newSong);
+		}
+		
+		//close all the resources
+		ps.close();
+		rs.close();
+		cnt.close();
+		
+		return sl;
+
+	} catch (SQLException e) {
+		e.printStackTrace();
+	}
+	return null; 
+	
+}
 //	public void testerTemplate() {
 //		String x = "dad";
 //		String y = "d";

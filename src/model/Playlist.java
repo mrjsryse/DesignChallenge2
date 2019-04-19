@@ -9,11 +9,13 @@ public class Playlist {
 	private static ArrayList<Song> SongInPlaylist = new ArrayList<Song>();
 	String playlistName;
 	String username;
+	String favorite;
 
-	public Playlist(String playlistName, String username) {
+	public Playlist(String playlistName, String username, String favorite) {
 		super();
 		this.playlistName = playlistName;
 		this.username = username;
+		this.favorite = favorite;
 	}
 
 
@@ -31,7 +33,10 @@ public class Playlist {
 		return playlistName;
 	}
 
-
+	public String getFavorite() {
+		return favorite;
+	}
+	
 	public void setPlaylistName(String playlistName) {
 		this.playlistName = playlistName;
 	}

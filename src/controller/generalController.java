@@ -1,6 +1,7 @@
 package controller;
 import model.generalModel;
 import model.Playlist;
+import model.Song;
 import model.account;
 
 public class generalController {
@@ -23,9 +24,9 @@ public class generalController {
 		generalModel.getInstance().checkingAccountData(registeredAccount);
 	}
 	
-	public void gettingUserPlaylist(String username, String playlistName)
+	public void gettingUserPlaylist(String username, String playlistName, String favorite)
 	{
-		Playlist p = new Playlist(playlistName, username);
+		Playlist p = new Playlist(playlistName, username, favorite);
 		generalModel.getInstance().getUserPlaylistData(p);
 	}
 }
