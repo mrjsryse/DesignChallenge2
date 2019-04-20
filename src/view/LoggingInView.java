@@ -106,7 +106,7 @@ public class LoggingInView extends JFrame{
 	}
 	
 	public void entranceAllowed() {
-		JOptionPane.showMessageDialog(null,"Successfully Logged In! Welcome back wrong!");
+		JOptionPane.showMessageDialog(null,"Successfully Logged In! Welcome back!");
 		RegisteredUserView.getInstance().setVisible(true);
 	}
 	

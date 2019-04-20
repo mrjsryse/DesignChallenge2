@@ -29,7 +29,7 @@ public class ArtistLoggingInView extends JFrame{
 	account logIn;
 	Boolean entrance;
 	Database theAccounts;
-	HomeViewA artistHomeView;
+	HomeViewA artistHomeView = new HomeViewA();
 	
 	private volatile static ArtistLoggingInView modelInstance = null;
 	
@@ -110,8 +110,10 @@ public class ArtistLoggingInView extends JFrame{
 	public void entranceAllowed() {
 		JOptionPane.showMessageDialog(null,"Successfully Logged In! Welcome back Artist!");
 //		RegisteredUserView.getInstance().setVisible(true);
-		artistHomeView = new HomeViewA();
-		artistHomeView.run();
+//		artistHomeView = new HomeViewA();
+		artistHomeView.getInstance().setUsername(gettingUsername());
+		System.out.println(gettingUsername());
+		artistHomeView.getInstance().run();
 //		artistHomeView.setVisible(true);
 	}
 	
