@@ -5,6 +5,8 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 import jaco.mp3.player.MP3Player;
 import model.Playlist;
@@ -33,7 +35,6 @@ import javax.swing.JList;
 public class LibraryView extends JFrame {
 
 	private volatile static LibraryView instance = null;
-	MP3Player mp3 = new MP3Player(new File("currentSong.mp3"));
 	public String currentUser;
 	private JPanel contentPane;
 	private JTextField txtSearch;
@@ -43,7 +44,7 @@ public class LibraryView extends JFrame {
 	JList Title_list, Artist_list, Album_List, Genre_List, Year_List, Fave_List, Playlist_List, MP_List, RP_List;
 	ArrayList<Song> userSongsMostPlayed, userSongs;
 	ArrayList<Playlist> userPlaylists;
-	boolean songChangedInLibrary, playSongInPlaylist;
+	boolean songChangedInLibrary, playSongInPlaylist, songChangedInMP;
 	/**
 	 * Launch the application.
 	 */
@@ -344,6 +345,15 @@ public class LibraryView extends JFrame {
 		RecentlyPlayedPanel.add(RP_List);
 		
 		 MP_List = new JList();
+		 MP_List.addListSelectionListener(new ListSelectionListener() {
+				public void valueChanged(ListSelectionEvent arg0) {
+					String s = Title_list.getName();
+					String t = "0";
+					try {	
+					}catch(ArrayIndexOutOfBoundsException e) {}
+					songChangedInMP = true;	
+				}
+			});
 		MP_List.setBounds(0, 287, 186, 138);
 		RecentlyPlayedPanel.add(MP_List);
 		
@@ -415,6 +425,15 @@ public class LibraryView extends JFrame {
 		Dashboard.add(Favorite_Dashboard);
 		
 		 Title_list = new JList();
+		 Title_list.addListSelectionListener(new ListSelectionListener() {
+				public void valueChanged(ListSelectionEvent arg0) {
+					String s = Title_list.getName();
+					String t = "0";
+					try {	
+					}catch(ArrayIndexOutOfBoundsException e) {}
+					songChangedInLibrary = true;	
+				}
+			});
 		Title_list.setBounds(12, 79, 158, 417);
 		Dashboard.add(Title_list);
 		
@@ -559,16 +578,25 @@ public class LibraryView extends JFrame {
 
 	     public void actionPerformed(ActionEvent e) 
 	     {	 
-	    	 System.out.println("songChanged: "+songChangedInLibrary);
+	    	 
+	    	 System.out.println("songChangedInLibrary: "+songChangedInLibrary);
 		    	if(songChangedInLibrary == true) {
-			    	 mp3.pause();
-			    	 int SongID = userSongs.get(LibraryView.getInstance().Title_list.getSelectedIndex()).getSongID();
+		    		HomeView.getInstance().mp3.pause();
+			    	 int SongID = userSongs.get(Title_list.getSelectedIndex()).getSongID();
 		    		 generalModel.getInstance().readSongData(SongID);
 		    		 generalModel.getInstance().updateCount(SongID);
-		    		 mp3 = new MP3Player(new File("currentSong.mp3"));
-			    	 mp3.play();
+		    		 HomeView.getInstance().mp3 = new MP3Player(new File("currentSong.mp3"));
+		    		 HomeView.getInstance().mp3.play();
 			    	 songChangedInLibrary = false;
 
+		    	 }else if (songChangedInMP == true){
+		    		 HomeView.getInstance().mp3.pause();
+			    	 int SongID = userSongs.get(MP_List.getSelectedIndex()).getSongID();
+		    		 generalModel.getInstance().readSongData(SongID);
+		    		 generalModel.getInstance().updateCount(SongID);
+		    		 HomeView.getInstance().mp3 = new MP3Player(new File("currentSong.mp3"));
+		    		 HomeView.getInstance().mp3.play();
+			    	 songChangedInMP = false;
 		    	 }
 		    	/* else if(playSongInPlaylist == true)
 			     {
@@ -581,11 +609,11 @@ public class LibraryView extends JFrame {
 				   	 playSongInPlaylist = false;
 			     } */else 
 		    	 {
-		    		 mp3.play();
+			    	 HomeView.getInstance().mp3.play();
 		    	 }
 	    	 
 	    	 
-
+		    	
 	     }
 	 }
 	

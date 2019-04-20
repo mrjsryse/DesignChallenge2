@@ -600,7 +600,7 @@ public class Database{
 		Connection cnt = getConnection();
 		PreparedStatement myReadingStatement = null;
 		int ID = SongID;
-		String query = "UPDATE swdespa.songs SET Play_Count = Play_Count + 1 WHERE SongID = ('"+ID+"');";
+		String query = "UPDATE udc.songs SET Play_Count = Play_Count + 1 WHERE SongID = ('"+ID+"');";
 		ResultSet rs = null;
 		
 		try {

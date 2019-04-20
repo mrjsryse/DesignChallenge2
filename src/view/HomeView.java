@@ -5,6 +5,8 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 import jaco.mp3.player.MP3Player;
 import model.Playlist;
@@ -40,12 +42,12 @@ public class HomeView extends JFrame {
 	private JPanel contentPane;
 	private JTextField txtSearch;
 	boolean evenClick = false;
-	JButton btnCreatePlaylist, AddSongbtn, Profile, Library, Refreshbtn;
+	JButton btnCreatePlaylist, AddSongbtn, Profile, Library, Refreshbtn, Playbtn;
 	JList Playlist_List, MP_List;
 	SongList sl = new SongList();
 	ArrayList<Song> userSongsMostPlayed, userSongs;
 	ArrayList<Playlist> userPlaylists;
-	boolean songChangedInLibrary, playSongInPlaylist;
+	boolean songChangedInLibrary, playSongInPlaylist, songChangedInMP;
 	/**
 	 * Launch the application.
 	 */
@@ -148,7 +150,8 @@ public class HomeView extends JFrame {
 		Prevbtn.setBorder(null);
 		MainRectangle.add(Prevbtn);
 		
-		JButton Playbtn = new JButton("");
+		 Playbtn = new JButton("");
+		Playbtn.addActionListener(new btn_Play());
 		Playbtn.setIcon(new ImageIcon(HomeView.class.getResource("/images2/play-button (2).png")));
 		Playbtn.addMouseListener(new MouseAdapter() {
 			@Override
@@ -359,6 +362,13 @@ public class HomeView extends JFrame {
 		RecentlyPlayedPanel.add(RP_List);
 		
 		 MP_List = new JList();
+		 MP_List.addListSelectionListener(new ListSelectionListener() {
+				public void valueChanged(ListSelectionEvent arg0) {
+					try {	
+					}catch(ArrayIndexOutOfBoundsException e) {}
+					songChangedInMP = true;	
+				}
+			});
 		MP_List.setBounds(0, 287, 186, 139);
 		RecentlyPlayedPanel.add(MP_List);
 		
@@ -581,16 +591,17 @@ public class HomeView extends JFrame {
 
 	     public void actionPerformed(ActionEvent e) 
 	     {	 
-	    	 System.out.println("songChanged: "+songChangedInLibrary);
-		    	if(songChangedInLibrary == true) {
-			    	 mp3.pause();
-			    	 int SongID = userSongs.get(LibraryView.getInstance().Title_list.getSelectedIndex()).getSongID();
+	    	 
+	    	 System.out.println("songChangedInMP: "+songChangedInMP);
+		    	if (songChangedInMP == true)
+		    	 {
+		    		 mp3.pause();
+			    	 int SongID = userSongs.get(HomeView.getInstance().MP_List.getSelectedIndex()).getSongID();
 		    		 generalModel.getInstance().readSongData(SongID);
 		    		 generalModel.getInstance().updateCount(SongID);
 		    		 mp3 = new MP3Player(new File("currentSong.mp3"));
 			    	 mp3.play();
-			    	 songChangedInLibrary = false;
-
+			    	 songChangedInMP = false;
 		    	 }
 		    	/* else if(playSongInPlaylist == true)
 			     {
