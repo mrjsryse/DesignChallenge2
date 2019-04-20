@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -21,6 +22,7 @@ import model.generalModel;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import java.awt.Color;
 import java.awt.Font;
@@ -32,6 +34,7 @@ public class CreatePlaylist extends JFrame {
 	private JTextField textFieldEnterPlaylistName;
 	JButton btnCreatePlaylist;
 	private JTextField textField;
+	ArrayList<Playlist> userPlaylist;
 
 	/**
 	 * Launch the application.
@@ -111,6 +114,7 @@ public class CreatePlaylist extends JFrame {
 			 String favorite = "0";
 			 String privacy = "0";
 
+
 			 Playlist addedPlaylist = new PlaylistBuilder()
 					 .setPlaylistName(playlistName)
 					 .setUsername(username)
@@ -136,14 +140,21 @@ public class CreatePlaylist extends JFrame {
 				 int index = pList.getIndex(addedPlaylist);
 			 
 				 generalModel.getInstance().getPlaylistData(addedPlaylist);
-				 generalController.getInstance().gettingUserPlaylist(username, playlistName, favorite,privacy);
+				 generalController.getInstance().gettingUserPlaylist(username, playlistName, favorite, privacy);
 				 JOptionPane.showMessageDialog(null, "Added " + playlistName + " playlist!");
-			 
 				 
 				 dispose();
 			 
 			 }
-			 
+			 //===================
+			 userPlaylist = generalModel.getInstance().gettingPlaylists(HomeView.getInstance().currentUser);
+			 DefaultListModel DLM2 = new DefaultListModel();
+			
+			 for(int y = 0; y < userPlaylist.size(); y++)
+				 DLM2.addElement(userPlaylist.get(y).getPlaylistName());
+
+			 HomeView.getInstance().Playlist_List.setModel(DLM2);
+			 //=====================
 
 
 		 }

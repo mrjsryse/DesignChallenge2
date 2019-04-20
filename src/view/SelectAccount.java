@@ -20,8 +20,7 @@ public class SelectAccount extends JFrame{
 	SigningUpView signingUpViewing;
 	account signUpData,registeredData;
 	LoggingInView loggingInViewing;
-	ArtistLoggingInView artistLoginView;
-	public JButton btnSignUp,btnGuestAccount,btnRegisteredAccount, btnArtistAccount;
+	public JButton btnSignUp,btnGuestAccount,btnRegisteredAccount;
 	
 	
 	public static SelectAccount getInstance() {
@@ -38,7 +37,6 @@ public class SelectAccount extends JFrame{
 		
 		signingUpViewing = new SigningUpView();
 		loggingInViewing = new LoggingInView();
-		artistLoginView = new ArtistLoggingInView();
 		JPanel backgroundPanel = new JPanel();
 		getContentPane().add(backgroundPanel, BorderLayout.CENTER);
 		backgroundPanel.setLayout(null);
@@ -55,14 +53,9 @@ public class SelectAccount extends JFrame{
 		backgroundPanel.add(btnGuestAccount);
 		
 		btnRegisteredAccount = new JButton("Registered Account");
-
-		btnRegisteredAccount.setBounds(70, 268, 183, 62);
-
+		btnRegisteredAccount.setBounds(440, 245, 127, 38);
 		backgroundPanel.add(btnRegisteredAccount);
 		
-		btnArtistAccount = new JButton("Artist Account");
-		btnArtistAccount.setBounds(290, 268, 183, 62);
-		backgroundPanel.add(btnArtistAccount);
 		
 		btnSignUp = new JButton("Sign Up");
 		btnSignUp.setBounds(440, 196, 127, 38);
@@ -86,7 +79,6 @@ public class SelectAccount extends JFrame{
 		btnSignUp.addActionListener(new signUpButton());
 		btnRegisteredAccount.addActionListener(new registeredButton());
 		btnGuestAccount.addActionListener(new guestButton());
-		btnArtistAccount.addActionListener(new artistButton());
 
 	}
 	
@@ -126,18 +118,6 @@ public class SelectAccount extends JFrame{
 			closingWindow();
 			
 		}
-	}
-	
-	class artistButton implements ActionListener
-	{
-
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
-			System.out.println("Artist login");
-			artistLoginView.setVisible(true);
-		}
-		
 	}
 	
 	public void closingWindow() {
