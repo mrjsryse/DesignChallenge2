@@ -357,7 +357,7 @@ public class Database{
 		Connection cnt = getConnection();
 		PreparedStatement myReadingStatement = null;
 		
-		String query = "SELECT data FROM songData WHERE SongID = ?;";
+		String query = "SELECT data FROM accountData WHERE username = ('"+username+"');";
 		ResultSet rs = null;
 		
 		try {

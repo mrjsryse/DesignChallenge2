@@ -160,6 +160,7 @@ public class SigningUpView extends JFrame{
 				HomeView.getInstance().setDisplayPicture(path);
 				closingWindow();
 				SelectAccount.getInstance().setVisible(false);
+				HomeView.getInstance().realPath = path;
 			}
 		}
 		
