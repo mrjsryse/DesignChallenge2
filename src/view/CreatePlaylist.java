@@ -133,7 +133,6 @@ public class CreatePlaylist extends JFrame {
 			 String username = HomeView.getInstance().currentUser;
 			 String path = textFieldChosenFile.getText();
 			 String favorite = "0";
-			 int count = 0;
 			 String description = descriptionTextField.getText();
 			 String privacy = "0";
 			 

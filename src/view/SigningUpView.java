@@ -4,6 +4,8 @@ import java.awt.*;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
@@ -17,7 +19,7 @@ import view.LoggingInView.confirmButton;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-
+import javax.swing.JFileChooser;
 
 import java.awt.Font;
 import java.awt.Toolkit;
@@ -36,6 +38,8 @@ public class SigningUpView extends JFrame{
 	generalController controller;
 	private JTextField UsernameText;
 	private JTextField PasswordText;
+	private JPasswordField textFieldChosenFile;
+	String fileName;
 	
 	
 	public static SigningUpView getInstance() {
@@ -55,28 +59,28 @@ public class SigningUpView extends JFrame{
 		
 		JLabel lblUsername = new JLabel("Username");
 		lblUsername.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblUsername.setBounds(100, 204, 89, 50);
+		lblUsername.setBounds(100, 175, 89, 50);
 		getContentPane().add(lblUsername);
 		
 		UsernameText = new JTextField();
 		UsernameText.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		UsernameText.setBounds(189, 213, 295, 32);
+		UsernameText.setBounds(189, 184, 295, 32);
 		getContentPane().add(UsernameText);
 		UsernameText.setColumns(10);
 		
 		PasswordText = new JPasswordField(40);
 		PasswordText.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		PasswordText.setColumns(10);
-		PasswordText.setBounds(189, 251, 295, 32);
+		PasswordText.setBounds(189, 222, 295, 32);
 		getContentPane().add(PasswordText);
 		
 		JLabel lblPassword = new JLabel("Password");
 		lblPassword.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblPassword.setBounds(100, 242, 89, 50);
+		lblPassword.setBounds(100, 213, 89, 50);
 		getContentPane().add(lblPassword);
 		
 
-		JButton btnConfirm = new JButton("SIGN UP");
+		JButton btnConfirm = new JButton("Sign Up");
 		btnConfirm.addActionListener(new btn_Confirm());
 
 		btnConfirm.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -97,8 +101,38 @@ public class SigningUpView extends JFrame{
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		lblNewLabel.setBounds(159, 51, 99, 86);
 		getContentPane().add(lblNewLabel);
+		
+		JLabel lblDisplayPicture = new JLabel("Picture");
+		lblDisplayPicture.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblDisplayPicture.setBounds(100, 259, 89, 50);
+		getContentPane().add(lblDisplayPicture);
+		
+		textFieldChosenFile = new JPasswordField(10);
+		textFieldChosenFile.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		textFieldChosenFile.setBounds(189, 265, 295, 32);
+		getContentPane().add(textFieldChosenFile);
+		
+		JButton btnChoosePicture = new JButton("Choose File");
+		btnChoosePicture.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnChoosePicture.setBackground(new Color(254, 254, 250));
+		btnChoosePicture.setBounds(189, 318, 109, 49);
+		getContentPane().add(btnChoosePicture);
+		btnChoosePicture.addActionListener(new btn_ChoosePicture());
 
 	}
+	
+	class btn_ChoosePicture implements ActionListener
+	 {		
+		 public void actionPerformed(ActionEvent e)
+		 {
+			 JFileChooser chooser = new JFileChooser();
+			 chooser.showOpenDialog(null);
+			 File f = chooser.getSelectedFile();
+			 fileName = f.getAbsolutePath();
+			 textFieldChosenFile.setText(fileName);
+		 }
+		 
+	 }
 	
 	class btn_Confirm implements ActionListener
 	{
@@ -129,5 +163,4 @@ public class SigningUpView extends JFrame{
 		public void closingWindow() {
 			this.setVisible(false);
 		}
-
 }

@@ -58,7 +58,7 @@ public class Database{
 		String query4 = "CREATE TABLE IF NOT EXISTS user_playlists(PlaylistID int NOT NULL AUTO_INCREMENT PRIMARY KEY,Username varchar(255), PlaylistName varchar(255), Favorite varchar(255), Privacy varchar(255));";
 		String query5 = "CREATE TABLE IF NOT EXISTS songData(SongID int NOT NULL AUTO_INCREMENT PRIMARY KEY, data LONGBLOB);";
 		String query6 = "CREATE TABLE IF NOT EXISTS songs_in_playlist(PlaylistID int PRIMARY KEY, PlaylistName varchar(255),SongID int(11), SongName varchar(255));";
-		String query7 = "CREATE TABLE IF NOT EXISTS playlistData(PlaylistID int NOT NULL AUTO_INCREMENT PRIMARY KEY, picture BLOB, description varchar(255));";
+		String query7 = "CREATE TABLE IF NOT EXISTS playlistData(PlaylistID int NOT NULL AUTO_INCREMENT PRIMARY KEY, picture BLOB,PlaylistName varchar(255), description varchar(255));";
 		
 		String packetQuery = "SET GLOBAL max_allowed_packet=16777216;";
 		
@@ -251,18 +251,20 @@ public class Database{
 		FileInputStream input = null;
 		PreparedStatement myStatement = null;
 		
-		String query = "INSERT INTO playlistData VALUES (?,?,?)";
 		
+		String query = "INSERT INTO playlistData VALUES (?,?,?,?)";
+		int x = 0;
 		//create string qu
 		
 		try {
 			myStatement = cnt.prepareStatement(query);
 			
-			File thePlaylistPicture = new File(path); //Place instead of song.getSongName()
+			File thePlaylistPicture = new File(path); 
 			input = new FileInputStream(thePlaylistPicture);
+			myStatement.setInt(1, x);
 			myStatement.setBinaryStream(2, input);
-			myStatement.setString(1, playlistName);
-			myStatement.setString(3, description);
+			myStatement.setString(3, playlistName);
+			myStatement.setString(4, description);
 			
 			System.out.println("Reading the jpeg file: " + thePlaylistPicture.getAbsolutePath());
 			System.out.println("Storing Playlist picture into Database " + thePlaylistPicture);
@@ -611,7 +613,7 @@ public class Database{
 	}
 
 	
-	public void addingPlaylist(Playlist p){
+	public int addingPlaylist(Playlist p){
 		String getPlaylistName, getUsername;
 		
 		
@@ -638,7 +640,7 @@ public class Database{
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		//return null;
+		return 0;
 	}
 	
 	

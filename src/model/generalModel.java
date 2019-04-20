@@ -27,7 +27,7 @@ public class generalModel {
 	public void getPlaylistData(Playlist p)
 	{
 		Database.getInstance().addingPlaylist(p);
-		Database.getInstance().writePlaylistBLOB(p.getUsername(),p.getPlaylistName(),p.getDescription());
+		Database.getInstance().writePlaylistBLOB(p.getPlaylistName(),p.getPath(),p.getDescription());
 	}
 	
 	public void getAccountData(account x) { //SIGNING UP
