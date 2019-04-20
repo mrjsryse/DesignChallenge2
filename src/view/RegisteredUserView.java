@@ -2,6 +2,7 @@ package view;
 
 
 import java.awt.Font;
+
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -46,6 +47,7 @@ import model.generalModel;
 
 import java.awt.Color;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.event.ListDataListener;
 import javax.swing.event.ListSelectionEvent;
 
 public class RegisteredUserView extends JFrame {
@@ -62,7 +64,7 @@ public class RegisteredUserView extends JFrame {
 	JLabel lblUser;
 	PlaylistList pl;
 	SongList sl;
-	ArrayList<Song> userSongs;
+	ArrayList<Song> userSongs,userSongsUpdated;
 	ArrayList<Playlist> userPlaylist;
 	boolean songChanged;
 	private JButton btnProfile;
@@ -161,19 +163,12 @@ public class RegisteredUserView extends JFrame {
 		btnPickPlaylist.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				DefaultListModel DLM3 = new DefaultListModel();
-				yourSongsListJList.removeAll();
-				
 				int i = playlistListJList.getSelectedIndex();
 				String SongName;
-					 for(int j = 0; j <  generalModel.getInstance().getUserPlaylist(currentUser).get(i).getSongInPlaylist().size(); j++)
-					 {
-						 SongName = generalModel.getInstance().getUserPlaylist(currentUser).get(i).getSongInPlaylist().get(j).getSongName();
-						 DLM3.addElement(SongName);
-					 }
+					 for(int j = 0; j <  pl.getPlaylistList().get(i).getSongSize(); j++)
+						 DLM3.addElement(pl.getPlaylistList().get(i).getSongInPlaylist().get(j).getSongName());
+				
 				yourSongsListJList.setModel(DLM3);
-				
-				
-				System.out.print(generalModel.getInstance().getUserPlaylist(currentUser).get(0).getSongInPlaylist().get(1).getSongName());
 				
 			}
 		});
@@ -221,11 +216,13 @@ public class RegisteredUserView extends JFrame {
 			public void valueChanged(ListSelectionEvent arg0) {
 				String s = yourSongsList.getName();
 				String t = "0";
-				txtpnSongNameGenre.setText("Song Name: "+userSongs.get(yourSongsList.getSelectedIndex()).getSongName()+"\r\nArtist: "+userSongs.get(yourSongsList.getSelectedIndex()).getArtistName()+"\r\nAlbum: "+userSongs.get(yourSongsList.getSelectedIndex()).getAlbum()+"\r\nGenre: "+userSongs.get(yourSongsList.getSelectedIndex()).getGenre()+"\r\r\nYear: "+userSongs.get(yourSongsList.getSelectedIndex()).getYear()+"");
-	
-				songChanged = true;
+				try {
+					txtpnSongNameGenre.setText("Song Name: "+userSongs.get(yourSongsList.getSelectedIndex()).getSongName()+"\r\nArtist: "+userSongs.get(yourSongsList.getSelectedIndex()).getArtistName()+"\r\nAlbum: "+userSongs.get(yourSongsList.getSelectedIndex()).getAlbum()+"\r\nGenre: "+userSongs.get(yourSongsList.getSelectedIndex()).getGenre()+"\r\r\nYear: "+userSongs.get(yourSongsList.getSelectedIndex()).getYear()+"");				
+				}catch(ArrayIndexOutOfBoundsException e) {}
+				songChanged = true;	
 			}
 		});
+		yourSongsList.clearSelection();
 		yourSongsList.setBounds(806, 94, 341, 557);
 		yourSongsList.setBackground(new Color(224,224,224));
 		contentPane.add(yourSongsList);
@@ -326,6 +323,9 @@ public class RegisteredUserView extends JFrame {
 		 	this.profile = profile;
 		}
 	 
+	 public void deselectJList() {
+		 yourSongsList.clearSelection();
+	 }
 	
 	 class btn_Play implements ActionListener 
 	 {
@@ -333,45 +333,37 @@ public class RegisteredUserView extends JFrame {
 	     public void actionPerformed(ActionEvent e) 
 	     {	 
 	    	 System.out.println("songChanged: "+songChanged);
-		    	if(songChanged == true) {
-			    	 mp3.pause();
-			    	 int SongID = userSongs.get(yourSongsList.getSelectedIndex()).getSongID();
-		    		 generalModel.getInstance().readSongData(SongID);
-		    		 generalModel.getInstance().updateCount(SongID);
-		    		 mp3 = new MP3Player(new File("currentSong.mp3"));
-			    	 mp3.play();
-			    	 songChanged = false;
-
-		    	 }
-		    	 else if(playSongInPlaylist == true)
-			     {
-		    		 mp3.pause();
-			    	 int SongID2 = userPlaylists.get(playlistListJList.getSelectedIndex()).getSongInPlaylist().get(yourSongsListJList.getSelectedIndex()).getSongID();
-			    	 generalModel.getInstance().readSongData(SongID2);
-			    	 generalModel.getInstance().updateCount(SongID2);
-			    	 mp3 = new MP3Player(new File("currentSong.mp3"));
-				     mp3.play();
-				   	 playSongInPlaylist = false;
-			     }else 
-		    	 {
-		    		 mp3.play();
-		    	 }
-	    	 /*else {
-		    	 if(songChanged) {
-		    		 mp3.pause();
-		    		 int SongID = userSongs.get(yourSongsList.getSelectedIndex()).getSongID();
-		    		 generalModel.getInstance().readSongData(SongID);
-		    		 mp3 = new MP3Player(new File("currentSong.mp3"));
-		    		 mp3.play();
-		    		 songChanged = false;
-		    		 generalModel.getInstance().updateCount(SongID);
+	    	 if(songChanged) {
+		    	 mp3.pause();
+		    	 int SongID = userSongs.get(yourSongsList.getSelectedIndex()).getSongID();
+		    	 generalModel.getInstance().readSongData(SongID);
+		    	 mp3 = new MP3Player(new File("currentSong.mp3"));
+		    	 mp3.play();
+		    	 songChanged = false;
+		    	 generalModel.getInstance().updateCount(SongID);
 		    	 
-	    	 }*/
+	    	 }else {
+	    		 mp3.play();
+	    	 }
+	    	 
+	    	 System.out.println("playSongInPlaylist: "+playSongInPlaylist);
+	    	 if(playSongInPlaylist) {
+		    	 mp3.pause();
+		    	 int SongID = pl.getPlaylistList().get(playlistListJList.getSelectedIndex()).getSongInPlaylist().get(yourSongsListJList.getSelectedIndex()).getSongID();
+		    	 generalModel.getInstance().readSongData(SongID);
+		    	 mp3 = new MP3Player(new File("currentSong.mp3"));
+		    	 mp3.play();
+		    	 
+		    	 playSongInPlaylist = false;
+	    	 }else {
+	    		 mp3.play();
+	    	 }
+	    	 
+	    	 
 
-
-		   }
-	    }
-	  
+	     }
+	 }
+	 
 	
 	 class btn_addSongtoP implements ActionListener 
 	 {
@@ -451,9 +443,9 @@ public class RegisteredUserView extends JFrame {
 			 
 			 for(int x = 0; x < userSongs.size(); x++)
 				 DLM.addElement(userSongs.get(x).getSongName());
-
+			 
 			 yourSongsList.setModel(DLM);
-			 //==============================================
+			 //============================================== Above is songs to the JList
 			 
 			 userPlaylist = generalModel.getInstance().gettingPlaylists(currentUser);
 			 
@@ -466,10 +458,9 @@ public class RegisteredUserView extends JFrame {
 			 
 			 playlistListJList.setModel(DLM2);
 			 
-			 //==============================================
+			 //============================================== Above is playlists to the JList
 			 SongList sList = new SongList();
 			 PlaylistList pList1 = new PlaylistList();
-			 
 			 
 		 }
 	 }
@@ -500,9 +491,37 @@ public class RegisteredUserView extends JFrame {
 	 {
 		 public void actionPerformed(ActionEvent e)
 		 {
+			String songOfUserForEditing = userSongs.get(yourSongsList.getSelectedIndex()).getUserName();
+			String songNameForEditing = userSongs.get(yourSongsList.getSelectedIndex()).getSongName();
+			EditSongView.getInstance().getUsername(currentUser);
+			EditSongView.getInstance().getOldSongName(songNameForEditing);
 			EditSongView.getInstance().setVisible(true);
-			
 		 }
+	 }
+	 
+	 public String getSongName() {
+		 String songTitle = userSongs.get(yourSongsList.getSelectedIndex()).getSongName();
+		 return songTitle;
+	 }
+	 
+	 public String getArtistName() {
+		 String artistName = userSongs.get(yourSongsList.getSelectedIndex()).getArtistName();
+		 return artistName;
+	 }
+	 
+	 public String getAlbumName() {
+		 String albumName = userSongs.get(yourSongsList.getSelectedIndex()).getAlbum();
+		 return albumName;
+	 }
+	 
+	 public String getGenreName() {
+		 String genreName = userSongs.get(yourSongsList.getSelectedIndex()).getGenre();
+		 return genreName;
+	 }
+	 
+	 public String getYearDate() {
+		 String yearDate = userSongs.get(yourSongsList.getSelectedIndex()).getYear();
+		 return yearDate;
 	 }
 	 
 	 class btn_nextSong implements ActionListener
@@ -530,9 +549,10 @@ public class RegisteredUserView extends JFrame {
 			 String s;
 			 userSongs = generalModel.getInstance().getSongsByGenre();
 			 DefaultListModel DLM = new DefaultListModel();
-			 for(int i = 0; i < userSongs.size(); i++)
+			 for(int i = 0; i < generalModel.getInstance().getSongsByGenre().size(); i++)
 			 {
-				 DLM.addElement(userSongs.get(i).getSongName());
+				 s = generalModel.getInstance().getSongsByGenre().get(i).getSongName();
+				 DLM.addElement(s);
 			 }
 			 
 			 yourSongsList.setModel(DLM);
@@ -547,9 +567,10 @@ public class RegisteredUserView extends JFrame {
 			 String s;
 			 userSongs = generalModel.getInstance().getSongsByAlbum();
 			 DefaultListModel DLM = new DefaultListModel();
-			 for(int i = 0; i < userSongs.size(); i++)
+			 for(int i = 0; i < generalModel.getInstance().getSongsByAlbum().size(); i++)
 			 {
-				 DLM.addElement(userSongs.get(i).getSongName());
+				 s = generalModel.getInstance().getSongsByAlbum().get(i).getSongName();
+				 DLM.addElement(s);
 			 }
 			 
 			 yourSongsList.setModel(DLM);
@@ -564,9 +585,10 @@ public class RegisteredUserView extends JFrame {
 			 String s;
 			 userSongs = generalModel.getInstance().getSongsByYear();
 			 DefaultListModel DLM = new DefaultListModel();
-			 for(int i = 0; i < userSongs.size(); i++)
+			 for(int i = 0; i < generalModel.getInstance().getSongsByYear().size(); i++)
 			 {
-				 DLM.addElement(userSongs.get(i).getSongName());
+				 s = generalModel.getInstance().getSongsByYear().get(i).getSongName();
+				 DLM.addElement(s);
 			 }
 			 
 			 yourSongsList.setModel(DLM);
@@ -582,6 +604,4 @@ public class RegisteredUserView extends JFrame {
 			this.currentUser = currentUser;
 			lblUser.setText("Current User: " + currentUser);
 		}
-	 
-	 
 }

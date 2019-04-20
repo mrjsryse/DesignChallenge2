@@ -24,7 +24,8 @@ public class generalModel {
 		Database.getInstance().writeBLOB(SongID, s.getPath());
 	}
 	
-	public void getAccountData(account x) {
+	
+	public void getAccountData(account x) { //SIGNING IN 
 		if(Database.getInstance().addingAccount(x) == false) {
 			SigningUpView.getInstance().signingSuccessful();
 		}
@@ -74,7 +75,10 @@ public class generalModel {
 	public void favoritingSongs(String SongID, String SongName) {
 		Database.getInstance().favoritingSong(SongID, SongName);
 	}
-	
+
+	public void gettingSongCounts(String username){
+		
+	}
 	public ArrayList<Playlist> gettingFavoritePlaylist(String t) {
 		return Database.getInstance().getFavoritePlaylist(t);
 	}
@@ -113,6 +117,15 @@ public class generalModel {
 	
 	public ArrayList<Song> getSongStuff() {
 		return Database.getInstance().gettingSongs();
+	}
+	
+	//=========================================================================== Everything Editing
+	public void editSongData(String username,String oldSongName, String newSongName,String newArtistName, String newAlbumName,String newGenreName ,String newYearDate) {
+		Database.getInstance().editSongName(username,oldSongName,newSongName);
+		Database.getInstance().editArtistName(username,oldSongName,newSongName,newArtistName);
+		Database.getInstance().editAlbumName(username,oldSongName,newSongName,newAlbumName);
+		Database.getInstance().editGenreName(username,oldSongName,newSongName,newGenreName);
+		Database.getInstance().editYearDate(username,oldSongName,newSongName,newYearDate);
 	}
 }
 
