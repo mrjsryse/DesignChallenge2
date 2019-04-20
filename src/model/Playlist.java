@@ -10,12 +10,14 @@ public class Playlist {
 	String playlistName;
 	String username;
 	String favorite;
+	String privacy;
 
-	public Playlist(String playlistName, String username, String favorite) {
+	public Playlist(String playlistName, String username, String favorite,String privacy) {
 		super();
 		this.playlistName = playlistName;
 		this.username = username;
 		this.favorite = favorite;
+		this.privacy = privacy;
 	}
 
 
@@ -35,6 +37,10 @@ public class Playlist {
 
 	public String getFavorite() {
 		return favorite;
+	}
+	
+	public String getPrivacy() {
+		return privacy;
 	}
 	
 	public void setPlaylistName(String playlistName) {

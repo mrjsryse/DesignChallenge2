@@ -5,16 +5,24 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import model.Playlist;
+import model.PlaylistList;
+import model.Song;
+import model.SongList;
+import model.generalModel;
+
 import javax.swing.JLabel;
 import java.awt.Color;
 import javax.swing.JButton;
-
-
+import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+
 import javax.swing.JTextField;
 import java.awt.SystemColor;
 import java.awt.event.ActionListener;
@@ -26,21 +34,27 @@ public class ListenerView extends JFrame {
 	private JPanel contentPane;
 	private JTextField txtSearch;
 	boolean evenClick = false;
+	private volatile static ListenerView instance = null;
+	public String currentUser;
+	public JLabel lblUser;
+	private JButton btnRefresh,btnFavoritePlaylist,btnFavoriteSong,ProfileName_Dashboard,Profile,btnPrivate;
+	ArrayList<Song> userSongs,userSongsFavorites;
+	ArrayList<Playlist> userPlaylist,userPlaylistFavorites,userPlaylistPrivacy;
+	PlaylistList pl;
+	JList songJlist,playlistJList,FavoriteplaylistJList,FavoritesongJList, mostPlayedList;
+	JList publicPlaylistJList,myPlaylistJList;
+	boolean songChanged;
+	
+	public static ListenerView getInstance() {
+        if (instance == null) {
+        	instance = new ListenerView();
+        }
+		return instance;
+	}
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					ListenerView frame = new ListenerView();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	
 
 	/**
 	 * Create the frame.
@@ -202,7 +216,11 @@ public class ListenerView extends JFrame {
 		TopBar.add(ProfilePic);
 		ProfilePic.setBackground(new Color(170, 187, 204));
 		
-		JButton Profile = new JButton("Profile Name");
+		Profile = new JButton("Profile Name");
+		Profile.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		Profile.setBackground(new Color(30,58,42));
 		Profile.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		Profile.setForeground(Color.WHITE);
@@ -217,12 +235,13 @@ public class ListenerView extends JFrame {
 		button_2.setBounds(1084, 11, 39, 39);
 		TopBar.add(button_2);
 		
-		JButton Refreshbtn = new JButton("");
-		Refreshbtn.setIcon(new ImageIcon(ListenerView.class.getResource("/images2/reload.png")));
-		Refreshbtn.setBorder(null);
-		Refreshbtn.setBackground(new Color(30, 58, 42));
-		Refreshbtn.setBounds(1035, 11, 39, 39);
-		TopBar.add(Refreshbtn);
+		btnRefresh = new JButton("");
+		btnRefresh.setIcon(new ImageIcon(ListenerView.class.getResource("/images2/reload.png")));
+		btnRefresh.setBorder(null);
+		btnRefresh.setBackground(new Color(30, 58, 42));
+		btnRefresh.setBounds(1035, 11, 39, 39);
+		TopBar.add(btnRefresh);
+		btnRefresh.addActionListener(new btn_Refresh());
 		
 		JPanel MusicPanel = new JPanel();
 		MusicPanel.setBackground(new Color(254, 254, 250));
@@ -272,21 +291,24 @@ public class ListenerView extends JFrame {
 		Albums_Music.setBounds(0, 90, 186, 30);
 		MusicPanel.add(Albums_Music);
 		
-		JButton Playlist_Name3 = new JButton("(PlaylistName)");
+		JButton Playlist_Name3 = new JButton("");
+		Playlist_Name3.setEnabled(false);
 		Playlist_Name3.setHorizontalAlignment(SwingConstants.LEFT);
 		Playlist_Name3.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		Playlist_Name3.setBackground(new Color(254, 254, 250));
 		Playlist_Name3.setBounds(0, 232, 186, 30);
 		MusicPanel.add(Playlist_Name3);
 		
-		JButton Playlist_Name2 = new JButton("(PlaylistName)");
+		JButton Playlist_Name2 = new JButton("");
+		Playlist_Name2.setEnabled(false);
 		Playlist_Name2.setHorizontalAlignment(SwingConstants.LEFT);
 		Playlist_Name2.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		Playlist_Name2.setBackground(new Color(242, 203, 155));
 		Playlist_Name2.setBounds(0, 203, 186, 30);
 		MusicPanel.add(Playlist_Name2);
 		
-		JButton Playlist_Name1 = new JButton("(PlaylistName)");
+		JButton Playlist_Name1 = new JButton("");
+		Playlist_Name1.setEnabled(false);
 		Playlist_Name1.setHorizontalAlignment(SwingConstants.LEFT);
 		Playlist_Name1.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		Playlist_Name1.setBackground(new Color(254, 254, 250));
@@ -300,47 +322,57 @@ public class ListenerView extends JFrame {
 		Playlists_Music.setBounds(0, 146, 186, 30);
 		MusicPanel.add(Playlists_Music);
 		
-		JButton Playlist_Name7 = new JButton("(PlaylistName)");
+		JButton Playlist_Name7 = new JButton("");
+		Playlist_Name7.setEnabled(false);
 		Playlist_Name7.setHorizontalAlignment(SwingConstants.LEFT);
 		Playlist_Name7.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		Playlist_Name7.setBackground(new Color(254, 254, 250));
 		Playlist_Name7.setBounds(0, 344, 186, 30);
 		MusicPanel.add(Playlist_Name7);
 		
-		JButton Playlist_Name6 = new JButton("(PlaylistName)");
+		JButton Playlist_Name6 = new JButton("");
+		Playlist_Name6.setEnabled(false);
 		Playlist_Name6.setHorizontalAlignment(SwingConstants.LEFT);
 		Playlist_Name6.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		Playlist_Name6.setBackground(new Color(242, 203, 155));
 		Playlist_Name6.setBounds(0, 315, 186, 30);
 		MusicPanel.add(Playlist_Name6);
 		
-		JButton Playlist_Name5 = new JButton("(PlaylistName)");
+		JButton Playlist_Name5 = new JButton("");
+		Playlist_Name5.setEnabled(false);
 		Playlist_Name5.setHorizontalAlignment(SwingConstants.LEFT);
 		Playlist_Name5.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		Playlist_Name5.setBackground(new Color(254, 254, 250));
 		Playlist_Name5.setBounds(0, 287, 186, 30);
 		MusicPanel.add(Playlist_Name5);
 		
-		JButton Playlist_Name4 = new JButton("(PlaylistName)");
+		JButton Playlist_Name4 = new JButton("");
+		Playlist_Name4.setEnabled(false);
 		Playlist_Name4.setHorizontalAlignment(SwingConstants.LEFT);
 		Playlist_Name4.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		Playlist_Name4.setBackground(new Color(242, 203, 155));
 		Playlist_Name4.setBounds(0, 258, 186, 30);
 		MusicPanel.add(Playlist_Name4);
 		
-		JButton Playlist_Name9 = new JButton("(PlaylistName)");
+		JButton Playlist_Name9 = new JButton("");
+		Playlist_Name9.setEnabled(false);
 		Playlist_Name9.setHorizontalAlignment(SwingConstants.LEFT);
 		Playlist_Name9.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		Playlist_Name9.setBackground(new Color(254, 254, 250));
 		Playlist_Name9.setBounds(0, 401, 186, 30);
 		MusicPanel.add(Playlist_Name9);
 		
-		JButton Playlist_Name8 = new JButton("(PlaylistName)");
+		JButton Playlist_Name8 = new JButton("");
+		Playlist_Name8.setEnabled(false);
 		Playlist_Name8.setHorizontalAlignment(SwingConstants.LEFT);
 		Playlist_Name8.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		Playlist_Name8.setBackground(new Color(242, 203, 155));
 		Playlist_Name8.setBounds(0, 372, 186, 30);
 		MusicPanel.add(Playlist_Name8);
+		
+		JList Playlist_list = new JList();
+		Playlist_list.setBounds(0, 175, 186, 256);
+		MusicPanel.add(Playlist_list);
 		
 		JPanel RecentlyPlayedPanel = new JPanel();
 		RecentlyPlayedPanel.setLayout(null);
@@ -355,84 +387,96 @@ public class ListenerView extends JFrame {
 		label.setBounds(0, 0, 186, 34);
 		RecentlyPlayedPanel.add(label);
 		
-		JButton RPSONG_1 = new JButton("Song Name");
+		JButton RPSONG_1 = new JButton("");
+		RPSONG_1.setEnabled(false);
 		RPSONG_1.setHorizontalAlignment(SwingConstants.LEFT);
 		RPSONG_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		RPSONG_1.setBackground(new Color(242, 203, 155));
 		RPSONG_1.setBounds(0, 33, 186, 30);
 		RecentlyPlayedPanel.add(RPSONG_1);
 		
-		JButton RPSONG_2 = new JButton("Song Name");
+		JButton RPSONG_2 = new JButton("");
+		RPSONG_2.setEnabled(false);
 		RPSONG_2.setHorizontalAlignment(SwingConstants.LEFT);
 		RPSONG_2.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		RPSONG_2.setBackground(new Color(254, 254, 250));
 		RPSONG_2.setBounds(0, 62, 186, 30);
 		RecentlyPlayedPanel.add(RPSONG_2);
 		
-		JButton RPSONG_4 = new JButton("Song Name");
+		JButton RPSONG_4 = new JButton("");
+		RPSONG_4.setEnabled(false);
 		RPSONG_4.setHorizontalAlignment(SwingConstants.LEFT);
 		RPSONG_4.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		RPSONG_4.setBackground(new Color(254, 254, 250));
 		RPSONG_4.setBounds(0, 119, 186, 30);
 		RecentlyPlayedPanel.add(RPSONG_4);
 		
-		JButton RPSONG_3 = new JButton("Song Name");
+		JButton RPSONG_3 = new JButton("");
+		RPSONG_3.setEnabled(false);
 		RPSONG_3.setHorizontalAlignment(SwingConstants.LEFT);
 		RPSONG_3.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		RPSONG_3.setBackground(new Color(242, 203, 155));
 		RPSONG_3.setBounds(0, 90, 186, 30);
 		RecentlyPlayedPanel.add(RPSONG_3);
 		
-		JButton RPSONG_7 = new JButton("Song Name");
+		JButton RPSONG_7 = new JButton("");
+		RPSONG_7.setEnabled(false);
 		RPSONG_7.setHorizontalAlignment(SwingConstants.LEFT);
 		RPSONG_7.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		RPSONG_7.setBackground(new Color(242, 203, 155));
 		RPSONG_7.setBounds(0, 203, 186, 30);
 		RecentlyPlayedPanel.add(RPSONG_7);
 		
-		JButton RPSONG_6 = new JButton("Song Name");
+		JButton RPSONG_6 = new JButton("");
+		RPSONG_6.setEnabled(false);
 		RPSONG_6.setHorizontalAlignment(SwingConstants.LEFT);
 		RPSONG_6.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		RPSONG_6.setBackground(new Color(254, 254, 250));
 		RPSONG_6.setBounds(0, 175, 186, 30);
 		RecentlyPlayedPanel.add(RPSONG_6);
 		
-		JButton RPSONG_5 = new JButton("Song Name");
+		JButton RPSONG_5 = new JButton("");
+		RPSONG_5.setEnabled(false);
 		RPSONG_5.setHorizontalAlignment(SwingConstants.LEFT);
 		RPSONG_5.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		RPSONG_5.setBackground(new Color(242, 203, 155));
 		RPSONG_5.setBounds(0, 146, 186, 30);
 		RecentlyPlayedPanel.add(RPSONG_5);
 		
-		JButton MPSONG_3 = new JButton("Song Name");
+		JButton MPSONG_3 = new JButton("");
+		MPSONG_3.setEnabled(false);
 		MPSONG_3.setHorizontalAlignment(SwingConstants.LEFT);
 		MPSONG_3.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		MPSONG_3.setBackground(new Color(254, 254, 250));
 		MPSONG_3.setBounds(0, 344, 186, 30);
 		RecentlyPlayedPanel.add(MPSONG_3);
 		
-		JButton MPSONG_2 = new JButton("Song Name");
+		JButton MPSONG_2 = new JButton("");
+		MPSONG_2.setEnabled(false);
 		MPSONG_2.setHorizontalAlignment(SwingConstants.LEFT);
 		MPSONG_2.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		MPSONG_2.setBackground(new Color(242, 203, 155));
 		MPSONG_2.setBounds(0, 315, 186, 30);
 		RecentlyPlayedPanel.add(MPSONG_2);
 		
-		JButton MPSONG_1 = new JButton("Song Name");
+		JButton MPSONG_1 = new JButton("");
+		MPSONG_1.setEnabled(false);
 		MPSONG_1.setHorizontalAlignment(SwingConstants.LEFT);
 		MPSONG_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		MPSONG_1.setBackground(new Color(254, 254, 250));
 		MPSONG_1.setBounds(0, 287, 186, 30);
 		RecentlyPlayedPanel.add(MPSONG_1);
 		
-		JButton MPSONG_5 = new JButton("Song Name");
+		JButton MPSONG_5 = new JButton("");
+		MPSONG_5.setEnabled(false);
 		MPSONG_5.setHorizontalAlignment(SwingConstants.LEFT);
 		MPSONG_5.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		MPSONG_5.setBackground(new Color(254, 254, 250));
 		MPSONG_5.setBounds(0, 401, 186, 30);
 		RecentlyPlayedPanel.add(MPSONG_5);
 		
-		JButton MPSONG_4 = new JButton("Song Name");
+		JButton MPSONG_4 = new JButton("");
+		MPSONG_4.setEnabled(false);
 		MPSONG_4.setHorizontalAlignment(SwingConstants.LEFT);
 		MPSONG_4.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		MPSONG_4.setBackground(new Color(242, 203, 155));
@@ -452,6 +496,14 @@ public class ListenerView extends JFrame {
 		MostPlayedSongs.setBackground(new Color(254, 254, 250));
 		MostPlayedSongs.setBounds(0, 231, 186, 61);
 		RecentlyPlayedPanel.add(MostPlayedSongs);
+		
+		JList FaveSongslist = new JList();
+		FaveSongslist.setBounds(0, 33, 186, 200);
+		RecentlyPlayedPanel.add(FaveSongslist);
+		
+		JList MostPlayed_list = new JList();
+		MostPlayed_list.setBounds(0, 291, 186, 140);
+		RecentlyPlayedPanel.add(MostPlayed_list);
 		
 		JPanel Dashboard = new JPanel();
 		Dashboard.setBackground(new Color(254, 254, 250));
@@ -474,7 +526,11 @@ public class ListenerView extends JFrame {
 		lblProfileDetails.setBounds(184, 82, 377, 55);
 		Dashboard.add(lblProfileDetails);
 		
-		JButton ProfileName_Dashboard = new JButton("Profile Name");
+		ProfileName_Dashboard = new JButton("Profile Name");
+		ProfileName_Dashboard.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
 		ProfileName_Dashboard.setHorizontalAlignment(SwingConstants.LEFT);
 		ProfileName_Dashboard.setForeground(Color.BLACK);
 		ProfileName_Dashboard.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -508,14 +564,15 @@ public class ListenerView extends JFrame {
 		FavePlaylistbtn.setToolTipText("Add a Favorite Playlist");
 		Dashboard.add(FavePlaylistbtn);
 		
-		JButton Public_Privatebtn = new JButton("");
-		Public_Privatebtn.setIcon(new ImageIcon(ListenerView.class.getResource("/images2/private_(1).png")));
-		Public_Privatebtn.setBorder(null);
-		Public_Privatebtn.setBackground(new Color(254, 254, 250));
-		Public_Privatebtn.setBounds(705, 11, 39, 39);
-		Public_Privatebtn.setBorder(null);
-		Public_Privatebtn.setToolTipText("Set Profile  to Public/Private");
-		Dashboard.add(Public_Privatebtn);
+		btnPrivate = new JButton("");
+		btnPrivate.setIcon(new ImageIcon(ListenerView.class.getResource("/images2/private_(1).png")));
+		btnPrivate.setBorder(null);
+		btnPrivate.setBackground(new Color(254, 254, 250));
+		btnPrivate.setBounds(705, 11, 39, 39);
+		btnPrivate.setBorder(null);
+		btnPrivate.setToolTipText("Set Profile  to Public/Private");
+		Dashboard.add(btnPrivate);
+		btnPrivate.addActionListener(new btn_Private());
 		
 		JButton LFollow_Dashboard = new JButton("Listeners I Follow");
 		LFollow_Dashboard.setHorizontalAlignment(SwingConstants.LEFT);
@@ -628,8 +685,110 @@ public class ListenerView extends JFrame {
 		AFollow9.setBounds(580, 444, 164, 30);
 		Dashboard.add(AFollow9);
 		
-
+		publicPlaylistJList = new JList();
+		publicPlaylistJList.setBounds(10, 211, 206, 274);
+		Dashboard.add(publicPlaylistJList);
 		
-
+		myPlaylistJList = new JList();
+		myPlaylistJList.setBounds(223, 211, 196, 274);
+		Dashboard.add(myPlaylistJList);
+		
+		JList listenerfollowJList = new JList();
+		listenerfollowJList.setBounds(418, 199, 164, 286);
+		Dashboard.add(listenerfollowJList);
+		
+		JList artistfollowJList = new JList();
+		artistfollowJList.setBounds(580, 199, 164, 286);
+		Dashboard.add(artistfollowJList);
+	}
+	
+	class btn_Refresh implements ActionListener
+	{
+		public void actionPerformed(ActionEvent e)
+		{
+			//============================================== General Playlists
+			userPlaylist = generalModel.getInstance().gettingPlaylists(currentUser);
+			
+			DefaultListModel DLM1 = new DefaultListModel();
+			
+			for(int y = 0; y < userPlaylist.size(); y++)
+				DLM1.addElement(userPlaylist.get(y).getPlaylistName());
+			
+			myPlaylistJList.setModel(DLM1);
+			
+			//============================================== Private Playlists
+			userPlaylistPrivacy = generalModel.getInstance().gettingPrivatePlaylists(currentUser);
+			
+			DefaultListModel DLM2 = new DefaultListModel();
+			
+			for(int a = 0; a < userPlaylistPrivacy.size();a++)
+				DLM2.addElement(userPlaylistPrivacy.get(a).getPlaylistName());
+			
+			publicPlaylistJList.setModel(DLM2);
+			
+			//============================================== Favorite Playlists
+//			userPlaylistFavorites = generalModel.getInstance().gettingFavoritePlaylist(currentUser);
+//			
+//			DefaultListModel DLM3 = new DefaultListModel();
+//			
+//			for(int w = 0; w < userPlaylistFavorites.size(); w++)
+//				DLM3.addElement(userPlaylistFavorites.get(w).getPlaylistName());
+//			
+//			FavoriteplaylistJList.setModel(DLM3);
+//			
+//			
+//			SongList sList = new SongList();
+//			PlaylistList pList1 = new PlaylistList();
+//			
+//			//============================================== Favorite Songs
+//			userSongsFavorites = generalModel.getInstance().gettingFavoriteSong(currentUser);
+//			
+//			DefaultListModel DLM4 = new DefaultListModel();
+//			
+//			for(int a = 0; a < userSongsFavorites.size();a++)
+//				DLM4.addElement(userSongsFavorites.get(a).getSongName());
+//			
+//			FavoritesongJList.setModel(DLM4);
+//			
+//			//============================================== Most Played Song
+//			
+//			userSongs = generalModel.getInstance().getMostPlayed();
+//			DefaultListModel DLM5 = new DefaultListModel();
+//			
+//			DLM5.addElement(userSongs.get(0).getSongName());
+//			
+//			 
+//			mostPlayedList.setModel(DLM5);
+		}
+	}
+	
+	class btn_FavoritePlaylist implements ActionListener
+	{
+		
+		public void actionPerformed(ActionEvent e)
+		{
+			String playlistOfUser = userPlaylist.get(myPlaylistJList.getSelectedIndex()).getUsername();
+			String playlistName = userPlaylist.get(myPlaylistJList.getSelectedIndex()).getPlaylistName();
+			
+			generalModel.getInstance().favoritingPlaylist(playlistOfUser,playlistName);
+		}
+	}	
+	
+	class btn_Private implements ActionListener
+	{
+		
+		public void actionPerformed(ActionEvent e)
+		{
+			String playlistOfUserPrivate = userPlaylist.get(myPlaylistJList.getSelectedIndex()).getUsername();
+			String playlistNamePrivate = userPlaylist.get(myPlaylistJList.getSelectedIndex()).getPlaylistName();
+			
+			generalModel.getInstance().makingPrivatePlaylist(playlistOfUserPrivate,playlistNamePrivate);
+		}
+	}
+	
+	public void getUsername(String currentUser) {
+		this.currentUser = currentUser;
+		ProfileName_Dashboard.setText(currentUser);
+		Profile.setText(currentUser);
 	}
 }

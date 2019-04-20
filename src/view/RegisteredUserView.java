@@ -187,7 +187,7 @@ public class RegisteredUserView extends JFrame {
 		 
 		txtpnSongNameGenre = new JTextPane();
 		txtpnSongNameGenre.setBounds(395, 427, 375, 224);
-		txtpnSongNameGenre.setText("Song Name:\r\nArtist:\r\nAlbum:\r\nGenre:\r\r\nYear:\r\rFavorite");
+		txtpnSongNameGenre.setText("Song Name:\r\nArtist:\r\nAlbum:\r\nGenre:\r\r\nYear:");
 		txtpnSongNameGenre.setBackground(new Color(224,224,224));
 		contentPane.add(txtpnSongNameGenre);
 		
