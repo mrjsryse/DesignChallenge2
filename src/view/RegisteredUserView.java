@@ -333,31 +333,29 @@ public class RegisteredUserView extends JFrame {
 	     public void actionPerformed(ActionEvent e) 
 	     {	 
 	    	 System.out.println("songChanged: "+songChanged);
-	    	 if(songChanged) {
-		    	 mp3.pause();
-		    	 int SongID = userSongs.get(yourSongsList.getSelectedIndex()).getSongID();
-		    	 generalModel.getInstance().readSongData(SongID);
-		    	 mp3 = new MP3Player(new File("currentSong.mp3"));
-		    	 mp3.play();
-		    	 songChanged = false;
-		    	 generalModel.getInstance().updateCount(SongID);
-		    	 
-	    	 }else {
-	    		 mp3.play();
-	    	 }
-	    	 
-	    	 System.out.println("playSongInPlaylist: "+playSongInPlaylist);
-	    	 if(playSongInPlaylist) {
-		    	 mp3.pause();
-		    	 int SongID = pl.getPlaylistList().get(playlistListJList.getSelectedIndex()).getSongInPlaylist().get(yourSongsListJList.getSelectedIndex()).getSongID();
-		    	 generalModel.getInstance().readSongData(SongID);
-		    	 mp3 = new MP3Player(new File("currentSong.mp3"));
-		    	 mp3.play();
-		    	 
-		    	 playSongInPlaylist = false;
-	    	 }else {
-	    		 mp3.play();
-	    	 }
+		    	if(songChanged == true) {
+			    	 mp3.pause();
+			    	 int SongID = userSongs.get(yourSongsList.getSelectedIndex()).getSongID();
+		    		 generalModel.getInstance().readSongData(SongID);
+		    		 generalModel.getInstance().updateCount(SongID);
+		    		 mp3 = new MP3Player(new File("currentSong.mp3"));
+			    	 mp3.play();
+			    	 songChanged = false;
+
+		    	 }
+		    	 else if(playSongInPlaylist == true)
+			     {
+		    		 mp3.pause();
+			    	 int SongID2 = userPlaylists.get(playlistListJList.getSelectedIndex()).getSongInPlaylist().get(yourSongsListJList.getSelectedIndex()).getSongID();
+			    	 generalModel.getInstance().readSongData(SongID2);
+			    	 generalModel.getInstance().updateCount(SongID2);
+			    	 mp3 = new MP3Player(new File("currentSong.mp3"));
+				     mp3.play();
+				   	 playSongInPlaylist = false;
+			     }else 
+		    	 {
+		    		 mp3.play();
+		    	 }
 	    	 
 	    	 
 

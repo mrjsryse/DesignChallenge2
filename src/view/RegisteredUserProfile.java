@@ -254,12 +254,7 @@ public class RegisteredUserProfile extends JFrame{
 		
 		public void actionPerformed(ActionEvent e)
 		{
-<<<<<<< HEAD
 			userSongsMostPlayed = generalModel.getInstance().getMostPlayed();
-=======
-
-			userSongs = generalModel.getInstance().getMostPlayed();
->>>>>>> 49390918218c5ba7b2234f8df0ba6de47761b937
 			DefaultListModel DLM = new DefaultListModel();
 			
 			DLM.addElement(userSongsMostPlayed.get(0).getSongName());
