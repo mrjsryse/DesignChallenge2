@@ -547,10 +547,9 @@ public class RegisteredUserView extends JFrame {
 			 String s;
 			 userSongs = generalModel.getInstance().getSongsByGenre();
 			 DefaultListModel DLM = new DefaultListModel();
-			 for(int i = 0; i < generalModel.getInstance().getSongsByGenre().size(); i++)
+			 for(int i = 0; i < userSongs.size(); i++)
 			 {
-				 s = generalModel.getInstance().getSongsByGenre().get(i).getSongName();
-				 DLM.addElement(s);
+				 DLM.addElement(userSongs.get(i).getSongName());
 			 }
 			 
 			 yourSongsList.setModel(DLM);
@@ -565,10 +564,9 @@ public class RegisteredUserView extends JFrame {
 			 String s;
 			 userSongs = generalModel.getInstance().getSongsByAlbum();
 			 DefaultListModel DLM = new DefaultListModel();
-			 for(int i = 0; i < generalModel.getInstance().getSongsByAlbum().size(); i++)
+			 for(int i = 0; i < userSongs.size(); i++)
 			 {
-				 s = generalModel.getInstance().getSongsByAlbum().get(i).getSongName();
-				 DLM.addElement(s);
+				 DLM.addElement(userSongs.get(i).getSongName());
 			 }
 			 
 			 yourSongsList.setModel(DLM);
@@ -583,10 +581,9 @@ public class RegisteredUserView extends JFrame {
 			 String s;
 			 userSongs = generalModel.getInstance().getSongsByYear();
 			 DefaultListModel DLM = new DefaultListModel();
-			 for(int i = 0; i < generalModel.getInstance().getSongsByYear().size(); i++)
+			 for(int i = 0; i < userSongs.size(); i++)
 			 {
-				 s = generalModel.getInstance().getSongsByYear().get(i).getSongName();
-				 DLM.addElement(s);
+				 DLM.addElement(userSongs.get(i).getSongName());
 			 }
 			 
 			 yourSongsList.setModel(DLM);
