@@ -30,12 +30,14 @@ public class generalModel {
 		Database.getInstance().writePlaylistBLOB(p.getPlaylistName(),p.getPath(),p.getDescription());
 	}
 	
-	public void getAccountData(account x) { //SIGNING UP
+	public int getAccountData(account x) { //SIGNING UP
 		if(Database.getInstance().addingAccount(x) == false) {
-			SigningUpView.getInstance().signingSuccessful();
+			//SigningUpView.getInstance().signingSuccessful();
+			return 1;
 		}
 		else{
-			SigningUpView.getInstance().signingFailed();
+			//SigningUpView.getInstance().signingFailed();
+			return 0;
 		}
 	}
 	

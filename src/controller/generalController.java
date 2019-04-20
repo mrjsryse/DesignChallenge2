@@ -14,9 +14,9 @@ public class generalController {
 		return instance;
 	}
 	
-	public void gettingAccountData(String username, String password) { //SINGING UP
+	public int gettingAccountData(String username, String password) { //SINGING UP
 		account newAccount = new account(username, password);
-		generalModel.getInstance().getAccountData(newAccount);
+		 return generalModel.getInstance().getAccountData(newAccount);
 	}
 	
 	public void gettingRegisteredAccountData(String registeredUsername,String registeredPassword) { //LOGGING IN

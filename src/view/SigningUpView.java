@@ -13,6 +13,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
+import controller.AccountBuilder;
 import controller.generalController;
 import model.account;
 import view.LoggingInView.confirmButton;
@@ -141,24 +142,32 @@ public class SigningUpView extends JFrame{
 			{
 				String username = UsernameText.getText();
 				String password = PasswordText.getText();
+				String path = textFieldChosenFile.getText();
+						
 				signUp = new account(username,password); 
-				generalController.getInstance().gettingAccountData(username, password);
+				int x = generalController.getInstance().gettingAccountData(username, password);
+				if(x == 1) {
+					JOptionPane.showMessageDialog(null, "Signing Up Successful!");
+					HomeView.getInstance().setVisible(true);
+				}
+				else {
+					JOptionPane.showMessageDialog(null, "Username already exisits! Please Try Again!");
+				}
 				HomeView.getInstance().setUserName(username);
 				closingWindow();
 				SelectAccount.getInstance().setVisible(false);
-				
 			}
 		}
 		
-		public void signingSuccessful() {
-			String username = UsernameText.getText();
-			JOptionPane.showMessageDialog(null, "Signing Up Successful!");
-			HomeView.getInstance().setVisible(true);
-		}
-		
-		public void signingFailed() {
-			JOptionPane.showMessageDialog(null, "Username already exisits! Please Try Again!");
-		}
+//		public void signingSuccessful() {
+//			JOptionPane.showMessageDialog(null, "Signing Up Successful!");
+//			//generalModel.getInstance().getDisplayPictureData();
+//			HomeView.getInstance().setVisible(true);
+//		}
+//		
+//		public void signingFailed() {
+//			JOptionPane.showMessageDialog(null, "Username already exisits! Please Try Again!");
+//		}
 		
 		public void closingWindow() {
 			this.setVisible(false);

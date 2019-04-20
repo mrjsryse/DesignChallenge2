@@ -59,6 +59,7 @@ public class Database{
 		String query5 = "CREATE TABLE IF NOT EXISTS songData(SongID int NOT NULL AUTO_INCREMENT PRIMARY KEY, data LONGBLOB);";
 		String query6 = "CREATE TABLE IF NOT EXISTS songs_in_playlist(PlaylistID int PRIMARY KEY, PlaylistName varchar(255),SongID int(11), SongName varchar(255));";
 		String query7 = "CREATE TABLE IF NOT EXISTS playlistData(PlaylistID int NOT NULL AUTO_INCREMENT PRIMARY KEY, picture BLOB,PlaylistName varchar(255), description varchar(255));";
+		String query8 = "CREATE TABLE IF NOT EXISTS accountData(Username varchar(255) PRIMARY KEY, Profile_Picture BLOB);";
 		
 		String packetQuery = "SET GLOBAL max_allowed_packet=16777216;";
 		
@@ -68,6 +69,7 @@ public class Database{
 		String queryIncrement4 = "ALTER TABLE user_playlists auto_increment = 1";
 		String queryIncrement5 = "ALTER TABLE songData auto_increment = 1";
 		String queryIncrement7 = "ALTER TABLE playlistData auto_increment = 1";
+		String queryIncrement8 = "ALTER TABLE accountData auto_increment = 1";
 //		String queryIncrement7 = "ALTER TABLE user_songs auto_increment = 1";
 //		String queryIncrement6 = "ALTER TABLE song_in_playlist = 1";
 		
@@ -86,6 +88,8 @@ public class Database{
 			ps6.execute();
 			PreparedStatement ps7 = getConnection().prepareStatement(query7);
 			ps7.execute();
+			PreparedStatement ps8 = getConnection().prepareStatement(query8);
+			ps8.execute();
 			
 			PreparedStatement pq = getConnection().prepareStatement(packetQuery);
 			pq.execute();
@@ -104,6 +108,8 @@ public class Database{
 //			ps6.execute();
 			ps7 = getConnection().prepareStatement(queryIncrement7);
 			ps7.execute();
+			ps8 = getConnection().prepareStatement(queryIncrement8);
+			ps8.execute();
 			
 		}catch (SQLException e) {
 			e.printStackTrace();
@@ -244,6 +250,38 @@ public class Database{
 			} 
 			
 		}
+	
+	public void writeDisplayPictureBLOB(String username, String path) {
+		
+		Connection cnt = getConnection();
+		FileInputStream input = null;
+		PreparedStatement myStatement = null;
+		
+		String query = "INSERT INTO songData VALUES (?,?)";
+		
+		//create string qu
+		
+		try {
+			myStatement = cnt.prepareStatement(query);
+			
+			File theDisplayPictureFile = new File(path); //Place instead of song.getSongName()
+			input = new FileInputStream(theDisplayPictureFile);
+			myStatement.setBinaryStream(2, input);
+			myStatement.setString(1, username);
+			
+			System.out.println("Reading the jpeg file: " + theDisplayPictureFile.getAbsolutePath());
+			System.out.println("Storing picture into the database " + theDisplayPictureFile);
+			System.out.println(query);
+			
+			myStatement.execute();
+			
+			myStatement.close();
+
+		} catch (Exception ecx) {
+			ecx.printStackTrace();
+		} 
+		
+	}
 	
 	public void writePlaylistBLOB(String playlistName, String path, String description) {
 		
