@@ -30,7 +30,6 @@ public class CreateAlbum extends JFrame {
 	private volatile static CreateAlbum instance = null;
 	private JPanel contentPane;
 	private JTextField textFieldEnterPlaylistName;
-	JButton btnCreatePlaylist;
 	private JTextField textField;
 
 	/**
@@ -61,15 +60,15 @@ public class CreateAlbum extends JFrame {
 		contentPane.add(textFieldEnterPlaylistName);
 		textFieldEnterPlaylistName.setColumns(10);
 		
-		JLabel lblNewLabel = new JLabel("Playlist Name:");
+		JLabel lblNewLabel = new JLabel("Album Name:");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblNewLabel.setBounds(30, 14, 112, 14);
 		contentPane.add(lblNewLabel);
 		
-		btnCreatePlaylist = new JButton("Create Playlist");
-		btnCreatePlaylist.addActionListener(new btn_CreatePlaylist());
-		btnCreatePlaylist.setBounds(336, 228, 101, 23);
-		contentPane.add(btnCreatePlaylist);
+		JButton btnCreateAlbum = new JButton("Create Album");
+		btnCreateAlbum.addActionListener(new btn_CreateAlbum());
+		btnCreateAlbum.setBounds(336, 228, 101, 23);
+		contentPane.add(btnCreateAlbum);
 		
 		textField = new JTextField();
 		textField.setColumns(10);
@@ -90,13 +89,13 @@ public class CreateAlbum extends JFrame {
 		PlaylistImagelbl.setBounds(60, 66, 56, 23);
 		contentPane.add(PlaylistImagelbl);
 		
-		JLabel lblNewLabel_1 = new JLabel("Playlist Image here");
+		JLabel lblNewLabel_1 = new JLabel("Album Art here");
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_1.setBounds(10, 91, 160, 126);
 		contentPane.add(lblNewLabel_1);
 	}
 	
-	class btn_CreatePlaylist implements ActionListener
+	class btn_CreateAlbum implements ActionListener
 	 {		
 		 public void actionPerformed(ActionEvent e)
 		 {
