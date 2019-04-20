@@ -39,7 +39,7 @@ public class ListenerView extends JFrame {
 	public JLabel lblUser;
 	private JButton btnRefresh,btnFavoritePlaylist,btnFavoriteSong,ProfileName_Dashboard,Profile,btnPrivate;
 	ArrayList<Song> userSongs,userSongsFavorites;
-	ArrayList<Playlist> userPlaylist,userPlaylistFavorites;
+	ArrayList<Playlist> userPlaylist,userPlaylistFavorites,userPlaylistPrivacy;
 	PlaylistList pl;
 	JList songJlist,playlistJList,FavoriteplaylistJList,FavoritesongJList, mostPlayedList;
 	JList publicPlaylistJList,myPlaylistJList;
@@ -676,12 +676,22 @@ public class ListenerView extends JFrame {
 			//============================================== General Playlists
 			userPlaylist = generalModel.getInstance().gettingPlaylists(currentUser);
 			
-			DefaultListModel DLM2 = new DefaultListModel();
+			DefaultListModel DLM1 = new DefaultListModel();
 			
 			for(int y = 0; y < userPlaylist.size(); y++)
-				DLM2.addElement(userPlaylist.get(y).getPlaylistName());
+				DLM1.addElement(userPlaylist.get(y).getPlaylistName());
 			
-			myPlaylistJList.setModel(DLM2);
+			myPlaylistJList.setModel(DLM1);
+			
+			//============================================== Private Playlists
+			userPlaylistPrivacy = generalModel.getInstance().gettingPrivatePlaylists(currentUser);
+			
+			DefaultListModel DLM2 = new DefaultListModel();
+			
+			for(int a = 0; a < userPlaylistPrivacy.size();a++)
+				DLM2.addElement(userPlaylistPrivacy.get(a).getPlaylistName());
+			
+			publicPlaylistJList.setModel(DLM2);
 			
 			//============================================== Favorite Playlists
 //			userPlaylistFavorites = generalModel.getInstance().gettingFavoritePlaylist(currentUser);
@@ -697,7 +707,7 @@ public class ListenerView extends JFrame {
 //			SongList sList = new SongList();
 //			PlaylistList pList1 = new PlaylistList();
 //			
-//			//============================================== Favorite Playlists
+//			//============================================== Favorite Songs
 //			userSongsFavorites = generalModel.getInstance().gettingFavoriteSong(currentUser);
 //			
 //			DefaultListModel DLM4 = new DefaultListModel();

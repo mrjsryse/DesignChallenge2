@@ -86,6 +86,10 @@ public class generalModel {
 		return Database.getInstance().getFavoritePlaylist(t);
 	}
 	
+	public ArrayList<Playlist> gettingPrivatePlaylists(String t){
+		return Database.getInstance().getPrivatePlaylist(t);
+	}
+	
 	public ArrayList<Song> gettingFavoriteSong(String t)
 	{
 		return Database.getInstance().getFavoriteSong(t);
