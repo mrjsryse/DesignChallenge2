@@ -211,7 +211,7 @@ public class LibraryViewA extends JFrame {
 		TopBar.add(Refreshbtn);
 		
 		JButton verified = new JButton("");
-		verified.setIcon(new ImageIcon(QueueViewA.class.getResource("/images2/correct (4).png")));
+		verified.setIcon(new ImageIcon(LibraryViewA.class.getResource("/images2/correct (4).png")));
 		verified.setEnabled(false);
 		verified.setBorder(null);
 		verified.setBackground(new Color(30, 58, 42));

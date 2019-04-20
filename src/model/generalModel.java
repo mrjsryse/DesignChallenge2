@@ -25,7 +25,7 @@ public class generalModel {
 	}
 	
 	
-	public void getAccountData(account x) { //SIGNING IN 
+	public void getAccountData(Account x) { //SIGNING IN 
 		if(Database.getInstance().addingAccount(x) == false) {
 			SigningUpView.getInstance().signingSuccessful();
 		}
@@ -34,7 +34,7 @@ public class generalModel {
 		}
 	}
 	
-	public void checkingAccountData(account w) { //LOGGING IN
+	public void checkingAccountData(Account w) { //LOGGING IN
 		if(Database.getInstance().loggingAccount(w) == true) {
 			LoggingInView.getInstance().entranceAllowed();
 		}

@@ -5,7 +5,7 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
 import controller.generalController;
-import model.account;
+import model.Account;
 import model.generalModel;
 import view.LoggingInView.confirmButton;
 

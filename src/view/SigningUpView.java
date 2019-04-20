@@ -12,7 +12,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import controller.generalController;
-import model.account;
+import model.Account;
 import view.LoggingInView.confirmButton;
 
 import javax.swing.ImageIcon;
@@ -32,7 +32,7 @@ import java.awt.Color;
 
 public class SigningUpView extends JFrame{
 	private volatile static SigningUpView instance = null;
-	account signUp;
+	Account signUp;
 	generalController controller;
 	private JTextField UsernameTextField;
 	private JTextField PasswordTextField;
@@ -107,8 +107,8 @@ public class SigningUpView extends JFrame{
 			{
 				String username = UsernameTextField.getText();
 				String password = PasswordTextField.getText();
-				signUp = new account(username,password); 
-				generalController.getInstance().gettingAccountData(username, password);
+				signUp = new Account(username,password); 
+				generalController.getInstance().gettingAccountData(username, password,path);
 				RegisteredUserView.getInstance().setUserName(username);
 				closingWindow();
 				SelectAccount.getInstance().setVisible(false);

@@ -132,7 +132,7 @@ public class Database{
 		
 	}
 	
-	public boolean addingAccount(account newAccount){ //Signing Up
+	public boolean addingAccount(Account newAccount){ //Signing Up
 		String x,y;
 		boolean unique = false;
 		//get getConnection() from db
@@ -174,7 +174,7 @@ public class Database{
 		return unique;
 	}
 	
-	public boolean loggingAccount(account registeredAccount) { //Logging In
+	public boolean loggingAccount(Account registeredAccount) { //Logging In
 		Connection cnt = getConnection(); 
 		boolean loggedIn = false;
 		

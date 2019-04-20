@@ -42,7 +42,7 @@ import javax.swing.border.EmptyBorder;
 import jaco.mp3.player.MP3Player;
 import model.PlaylistList;
 import model.SongList;
-import model.account;
+import model.Account;
 import model.generalModel;
 
 import java.awt.Color;

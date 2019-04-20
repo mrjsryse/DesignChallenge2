@@ -2,7 +2,7 @@ package controller;
 import model.generalModel;
 import model.Playlist;
 import model.Song;
-import model.account;
+import model.Account;
 
 public class generalController {
 	private volatile static generalController instance = null;
@@ -14,13 +14,13 @@ public class generalController {
 		return instance;
 	}
 	
-	public void gettingAccountData(String username, String password) { //SINGING UP
-		account newAccount = new account(username, password);
+	public void gettingAccountData(String username, String password, String path) { //SINGING UP
+		Account newAccount = new Account(username, password,path);
 		generalModel.getInstance().getAccountData(newAccount);
 	}
 	
-	public void gettingRegisteredAccountData(String registeredUsername,String registeredPassword) { //LOGGING IN
-		account registeredAccount = new account(registeredUsername, registeredPassword);
+	public void gettingRegisteredAccountData(String registeredUsername,String registeredPassword,String registeredPath) { //LOGGING IN
+		Account registeredAccount = new Account(registeredUsername, registeredPassword, registeredPath);
 		generalModel.getInstance().checkingAccountData(registeredAccount);
 	}
 	

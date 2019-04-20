@@ -14,7 +14,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JTextField;
 
 import controller.generalController;
-import model.account;
+import model.Account;
 import model.generalModel;
 
 import javax.swing.JButton;
@@ -26,7 +26,7 @@ import java.awt.Color;
 public class LoggingInView extends JFrame{
 	private JTextField UsernameTextField;
 	private JPasswordField PasswordTextField;
-	account logIn;
+	Account logIn;
 	Boolean entrance;
 	Database theAccounts;
 	
@@ -97,8 +97,8 @@ public class LoggingInView extends JFrame{
 		{
 			String registeredUsername = UsernameTextField.getText();
 			String registeredPassword = new String(PasswordTextField.getPassword());
-			logIn = new account(registeredUsername,registeredPassword);
-			generalController.getInstance().gettingRegisteredAccountData(registeredUsername, registeredPassword);
+			logIn = new Account(registeredUsername,registeredPassword,registeredPath);
+			generalController.getInstance().gettingRegisteredAccountData(registeredUsername, registeredPassword,registeredPath);
 			RegisteredUserView.getInstance().setUserName(registeredUsername);
 			closingWindow();
 			SelectAccount.getInstance().setVisible(false);

@@ -11,14 +11,14 @@ import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
 
-import model.account;
+import model.Account;
 
 import javax.swing.ImageIcon;
 
 public class SelectAccount extends JFrame{
 	private volatile static SelectAccount instance = null;
 	SigningUpView signingUpViewing;
-	account signUpData,registeredData;
+	Account signUpData,registeredData;
 	LoggingInView loggingInViewing;
 	public JButton btnSignUp,btnGuestAccount,btnRegisteredAccount;
 	
