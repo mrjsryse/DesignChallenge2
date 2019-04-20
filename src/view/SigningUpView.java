@@ -34,8 +34,8 @@ public class SigningUpView extends JFrame{
 	private volatile static SigningUpView instance = null;
 	account signUp;
 	generalController controller;
-	private JTextField UsernameTextField;
-	private JTextField PasswordTextField;
+	private JTextField UsernameText;
+	private JTextField PasswordText;
 	
 	
 	public static SigningUpView getInstance() {
@@ -58,17 +58,17 @@ public class SigningUpView extends JFrame{
 		lblUsername.setBounds(100, 204, 89, 50);
 		getContentPane().add(lblUsername);
 		
-		UsernameTextField = new JTextField();
-		UsernameTextField.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		UsernameTextField.setBounds(189, 213, 295, 32);
-		getContentPane().add(UsernameTextField);
-		UsernameTextField.setColumns(10);
+		UsernameText = new JTextField();
+		UsernameText.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		UsernameText.setBounds(189, 213, 295, 32);
+		getContentPane().add(UsernameText);
+		UsernameText.setColumns(10);
 		
-		PasswordTextField = new JPasswordField(40);
-		PasswordTextField.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		PasswordTextField.setColumns(10);
-		PasswordTextField.setBounds(189, 251, 295, 32);
-		getContentPane().add(PasswordTextField);
+		PasswordText = new JPasswordField(40);
+		PasswordText.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		PasswordText.setColumns(10);
+		PasswordText.setBounds(189, 251, 295, 32);
+		getContentPane().add(PasswordText);
 		
 		JLabel lblPassword = new JLabel("Password");
 		lblPassword.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -105,11 +105,11 @@ public class SigningUpView extends JFrame{
 
 		public void actionPerformed (ActionEvent account)
 			{
-				String username = UsernameTextField.getText();
-				String password = PasswordTextField.getText();
+				String username = UsernameText.getText();
+				String password = PasswordText.getText();
 				signUp = new account(username,password); 
 				generalController.getInstance().gettingAccountData(username, password);
-				RegisteredUserView.getInstance().setUserName(username);
+				HomeView.getInstance().setUserName(username);
 				closingWindow();
 				SelectAccount.getInstance().setVisible(false);
 				
@@ -117,9 +117,9 @@ public class SigningUpView extends JFrame{
 		}
 		
 		public void signingSuccessful() {
-			String username = UsernameTextField.getText();
+			String username = UsernameText.getText();
 			JOptionPane.showMessageDialog(null, "Signing Up Successful!");
-			RegisteredUserView.getInstance().setVisible(true);
+			HomeView.getInstance().setVisible(true);
 		}
 		
 		public void signingFailed() {

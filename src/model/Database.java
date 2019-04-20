@@ -55,10 +55,9 @@ public class Database{
 		String query2 = "CREATE TABLE IF NOT EXISTS playlists(PlaylistID int NOT NULL AUTO_INCREMENT PRIMARY KEY, PlaylistName varchar(255), Username varchar(255));";
 		String query3 = "CREATE TABLE IF NOT EXISTS songs(SongID int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY, Title varchar(255), "
 				+ "Artist varchar(255),Album varchar(255),Genre varchar(255), Year varchar(255), Username varchar(255), Play_Count int(11), Favorite varchar(255));";
-		String query4 = "CREATE TABLE IF NOT EXISTS user_playlists(PlaylistID int NOT NULL AUTO_INCREMENT PRIMARY KEY,Username varchar(255), PlaylistName varchar(255), Favorite varchar(255));";
+		String query4 = "CREATE TABLE IF NOT EXISTS user_playlists(PlaylistID int NOT NULL AUTO_INCREMENT PRIMARY KEY,Username varchar(255), PlaylistName varchar(255), Favorite varchar(255), Privacy varchar(255));";
 		String query5 = "CREATE TABLE IF NOT EXISTS songData(SongID int NOT NULL AUTO_INCREMENT PRIMARY KEY, data LONGBLOB);";
 		String query6 = "CREATE TABLE IF NOT EXISTS songs_in_playlist(PlaylistID int PRIMARY KEY, PlaylistName varchar(255),SongID int(11), SongName varchar(255));";		
-//	String query7 = "CREATE TABLE IF NOT EXISTS user_songs(SongID int NOT NULL AUTO_INCREMENT PRIMARY KEY,Username varchar(255), PlaylistName varchar(255), Favorite varchar(255));";
 		
 		String packetQuery = "SET GLOBAL max_allowed_packet=16777216;";
 		
@@ -432,6 +431,43 @@ public class Database{
 				return null; 
 	}
 	
+	public ArrayList<Playlist> getPrivatePlaylist(String username){
+		//get getConnection() from db
+		Connection cnt = getConnection();
+		String y = "1";
+		String query = "SELECT * FROM user_playlists WHERE username = ('"+username+"') AND Privacy = ('"+y+"');";
+		//create string query
+		
+		try {
+			//create prepared statement	
+			PreparedStatement ps = cnt.prepareStatement(query);
+			
+			//get result and store in result set
+			ResultSet rs = ps.executeQuery();
+			
+			ArrayList<Playlist> pl = new ArrayList<>();
+			//transform set into list
+			while(rs.next()) {
+				 Playlist newPlaylist = new PlaylistBuilder()
+						 .setPlaylistName(rs.getString("playlistName"))
+						 .setUsername(rs.getString("username"))
+						 .getPlaylist();
+				 pl.add(newPlaylist);
+			}
+			
+			//close all the resources
+			ps.close();
+			rs.close();
+			cnt.close();
+			
+			return pl;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null; 
+	}
+	
 	public ArrayList<Song> getFavoriteSong(String username){
 		//get getConnection() from db
 				Connection cnt = getConnection();
@@ -580,8 +616,9 @@ public class Database{
 		getPlaylistName = p.getPlaylistName();
 		getUsername = p.getUsername();
 		String x = p.getFavorite(); // if favorite or not
+		String z = p.getPrivacy();
 		
-		String query = "insert into user_playlists values ('"+y+"','"+getUsername+"','"+getPlaylistName+"','"+x+"')";
+		String query = "insert into user_playlists values ('"+y+"','"+getUsername+"','"+getPlaylistName+"','"+x+"', '"+z+"')";
 
 		System.out.print(query);
 		//create string query
@@ -612,6 +649,32 @@ public class Database{
 		
 		
 		String query = "UPDATE swdespa.user_playlists SET Favorite = ('"+y+"') WHERE Username = ('"+ID+"') AND PlaylistName = ('"+Name+"');";
+
+		System.out.print(query);
+		//create string query
+		
+		try {
+			PreparedStatement ps = getConnection().prepareStatement(query);
+			ps.executeUpdate(query, Statement.RETURN_GENERATED_KEYS);
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		//return null;
+	}
+	
+	public void privacyPlaylist(String PlaylistIDPrivate, String PlaylistNamePrivate) {
+		String ID = PlaylistIDPrivate;
+		String Name = PlaylistNamePrivate;
+		
+		//get getConnection() from db
+		Connection cnt = getConnection();
+		
+		String x = "0"; // if private or not
+		String y = "1";
+		
+		
+		String query = "UPDATE swdespa.user_playlists SET Privacy = ('"+y+"') WHERE Username = ('"+ID+"') AND PlaylistName = ('"+Name+"');";
 
 		System.out.print(query);
 		//create string query
