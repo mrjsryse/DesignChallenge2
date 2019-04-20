@@ -275,7 +275,7 @@ public class HomeView extends JFrame {
 		Albums_Music.setBounds(0, 90, 186, 30);
 		MusicPanel.add(Albums_Music);
 		
-		JButton Playlist_Name3 = new JButton("(PlaylistName)");
+		JButton Playlist_Name3 = new JButton("");
 		Playlist_Name3.setEnabled(false);
 		Playlist_Name3.setHorizontalAlignment(SwingConstants.LEFT);
 		Playlist_Name3.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -283,7 +283,7 @@ public class HomeView extends JFrame {
 		Playlist_Name3.setBounds(0, 232, 186, 30);
 		MusicPanel.add(Playlist_Name3);
 		
-		JButton Playlist_Name2 = new JButton("(PlaylistName)");
+		JButton Playlist_Name2 = new JButton("");
 		Playlist_Name2.setEnabled(false);
 		Playlist_Name2.setHorizontalAlignment(SwingConstants.LEFT);
 		Playlist_Name2.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -291,7 +291,7 @@ public class HomeView extends JFrame {
 		Playlist_Name2.setBounds(0, 203, 186, 30);
 		MusicPanel.add(Playlist_Name2);
 		
-		JButton Playlist_Name1 = new JButton("(PlaylistName)");
+		JButton Playlist_Name1 = new JButton("");
 		Playlist_Name1.setEnabled(false);
 		Playlist_Name1.setHorizontalAlignment(SwingConstants.LEFT);
 		Playlist_Name1.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -306,7 +306,7 @@ public class HomeView extends JFrame {
 		Playlists_Music.setBounds(0, 146, 186, 30);
 		MusicPanel.add(Playlists_Music);
 		
-		JButton Playlist_Name7 = new JButton("(PlaylistName)");
+		JButton Playlist_Name7 = new JButton("");
 		Playlist_Name7.setEnabled(false);
 		Playlist_Name7.setHorizontalAlignment(SwingConstants.LEFT);
 		Playlist_Name7.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -314,7 +314,7 @@ public class HomeView extends JFrame {
 		Playlist_Name7.setBounds(0, 344, 186, 30);
 		MusicPanel.add(Playlist_Name7);
 		
-		JButton Playlist_Name6 = new JButton("(PlaylistName)");
+		JButton Playlist_Name6 = new JButton("");
 		Playlist_Name6.setEnabled(false);
 		Playlist_Name6.setHorizontalAlignment(SwingConstants.LEFT);
 		Playlist_Name6.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -322,7 +322,7 @@ public class HomeView extends JFrame {
 		Playlist_Name6.setBounds(0, 315, 186, 30);
 		MusicPanel.add(Playlist_Name6);
 		
-		JButton Playlist_Name5 = new JButton("(PlaylistName)");
+		JButton Playlist_Name5 = new JButton("");
 		Playlist_Name5.setEnabled(false);
 		Playlist_Name5.setHorizontalAlignment(SwingConstants.LEFT);
 		Playlist_Name5.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -330,7 +330,7 @@ public class HomeView extends JFrame {
 		Playlist_Name5.setBounds(0, 287, 186, 30);
 		MusicPanel.add(Playlist_Name5);
 		
-		JButton Playlist_Name4 = new JButton("(PlaylistName)");
+		JButton Playlist_Name4 = new JButton("");
 		Playlist_Name4.setEnabled(false);
 		Playlist_Name4.setHorizontalAlignment(SwingConstants.LEFT);
 		Playlist_Name4.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -338,7 +338,7 @@ public class HomeView extends JFrame {
 		Playlist_Name4.setBounds(0, 258, 186, 30);
 		MusicPanel.add(Playlist_Name4);
 		
-		JButton Playlist_Name9 = new JButton("(PlaylistName)");
+		JButton Playlist_Name9 = new JButton("");
 		Playlist_Name9.setEnabled(false);
 		Playlist_Name9.setHorizontalAlignment(SwingConstants.LEFT);
 		Playlist_Name9.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -346,7 +346,7 @@ public class HomeView extends JFrame {
 		Playlist_Name9.setBounds(0, 401, 186, 30);
 		MusicPanel.add(Playlist_Name9);
 		
-		JButton Playlist_Name8 = new JButton("(PlaylistName)");
+		JButton Playlist_Name8 = new JButton("");
 		Playlist_Name8.setEnabled(false);
 		Playlist_Name8.setHorizontalAlignment(SwingConstants.LEFT);
 		Playlist_Name8.setFont(new Font("Tahoma", Font.PLAIN, 14));
