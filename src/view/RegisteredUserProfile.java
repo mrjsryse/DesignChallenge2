@@ -32,7 +32,6 @@ public class RegisteredUserProfile extends JFrame{
 	ArrayList<Song> userSongs,userSongsFavorites, userSongsMostPlayed;
 	ArrayList<Playlist> userPlaylist,userPlaylistFavorites;
 	PlaylistList pl;
-
 	JList songJlist,playlistJList,FavoriteplaylistJList,FavoritesongJList, mostPlayedList;
 
 	boolean songChanged;
