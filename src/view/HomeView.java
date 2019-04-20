@@ -61,6 +61,7 @@ public class HomeView extends JFrame {
 	private JButton btnByAlbum;
 	private JButton btnByYear;
 	ArrayList<Playlist> userPlaylists;
+	String path,realPath;
 	
 	public static HomeView getInstance() {
         if (instance == null) {
@@ -209,7 +210,8 @@ public class HomeView extends JFrame {
 		TopBar.add(SearchBtn);
 		
 		btnProfile = new JButton("");
-		btnProfile.setIcon(new ImageIcon(HomeView.class.getResource("/images2/user-avatar-main-picture.png")));
+		
+		//btnProfile.setIcon(new ImageIcon(HomeView.class.getResource("/images2/user-avatar-main-picture.png")));
 		btnProfile.setBounds(478, 10, 40, 40);
 		TopBar.add(btnProfile);
 		btnProfile.setBackground(new Color(170, 187, 204));
@@ -693,5 +695,11 @@ public class HomeView extends JFrame {
 	public void setUserName(String currentUser) {
 		this.currentUser = currentUser;
 		Profile.setText(currentUser);
+		HomeView.getInstance().realPath = currentUser;
+	}
+	
+	public void setDisplayPicture(String path) {
+		this.path = path;
+		
 	}
 }

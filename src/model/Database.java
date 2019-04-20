@@ -257,7 +257,7 @@ public class Database{
 		FileInputStream input = null;
 		PreparedStatement myStatement = null;
 		
-		String query = "INSERT INTO songData VALUES (?,?)";
+		String query = "INSERT INTO accountData VALUES (?,?)";
 		
 		//create string qu
 		
@@ -332,6 +332,41 @@ public class Database{
 			rs = myReadingStatement.executeQuery();
 			
 			File file = new File("currentSong.mp3");
+			FileOutputStream output = new FileOutputStream(file);
+			
+            while (rs.next()) {
+                InputStream input = rs.getBinaryStream("data");
+                byte[] buffer = new byte[1024];
+                while (input.read(buffer) > 0) {
+                    output.write(buffer);
+                }
+                input.close();
+            }
+            
+            myReadingStatement.close();
+            output.close();
+			
+		}catch(Exception exc) {
+			exc.printStackTrace();
+		}finally {
+			
+		}
+	}
+	
+	public void readDisplayPictureBLOB(String username) {
+		Connection cnt = getConnection();
+		PreparedStatement myReadingStatement = null;
+		
+		String query = "SELECT data FROM songData WHERE SongID = ?;";
+		ResultSet rs = null;
+		
+		try {
+			myReadingStatement = cnt.prepareStatement(query);
+			myReadingStatement.setString(1, username);
+			
+			rs = myReadingStatement.executeQuery();
+			
+			File file = new File("DisplayPicture.jpeg");
 			FileOutputStream output = new FileOutputStream(file);
 			
             while (rs.next()) {

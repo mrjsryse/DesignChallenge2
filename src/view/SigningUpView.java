@@ -2,6 +2,7 @@ package view;
 
 import java.awt.*;
 
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -13,7 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
-import controller.AccountBuilder;
+
 import controller.generalController;
 import model.account;
 import view.LoggingInView.confirmButton;
@@ -145,7 +146,8 @@ public class SigningUpView extends JFrame{
 				String path = textFieldChosenFile.getText();
 						
 				signUp = new account(username,password); 
-				int x = generalController.getInstance().gettingAccountData(username, password);
+				int x = generalController.getInstance().gettingAccountData(username, password,path);
+				
 				if(x == 1) {
 					JOptionPane.showMessageDialog(null, "Signing Up Successful!");
 					HomeView.getInstance().setVisible(true);
@@ -153,7 +155,9 @@ public class SigningUpView extends JFrame{
 				else {
 					JOptionPane.showMessageDialog(null, "Username already exisits! Please Try Again!");
 				}
+				
 				HomeView.getInstance().setUserName(username);
+				HomeView.getInstance().setDisplayPicture(path);
 				closingWindow();
 				SelectAccount.getInstance().setVisible(false);
 			}
