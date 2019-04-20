@@ -1,13 +1,16 @@
 package view;
 
+
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.text.JTextComponent;
 
 import controller.PlaylistBuilder;
 import controller.SongBuilder;
@@ -22,12 +25,20 @@ import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
+
+import java.awt.Color;
+import java.awt.Font;
+import javax.swing.SwingConstants;
 
 public class CreatePlaylist extends JFrame {
 	private volatile static CreatePlaylist instance = null;
 	private JPanel contentPane;
 	private JTextField textFieldEnterPlaylistName;
-	JButton btnCreatePlaylist;
+	JButton btnCreatePlaylist,btnChoosePicture;
+	String textField,fileName;
+	private JTextField textFieldChosenFile;
+	private JTextField descriptionTextField;
 
 	/**
 	 * Launch the application.
@@ -45,26 +56,73 @@ public class CreatePlaylist extends JFrame {
 	 */
 	public CreatePlaylist() {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 272, 183);
+		setBounds(100, 100, 463, 301);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(255, 255, 250));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		textFieldEnterPlaylistName = new JTextField();
-		textFieldEnterPlaylistName.setBounds(30, 39, 112, 20);
+		textFieldEnterPlaylistName.setBounds(30, 39, 407, 20);
 		contentPane.add(textFieldEnterPlaylistName);
 		textFieldEnterPlaylistName.setColumns(10);
 		
-		JLabel lblNewLabel = new JLabel("Enter Playlist Name:");
-		lblNewLabel.setBounds(30, 14, 136, 14);
+		JLabel lblNewLabel = new JLabel("Playlist Name:");
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblNewLabel.setBounds(30, 14, 112, 14);
 		contentPane.add(lblNewLabel);
 		
 		btnCreatePlaylist = new JButton("Create Playlist");
 		btnCreatePlaylist.addActionListener(new btn_CreatePlaylist());
-		btnCreatePlaylist.setBounds(135, 110, 101, 23);
+		btnCreatePlaylist.setBounds(336, 228, 101, 23);
 		contentPane.add(btnCreatePlaylist);
+		
+		
+		
+		JLabel label = new JLabel("Description:");
+		label.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		label.setBounds(312, 70, 80, 14);
+		contentPane.add(label);
+		
+		btnChoosePicture = new JButton("Choose Image");
+		btnChoosePicture.setBounds(30, 228, 101, 23);
+		contentPane.add(btnChoosePicture);
+		btnChoosePicture.addActionListener(new btn_ChoosePicture());
+		
+		JLabel PlaylistImagelbl = new JLabel("Image:");
+		PlaylistImagelbl.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		PlaylistImagelbl.setBounds(60, 66, 56, 23);
+		contentPane.add(PlaylistImagelbl);
+		
+		JLabel lblNewLabel_1 = new JLabel("Playlist Image here");
+		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_1.setBounds(30, 93, 160, 94);
+		contentPane.add(lblNewLabel_1);
+		
+		textFieldChosenFile = new JTextField();
+		textFieldChosenFile.setBounds(30, 198, 160, 20);
+		contentPane.add(textFieldChosenFile);
+		textFieldChosenFile.setColumns(10);
+		
+		descriptionTextField = new JTextField();
+		descriptionTextField.setBounds(277, 95, 160, 122);
+		contentPane.add(descriptionTextField);
+		descriptionTextField.setColumns(10);
 	}
+	
+	class btn_ChoosePicture implements ActionListener
+	 {		
+		 public void actionPerformed(ActionEvent e)
+		 {
+			 JFileChooser chooser = new JFileChooser();
+			 chooser.showOpenDialog(null);
+			 File f = chooser.getSelectedFile();
+			 fileName = f.getAbsolutePath();
+			 textFieldChosenFile.setText(fileName);
+		 }
+		 
+	 }
 	
 	class btn_CreatePlaylist implements ActionListener
 	 {		
@@ -72,20 +130,25 @@ public class CreatePlaylist extends JFrame {
 		 {
 			 
 			 String playlistName = textFieldEnterPlaylistName.getText();
-			 String username = RegisteredUserView.getInstance().currentUser;
-
+			 String username = HomeView.getInstance().currentUser;
+			 String path = textFieldChosenFile.getText();
+			 String favorite = "0";
+			 int count = 0;
+			 String description = descriptionTextField.getText();
+			 String privacy = "0";
 			 
 			 boolean isTrue = true;
 			 
 
-			 String favorite = "0";
-			 String privacy = "0";
+			 
 
 			 Playlist addedPlaylist = new PlaylistBuilder()
 					 .setPlaylistName(playlistName)
 					 .setUsername(username)
 					 .setFavorite(favorite)
 					 .setPrivacy(privacy)
+					 .setPath(path)
+					 .setDescription(description)
 					 .getPlaylist();
 
 			 PlaylistList pList = new PlaylistList();
@@ -106,7 +169,7 @@ public class CreatePlaylist extends JFrame {
 				 int index = pList.getIndex(addedPlaylist);
 			 
 				 generalModel.getInstance().getPlaylistData(addedPlaylist);
-				 generalController.getInstance().gettingUserPlaylist(username, playlistName, favorite,privacy);
+				 generalController.getInstance().gettingUserPlaylist(username, playlistName, favorite,privacy,path,description);
 				 JOptionPane.showMessageDialog(null, "Added " + playlistName + " playlist!");
 			 
 				 
@@ -114,7 +177,7 @@ public class CreatePlaylist extends JFrame {
 			 
 			 }
 			 
-
+			 
 
 		 }
 		 }

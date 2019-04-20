@@ -12,6 +12,7 @@ import model.PlaylistList;
 import model.Song;
 import model.SongList;
 import model.generalModel;
+import view.RegisteredUserView.btn_CreatePlaylist;
 
 import javax.swing.JLabel;
 import java.awt.Color;
@@ -45,7 +46,7 @@ public class HomeView extends JFrame {
 	MP3Player mp3 = new MP3Player(new File("currentSong.mp3"));
 	RegisteredUserProfile profile;
 	public String currentUser;
-	JButton btnPickPlaylist, btnPickSong, btnCreatePlaylist, btnUploadSong, btnEditSong, btnPlay, btnPause, btnNextSong, btnPreviousSong, btnByGenre,Profile;
+	JButton btnPickPlaylist, btnPickSong,btnCreatePlaylist,btnUploadSong, btnEditSong, btnPlay, btnPause, btnNextSong, btnPreviousSong, btnByGenre,Profile;
 	JList yourSongsList, yourSongsListJList, playlistListJList;
 	JTextPane txtpnSongNameGenre;
 	private JButton btnRefresh;
@@ -243,12 +244,13 @@ public class HomeView extends JFrame {
 		contentPane.add(MusicPanel);
 		MusicPanel.setLayout(null);
 		
-		JButton btnNewButton = new JButton("New Playlist");
-		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnNewButton.setHorizontalAlignment(SwingConstants.LEFT);
-		btnNewButton.setIcon(new ImageIcon(HomeView.class.getResource("/images2/add-circular-outlined-button (1).png")));
-		btnNewButton.setBounds(0, 429, 186, 88);
-		MusicPanel.add(btnNewButton);
+		btnCreatePlaylist = new JButton("New Playlist");
+		btnCreatePlaylist.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnCreatePlaylist.setHorizontalAlignment(SwingConstants.LEFT);
+		btnCreatePlaylist.setIcon(new ImageIcon(HomeView.class.getResource("/images2/add-circular-outlined-button (1).png")));
+		btnCreatePlaylist.setBounds(0, 429, 186, 88);
+		MusicPanel.add(btnCreatePlaylist);
+		btnCreatePlaylist.addActionListener(new btn_CreatePlaylist());
 		
 		JLabel MusicLbl = new JLabel("Music");
 		MusicLbl.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -662,6 +664,15 @@ public class HomeView extends JFrame {
 			 SongList sList = new SongList();
 			 PlaylistList pList1 = new PlaylistList();
 			 
+		 }
+	 }
+	
+	 class btn_CreatePlaylist implements ActionListener
+	 {
+		 public void actionPerformed(ActionEvent e)
+		 {
+			 CreatePlaylist cp = new CreatePlaylist();
+			 cp.setVisible(true);
 		 }
 	 }
 	

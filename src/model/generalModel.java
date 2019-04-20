@@ -21,9 +21,14 @@ public class generalModel {
 	public void getSongData(Song s)
 	{
 		int SongID = Database.getInstance().addingSong(s);
-		Database.getInstance().writeBLOB(SongID, s.getPath());
+		Database.getInstance().writeSongBLOB(SongID, s.getPath());
 	}
 	
+	public void getPlaylistData(Playlist p)
+	{
+		Database.getInstance().addingPlaylist(p);
+		Database.getInstance().writePlaylistBLOB(p.getUsername(),p.getPlaylistName(),p.getDescription());
+	}
 	
 	public void getAccountData(account x) { //SIGNING UP
 		if(Database.getInstance().addingAccount(x) == false) {
@@ -43,10 +48,7 @@ public class generalModel {
 		}
 	}
 	
-	public void getPlaylistData(Playlist p)
-	{
-		Database.getInstance().addingPlaylist(p);
-	}
+	
 	
 	public void getUserPlaylistData(Playlist p)
 	{
