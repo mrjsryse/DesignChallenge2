@@ -44,7 +44,7 @@ public class LibraryView extends JFrame {
 	JList Title_list, Artist_list, Album_List, Genre_List, Year_List, Fave_List, Playlist_List, MP_List, RP_List;
 	ArrayList<Song> userSongsMostPlayed, userSongs;
 	ArrayList<Playlist> userPlaylists;
-	boolean songChangedInLibrary, playSongInPlaylist, songChangedInMP;
+	boolean songChangedInLibrary, playSongInPlaylist, songChangedInMP, songPaused;
 	/**
 	 * Launch the application.
 	 */
@@ -582,7 +582,7 @@ public class LibraryView extends JFrame {
 	    	 System.out.println("songChangedInLibrary: "+songChangedInLibrary);
 		    	if(songChangedInLibrary == true) {
 		    		HomeView.getInstance().mp3.pause();
-			    	 int SongID = userSongs.get(Title_list.getSelectedIndex()).getSongID();
+			    	 int SongID = HomeView.getInstance().userSongs.get(Title_list.getSelectedIndex()).getSongID();
 		    		 generalModel.getInstance().readSongData(SongID);
 		    		 generalModel.getInstance().updateCount(SongID);
 		    		 HomeView.getInstance().mp3 = new MP3Player(new File("currentSong.mp3"));
@@ -591,7 +591,7 @@ public class LibraryView extends JFrame {
 
 		    	 }else if (songChangedInMP == true){
 		    		 HomeView.getInstance().mp3.pause();
-			    	 int SongID = userSongs.get(MP_List.getSelectedIndex()).getSongID();
+			    	 int SongID = HomeView.getInstance().userSongs.get(MP_List.getSelectedIndex()).getSongID();
 		    		 generalModel.getInstance().readSongData(SongID);
 		    		 generalModel.getInstance().updateCount(SongID);
 		    		 HomeView.getInstance().mp3 = new MP3Player(new File("currentSong.mp3"));
@@ -609,7 +609,16 @@ public class LibraryView extends JFrame {
 				   	 playSongInPlaylist = false;
 			     } */else 
 		    	 {
+			    	 if(HomeView.getInstance().songPaused == true)
+			    	 {
+			    	 HomeView.getInstance().mp3.pause();
+			    	 HomeView.getInstance().songPaused = false;
+			    	 }
+			    	 else
+			    	 {
 			    	 HomeView.getInstance().mp3.play();
+			    	 HomeView.getInstance().songPaused = true;
+			    	 }
 		    	 }
 	    	 
 	    	 

@@ -42,12 +42,13 @@ public class HomeView extends JFrame {
 	private JPanel contentPane;
 	private JTextField txtSearch;
 	boolean evenClick = false;
-	JButton btnCreatePlaylist, AddSongbtn, Profile, Library, Refreshbtn, Playbtn;
+	JButton btnCreatePlaylist, AddSongbtn, Profile, Library, Refreshbtn, Playbtn, StopBtn;
 	JList Playlist_List, MP_List;
 	SongList sl = new SongList();
 	ArrayList<Song> userSongsMostPlayed, userSongs;
 	ArrayList<Playlist> userPlaylists;
 	boolean songChangedInLibrary, playSongInPlaylist, songChangedInMP;
+	boolean songPaused;
 	/**
 	 * Launch the application.
 	 */
@@ -185,7 +186,8 @@ public class HomeView extends JFrame {
 		Queuebtn.setBounds(769, 31, 39, 39);
 		MainRectangle.add(Queuebtn);
 		
-		JButton StopBtn = new JButton("");
+		 StopBtn = new JButton("");
+		StopBtn.addActionListener(new btn_Stop());
 		StopBtn.setIcon(new ImageIcon(HomeView.class.getResource("/images2/stop (3).png")));
 		StopBtn.setBorder(null);
 		StopBtn.setBackground(new Color(30, 58, 42));
@@ -581,11 +583,6 @@ public class HomeView extends JFrame {
 		 }
 	 }
 	
-	public void setUserName(String currentUser) {
-		this.currentUser = currentUser;
-		Profile.setText("Current User: " + currentUser);
-	}
-	
 	 class btn_Play implements ActionListener 
 	 {
 
@@ -602,6 +599,7 @@ public class HomeView extends JFrame {
 		    		 mp3 = new MP3Player(new File("currentSong.mp3"));
 			    	 mp3.play();
 			    	 songChangedInMP = false;
+			    	 songPaused = false;
 		    	 }
 		    	/* else if(playSongInPlaylist == true)
 			     {
@@ -614,11 +612,34 @@ public class HomeView extends JFrame {
 				   	 playSongInPlaylist = false;
 			     } */else 
 		    	 {
-		    		 mp3.play();
+			    	 if(songPaused == true)
+			    	 {
+		    		 mp3.pause();
+		    		 songPaused = false;
+			    	 }
+			    	 else
+			    	 {
+			    	 mp3.play();
+			    	 songPaused = true;
+			    	 }
 		    	 }
 	    	 
 	    	 
 
 	     }
 	 }
+	 
+	 class btn_Stop implements ActionListener
+	 {
+		 public void actionPerformed(ActionEvent e)
+		 {
+			 mp3.stop();
+		 }
+	 }
+	 
+	 public void setUserName(String currentUser) {
+			this.currentUser = currentUser;
+			Profile.setText("Current User: " + currentUser);
+		}
+		
 }
