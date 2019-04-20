@@ -32,7 +32,21 @@ public class HomeViewA extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					HomeViewA frame = new HomeViewA();
+//					frame.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
+
+	public void run()
+	{
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -44,7 +58,7 @@ public class HomeViewA extends JFrame {
 			}
 		});
 	}
-
+	
 	/**
 	 * Create the frame.
 	 */
@@ -607,9 +621,6 @@ public class HomeViewA extends JFrame {
 		lblMadeForYou.setBounds(0, 0, 186, 23);
 		Dashboard.add(lblMadeForYou);
 		
-
-		
-
 	}
 	private static void addPopup(Component component, final JPopupMenu popup) {
 		component.addMouseListener(new MouseAdapter() {

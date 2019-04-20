@@ -23,24 +23,25 @@ import model.Database;
 import javax.swing.ImageIcon;
 import java.awt.Color;
 
-public class LoggingInView extends JFrame{
+public class ArtistLoggingInView extends JFrame{
 	private JTextField UsernameTextField;
 	private JPasswordField PasswordTextField;
 	account logIn;
 	Boolean entrance;
 	Database theAccounts;
+	HomeViewA artistHomeView;
 	
-	private volatile static LoggingInView modelInstance = null;
+	private volatile static ArtistLoggingInView modelInstance = null;
 	
-	public static LoggingInView getInstance() {
+	public static ArtistLoggingInView getInstance() {
         if (modelInstance == null) {
-        	modelInstance = new LoggingInView();
+        	modelInstance = new ArtistLoggingInView();
         }
 		return modelInstance;
 	
 	}
 	
-	public LoggingInView() {
+	public ArtistLoggingInView() {
 		getContentPane().setBackground(new Color(254,254,250));
 		setIconImage(Toolkit.getDefaultToolkit().getImage(GuestView.class.getResource("/images/spotify.png")));
 		setTitle("Not So Spotify");
@@ -89,6 +90,7 @@ public class LoggingInView extends JFrame{
 		lblNewLabel.setBounds(159, 51, 99, 86);
 		getContentPane().add(lblNewLabel);
 		btnConfirm.addActionListener(new confirmButton());
+		
 	}
 	
 	class confirmButton implements ActionListener
@@ -98,16 +100,19 @@ public class LoggingInView extends JFrame{
 			String registeredUsername = UsernameTextField.getText();
 			String registeredPassword = new String(PasswordTextField.getPassword());
 			logIn = new account(registeredUsername,registeredPassword);
-			generalController.getInstance().gettingRegisteredAccountData(registeredUsername, registeredPassword);
-			RegisteredUserView.getInstance().setUserName(registeredUsername);
+			generalController.getInstance().gettingRegisteredArtistAccountData(registeredUsername, registeredPassword);
+//			RegisteredUserView.getInstance().setUserName(registeredUsername);
 			closingWindow();
-			SelectAccount.getInstance().setVisible(false);
+			SelectAccount.getInstance().closingWindow();
 		}
 	}
 	
 	public void entranceAllowed() {
-		JOptionPane.showMessageDialog(null,"Successfully Logged In! Welcome back wrong!");
-		RegisteredUserView.getInstance().setVisible(true);
+		JOptionPane.showMessageDialog(null,"Successfully Logged In! Welcome back Artist!");
+//		RegisteredUserView.getInstance().setVisible(true);
+		artistHomeView = new HomeViewA();
+		artistHomeView.run();
+//		artistHomeView.setVisible(true);
 	}
 	
 	public void entranceDenied() {
