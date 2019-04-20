@@ -5,6 +5,12 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import jaco.mp3.player.MP3Player;
+import model.Playlist;
+import model.Song;
+import model.generalModel;
+
 import javax.swing.JLabel;
 import java.awt.Color;
 import javax.swing.JButton;
@@ -15,6 +21,9 @@ import javax.swing.SwingConstants;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
+import java.util.ArrayList;
+
 import javax.swing.JPopupMenu;
 import java.awt.Component;
 import javax.swing.JTextField;
@@ -24,30 +33,26 @@ import java.awt.event.ActionEvent;
 import javax.swing.JList;
 
 public class HomeView extends JFrame {
-
+	
+	private volatile static HomeView instance = null;
+	MP3Player mp3 = new MP3Player(new File("currentSong.mp3"));
 	private JPanel contentPane;
 	private JTextField txtSearch;
 	boolean evenClick = false;
+	JButton btnPlay, Shufflebtn, btnNext, Repeatbtn, Queuebtn, btnPrev, StopBtn, Volumebtn, 
+	NewAlbumPic, SearchBtn, ProfilePic, Profile, Notificationbtn, Refreshbtn, btnCreatePlaylist;
+	boolean songChanged;
+	boolean playSongInPlaylist;
+	ArrayList<Song> userSongs,userSongsUpdated;
+	ArrayList<Playlist> userPlaylists;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					HomeView frame = new HomeView();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+	public static HomeView getInstance() {
+        if (instance == null) {
+        	instance = new HomeView();
+        }
+		return instance;
 	}
-
-	/**
-	 * Create the frame.
-	 */
+	
 	public HomeView() {
 		setBackground(new Color(254,254,250));
 		setResizable(false);
@@ -94,69 +99,70 @@ public class HomeView extends JFrame {
 		Album.setBounds(0, 62, 147, 28);
 		SongDetails.add(Album);
 		
-		JButton Shufflebtn = new JButton("");
+		 Shufflebtn = new JButton("");
 		Shufflebtn.setIcon(new ImageIcon(HomeView.class.getResource("/images2/shuffle (4).png")));
 		Shufflebtn.setBackground(new Color(30,58,42));
 		Shufflebtn.setBounds(290, 31, 39, 39);
 		Shufflebtn.setBorder(null);
 		MainRectangle.add(Shufflebtn);
 		
-		JButton Nextbtn = new JButton("");
-		Nextbtn.setIcon(new ImageIcon(HomeView.class.getResource("/images2/next (2).png")));
-		Nextbtn.setBackground(new Color(30, 58, 42));
-		Nextbtn.setBounds(512, 31, 39, 39);
-		Nextbtn.setBorder(null);
-		MainRectangle.add(Nextbtn);
+		 btnNext = new JButton("");
+		btnNext.setIcon(new ImageIcon(HomeView.class.getResource("/images2/next (2).png")));
+		btnNext.setBackground(new Color(30, 58, 42));
+		btnNext.setBounds(512, 31, 39, 39);
+		btnNext.setBorder(null);
+		MainRectangle.add(btnNext);
 		
-		JButton Prevbtn = new JButton("");
-		Prevbtn.setIcon(new ImageIcon(HomeView.class.getResource("/images2/back (2).png")));
-		Prevbtn.setBackground(new Color(30, 58, 42));
-		Prevbtn.setBounds(355, 31, 39, 39);
-		Prevbtn.setBorder(null);
-		MainRectangle.add(Prevbtn);
+		 btnPrev = new JButton("");
+		btnPrev.setIcon(new ImageIcon(HomeView.class.getResource("/images2/back (2).png")));
+		btnPrev.setBackground(new Color(30, 58, 42));
+		btnPrev.setBounds(355, 31, 39, 39);
+		btnPrev.setBorder(null);
+		MainRectangle.add(btnPrev);
 		
-		JButton Playbtn = new JButton("");
-		Playbtn.setIcon(new ImageIcon(HomeView.class.getResource("/images2/play-button (2).png")));
-		Playbtn.addMouseListener(new MouseAdapter() {
+		 btnPlay = new JButton("");
+		btnPlay.addActionListener(new btn_Play());
+		btnPlay.setIcon(new ImageIcon(HomeView.class.getResource("/images2/play-button (2).png")));
+		btnPlay.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				if(evenClick) {
-				Playbtn.setIcon(new ImageIcon(HomeView.class.getResource("/images2/play-button (2).png")));
+				btnPlay.setIcon(new ImageIcon(HomeView.class.getResource("/images2/play-button (2).png")));
 				evenClick = false;
 			}
 				else {
-					Playbtn.setIcon(new ImageIcon(HomeView.class.getResource("/images2/rounded-pause-button.png")));
+					btnPlay.setIcon(new ImageIcon(HomeView.class.getResource("/images2/rounded-pause-button.png")));
 					evenClick = true;
 				}
 				}
 		});
-		Playbtn.setBounds(413, 15, 78, 70);
-		Playbtn.setBackground(new Color(30, 58, 42));
-		Playbtn.setBorder(null);
-		MainRectangle.add(Playbtn);
+		btnPlay.setBounds(413, 15, 78, 70);
+		btnPlay.setBackground(new Color(30, 58, 42));
+		btnPlay.setBorder(null);
+		MainRectangle.add(btnPlay);
 		
-		JButton Repeatbtn = new JButton("");
+		 Repeatbtn = new JButton("");
 		Repeatbtn.setIcon(new ImageIcon(HomeView.class.getResource("/images2/repeat.png")));
 		Repeatbtn.setBackground(new Color(30, 58, 42));
 		Repeatbtn.setBounds(577, 31, 39, 39);
 		Repeatbtn.setBorder(null);
 		MainRectangle.add(Repeatbtn);
 		
-		JButton Queuebtn = new JButton("");
+		 Queuebtn = new JButton("");
 		Queuebtn.setIcon(new ImageIcon(HomeView.class.getResource("/images2/list (1).png")));
 		Queuebtn.setBorder(null);
 		Queuebtn.setBackground(new Color(30, 58, 42));
 		Queuebtn.setBounds(769, 31, 39, 39);
 		MainRectangle.add(Queuebtn);
 		
-		JButton StopBtn = new JButton("");
+		 StopBtn = new JButton("");
 		StopBtn.setIcon(new ImageIcon(HomeView.class.getResource("/images2/stop (3).png")));
 		StopBtn.setBorder(null);
 		StopBtn.setBackground(new Color(30, 58, 42));
 		StopBtn.setBounds(818, 31, 39, 39);
 		MainRectangle.add(StopBtn);
 		
-		JButton Volumebtn = new JButton("");
+		 Volumebtn = new JButton("");
 		Volumebtn.setIcon(new ImageIcon(HomeView.class.getResource("/images2/speaker (2).png")));
 		Volumebtn.setBorder(null);
 		Volumebtn.setBackground(new Color(30, 58, 42));
@@ -164,7 +170,7 @@ public class HomeView extends JFrame {
 		MainRectangle.add(Volumebtn);
 		
 		
-		JButton NewAlbumPic = new JButton("");
+		 NewAlbumPic = new JButton("");
 		NewAlbumPic.setIcon(new ImageIcon(HomeView.class.getResource("/images2/photo.png")));
 		NewAlbumPic.setBounds(0, 579, 119, 92);
 		contentPane.add(NewAlbumPic);
@@ -191,7 +197,7 @@ public class HomeView extends JFrame {
 		TopBar.add(txtSearch);
 		txtSearch.setColumns(10);
 		
-		JButton SearchBtn = new JButton("");
+		 SearchBtn = new JButton("");
 		SearchBtn.setIcon(new ImageIcon(HomeView.class.getResource("/images2/magnifying-glass (1).png")));
 		SearchBtn.setBorder(null);
 		SearchBtn.setBackground(new Color(30,58,42));
@@ -199,13 +205,13 @@ public class HomeView extends JFrame {
 		SearchBtn.setBorder(null);
 		TopBar.add(SearchBtn);
 		
-		JButton ProfilePic = new JButton("");
+		 ProfilePic = new JButton("");
 		ProfilePic.setIcon(new ImageIcon(HomeView.class.getResource("/images2/user-avatar-main-picture.png")));
 		ProfilePic.setBounds(478, 10, 40, 40);
 		TopBar.add(ProfilePic);
 		ProfilePic.setBackground(new Color(170, 187, 204));
 		
-		JButton Profile = new JButton("Profile Name");
+		 Profile = new JButton("Profile Name");
 		Profile.setBackground(new Color(30,58,42));
 		Profile.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		Profile.setForeground(Color.WHITE);
@@ -213,14 +219,14 @@ public class HomeView extends JFrame {
 		Profile.setBorder(null);
 		TopBar.add(Profile);
 		
-		JButton Notificationbtn = new JButton("");
+		 Notificationbtn = new JButton("");
 		Notificationbtn.setIcon(new ImageIcon(HomeView.class.getResource("/images2/notifications-button.png")));
 		Notificationbtn.setBorder(null);
 		Notificationbtn.setBackground(new Color(30, 58, 42));
 		Notificationbtn.setBounds(1084, 11, 39, 39);
 		TopBar.add(Notificationbtn);
 		
-		JButton Refreshbtn = new JButton("");
+		 Refreshbtn = new JButton("");
 		Refreshbtn.setIcon(new ImageIcon(HomeView.class.getResource("/images2/reload.png")));
 		Refreshbtn.setBorder(null);
 		Refreshbtn.setBackground(new Color(30, 58, 42));
@@ -233,12 +239,13 @@ public class HomeView extends JFrame {
 		contentPane.add(MusicPanel);
 		MusicPanel.setLayout(null);
 		
-		JButton btnNewButton = new JButton("New Playlist");
-		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnNewButton.setHorizontalAlignment(SwingConstants.LEFT);
-		btnNewButton.setIcon(new ImageIcon(HomeView.class.getResource("/images2/add-circular-outlined-button (1).png")));
-		btnNewButton.setBounds(0, 429, 186, 88);
-		MusicPanel.add(btnNewButton);
+		 btnCreatePlaylist = new JButton("New Playlist");
+		btnCreatePlaylist.addActionListener(new btn_CreatePlaylist());
+		btnCreatePlaylist.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnCreatePlaylist.setHorizontalAlignment(SwingConstants.LEFT);
+		btnCreatePlaylist.setIcon(new ImageIcon(HomeView.class.getResource("/images2/add-circular-outlined-button (1).png")));
+		btnCreatePlaylist.setBounds(0, 429, 186, 88);
+		MusicPanel.add(btnCreatePlaylist);
 		
 		JLabel MusicLbl = new JLabel("Music");
 		MusicLbl.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -275,86 +282,18 @@ public class HomeView extends JFrame {
 		Albums_Music.setBounds(0, 90, 186, 30);
 		MusicPanel.add(Albums_Music);
 		
-		JButton Playlist_Name3 = new JButton("(PlaylistName)");
-		Playlist_Name3.setEnabled(false);
-		Playlist_Name3.setHorizontalAlignment(SwingConstants.LEFT);
-		Playlist_Name3.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		Playlist_Name3.setBackground(new Color(254, 254, 250));
-		Playlist_Name3.setBounds(0, 232, 186, 30);
-		MusicPanel.add(Playlist_Name3);
-		
-		JButton Playlist_Name2 = new JButton("(PlaylistName)");
-		Playlist_Name2.setEnabled(false);
-		Playlist_Name2.setHorizontalAlignment(SwingConstants.LEFT);
-		Playlist_Name2.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		Playlist_Name2.setBackground(new Color(242, 203, 155));
-		Playlist_Name2.setBounds(0, 203, 186, 30);
-		MusicPanel.add(Playlist_Name2);
-		
-		JButton Playlist_Name1 = new JButton("(PlaylistName)");
-		Playlist_Name1.setEnabled(false);
-		Playlist_Name1.setHorizontalAlignment(SwingConstants.LEFT);
-		Playlist_Name1.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		Playlist_Name1.setBackground(new Color(254, 254, 250));
-		Playlist_Name1.setBounds(0, 175, 186, 30);
-		MusicPanel.add(Playlist_Name1);
-		
 		JButton Playlists_Music = new JButton("Playlists");
+		Playlists_Music.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		Playlists_Music.setHorizontalAlignment(SwingConstants.LEFT);
 		Playlists_Music.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		Playlists_Music.setBackground(new Color(242, 203, 155));
 		Playlists_Music.setBounds(0, 146, 186, 30);
 		MusicPanel.add(Playlists_Music);
 		
-		JButton Playlist_Name7 = new JButton("(PlaylistName)");
-		Playlist_Name7.setEnabled(false);
-		Playlist_Name7.setHorizontalAlignment(SwingConstants.LEFT);
-		Playlist_Name7.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		Playlist_Name7.setBackground(new Color(254, 254, 250));
-		Playlist_Name7.setBounds(0, 344, 186, 30);
-		MusicPanel.add(Playlist_Name7);
-		
-		JButton Playlist_Name6 = new JButton("(PlaylistName)");
-		Playlist_Name6.setEnabled(false);
-		Playlist_Name6.setHorizontalAlignment(SwingConstants.LEFT);
-		Playlist_Name6.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		Playlist_Name6.setBackground(new Color(242, 203, 155));
-		Playlist_Name6.setBounds(0, 315, 186, 30);
-		MusicPanel.add(Playlist_Name6);
-		
-		JButton Playlist_Name5 = new JButton("(PlaylistName)");
-		Playlist_Name5.setEnabled(false);
-		Playlist_Name5.setHorizontalAlignment(SwingConstants.LEFT);
-		Playlist_Name5.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		Playlist_Name5.setBackground(new Color(254, 254, 250));
-		Playlist_Name5.setBounds(0, 287, 186, 30);
-		MusicPanel.add(Playlist_Name5);
-		
-		JButton Playlist_Name4 = new JButton("(PlaylistName)");
-		Playlist_Name4.setEnabled(false);
-		Playlist_Name4.setHorizontalAlignment(SwingConstants.LEFT);
-		Playlist_Name4.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		Playlist_Name4.setBackground(new Color(242, 203, 155));
-		Playlist_Name4.setBounds(0, 258, 186, 30);
-		MusicPanel.add(Playlist_Name4);
-		
-		JButton Playlist_Name9 = new JButton("(PlaylistName)");
-		Playlist_Name9.setEnabled(false);
-		Playlist_Name9.setHorizontalAlignment(SwingConstants.LEFT);
-		Playlist_Name9.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		Playlist_Name9.setBackground(new Color(254, 254, 250));
-		Playlist_Name9.setBounds(0, 401, 186, 30);
-		MusicPanel.add(Playlist_Name9);
-		
-		JButton Playlist_Name8 = new JButton("(PlaylistName)");
-		Playlist_Name8.setEnabled(false);
-		Playlist_Name8.setHorizontalAlignment(SwingConstants.LEFT);
-		Playlist_Name8.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		Playlist_Name8.setBackground(new Color(242, 203, 155));
-		Playlist_Name8.setBounds(0, 372, 186, 30);
-		MusicPanel.add(Playlist_Name8);
-		
-		JList Playlist_List = new JList();
+		 Playlist_List = new JList();
 		Playlist_List.setBounds(0, 175, 186, 253);
 		MusicPanel.add(Playlist_List);
 		
@@ -370,106 +309,6 @@ public class HomeView extends JFrame {
 		label.setBackground(new Color(254, 254, 250));
 		label.setBounds(0, 0, 186, 34);
 		RecentlyPlayedPanel.add(label);
-		
-		JButton RPSONG_1 = new JButton("");
-		RPSONG_1.setEnabled(false);
-		RPSONG_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		RPSONG_1.setHorizontalAlignment(SwingConstants.LEFT);
-		RPSONG_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		RPSONG_1.setBackground(new Color(242, 203, 155));
-		RPSONG_1.setBounds(0, 33, 186, 30);
-		RecentlyPlayedPanel.add(RPSONG_1);
-		
-		JButton RPSONG_2 = new JButton("");
-		RPSONG_2.setEnabled(false);
-		RPSONG_2.setHorizontalAlignment(SwingConstants.LEFT);
-		RPSONG_2.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		RPSONG_2.setBackground(new Color(254, 254, 250));
-		RPSONG_2.setBounds(0, 62, 186, 30);
-		RecentlyPlayedPanel.add(RPSONG_2);
-		
-		JButton RPSONG_4 = new JButton("");
-		RPSONG_4.setEnabled(false);
-		RPSONG_4.setHorizontalAlignment(SwingConstants.LEFT);
-		RPSONG_4.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		RPSONG_4.setBackground(new Color(254, 254, 250));
-		RPSONG_4.setBounds(0, 119, 186, 30);
-		RecentlyPlayedPanel.add(RPSONG_4);
-		
-		JButton RPSONG_3 = new JButton("");
-		RPSONG_3.setEnabled(false);
-		RPSONG_3.setHorizontalAlignment(SwingConstants.LEFT);
-		RPSONG_3.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		RPSONG_3.setBackground(new Color(242, 203, 155));
-		RPSONG_3.setBounds(0, 90, 186, 30);
-		RecentlyPlayedPanel.add(RPSONG_3);
-		
-		JButton RPSONG_7 = new JButton("");
-		RPSONG_7.setEnabled(false);
-		RPSONG_7.setHorizontalAlignment(SwingConstants.LEFT);
-		RPSONG_7.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		RPSONG_7.setBackground(new Color(242, 203, 155));
-		RPSONG_7.setBounds(0, 203, 186, 30);
-		RecentlyPlayedPanel.add(RPSONG_7);
-		
-		JButton RPSONG_6 = new JButton("");
-		RPSONG_6.setEnabled(false);
-		RPSONG_6.setHorizontalAlignment(SwingConstants.LEFT);
-		RPSONG_6.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		RPSONG_6.setBackground(new Color(254, 254, 250));
-		RPSONG_6.setBounds(0, 175, 186, 30);
-		RecentlyPlayedPanel.add(RPSONG_6);
-		
-		JButton RPSONG_5 = new JButton("");
-		RPSONG_5.setEnabled(false);
-		RPSONG_5.setHorizontalAlignment(SwingConstants.LEFT);
-		RPSONG_5.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		RPSONG_5.setBackground(new Color(242, 203, 155));
-		RPSONG_5.setBounds(0, 146, 186, 30);
-		RecentlyPlayedPanel.add(RPSONG_5);
-		
-		JButton MPSONG_3 = new JButton("");
-		MPSONG_3.setEnabled(false);
-		MPSONG_3.setHorizontalAlignment(SwingConstants.LEFT);
-		MPSONG_3.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		MPSONG_3.setBackground(new Color(254, 254, 250));
-		MPSONG_3.setBounds(0, 344, 186, 30);
-		RecentlyPlayedPanel.add(MPSONG_3);
-		
-		JButton MPSONG_2 = new JButton("");
-		MPSONG_2.setEnabled(false);
-		MPSONG_2.setHorizontalAlignment(SwingConstants.LEFT);
-		MPSONG_2.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		MPSONG_2.setBackground(new Color(242, 203, 155));
-		MPSONG_2.setBounds(0, 315, 186, 30);
-		RecentlyPlayedPanel.add(MPSONG_2);
-		
-		JButton MPSONG_1 = new JButton("");
-		MPSONG_1.setEnabled(false);
-		MPSONG_1.setHorizontalAlignment(SwingConstants.LEFT);
-		MPSONG_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		MPSONG_1.setBackground(new Color(254, 254, 250));
-		MPSONG_1.setBounds(0, 287, 186, 30);
-		RecentlyPlayedPanel.add(MPSONG_1);
-		
-		JButton MPSONG_5 = new JButton("");
-		MPSONG_5.setEnabled(false);
-		MPSONG_5.setHorizontalAlignment(SwingConstants.LEFT);
-		MPSONG_5.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		MPSONG_5.setBackground(new Color(254, 254, 250));
-		MPSONG_5.setBounds(0, 401, 186, 30);
-		RecentlyPlayedPanel.add(MPSONG_5);
-		
-		JButton MPSONG_4 = new JButton("");
-		MPSONG_4.setEnabled(false);
-		MPSONG_4.setHorizontalAlignment(SwingConstants.LEFT);
-		MPSONG_4.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		MPSONG_4.setBackground(new Color(242, 203, 155));
-		MPSONG_4.setBounds(0, 372, 186, 30);
-		RecentlyPlayedPanel.add(MPSONG_4);
 		
 		JButton AddSongbtn = new JButton("Add Song");
 		AddSongbtn.setIcon(new ImageIcon(HomeView.class.getResource("/images2/add-circular-outlined-button (1).png")));
@@ -620,4 +459,52 @@ public class HomeView extends JFrame {
 			}
 		});
 	}
+	
+	class btn_CreatePlaylist implements ActionListener
+	 {
+		 public void actionPerformed(ActionEvent e)
+		 {
+			 
+			 CreatePlaylist cp = new CreatePlaylist();
+			 cp.setVisible(true);
+			 
+			 
+		 }
+	 }
+	
+	
+	class btn_Play implements ActionListener 
+	 {
+
+	     public void actionPerformed(ActionEvent e) 
+	     {	 
+	    	 System.out.println("songChanged: "+songChanged);
+		    	if(songChanged == true) {
+			    	 mp3.pause();
+			    	 int SongID = userSongs.get(yourSongsList.getSelectedIndex()).getSongID();
+		    		 generalModel.getInstance().readSongData(SongID);
+		    		 generalModel.getInstance().updateCount(SongID);
+		    		 mp3 = new MP3Player(new File("currentSong.mp3"));
+			    	 mp3.play();
+			    	 songChanged = false;
+
+		    	 }
+		    	 else if(playSongInPlaylist == true)
+			     {
+		    		 mp3.pause();
+			    	 int SongID2 = userPlaylists.get(Playlist_List.getSelectedIndex()).getSongInPlaylist().get(Playlist_List.getSelectedIndex()).getSongID();
+			    	 generalModel.getInstance().readSongData(SongID2);
+			    	 generalModel.getInstance().updateCount(SongID2);
+			    	 mp3 = new MP3Player(new File("currentSong.mp3"));
+				     mp3.play();
+				   	 playSongInPlaylist = false;
+			     }else 
+		    	 {
+		    		 mp3.play();
+		    	 }
+	    	 
+	    	 
+
+	     }
+	 }
 }
