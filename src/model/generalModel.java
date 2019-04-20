@@ -25,11 +25,11 @@ public class generalModel {
 	}
 	
 	
-	public void getAccountData(account x) { //SIGNING IN 
+	public void getAccountData(account x) { //SIGNING UP
 		if(Database.getInstance().addingAccount(x) == false) {
 			SigningUpView.getInstance().signingSuccessful();
 		}
-		else {
+		else{
 			SigningUpView.getInstance().signingFailed();
 		}
 	}
