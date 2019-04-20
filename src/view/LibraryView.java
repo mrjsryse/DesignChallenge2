@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import jaco.mp3.player.MP3Player;
 import model.Playlist;
 import model.Song;
 import model.generalModel;
@@ -20,6 +21,7 @@ import javax.swing.SwingConstants;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
 import java.util.ArrayList;
 
 import javax.swing.JTextField;
@@ -31,15 +33,17 @@ import javax.swing.JList;
 public class LibraryView extends JFrame {
 
 	private volatile static LibraryView instance = null;
+	MP3Player mp3 = new MP3Player(new File("currentSong.mp3"));
 	public String currentUser;
 	private JPanel contentPane;
 	private JTextField txtSearch;
 	boolean evenClick = false;
 	private JButton Artist_Dashboard;
-	JButton btnCreatePlaylist, AddSongbtn, Profile;
+	JButton btnCreatePlaylist, AddSongbtn, Profile, Refreshbtn, Playbtn;
 	JList Title_list, Artist_list, Album_List, Genre_List, Year_List, Fave_List, Playlist_List, MP_List, RP_List;
 	ArrayList<Song> userSongsMostPlayed, userSongs;
-	ArrayList<Playlist> userPlaylist;
+	ArrayList<Playlist> userPlaylists;
+	boolean songChangedInLibrary, playSongInPlaylist;
 	/**
 	 * Launch the application.
 	 */
@@ -133,7 +137,8 @@ public class LibraryView extends JFrame {
 		Prevbtn.setBorder(null);
 		MainRectangle.add(Prevbtn);
 		
-		JButton Playbtn = new JButton("");
+		 Playbtn = new JButton("");
+		Playbtn.addActionListener(new btn_Play());
 		Playbtn.setIcon(new ImageIcon(HomeView.class.getResource("/images2/play-button (2).png")));
 		Playbtn.addMouseListener(new MouseAdapter() {
 			@Override
@@ -238,7 +243,8 @@ public class LibraryView extends JFrame {
 		button_2.setBounds(1084, 11, 39, 39);
 		TopBar.add(button_2);
 		
-		JButton Refreshbtn = new JButton("");
+		 Refreshbtn = new JButton("");
+		 Refreshbtn.addActionListener(new Refresh_btn());
 		Refreshbtn.setIcon(new ImageIcon(LibraryView.class.getResource("/images2/reload.png")));
 		Refreshbtn.setBorder(null);
 		Refreshbtn.setBackground(new Color(30, 58, 42));
@@ -512,14 +518,16 @@ public class LibraryView extends JFrame {
 				 DLMMostPlayed.addElement(userSongsMostPlayed.get(x).getSongName());
 			 
 			 HomeView.getInstance().MP_List.setModel(DLMMostPlayed);
+			 LibraryView.getInstance().MP_List.setModel(DLMMostPlayed);
 			 //========================================================== FOR PLAYLISTS
-			 userPlaylist = generalModel.getInstance().gettingPlaylists(HomeView.getInstance().currentUser);
+			 userPlaylists = generalModel.getInstance().gettingPlaylists(HomeView.getInstance().currentUser);
 			 DefaultListModel DLM2 = new DefaultListModel();
 			
-			 for(int y = 0; y < userPlaylist.size(); y++)
-				 DLM2.addElement(userPlaylist.get(y).getPlaylistName());
+			 for(int y = 0; y < userPlaylists.size(); y++)
+				 DLM2.addElement(userPlaylists.get(y).getPlaylistName());
 
 			 HomeView.getInstance().Playlist_List.setModel(DLM2);
+			 LibraryView.getInstance().Playlist_List.setModel(DLM2);
 			//==========================================================
 			 
 			 
@@ -546,6 +554,40 @@ public class LibraryView extends JFrame {
 		 }
 	 }
 	
+	class btn_Play implements ActionListener 
+	 {
+
+	     public void actionPerformed(ActionEvent e) 
+	     {	 
+	    	 System.out.println("songChanged: "+songChangedInLibrary);
+		    	if(songChangedInLibrary == true) {
+			    	 mp3.pause();
+			    	 int SongID = userSongs.get(LibraryView.getInstance().Title_list.getSelectedIndex()).getSongID();
+		    		 generalModel.getInstance().readSongData(SongID);
+		    		 generalModel.getInstance().updateCount(SongID);
+		    		 mp3 = new MP3Player(new File("currentSong.mp3"));
+			    	 mp3.play();
+			    	 songChangedInLibrary = false;
+
+		    	 }
+		    	/* else if(playSongInPlaylist == true)
+			     {
+		    		 mp3.pause();
+			    	 int SongID2 = userPlaylists.get(Playlist_List.getSelectedIndex()).getSongInPlaylist().get(yourSongsListJList.getSelectedIndex()).getSongID();
+			    	 generalModel.getInstance().readSongData(SongID2);
+			    	 generalModel.getInstance().updateCount(SongID2);
+			    	 mp3 = new MP3Player(new File("currentSong.mp3"));
+				     mp3.play();
+				   	 playSongInPlaylist = false;
+			     } */else 
+		    	 {
+		    		 mp3.play();
+		    	 }
+	    	 
+	    	 
+
+	     }
+	 }
 	
 	public void setUserName(String currentUser) {
 		this.currentUser = currentUser;
