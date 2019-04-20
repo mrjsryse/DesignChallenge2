@@ -60,6 +60,7 @@ public class AddSongToPlaylist extends JFrame {
 		contentPane.add(lblSongs);
 		
 		btnAddToPlaylist = new JButton("Add to Playlist");
+		btnAddToPlaylist.setBackground(new Color(255, 255, 255));
 		btnAddToPlaylist.addActionListener(new btn_AddToPlaylist());
 		btnAddToPlaylist.setBounds(102, 94, 192, 28);
 		contentPane.add(btnAddToPlaylist);

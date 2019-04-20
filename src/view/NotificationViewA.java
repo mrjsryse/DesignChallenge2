@@ -20,20 +20,15 @@ public class NotificationViewA extends JFrame {
 
 	private JPanel contentPane;
 	boolean evenClick = false;
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					NotificationViewA frame = new NotificationViewA();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+
+	
+	
+	private volatile static NotificationViewA instance = null;
+	public static NotificationViewA getInstance() {
+        if (instance == null) {
+        	instance = new NotificationViewA();
+        }
+		return instance;
 	}
 
 	/**

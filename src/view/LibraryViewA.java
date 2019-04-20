@@ -24,23 +24,16 @@ import javax.swing.JList;
 public class LibraryViewA extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField txtSearch;
 	boolean evenClick = false;
 	private JButton Artist_Dashboard;
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					LibraryViewA frame = new LibraryViewA();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+
+	
+	private volatile static LibraryViewA instance = null;
+	public static LibraryViewA getInstance() {
+        if (instance == null) {
+        	instance = new LibraryViewA();
+        }
+		return instance;
 	}
 
 	/**
@@ -180,14 +173,6 @@ public class LibraryViewA extends JFrame {
 		button.setBorder(null);
 		button.setBackground(new Color(30, 58, 42));
 		TopBar.add(button);
-		
-		txtSearch = new JTextField();
-		txtSearch.setForeground(SystemColor.desktop);
-		txtSearch.setText("Search");
-		txtSearch.setHorizontalAlignment(SwingConstants.LEFT);
-		txtSearch.setBounds(95, 11, 170, 39);
-		TopBar.add(txtSearch);
-		txtSearch.setColumns(10);
 		
 		JButton SearchBtn = new JButton("");
 		SearchBtn.setIcon(new ImageIcon(HomeView.class.getResource("/images2/magnifying-glass (1).png")));

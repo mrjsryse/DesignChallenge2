@@ -91,9 +91,8 @@ public class AddSong extends JFrame {
 		contentPane.add(textFieldGenre);
 		
 		 btnNewButton = new JButton("Add Song");
-		 btnNewButton.setBackground(Color.WHITE);
 		 btnNewButton.addActionListener(new btn_Add());
-		btnNewButton.setBounds(298, 194, 89, 23);
+		btnNewButton.setBounds(306, 203, 89, 23);
 		contentPane.add(btnNewButton);
 		
 		 btnChooseFile = new JButton("Choose File");

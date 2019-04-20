@@ -26,23 +26,13 @@ import javax.swing.JList;
 public class HomeView extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField txtSearch;
 	boolean evenClick = false;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					HomeView frame = new HomeView();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+	private volatile static HomeView instance = null;
+	public static HomeView getInstance() {
+        if (instance == null) {
+        	instance = new HomeView();
+        }
+		return instance;
 	}
 
 	/**
@@ -182,14 +172,6 @@ public class HomeView extends JFrame {
 		button.setBorder(null);
 		button.setBackground(new Color(30, 58, 42));
 		TopBar.add(button);
-		
-		txtSearch = new JTextField();
-		txtSearch.setForeground(SystemColor.desktop);
-		txtSearch.setText("Search");
-		txtSearch.setHorizontalAlignment(SwingConstants.LEFT);
-		txtSearch.setBounds(95, 11, 170, 39);
-		TopBar.add(txtSearch);
-		txtSearch.setColumns(10);
 		
 		JButton SearchBtn = new JButton("");
 		SearchBtn.setIcon(new ImageIcon(HomeView.class.getResource("/images2/magnifying-glass (1).png")));
