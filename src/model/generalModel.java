@@ -71,6 +71,9 @@ public class generalModel {
 	public void favoritingPlaylist(String PlaylistID, String PlaylistName) {
 		Database.getInstance().favoritingPlaylist(PlaylistID, PlaylistName);
 	}
+	public void makingPrivatePlaylist(String PlaylistIDPrivate,String PlaylistNamePrivate) {
+		Database.getInstance().privacyPlaylist(PlaylistIDPrivate,PlaylistNamePrivate);
+	}
 	
 	public void favoritingSongs(String SongID, String SongName) {
 		Database.getInstance().favoritingSong(SongID, SongName);

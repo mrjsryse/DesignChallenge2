@@ -79,12 +79,13 @@ public class CreatePlaylist extends JFrame {
 			 
 
 			 String favorite = "0";
-
+			 String privacy = "0";
 
 			 Playlist addedPlaylist = new PlaylistBuilder()
 					 .setPlaylistName(playlistName)
 					 .setUsername(username)
 					 .setFavorite(favorite)
+					 .setPrivacy(privacy)
 					 .getPlaylist();
 
 			 PlaylistList pList = new PlaylistList();
@@ -105,7 +106,7 @@ public class CreatePlaylist extends JFrame {
 				 int index = pList.getIndex(addedPlaylist);
 			 
 				 generalModel.getInstance().getPlaylistData(addedPlaylist);
-				 generalController.getInstance().gettingUserPlaylist(username, playlistName, favorite);
+				 generalController.getInstance().gettingUserPlaylist(username, playlistName, favorite,privacy);
 				 JOptionPane.showMessageDialog(null, "Added " + playlistName + " playlist!");
 			 
 				 
